@@ -17,6 +17,10 @@ public class Player : MonoBehaviour
     float velocityXSmoothing;
     public bool movingRight = false;
     public bool rotation = false;
+    [SerializeField] private const int MAX_HEALTH = 3;
+    [SerializeField] private int score = 0;
+    public int currentHealth;
+    public bool isAttackable = true;
 
     public float direction;
 
@@ -77,5 +81,42 @@ public class Player : MonoBehaviour
             rotation = false;
         }
 
+    }
+
+    public int GetHealth()
+    {
+        return currentHealth;
+    }
+
+    public void UpdateHealth(int amount)
+    {
+        currentHealth += amount;
+
+    }
+
+    public int GetScore()
+    {
+        return score;
+    }
+
+    public void UpdateScore(int amount)
+    {
+        score += amount;
+    }
+
+    public void DealDamage(int amount)
+    {
+        if (!isAttackable)
+            return;
+        UpdateHealth(-amount);
+        print("Player Health: " + GetHealth());
+        isAttackable = false;
+    }
+
+
+    IEnumerator DamagedDelay()
+    {
+        yield return new WaitForSeconds(2);
+        isAttackable = true;
     }
 }

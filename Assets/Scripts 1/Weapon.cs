@@ -5,98 +5,47 @@ using UnityEngine;
 public class Weapon : MonoBehaviour
 {
 
-    public Transform firePoint;
+    public float fireRate = 0;
+    public float Damage = 10;
+    public LayerMask notToHit;
     public Rigidbody bulletPrefab;
-    public float speed = 20;
-    public bool canShoot = true;
-    public bool delay = false;
+    [SerializeField] private float speed = 20;
 
-    public bool rotation = false;
+    private bool delay = false;
+    float timeToFire = 0;
+    [SerializeField]Transform firePoint;
 
-    public Player player;
-
-    WaitForSeconds cooldownTime;
-
-
-    void Start()
+    void Awake ()
     {
-        cooldownTime = new WaitForSeconds(0.1f);
+     
     }
-    // Update is called once per frame
     void Update()
     {
-        if (Input.GetAxis("Fire1") > 0.0f)
+        //If the button is held down, starts auto firing until button is released.
+        if (Input.GetAxis("Fire1") > 0.0f && !delay)
         {
-            canShoot = true;
-            Shoot(true);
+
+            timeToFire = Time.deltaTime + 1 / fireRate;
+            Shooting();
         }
 
-        if (Input.GetAxis("Fire1") <= 0.0f)
-        {
-            canShoot = false;
-            Shoot(false);
-        }
-        if (Input.GetKeyDown(KeyCode.E))
-        {
-            //ShootDiagonally();
-        }
     }
 
-    void Shoot(bool Shoot)
+    void Shooting()
     {
-        /*
-        while (!delay)
-        {
-            canShoot = Shoot;
-            if (!canShoot || delay)
-                return;
-            Rigidbody test = Instantiate<Rigidbody>(bulletPrefab, firePoint.position, firePoint.rotation);
-            Vector3 direction = player.rotation ? transform.up * (speed * Time.deltaTime) * transform.localScale.z : transform.right * (speed * Time.deltaTime) * transform.localScale.x;
-            test.velocity = transform.TransformDirection(direction);
-            ShootUpwards();
-            delay = true;
-            StartCoroutine(ShootPause());
-        }
-        */
-
-        if (!delay)
-        {
-            canShoot = Shoot;
-            if (!canShoot || delay)
-                return;
-            Rigidbody test = Instantiate<Rigidbody>(bulletPrefab, firePoint.position, firePoint.rotation);
-            Vector3 direction = player.rotation ? transform.up * (speed * Time.deltaTime) * transform.localScale.z : transform.right * (speed * Time.deltaTime) * transform.localScale.x;
-            test.transform.TransformDirection(direction);
-            test.velocity = transform.TransformDirection(direction);
-            ShootUpwards();
-            delay = true;
-            StartCoroutine(ShootPause());
-        }
+        Vector3 dir = Input.mousePosition - Camera.main.WorldToScreenPoint(transform.position); // Mouse position directoin.
+        Vector3 firePointPosition = new Vector3(firePoint.position.x, firePoint.position.y); // Stores the firepoint as a Vector2.
+        RaycastHit2D hit = Physics2D.Raycast(firePointPosition, (dir - firePointPosition) * 100, notToHit); //Makes a raycast in the direction of the mouse, stops at 100.
+        Debug.DrawLine(firePointPosition, (dir - firePointPosition) * 100, Color.red); //Draws the Raycast.
+        Rigidbody test = Instantiate<Rigidbody>(bulletPrefab, firePoint.position, firePoint.rotation);
+        test.velocity = transform.TransformDirection(dir * (speed * Time.deltaTime));
+        delay = true;
+        StartCoroutine(ShootDelay());
     }
 
-    void ShootUpwards()
+    IEnumerator ShootDelay()
     {
-        rotation = !rotation;
-    }
-
-   /* void ShootDiagonally()
-    {
-            Rigidbody thisBullet =  Instantiate(bulletPrefab, firePoint.position, firePoint.rotation) as Rigidbody;
-        //  Vector3 newRotation = transform.eulerAngles;
-        //newRotation.x = 
-        //thisBullet.transform.eulerAngles = new Vector3(0, 45, 0);
-        Vector3 rotation = new Vector3(0, 45, 0);
-        Quaternion rotationAngle = Quaternion.Euler(rotation);
-        Vector3 velocity = rotationAngle * (speed * Time.deltaTime) * transform.localScale.x;
-        
-        thisBullet.velocity = 
-           // thisBullet.transform.rotation = newRotation;
-            
-    }
-    */
-    IEnumerator ShootPause()
-    {
-        yield return cooldownTime;
+        yield return new WaitForSeconds(.1f);
         delay = false;
     }
 }

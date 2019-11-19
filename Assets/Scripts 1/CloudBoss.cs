@@ -5,7 +5,7 @@ using UnityEngine;
 public class CloudBoss : MonoBehaviour
 {
 
-    private Player thePlayer;
+    [SerializeField]private Player thePlayer;
     public float moveSpeed;
     public float playerRange;
 
