@@ -4,19 +4,12 @@ using UnityEngine;
 
 public class BulletScript : MonoBehaviour
 {
-    public float speed = 20;
-    public Rigidbody rb;
 
-    // Start is called before the first frame update
+    public Vector3 Velocity;
+
     void Update()
-    { 
-        if (Input.GetKeyDown(KeyCode.D))
-        {
-           
-        }
-        else if (Input.GetKeyDown(KeyCode.A))
-        {
-
-        }
+    {
+        //Moves the bullet.
+        transform.position += Velocity * Time.deltaTime;
     }
 }
