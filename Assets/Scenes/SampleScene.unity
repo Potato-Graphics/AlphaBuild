@@ -518,6 +518,12 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 631316833}
   m_Mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!50 &672931134 stripped
+Rigidbody2D:
+  m_CorrespondingSourceObject: {fileID: 319747550170441284, guid: c4f604b469727c447ba20895b86dff78,
+    type: 3}
+  m_PrefabInstance: {fileID: 319747548417536456}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &754615256
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1765,7 +1771,32 @@ PrefabInstance:
         type: 3}
       propertyPath: rb
       value: 
+      objectReference: {fileID: 672931134}
+    - target: {fileID: 319747550170441283, guid: c4f604b469727c447ba20895b86dff78,
+        type: 3}
+      propertyPath: cloud
+      value: 
       objectReference: {fileID: 319747550170441284, guid: c4f604b469727c447ba20895b86dff78,
         type: 3}
+    - target: {fileID: 319747550170441283, guid: c4f604b469727c447ba20895b86dff78,
+        type: 3}
+      propertyPath: currentState
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 319747550170441283, guid: c4f604b469727c447ba20895b86dff78,
+        type: 3}
+      propertyPath: moveSpeed
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 319747550170441284, guid: c4f604b469727c447ba20895b86dff78,
+        type: 3}
+      propertyPath: m_Mass
+      value: 44444
+      objectReference: {fileID: 0}
+    - target: {fileID: 319747550170441284, guid: c4f604b469727c447ba20895b86dff78,
+        type: 3}
+      propertyPath: m_UseAutoMass
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c4f604b469727c447ba20895b86dff78, type: 3}

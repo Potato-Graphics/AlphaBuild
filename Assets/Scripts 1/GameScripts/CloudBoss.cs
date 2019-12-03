@@ -14,11 +14,15 @@ public class CloudBoss : MonoBehaviour
     Vector3 playerPosition;
     Vector3 cloudPosition;
     float timePassed = 0;
-    [SerializeField] Rigidbody2D rb;
+    float knockingBackCooldown = 10;
+    bool followPlayer = false;
+    bool knockingBack = false;
+    [SerializeField] Rigidbody2D rb = null;
 
     // Gets the player game object.
     void Start()
     {
+        rb = GetComponent<Rigidbody2D>();
         thePlayer = FindObjectOfType<Player>();
         SetState(State.Idle);
     }
@@ -26,27 +30,61 @@ public class CloudBoss : MonoBehaviour
     // Follows the player's position.
     void Update()
     {
-       // print(currentState);
-       // print(GetState());
         playerPosition = thePlayer.transform.position;
         cloudPosition = transform.position;
         distanceToPlayer = Vector3.Distance(playerPosition, cloudPosition);
         timePassed += Time.deltaTime;
+        knockingBackCooldown += Time.deltaTime;
 
-        if(GetState() == State.Knockedback && timePassed > 3)
+        if (GetState() != State.Charging)
+            followPlayer = false;
+
+        if (followPlayer)
+            transform.position = Vector3.MoveTowards(transform.position, thePlayer.transform.position, moveSpeed * Time.deltaTime);
+
+
+        if (knockingBack)
         {
-            SetState(State.Idle);
-            print(timePassed);
+            Vector3 knockbackAmount = new Vector3(6, 5, 0);
+            Vector3 knockback = transform.position + knockbackAmount;
+            transform.position = Vector2.MoveTowards(transform.position, knockback, moveSpeed * Time.deltaTime);
+
+            if (timePassed > 4.5)
+            {
+                knockingBack = false;
+                SetState(State.Idle);
+                knockingBackCooldown = 0;
+            }
         }
-
-        if (GetState() != State.Knockedback)
+        if(GetState() != State.Knockedback)
         {
-           // print("not knock back");
             if (distanceToPlayer < distanceToCharge && GetState() != State.Charging)
+            {
                 SetState(State.Charging);
+            }
             if (distanceToPlayer >= distanceToCharge && GetState() != State.Idle)
                 SetState(State.Idle);
         }
+    }
+
+    private void OnCollisionEnter2D(Collision2D col)
+    {
+        if (col.gameObject.tag == "Player")
+            rb.constraints = RigidbodyConstraints2D.FreezeAll;
+
+        if(col.gameObject.tag == "Bullet")
+        {
+            if (GetState() != State.Knockedback)
+            {
+                Knockback();
+            }
+        }
+    }
+
+    private void onCollisionExit2D(Collider2D col)
+    {
+        if (col.gameObject.tag == "Player")
+            rb.constraints = RigidbodyConstraints2D.None;
     }
 
     public enum State
@@ -64,9 +102,10 @@ public class CloudBoss : MonoBehaviour
 
     public void SetState(State state)
     {
+        if (state == currentState)
+            return;
         currentState = state;
         HandleNewState(state);
-        print("The new state is " + state);
     }
 
     private void HandleNewState(State state)
@@ -80,24 +119,23 @@ public class CloudBoss : MonoBehaviour
                 FollowPlayer();
                 break;
             case State.Knockedback:
+                knockingBack = true;
                 break;
         }
     }
 
     void FollowPlayer()
     {
-       // transform.position = Vector3.MoveTowards(transform.position, thePlayer.transform.position, moveSpeed * Time.deltaTime);
-        Vector3 moveDirection = playerPosition - cloudPosition;
-        rb.AddForce(moveDirection.normalized * moveSpeed * Time.deltaTime);
+        followPlayer = true;
     }
 
     public void Knockback()
     {
-        print("knockback funciton");
-        SetState(State.Knockedback);
-        Vector3 moveDirection = cloudPosition - playerPosition;
-        rb.AddForce(moveDirection.normalized);
-        timePassed = 0;
+        if (knockingBackCooldown > 4)
+        {
+            SetState(State.Knockedback);
+            timePassed = 0;
+        }
     }
 
     void Idle()

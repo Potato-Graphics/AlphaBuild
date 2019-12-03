@@ -21,10 +21,6 @@ public class Destroy_onCollision : MonoBehaviour
 
             switch (col.gameObject.tag)
             {
-                case "Cloud":
-                    cloud.Knockback();
-                    print("cloud hut");
-                    break;
                 case "ScoreTier1":
                     player.UpdateScore(tier1Boost);
                     break;
