@@ -8,4 +8,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Menu.unity
     guid: 5f32ba143933ccb4a95c80c8db9c7952
+  - enabled: 1
+    path: Assets/Scenes/RunAndGun.unity
+    guid: 8527a608c3fbd47418cd519d0856f773
   m_configObjects: {}
