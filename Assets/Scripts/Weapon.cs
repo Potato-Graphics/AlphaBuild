@@ -6,7 +6,6 @@ public class Weapon : MonoBehaviour
 {
 
     public float fireRate = 0;
-    public float Damage = 10;
     public LayerMask notToHit;
     public Rigidbody bulletPrefab;
     [SerializeField] private float speed = 20;

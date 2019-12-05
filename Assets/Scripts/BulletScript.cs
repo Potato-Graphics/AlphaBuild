@@ -4,12 +4,15 @@ using UnityEngine;
 
 public class BulletScript : MonoBehaviour
 {
+    public int damageToGive;
 
-    public Vector3 Velocity;
-
-    void Update()
+    void OnCollisionEnter(Collision other)
     {
-        //Moves the bullet.
-        transform.position += Velocity * Time.deltaTime;
+        if (other.gameObject.tag == "Castle")
+        {
+            other.gameObject.GetComponent<CastleDamageScript>().DamageCastle(damageToGive);
+            print("CastleDamaged");
+            Destroy(gameObject);
+        }
     }
 }
