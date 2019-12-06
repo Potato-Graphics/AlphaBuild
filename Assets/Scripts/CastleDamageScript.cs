@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class CastleDamageScript : MonoBehaviour
 {
-    public int health;
+    private static int MAX_HEALTH = 50;
     private int currentHealth;
 
     void Start()
     {
-        currentHealth = health;
+        currentHealth = 50;
     }
 
     void Update()
@@ -22,6 +22,11 @@ public class CastleDamageScript : MonoBehaviour
 
     public void DamageCastle(int damage)
     {
-        currentHealth -= health;
+        currentHealth -= damage;
+    }
+
+    public int GetHealth()
+    {
+        return currentHealth;
     }
 }
