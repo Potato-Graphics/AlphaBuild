@@ -11,10 +11,7 @@ public class Controller2D : MonoBehaviour
     const float skinWidth = 0.15f;
     public int horizontalRayCount = 4;
     public int verticalRayCount = 4;
-<<<<<<< HEAD:Assets/Scripts/GameScripts/Controller2D.cs
 
-=======
->>>>>>> remotes/origin/Ollie:Assets/Scripts/Controller2D.cs
     float horizontalRaySpacing;
     float verticalRaySpacing;
 

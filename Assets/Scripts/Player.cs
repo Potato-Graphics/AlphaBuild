@@ -2,20 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-<<<<<<< HEAD:Assets/Scripts/GameScripts/Player.cs
+
 [RequireComponent (typeof (Controller2D))]
-=======
-[RequireComponent(typeof(Controller2D))]
->>>>>>> remotes/origin/Ollie:Assets/Scripts/Player.cs
+
 
 public class Player : MonoBehaviour
 {
     public float jumpHeight = 4;
     public float timeToJumpApex = .4f;
-<<<<<<< HEAD:Assets/Scripts/GameScripts/Player.cs
 
-=======
->>>>>>> remotes/origin/Ollie:Assets/Scripts/Player.cs
     float accelerationTimeAirborne = .2f;
     float accelerationTimeGrounded = .1f;
     float moveSpeed = 8;
@@ -28,10 +23,6 @@ public class Player : MonoBehaviour
     [SerializeField] private int score = 0;
     public int currentHealth;
     public bool isAttackable = true;
-<<<<<<< HEAD:Assets/Scripts/GameScripts/Player.cs
-
-=======
->>>>>>> remotes/origin/Ollie:Assets/Scripts/Player.cs
     public float direction;
 
     Vector3 velocity;
@@ -59,20 +50,12 @@ public class Player : MonoBehaviour
         //Gets the inputs for moving left and right.
         Vector2 input = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
 
-<<<<<<< HEAD:Assets/Scripts/GameScripts/Player.cs
         if(input.x < 0)
-=======
-        if (input.x < 0)
->>>>>>> remotes/origin/Ollie:Assets/Scripts/Player.cs
         {
             direction = -1;
             movingRight = false;
         }
-<<<<<<< HEAD:Assets/Scripts/GameScripts/Player.cs
         else if(input.x > 0)
-=======
-        else if (input.x > 0)
->>>>>>> remotes/origin/Ollie:Assets/Scripts/Player.cs
         {
             direction = 1;
             movingRight = true;
@@ -94,18 +77,12 @@ public class Player : MonoBehaviour
         {
             rotation = true;
         }
-<<<<<<< HEAD:Assets/Scripts/GameScripts/Player.cs
+
         if(Input.GetKeyUp(KeyCode.W))
         {
             rotation = false;
         }
 
-=======
-        if (Input.GetKeyUp(KeyCode.W))
-        {
-            rotation = false;
-        }
->>>>>>> remotes/origin/Ollie:Assets/Scripts/Player.cs
     }
 
     public int GetHealth()
@@ -138,10 +115,6 @@ public class Player : MonoBehaviour
         isAttackable = false;
     }
 
-<<<<<<< HEAD:Assets/Scripts/GameScripts/Player.cs
-
-=======
->>>>>>> remotes/origin/Ollie:Assets/Scripts/Player.cs
     IEnumerator DamagedDelay()
     {
         yield return new WaitForSeconds(2);
