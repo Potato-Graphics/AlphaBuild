@@ -141,6 +141,7 @@ GameObject:
   - component: {fileID: 6703719803248624752}
   - component: {fileID: 3409313251878979793}
   - component: {fileID: 3426924607893547595}
+  - component: {fileID: 5077988057641292255}
   m_Layer: 10
   m_Name: Crystal
   m_TagString: EnemyProjectile
@@ -188,7 +189,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 38b475ae0ac8f9a418af04f42877bc4e, type: 2}
+  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -224,9 +225,6 @@ MonoBehaviour:
     type: 3}
   sparksPrefab: {fileID: 2080296027851466013, guid: 751a25f6ff5254f47b0a4f169b2a5f69,
     type: 3}
-  source: {fileID: 738702467979329244}
-  explosionSound: {fileID: 8300000, guid: 3ff57631470bf7c46838d43d5ffa650c, type: 3}
-  bomb: {fileID: 8300000, guid: d53631a6feaff4d478089e6f961ab37f, type: 3}
 --- !u!136 &3409313251878979793
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -257,3 +255,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &5077988057641292255
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6703719803248624755}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c4e150f87fd81514fbd55d6466ade19d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  implosionPrefab: {fileID: 4392781583170637369, guid: 103295bc5b9949344baf59fba6cc603d,
+    type: 3}
+  sparksPrefab: {fileID: 2080296027851466013, guid: 751a25f6ff5254f47b0a4f169b2a5f69,
+    type: 3}
