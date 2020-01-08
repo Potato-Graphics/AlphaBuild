@@ -34,6 +34,7 @@ public class Player : MonoBehaviour
         controller = GetComponent<Controller2D>();
 
         gravity = -(2 * jumpHeight) / Mathf.Pow(timeToJumpApex, 2);
+        currentHealth = 3;
         jumpVelocity = Mathf.Abs(gravity) * timeToJumpApex;
         print("Gravity: " + gravity + " Jump Velocity: " + jumpVelocity);
     }
