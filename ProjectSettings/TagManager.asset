@@ -5,7 +5,10 @@ TagManager:
   serializedVersion: 2
   tags:
   - Bullet
+  - Obstacles
+  - EnemyProjectile
   - Cloud
+  - Castle
   layers:
   - Default
   - TransparentFX
