@@ -130,7 +130,8 @@ public class Enemy : MonoBehaviour
     public enum EnemyType
     {
         Boss,
-        ChargeNPC
+        ChargeNPC,
+        CloudBomber
     }
 
     public EnemyType GetEnemyType()
@@ -231,5 +232,10 @@ public class Enemy : MonoBehaviour
         rb.velocity = new Vector2(playerPosition.x * (chargeSpeed * Time.deltaTime), rb.velocity.y);
         //Enemy is set to the charging state
         SetState(State.Charging);
+    }
+
+    private void HandleCloudBomberPath()
+    {
+
     }
 }
