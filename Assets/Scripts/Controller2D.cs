@@ -117,6 +117,8 @@ public class Controller2D : MonoBehaviour
         }
     }
 
+
+
     //Sets how deep the rays spawn within the player character
     void UpdateRaycastOrigins()
     {
