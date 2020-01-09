@@ -6,7 +6,6 @@ ScriptedImporter:
     2800000: Stylised_Brick_Wall - baseColor
     2800002: Stylised_Brick_Wall - normal
     2800004: Stylised_Brick_Wall - height
-    2800006: Stylised_Brick_Wall - mask
     11400000: sbsar
     11400002: graph0
   externalObjects: {}
@@ -14,7 +13,7 @@ ScriptedImporter:
   assetBundleName: 
   assetBundleVariant: 
   script: {fileID: 232528478, guid: 43a8bbf65be290d44ba52b94476242b9, type: 3}
-  version: 23
+  version: 24
   mGraphInstanceData:
   - graphLabel: Stylised_Brick_Wall
     prototypeName: Stylised_Brick_Wall
@@ -81,7 +80,7 @@ ScriptedImporter:
         scale: {x: 1, y: 1}
         offset: {x: 0, y: 0}
       - name: _MaskMap
-        texture: {fileID: 2800006, guid: 6a81f7594721f114ab310b1593f52e26, type: 3}
+        texture: {instanceID: 0}
         scale: {x: 1, y: 1}
         offset: {x: 0, y: 0}
       - name: _NormalMap
@@ -532,4 +531,3 @@ ScriptedImporter:
     - {fileID: 2800000, guid: 6a81f7594721f114ab310b1593f52e26, type: 3}
     - {fileID: 2800002, guid: 6a81f7594721f114ab310b1593f52e26, type: 3}
     - {fileID: 2800004, guid: 6a81f7594721f114ab310b1593f52e26, type: 3}
-    - {fileID: 2800006, guid: 6a81f7594721f114ab310b1593f52e26, type: 3}
