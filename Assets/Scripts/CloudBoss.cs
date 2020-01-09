@@ -81,7 +81,7 @@ public class CloudBoss : MonoBehaviour
         }
     }
 
-    private void onCollisionExit2D(Collider2D col)
+    private void OnCollisionExit2D(Collision2D col)
     {
         if (col.gameObject.tag == "Player")
             rb.constraints = RigidbodyConstraints2D.None;
