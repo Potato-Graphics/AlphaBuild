@@ -113,7 +113,7 @@ MonoBehaviour:
     showEyeDropper: 1
   density:
     m_OverrideState: 1
-    m_Value: 0.403
+    m_Value: 0.515
     min: 0
     max: 1
   mipFogMaxMip:
@@ -131,11 +131,11 @@ MonoBehaviour:
     min: 0
   fogDistance:
     m_OverrideState: 1
-    m_Value: 179.73
+    m_Value: 180.9
     min: 0
   fogBaseHeight:
     m_OverrideState: 1
-    m_Value: 10
+    m_Value: 11.15
   fogHeightAttenuation:
     m_OverrideState: 1
     m_Value: 0.166
