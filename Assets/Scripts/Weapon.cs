@@ -7,7 +7,7 @@ public class Weapon : MonoBehaviour
 
     public float fireRate = 0;
     public LayerMask notToHit;
-    public Rigidbody bulletPrefab;
+    public Rigidbody2D bulletPrefab;
     [SerializeField] private float speed = 20;
 
     private bool delay = false;
@@ -36,7 +36,7 @@ public class Weapon : MonoBehaviour
         Vector3 firePointPosition = new Vector3(firePoint.position.x, firePoint.position.y); // Stores the firepoint as a Vector2.
         RaycastHit2D hit = Physics2D.Raycast(firePointPosition, (dir - firePointPosition) * 100, notToHit); //Makes a raycast in the direction of the mouse, stops at 100.
         Debug.DrawLine(firePointPosition, (dir - firePointPosition) * 100, Color.red); //Draws the Raycast.
-        Rigidbody test = Instantiate<Rigidbody>(bulletPrefab, firePoint.position, firePoint.rotation);
+        Rigidbody2D test = Instantiate<Rigidbody2D>(bulletPrefab, firePoint.position, firePoint.rotation);
         test.velocity = transform.TransformDirection(dir * (speed * Time.deltaTime));
         delay = true;
         StartCoroutine(ShootDelay());
