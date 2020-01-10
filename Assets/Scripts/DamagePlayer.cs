@@ -19,8 +19,22 @@ public class DamagePlayer : MonoBehaviour
         
     }
 
+    void OnCollisionEnter(Collision col)
+    {
+        print("test" + col.gameObject.tag);
+        if (col.gameObject.tag.Equals("Player"))
+        {
+            player.DealDamage(damageAmount);
+
+            if (destroyable)
+            {
+                Destroy(gameObject);
+            }
+        }
+    }
     void OnCollisionEnter2D(Collision2D col)
     {
+        print("test" + col.gameObject.tag);
         if (col.gameObject.tag.Equals("Player"))
         {
             player.DealDamage(damageAmount);

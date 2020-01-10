@@ -36,6 +36,8 @@ public class Enemy : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         SetState(State.Idle);
         startPosition = transform.position;
+        distanceToCharge = 4;
+        chargeSpeed = 1.0f;
 
     }
 
@@ -129,18 +131,22 @@ public class Enemy : MonoBehaviour
     private void MoveRight()
     {
         movingRight = true;
-        localScale.x = 1;
         transform.localScale = localScale;
-        rb.velocity = new Vector2(localScale.x * (walkSpeed * Time.deltaTime), rb.velocity.y);
+        float targetLocationX = startPosition.x + idleWalkDistance;
+        Vector3 targetLocation = startPosition;
+        targetLocation.x = targetLocationX;
+        Vector3.MoveTowards(transform.position, targetLocation);
 
     }
 
     private void MoveLeft()
     {
         movingRight = false;
-        localScale.x = -1;
         transform.localScale = localScale;
-        rb.velocity = new Vector2(localScale.x * (walkSpeed * Time.deltaTime), rb.velocity.y);
+        float targetLocationX = startPosition.x - idleWalkDistance;
+        Vector3 targetLocation = startPosition;
+        targetLocation.x = targetLocationX;
+        Vector3.MoveTowards(transform.position, targetLocation);
 
     }
 
@@ -155,7 +161,7 @@ public class Enemy : MonoBehaviour
             return;
         timePassed = 0;
         //Moves the enemy towards the player
-        rb.velocity = new Vector2(playerPosition.x * (chargeSpeed * Time.deltaTime), rb.velocity.y);
+        Vector3.MoveTowards(transform.position, player.transform.position, chargeSpeed * Time.deltaTime);
         //Enemy is set to the charging state
         SetState(State.Charging);
     }

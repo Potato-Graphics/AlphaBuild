@@ -125,7 +125,7 @@ public class Player : MonoBehaviour
 
     void HandleDeath()
     {
-        SceneManager.LoadScene("RunAndGun");
+        SceneManager.LoadScene(0);
     }
 
     public int GetHealth()
@@ -156,6 +156,7 @@ public class Player : MonoBehaviour
         UpdateHealth(-amount);
         print("Player Health: " + GetHealth());
         isAttackable = false;
+        StartCoroutine(DamagedDelay());
     }
 
     IEnumerator DamagedDelay()
