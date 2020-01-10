@@ -11,7 +11,7 @@ public class Crystal : MonoBehaviour
 
     public GameObject implosionPrefab;
     public GameObject sparksPrefab;
-    [SerializeField] Player player;
+    Player player;
 
     Player target;
     Vector2 moveDirection;
@@ -23,11 +23,19 @@ public class Crystal : MonoBehaviour
         moveDirection = (target.transform.position - transform.position).normalized * moveSpeed; // Moves Towards the player.
         rb.velocity = new Vector2(moveDirection.x, moveDirection.y); // The speed in which the crystal will move.
         Destroy(gameObject, 3f);
+
+        player = GameObject.Find("Player").GetComponent<Player>();
     }
 
     // Update is called once per frame
     void OnCollisionEnter2D(Collision2D col)
     {
+        Debug.LogWarning("HERE");
+        player.isAttackable = true;
+        player.DealDamage(1);
+        Debug.LogWarning("HERE");
+
+
         //print("on collision " + player.isAttackable);
         print("test" + col.gameObject.tag);
         // Spawns the implosion effect when the crystal hits an object.
@@ -39,7 +47,7 @@ public class Crystal : MonoBehaviour
         if(col.gameObject.tag == "Player")
         {
             Instantiate(implosionPrefab, gameObject.transform.position, Quaternion.identity);
-            Debug.LogError("crystal damage player");
+            Debug.LogWarning("crystal damage player" + player);
             player.DealDamage(1);
             print("hello");
             Destroy(gameObject);

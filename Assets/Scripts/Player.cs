@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -7,10 +8,13 @@ using UnityEngine.UI;
 [RequireComponent (typeof (Controller2D))]
 
 
+
 public class Player : MonoBehaviour
 {
     public float jumpHeight = 4;
     public float timeToJumpApex = .4f;
+
+    static int ID = 0;
 
     float accelerationTimeAirborne = .2f;
     float accelerationTimeGrounded = .1f;
@@ -23,7 +27,8 @@ public class Player : MonoBehaviour
     [SerializeField] private const int MAX_HEALTH = 3;
     [SerializeField] private int score = 0;
     public int currentHealth;
-    /*public */[SerializeField] bool isAttackable = true;
+    ///*public */[SerializeField] bool isAttackable = true;
+    public bool isAttackable = true;
     public float direction;
     [SerializeField] GameObject lifeOne;
     [SerializeField] GameObject lifeTwo;
@@ -32,11 +37,16 @@ public class Player : MonoBehaviour
 
     Vector3 velocity;
 
+    float cooldown;
+
     Controller2D controller;
+
+    public int myID;
 
     // Start is called before the first frame update
     void Start()
     {
+        myID = ID++;
         lifeOne.SetActive(true);
         lifeTwo.SetActive(true);
         lifeThree.SetActive(true);
@@ -51,8 +61,24 @@ public class Player : MonoBehaviour
     //Stops the player from moving building up downward force when standing still.
     void Update()
     {
-        Debug.LogError(isAttackable);
-        switch(GetHealth())
+        Debug.LogWarning(isAttackable +" " +this.myID + " " + currentHealth);
+
+        if (isAttackable == true)
+        {
+
+        }
+        else
+        {
+            cooldown -= Time.deltaTime;
+
+            if(cooldown < 0)
+            {
+                isAttackable = true;
+            }
+        }
+
+        //Debug.LogError(isAttackable);
+        switch (GetHealth())
         {
             case 0:
                 lifeOne.SetActive(false);
@@ -153,15 +179,26 @@ public class Player : MonoBehaviour
 
     public void DealDamage(int amount)
     {
-        print("deal damage function");
-        print("deal damage " +isAttackable);
-        if (!isAttackable)
-            return;
-        Debug.LogError("Working###############");
-        UpdateHealth(-amount);
-        print("Player Health: " + GetHealth());
-        isAttackable = false;
-        StartCoroutine(DamagedDelay());
+        try
+        {
+            Debug.LogWarning("deal damage function");
+            Debug.LogWarning("deal damage " + isAttackable);
+            Debug.LogWarning(isAttackable + " " + this.myID);
+
+            if (isAttackable == true)
+            {
+                Debug.LogError("Working###############");
+                //UpdateHealth(-amount);
+                print("Player Health: " + GetHealth());
+                //isAttackable = false;
+                //StartCoroutine(DamagedDelay());
+                this.cooldown = 2;
+            }
+        }
+        catch(Exception ex)
+        {
+            Debug.LogWarning("Fucked up: " + ex);
+        }
     }
 
     IEnumerator DamagedDelay()
