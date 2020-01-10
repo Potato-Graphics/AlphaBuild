@@ -23,6 +23,7 @@ public class DamagePlayer : MonoBehaviour
     {
         if (col.gameObject.tag.Equals("Player"))
         {
+
             player.DealDamage(damageAmount);
 
             if (destroyable)

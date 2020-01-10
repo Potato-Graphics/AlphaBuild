@@ -23,7 +23,7 @@ public class Player : MonoBehaviour
     [SerializeField] private const int MAX_HEALTH = 3;
     [SerializeField] private int score = 0;
     public int currentHealth;
-    public bool isAttackable = true;
+    /*public */[SerializeField] bool isAttackable = true;
     public float direction;
     [SerializeField] GameObject lifeOne;
     [SerializeField] GameObject lifeTwo;
@@ -41,6 +41,7 @@ public class Player : MonoBehaviour
         lifeTwo.SetActive(true);
         lifeThree.SetActive(true);
         controller = GetComponent<Controller2D>();
+        isAttackable = true;
 
         gravity = -(2 * jumpHeight) / Mathf.Pow(timeToJumpApex, 2);
         jumpVelocity = Mathf.Abs(gravity) * timeToJumpApex;
@@ -50,6 +51,7 @@ public class Player : MonoBehaviour
     //Stops the player from moving building up downward force when standing still.
     void Update()
     {
+        Debug.LogError(isAttackable);
         switch(GetHealth())
         {
             case 0:
@@ -151,16 +153,22 @@ public class Player : MonoBehaviour
 
     public void DealDamage(int amount)
     {
+        print("deal damage function");
+        print("deal damage " +isAttackable);
         if (!isAttackable)
             return;
+        Debug.LogError("Working###############");
         UpdateHealth(-amount);
         print("Player Health: " + GetHealth());
         isAttackable = false;
+        StartCoroutine(DamagedDelay());
     }
 
     IEnumerator DamagedDelay()
     {
+        Debug.Log("Delay/////////////");
         yield return new WaitForSeconds(2);
         isAttackable = true;
+        print(isAttackable);
     }
 }
