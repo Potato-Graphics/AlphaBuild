@@ -21,7 +21,6 @@ public class Enemy : MonoBehaviour
     [SerializeField] private EnemyType enemyType; //the enemy type
     [SerializeField] private bool movingRight = true;
     [SerializeField] public bool collidingWithPlayer = false;
-    [SerializeField] public bool damagePlayer = true;
     Rigidbody2D rb;
     private float timePassed;
     private Vector3 localScale;
@@ -36,6 +35,7 @@ public class Enemy : MonoBehaviour
 
         rb = GetComponent<Rigidbody2D>();
         SetState(State.Idle);
+        startPosition = transform.position;
 
     }
 
@@ -54,12 +54,7 @@ public class Enemy : MonoBehaviour
 
         if (GetState() == State.Charging)
         {
-            if (damagePlayer)
-            {
-                player.DealDamage(1);
-                SetState(Enemy.State.CoolDown);
-                damagePlayer = false;
-            }
+           
         }
         if (GetState() == State.Charging)
             if (timePassed > 5)
@@ -67,16 +62,7 @@ public class Enemy : MonoBehaviour
 
         if (GetState() == State.Charging)
         {
-            if (playerPosition.x > enemyPosition.x)
-            {
-                localScale.x = 1;
-                transform.localScale = localScale;
-            }
-            if (playerPosition.x <= enemyPosition.x)
-            {
-                localScale.x = -1;
-                transform.localScale = localScale;
-            }
+            Vector3.MoveTowards(transform.position, player.transform.position, chargeSpeed * Time.deltaTime);
         }
         if (GetState() == State.Idle)
         {
@@ -116,65 +102,6 @@ public class Enemy : MonoBehaviour
             SetState(State.Dead);
     }
 
-    //Handles the enemys state
-    public enum State
-    {
-        Idle,
-        Attacking,
-        Charging,
-        CoolDown,
-        Dead
-    }
-
-    //Handles the type of the enemy.
-    public enum EnemyType
-    {
-        Boss,
-        ChargeNPC
-    }
-
-    public EnemyType GetEnemyType()
-    {
-        return enemyType;
-    }
-
-    /* Sets the state of the enemy
-     * Params: the new state being assigned to enemy
-     */
-    public void SetState(State state)
-    {
-        currentState = state;
-        HandleNewState(state);
-    }
-
-    //returns the enemys current state
-    public State GetState()
-    {
-        return currentState;
-    }
-
-    //Handles the enemys new state
-    private void HandleNewState(State state)
-    {
-        //switch statement to handle various states
-        switch (state)
-        {
-            //if the enemys state is attacking
-            case State.Attacking:
-                if (GetEnemyType() == EnemyType.ChargeNPC)
-                    Charge(); // enemy does the charge attack if it's the charge npc
-                break;
-            //if the enemy is on cooldown
-            case State.CoolDown:
-                rb.velocity = Vector2.zero;
-                StartCoroutine(DamageDelay()); // The enemys damage delay is started.
-                break;
-            //if the enemy is dead
-            case State.Dead:
-                Destroy(this.gameObject); // The enemy is destroyed.
-                break;
-        }
-    }
 
     //returns the enemys current health
     public int GetHealth()
@@ -231,5 +158,86 @@ public class Enemy : MonoBehaviour
         rb.velocity = new Vector2(playerPosition.x * (chargeSpeed * Time.deltaTime), rb.velocity.y);
         //Enemy is set to the charging state
         SetState(State.Charging);
+    }
+
+    /*
+     * Cloud Bomber functions
+     * 
+     */
+
+    private void HandleCloudBomberPath()
+    {
+
+    }
+
+
+
+    /*
+     * State Functions
+     */
+    /* Sets the state of the enemy
+  * Params: the new state being assigned to enemy
+  */
+
+        //Handles the enemys state
+    public enum State
+    {
+        Idle,
+        Attacking,
+        Charging,
+        CoolDown,
+        Dead
+    }
+    public void SetState(State state)
+    {
+        currentState = state;
+        HandleNewState(state);
+    }
+
+    //returns the enemys current state
+    public State GetState()
+    {
+        return currentState;
+    }
+
+    //Handles the enemys new state
+    private void HandleNewState(State state)
+    {
+        //switch statement to handle various states
+        switch (state)
+        {
+            //if the enemys state is attacking
+            case State.Attacking:
+                if (GetEnemyType() == EnemyType.ChargeNPC)
+                    Charge(); // enemy does the charge attack if it's the charge npc
+                break;
+            //if the enemy is on cooldown
+            case State.CoolDown:
+                rb.velocity = Vector2.zero;
+                StartCoroutine(DamageDelay()); // The enemys damage delay is started.
+                break;
+            //if the enemy is dead
+            case State.Dead:
+                Destroy(this.gameObject); // The enemy is destroyed.
+                break;
+        }
+    }
+
+
+
+    /*
+     * Enemy Type functions
+     */
+    //Handles the type of the enemy.
+    public enum EnemyType
+    {
+        Boss,
+        ChargeNPC,
+        CloudBomber
+    }
+
+    public EnemyType GetEnemyType()
+    {
+        return enemyType;
     }
 }
