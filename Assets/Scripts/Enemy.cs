@@ -12,6 +12,7 @@ public class Enemy : MonoBehaviour
     [SerializeField] private float chargeSpeed = 50.0f;
     [SerializeField] private Transform playerObject; // the player transform object
     [SerializeField] private Vector3 playerPosition; // players position
+    private Vector2 dir = new Vector2(-1, 0);
     private Vector3 startPosition;
     [SerializeField] private float distance; // distance between enemy and player
     [SerializeField] private Vector3 enemyPosition; // enemy position
@@ -21,9 +22,23 @@ public class Enemy : MonoBehaviour
     [SerializeField] private EnemyType enemyType; //the enemy type
     [SerializeField] private bool movingRight = true;
     [SerializeField] public bool collidingWithPlayer = false;
+    public Transform spawnPoint;
+    private Vector2 direction = new Vector2(-1, 0);
     Rigidbody2D rb;
     private float timePassed;
     private Vector3 localScale;
+
+    /*
+     * Raycast
+     */
+    Vector3 endPos;
+    Vector3 endPos2;
+    RaycastHit2D hit;
+    RaycastHit2D infrontInfo;
+    RaycastHit2D groundInfo;
+    float castDist;
+    [SerializeField] Transform firePoint;
+    [SerializeField] Transform firePoint2;
 
     // Start is called before the first frame update
     private void Start()
@@ -32,13 +47,13 @@ public class Enemy : MonoBehaviour
         //Sets the enemy to idle on start
         localScale = transform.localScale;
         startPosition = transform.position;
+        endPos.z = -2.24f;
 
         rb = GetComponent<Rigidbody2D>();
         SetState(State.Idle);
         startPosition = transform.position;
 
     }
-
     // Update is called once per frame
     void Update()
     {
@@ -49,53 +64,84 @@ public class Enemy : MonoBehaviour
         //Initiliasing the enemy position
         enemyPosition = transform.position;
         //Initiliasing the distance between the enemy and player vector
-        distance = Vector3.Distance(playerPosition, enemyPosition);
+        distance = Vector2.Distance(playerPosition, enemyPosition);
         timePassed += Time.deltaTime;
 
-        if (GetState() == State.Charging)
+        endPos = firePoint.position + Vector3.right * castDist;
+        hit = Physics2D.Linecast(firePoint.position, endPos);
+        Debug.DrawLine(firePoint.position, endPos, Color.blue);
+        groundInfo = Physics2D.Raycast(firePoint2.position, Vector2.down, 2f);
+        infrontInfo = Physics2D.Raycast(firePoint.position, Vector2.right, 0.3f);
+
+        endPos2 = firePoint2.position + Vector3.right * 0.01f;
+        groundInfo = Physics2D.Raycast(firePoint2.position, Vector2.down, 2f);
+
+        if(GetState() == State.Idle)
         {
-           
+            if (groundInfo.collider == false)
+            {
+                if (movingRight)
+                {
+                    transform.eulerAngles = new Vector3(0, -180, 0);
+                    movingRight = false;
+                }
+                else
+                {
+                    transform.eulerAngles = new Vector3(0, 0, 0);
+                    movingRight = true;
+                }
+            }
+            if (infrontInfo.collider == true)
+            {
+                if (hit.collider != null)
+                {
+                    if (hit.collider.gameObject.tag != "Player")
+                    {
+                        if (movingRight)
+                        {
+                            transform.eulerAngles = new Vector3(0, -180, 0);
+                            movingRight = false;
+                        }
+                        else
+                        {
+                            transform.eulerAngles = new Vector3(0, 0, 0);
+                            movingRight = true;
+                        }
+                    }
+                }
+            }
+            if (enemyPosition.x > startPosition.x + idleWalkDistance && movingRight)
+            {
+                movingRight = false;
+                transform.eulerAngles = new Vector3(0, -180, 0);
+            }
+            if (enemyPosition.x <= startPosition.x - idleWalkDistance && !movingRight)
+            {
+                transform.eulerAngles = new Vector3(0, 0, 0);
+                movingRight = true;
+            }
+
+            if (CanSeePlayer(distanceToCharge))
+            {
+                Debug.LogWarning("can see");
+                SetState(State.Attacking);
+            }
+            else
+            {
+                Debug.LogWarning("cant see");
+                SetState(State.Idle);
+            }
         }
+        
+
         if (GetState() == State.Charging)
             if (timePassed > 5)
                 SetState(State.Idle);
 
-        if (GetState() == State.Charging)
-        {
-            Vector3.MoveTowards(transform.position, player.transform.position, chargeSpeed * Time.deltaTime);
-        }
         if (GetState() == State.Idle)
         {
-            if (enemyPosition.x > startPosition.x + idleWalkDistance)
-                movingRight = false;
-            if (enemyPosition.x <= startPosition.x - idleWalkDistance)
-                movingRight = true;
-            if (movingRight)
-                MoveRight();
-            else
-                MoveLeft();
+            transform.Translate(Vector2.right * walkSpeed * Time.deltaTime);
         }
-        // if the player is in range of the enemy
-        if (distance < distanceToCharge)
-        {
-            if (GetState() == State.CoolDown)
-                return;
-            if (GetState() == State.Idle)
-            {
-                if (movingRight && enemyPosition.x - 5 < playerPosition.x - 5)
-                    SetState(State.Attacking);
-                else if (!movingRight && enemyPosition.x + 5 > playerPosition.x + 5)
-                    SetState(State.Attacking);
-            }
-        }
-        else if (distance >= distanceToCharge)
-            //if the player is out of range the enemy is set to idle.
-            SetState(State.Idle);
-
-        if (movingRight && playerPosition.x < enemyPosition.x)
-            SetState(State.Idle);
-        else if (!movingRight && playerPosition.x > enemyPosition.x)
-            SetState(State.Idle);
 
         if (currentHealth <= 0)
             //if the enemy has no remaining health the enemy is set to dead.
@@ -126,36 +172,60 @@ public class Enemy : MonoBehaviour
         SetState(State.Idle);
     }
 
-    private void MoveRight()
+    bool CanSeePlayer(float distance)
     {
-        movingRight = true;
-        localScale.x = 1;
-        transform.localScale = localScale;
-        rb.velocity = new Vector2(localScale.x * (walkSpeed * Time.deltaTime), rb.velocity.y);
+        bool val = false;
+        castDist = distance;
 
+
+        if(!movingRight)
+        {
+            castDist = -distance;
+        }
+
+        if (hit.collider != null)
+        {
+            Debug.DrawLine(firePoint.position, endPos, Color.red);
+            if (hit.collider.gameObject.tag.Equals("Player"))
+            {
+                val = true;
+            }
+            else
+            {
+                val = false;
+            }
+
+        }
+        return val;
     }
 
-    private void MoveLeft()
+    void RotateEnemy()
     {
-        movingRight = false;
-        localScale.x = -1;
-        transform.localScale = localScale;
-        rb.velocity = new Vector2(localScale.x * (walkSpeed * Time.deltaTime), rb.velocity.y);
-
+        Vector3 locScale = transform.localScale;
+        locScale.x *= -1;
+        transform.localScale = locScale;
     }
 
     //Handles the enemy charge attack.
     private void Charge()
     {
-        //if the enemy is on cool down return
         if (GetState() == State.CoolDown)
             return;
-        //if the enemy is charging return
         if (GetState() == State.Charging)
             return;
         timePassed = 0;
+
         //Moves the enemy towards the player
-        rb.velocity = new Vector2(playerPosition.x * (chargeSpeed * Time.deltaTime), rb.velocity.y);
+        if(enemyPosition.x < playerPosition.x)
+        {
+            rb.velocity = new Vector2(chargeSpeed, 0);
+            movingRight = true;
+        }
+        else
+        {
+            rb.velocity = new Vector2(-chargeSpeed, 0);
+            movingRight = false;
+        }
         //Enemy is set to the charging state
         SetState(State.Charging);
     }

@@ -55,29 +55,12 @@ public class Player : MonoBehaviour
 
         gravity = -(2 * jumpHeight) / Mathf.Pow(timeToJumpApex, 2);
         jumpVelocity = Mathf.Abs(gravity) * timeToJumpApex;
-        print("Gravity: " + gravity + " Jump Velocity: " + jumpVelocity);
     }
 
     //Stops the player from moving building up downward force when standing still.
     void Update()
     {
-        Debug.LogWarning(isAttackable +" " +this.myID + " " + currentHealth);
 
-        if (isAttackable == true)
-        {
-
-        }
-        else
-        {
-            cooldown -= Time.deltaTime;
-
-            if(cooldown < 0)
-            {
-                isAttackable = true;
-            }
-        }
-
-        //Debug.LogError(isAttackable);
         switch (GetHealth())
         {
             case 0:
@@ -153,7 +136,7 @@ public class Player : MonoBehaviour
 
     void HandleDeath()
     {
-        SceneManager.LoadScene("RunAndGun");
+        SceneManager.LoadScene(1);
     }
 
     public int GetHealth()
@@ -179,33 +162,17 @@ public class Player : MonoBehaviour
 
     public void DealDamage(int amount)
     {
-        try
-        {
-            Debug.LogWarning("deal damage function");
-            Debug.LogWarning("deal damage " + isAttackable);
-            Debug.LogWarning(isAttackable + " " + this.myID);
-
             if (isAttackable == true)
             {
-                Debug.LogError("Working###############");
-                //UpdateHealth(-amount);
-                print("Player Health: " + GetHealth());
-                //isAttackable = false;
-                //StartCoroutine(DamagedDelay());
-                this.cooldown = 2;
+                UpdateHealth(-amount);
+                isAttackable = false;
+                StartCoroutine(DamagedDelay());
             }
-        }
-        catch(Exception ex)
-        {
-            Debug.LogWarning("Fucked up: " + ex);
-        }
     }
 
     IEnumerator DamagedDelay()
     {
-        Debug.Log("Delay/////////////");
         yield return new WaitForSeconds(2);
         isAttackable = true;
-        print(isAttackable);
     }
 }

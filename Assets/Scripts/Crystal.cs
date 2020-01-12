@@ -30,10 +30,8 @@ public class Crystal : MonoBehaviour
     // Update is called once per frame
     void OnCollisionEnter2D(Collision2D col)
     {
-        Debug.LogWarning("HERE");
         player.isAttackable = true;
         player.DealDamage(1);
-        Debug.LogWarning("HERE");
 
 
         //print("on collision " + player.isAttackable);
@@ -47,9 +45,7 @@ public class Crystal : MonoBehaviour
         if(col.gameObject.tag == "Player")
         {
             Instantiate(implosionPrefab, gameObject.transform.position, Quaternion.identity);
-            Debug.LogWarning("crystal damage player" + player);
             player.DealDamage(1);
-            print("hello");
             Destroy(gameObject);
         }
         // Spawns a seperate effect for when the player shoots at the crystal.
