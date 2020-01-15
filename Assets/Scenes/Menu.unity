@@ -637,7 +637,7 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 0.066037714, g: 0.06261123, b: 0.06261123, a: 0.81960785}
-    m_HighlightedColor: {r: 0.103773594, g: 0.1013261, b: 0.1013261, a: 0.85490197}
+    m_HighlightedColor: {r: 0.039977387, g: 0.9433962, b: 0.013349922, a: 0.85490197}
     m_PressedColor: {r: 0.03773582, g: 0.03542183, b: 0.03542183, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
@@ -826,7 +826,7 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 0.066037714, g: 0.06261123, b: 0.06261123, a: 0.81960785}
-    m_HighlightedColor: {r: 0.103773594, g: 0.1013261, b: 0.1013261, a: 0.85490197}
+    m_HighlightedColor: {r: 0.013883919, g: 0.9811321, b: 0.0846957, a: 0.85490197}
     m_PressedColor: {r: 0.03773582, g: 0.03542183, b: 0.03542183, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
@@ -1547,7 +1547,7 @@ MonoBehaviour:
   m_Script: {fileID: 1980459831, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 800, y: 600}
@@ -1566,8 +1566,8 @@ Canvas:
   m_GameObject: {fileID: 1509144821}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 0
-  m_Camera: {fileID: 0}
+  m_RenderMode: 1
+  m_Camera: {fileID: 1592314999}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
@@ -2276,7 +2276,7 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 0.066037714, g: 0.06261123, b: 0.06261123, a: 0.81960785}
-    m_HighlightedColor: {r: 0.103773594, g: 0.1013261, b: 0.1013261, a: 0.85490197}
+    m_HighlightedColor: {r: 0.040850822, g: 0.9622642, b: 0.11150431, a: 0.85490197}
     m_PressedColor: {r: 0.03773582, g: 0.03542183, b: 0.03542183, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
@@ -2798,7 +2798,7 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 0.066037714, g: 0.06261123, b: 0.06261123, a: 0.81960785}
-    m_HighlightedColor: {r: 0.103773594, g: 0.1013261, b: 0.1013261, a: 0.85490197}
+    m_HighlightedColor: {r: 0.049439307, g: 0.9528302, b: 0.07220875, a: 0.85490197}
     m_PressedColor: {r: 0.03773582, g: 0.03542183, b: 0.03542183, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1

@@ -123,12 +123,12 @@ public class Enemy : MonoBehaviour
 
             if (CanSeePlayer(distanceToCharge))
             {
-                Debug.LogWarning("can see");
+                
                 SetState(State.Attacking);
             }
             else
             {
-                Debug.LogWarning("cant see");
+                
                 SetState(State.Idle);
             }
         }

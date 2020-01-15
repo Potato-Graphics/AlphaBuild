@@ -61,37 +61,32 @@ public class Player : MonoBehaviour
     void Update()
     {
 
-        switch (GetHealth())
+        if (GetHealth() <= 0)
         {
-            case 0:
-                lifeOne.SetActive(false);
-                lifeTwo.SetActive(false);
-                lifeThree.SetActive(false);
-                HandleDeath();
-                break;
-            case 1:
-                lifeOne.SetActive(false);
-                lifeTwo.SetActive(false);
-                lifeThree.SetActive(true);
-                break;
-            case 2:
-                lifeOne.SetActive(false);
-                lifeTwo.SetActive(true);
-                lifeThree.SetActive(true);
-                break;
-            case 3:
-                lifeOne.SetActive(true);
-                lifeTwo.SetActive(true);
-                lifeThree.SetActive(true);
-                break;
-            default:
-                lifeOne.SetActive(false);
-                lifeTwo.SetActive(false);
-                lifeThree.SetActive(false);
-                print("UNEXPECTED_HEALTH_ERROR");
-                break;
+            lifeOne.SetActive(false);
+            lifeTwo.SetActive(false);
+            lifeThree.SetActive(false);
+            HandleDeath();
         }
-            if (controller.collisions.above || controller.collisions.below)
+        if (GetHealth() == 1)
+        {
+            lifeOne.SetActive(false);
+            lifeTwo.SetActive(false);
+            lifeThree.SetActive(true);
+        }
+        if (GetHealth() == 2)
+        {
+            lifeOne.SetActive(false);
+            lifeTwo.SetActive(true);
+            lifeThree.SetActive(true);
+        }
+        if (GetHealth() == 3)
+        {
+            lifeOne.SetActive(true);
+            lifeTwo.SetActive(true);
+            lifeThree.SetActive(true);
+        }
+        if (controller.collisions.above || controller.collisions.below)
             {
                 velocity.y = 0;
             }

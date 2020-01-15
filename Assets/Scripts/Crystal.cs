@@ -30,8 +30,6 @@ public class Crystal : MonoBehaviour
     // Update is called once per frame
     void OnCollisionEnter2D(Collision2D col)
     {
-        player.isAttackable = true;
-        player.DealDamage(1);
 
 
         //print("on collision " + player.isAttackable);
