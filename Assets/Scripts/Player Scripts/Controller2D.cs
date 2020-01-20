@@ -87,7 +87,6 @@ public class Controller2D : MonoBehaviour
                 velocity.x = (hit.distance - skinWidth) * directionX;
                 rayLength = hit.distance;
 
-
                 collisions.left = directionX == -1;
                 collisions.right = directionX == 1;
             }
@@ -135,7 +134,7 @@ public class Controller2D : MonoBehaviour
     void CalculateRaySpacing()
     {
         Bounds bounds = collider.bounds;
-        bounds.Expand(skinWidth * -2);
+        bounds.Expand(skinWidth * -3);
 
         horizontalRayCount = Mathf.Clamp(horizontalRayCount, 1, int.MaxValue);
         verticalRayCount = Mathf.Clamp(verticalRayCount, 1, int.MaxValue);
