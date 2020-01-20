@@ -21,9 +21,11 @@ namespace UnityTemplateProjects
         {
             playerPosition = playerObject.transform.position;
             playerPositionX = playerPosition.x;
-            targetPositionX = playerPositionX - 2;
+            targetPositionX = playerPositionX - 1;
             
-            targetLocation = new Vector3(targetPositionX, 16, -34.2f);
+            targetLocation = new Vector3(targetPositionX, 8, -23.2f);
+           
+
             transform.position = targetLocation;
 
 
