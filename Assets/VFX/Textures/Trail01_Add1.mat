@@ -7,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Impact03_Ab
-  m_Shader: {fileID: 4800000, guid: 16ca7b3ae9757d3449b1fd11fe40e235, type: 3}
+  m_Name: Trail01_Add1
+  m_Shader: {fileID: 4800000, guid: d01ca7e70f2b40741acda02a6060a146, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -22,13 +22,9 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - Texture2D_6626A7F4:
-        m_Texture: {fileID: 2800000, guid: 29a190de4067cd34ea6b09bb27253e8b, type: 3}
+        m_Texture: {fileID: 2800000, guid: d3b68393bd62b2f429da9e8ac106f941, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    m_Floats:
-    - Vector1_1D409D9: 10
-    - Vector1_3BD88EA6: 0.05
+    m_Floats: []
     m_Colors:
-    - Color_8E6C8CEA: {r: 0.5, g: 0.5, b: 0.5, a: 1}
-    - Vector2_B3A0242A: {r: 0.03, g: 1, b: 0, a: 0}
-    - _Vector_2: {r: 0, g: 0, b: 0, a: 0}
+    - Color_8E6C8CEA: {r: 2.9960785, g: 2.7137256, b: 2.7137256, a: 1}
