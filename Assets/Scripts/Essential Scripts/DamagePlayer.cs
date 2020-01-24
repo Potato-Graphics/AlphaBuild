@@ -6,7 +6,7 @@ public class DamagePlayer : MonoBehaviour
 {
     [SerializeField] Player player;
     [SerializeField] bool destroyable;
-    [SerializeField] int damageAmount;
+    [SerializeField] int damageAmount = 0;
     // Start is called before the first frame update
     void Start()
     {

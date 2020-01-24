@@ -16,7 +16,6 @@ public class Player : MonoBehaviour
 
     static int ID = 0;
 
-    float accelerationTimeAirborne = .2f;
     float accelerationTimeGrounded = .1f;
     float moveSpeed = 8;
     float gravity;
@@ -30,9 +29,9 @@ public class Player : MonoBehaviour
     ///*public */[SerializeField] bool isAttackable = true;
     public bool isAttackable = true;
     public float direction;
-    [SerializeField] GameObject lifeOne;
-    [SerializeField] GameObject lifeTwo;
-    [SerializeField] GameObject lifeThree;
+    [SerializeField] GameObject lifeOne = null;
+    [SerializeField] GameObject lifeTwo = null;
+    [SerializeField] GameObject lifeThree = null;
     [SerializeField] Vector3 spawnLocation = new Vector3(-11.13f, 9.34f, 0.011f);
 
     Vector3 velocity;

@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class CastleDamageScript : MonoBehaviour
 {
-    private static int MAX_HEALTH = 50;
     private int currentHealth;
 
     void Start()
