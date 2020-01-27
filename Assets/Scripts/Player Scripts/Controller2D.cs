@@ -32,14 +32,24 @@ public class Controller2D : MonoBehaviour
     private void Update()
     {
         Vector3 characterScale = transform.localScale;
-        if (Input.GetAxis("Horizontal") < 0)
+        Vector3 mousePosition;
+        mousePosition = Input.mousePosition - Camera.main.WorldToScreenPoint(transform.position);
+        if (transform.position.x > mousePosition.x)
+        {
+            characterScale.x = 1;
+        }
+        else if (transform.position.x <= mousePosition.x)
         {
             characterScale.x = -1;
+        }
+        if (Input.GetAxis("Horizontal") < 0)
+        {
+           // characterScale.x = -1;
         }
 
         if (Input.GetAxis("Horizontal") > 0)
         {
-            characterScale.x = 1;
+            //characterScale.x = 1;
         }
 
         transform.localScale = characterScale;

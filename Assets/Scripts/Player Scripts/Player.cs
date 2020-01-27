@@ -60,7 +60,6 @@ public class Player : MonoBehaviour
     //Stops the player from moving building up downward force when standing still.
     void Update()
     {
-
         if (GetHealth() <= 0)
         {
             lifeOne.SetActive(false);
