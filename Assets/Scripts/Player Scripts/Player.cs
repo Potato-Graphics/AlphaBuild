@@ -21,6 +21,7 @@ public class Player : MonoBehaviour
     float gravity;
     float jumpVelocity;
     float velocityXSmoothing;
+    public float coins = 0;
     public bool movingRight = false;
     public bool rotation = false;
     [SerializeField] private const int MAX_HEALTH = 3;
