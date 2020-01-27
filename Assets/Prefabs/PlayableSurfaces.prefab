@@ -631,11 +631,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8519714349029747120}
     m_Modifications:
-    - target: {fileID: 6260936834794924700, guid: 5eeed187798a9fd408ed3d82ff9ff742,
-        type: 3}
-      propertyPath: m_Name
-      value: Floor
-      objectReference: {fileID: 0}
     - target: {fileID: 6260936834794924704, guid: 5eeed187798a9fd408ed3d82ff9ff742,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -690,6 +685,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6260936834794924700, guid: 5eeed187798a9fd408ed3d82ff9ff742,
+        type: 3}
+      propertyPath: m_Name
+      value: Floor
       objectReference: {fileID: 0}
     - target: {fileID: 6260936835079397190, guid: 5eeed187798a9fd408ed3d82ff9ff742,
         type: 3}
@@ -816,11 +816,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8519714349029747120}
     m_Modifications:
-    - target: {fileID: 6260936834794924700, guid: 5eeed187798a9fd408ed3d82ff9ff742,
-        type: 3}
-      propertyPath: m_Name
-      value: Floor (5)
-      objectReference: {fileID: 0}
     - target: {fileID: 6260936834794924704, guid: 5eeed187798a9fd408ed3d82ff9ff742,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -875,6 +870,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6260936834794924700, guid: 5eeed187798a9fd408ed3d82ff9ff742,
+        type: 3}
+      propertyPath: m_Name
+      value: Floor (5)
       objectReference: {fileID: 0}
     - target: {fileID: 6260936835079397190, guid: 5eeed187798a9fd408ed3d82ff9ff742,
         type: 3}

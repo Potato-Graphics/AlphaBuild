@@ -12,10 +12,10 @@ GameObject:
   - component: {fileID: 6629710707411619643}
   - component: {fileID: 6629710707411619642}
   - component: {fileID: 1688792702670583473}
-  - component: {fileID: 560911519442791351}
   - component: {fileID: 3011063865170176865}
-  - component: {fileID: 4149122568739532597}
-  - component: {fileID: 5522712696184307111}
+  - component: {fileID: 2341332498175471912}
+  - component: {fileID: 3838420462084670953}
+  - component: {fileID: 1093212918242747157}
   m_Layer: 0
   m_Name: Bullet
   m_TagString: Bullet
@@ -94,19 +94,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8be88680d2dc88459026550dbec42bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &560911519442791351
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6629710707411619623}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 069b8b389197d2a4690088527744513e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  player: {fileID: 1716988175235006225, guid: 98367629276291a448f977ddd0f314f0, type: 3}
 --- !u!114 &3011063865170176865
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -119,8 +106,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: abeaa3626fad2f94aa848e0ff92c9967, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damageToGive: 1
---- !u!61 &4149122568739532597
+  Velocity: {x: 0, y: 0, z: 0}
+--- !u!114 &2341332498175471912
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6629710707411619623}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 069b8b389197d2a4690088527744513e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 1716988175235006225, guid: 98367629276291a448f977ddd0f314f0, type: 3}
+  cloud: {fileID: 319747550170441283, guid: c4f604b469727c447ba20895b86dff78, type: 3}
+  tier1Boost: 1
+  tier2Boost: 2
+  tier3Boost: 3
+  tier4Boost: 4
+  tier5Boost: 5
+--- !u!61 &3838420462084670953
 BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -146,7 +152,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.0000001, y: 1.0000001}
   m_EdgeRadius: 0
---- !u!50 &5522712696184307111
+--- !u!50 &1093212918242747157
 Rigidbody2D:
   serializedVersion: 4
   m_ObjectHideFlags: 0
@@ -158,7 +164,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 0.01
+  m_Mass: 0.0001
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
@@ -166,4 +172,4 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4

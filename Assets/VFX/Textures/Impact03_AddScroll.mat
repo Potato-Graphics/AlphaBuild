@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Impact03_AddScroll
+  m_Shader: {fileID: 4800000, guid: 16ca7b3ae9757d3449b1fd11fe40e235, type: 3}
+  m_ShaderKeywords: 
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap:
+    MotionVector: User
+  disabledShaderPasses:
+  - MOTIONVECTORS
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - Texture2D_6626A7F4:
+        m_Texture: {fileID: 2800000, guid: 29a190de4067cd34ea6b09bb27253e8b, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Floats:
+    - Vector1_1D409D9: 20
+    - Vector1_3BD88EA6: -0.05
+    m_Colors:
+    - Color_8E6C8CEA: {r: 14.251831, g: 12.908727, b: 12.908727, a: 1}
+    - Vector2_B3A0242A: {r: -0.3, g: -0.1, b: 0, a: 0}
+    - _Vector_2: {r: 0, g: 0, b: 0, a: 0}
