@@ -12,6 +12,11 @@ using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
+
+    public delegate void PlayerDelegate();
+    public static event PlayerDelegate OnPlayerDied;
+
+
     public float jumpHeight = 4;
     public float timeToJumpApex = .4f;
 
@@ -38,6 +43,7 @@ public class Player : MonoBehaviour
     [SerializeField] GameObject player;
     public Vector3 checkpointPos;
     public int checkpointsReceived;
+    public int waterRemaining;
 
     public int sceneToRespawnOn;
 
@@ -57,6 +63,7 @@ public class Player : MonoBehaviour
     }
     void Start()
     {
+        waterRemaining = 50;
         DontDestroyOnLoad(gameObject);
         print("test1");
 
@@ -153,9 +160,7 @@ public class Player : MonoBehaviour
 
     void HandleDeath()
     {
-        spawnLocation = checkpointPos;
-        Destroy(gameObject);
-        SceneManager.LoadScene(sceneToRespawnOn);
+        OnPlayerDied();
     }
 
     public int GetHealth()
@@ -187,6 +192,16 @@ public class Player : MonoBehaviour
                 isAttackable = false;
                 StartCoroutine(DamagedDelay());
             }
+    }
+
+    void Reload()
+    {
+
+    }
+
+    public void SendReloadText()
+    {
+        //TODO: Send reload text ui
     }
 
     IEnumerator DamagedDelay()
