@@ -9,6 +9,7 @@ using UnityEngine.UI;
 
 
 
+
 public class Player : MonoBehaviour
 {
     public float jumpHeight = 4;
@@ -33,19 +34,37 @@ public class Player : MonoBehaviour
     [SerializeField] GameObject lifeOne = null;
     [SerializeField] GameObject lifeTwo = null;
     [SerializeField] GameObject lifeThree = null;
-    [SerializeField] Vector3 spawnLocation = new Vector3(-11.13f, 9.34f, 0.011f);
+    public Vector3 spawnLocation = new Vector3(-4f, 0.47f, 0f);
+    [SerializeField] GameObject player;
+    public Vector3 checkpointPos;
+    public int checkpointsReceived;
+
+    public int sceneToRespawnOn;
 
     Vector3 velocity;
 
     float cooldown;
+
 
     Controller2D controller;
 
     public int myID;
 
     // Start is called before the first frame update
+    void Awake()
+    {
+        
+    }
     void Start()
     {
+        DontDestroyOnLoad(gameObject);
+        print("test1");
+
+        print(checkpointsReceived);
+        print("checkpoint pos " + checkpointPos);
+
+        transform.position = spawnLocation;
+        sceneToRespawnOn = SceneManager.GetActiveScene().buildIndex;
         myID = ID++;
         lifeOne.SetActive(true);
         lifeTwo.SetActive(true);
@@ -60,6 +79,10 @@ public class Player : MonoBehaviour
     //Stops the player from moving building up downward force when standing still.
     void Update()
     {
+        if(Input.GetKeyDown(KeyCode.F))
+        {
+            UpdateHealth(-GetHealth());
+        }
         if (GetHealth() <= 0)
         {
             lifeOne.SetActive(false);
@@ -130,7 +153,9 @@ public class Player : MonoBehaviour
 
     void HandleDeath()
     {
-        SceneManager.LoadScene(1);
+        spawnLocation = checkpointPos;
+        Destroy(gameObject);
+        SceneManager.LoadScene(sceneToRespawnOn);
     }
 
     public int GetHealth()
