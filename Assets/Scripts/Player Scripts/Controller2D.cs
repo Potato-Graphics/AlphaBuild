@@ -52,7 +52,7 @@ public class Controller2D : MonoBehaviour
         collisions.Reset();
         collisions.velocityOld = velocity;
 
-        if (velocity.y <= 0)
+        if (velocity.y < 0)
         {
             DescendSlope(ref velocity);
         }
@@ -85,16 +85,16 @@ public class Controller2D : MonoBehaviour
 
             if (hit)
             {
-
+                Debug.DrawLine(hit.point, hit.point + hit.normal);
                 float slopeAngle = Vector2.Angle(hit.normal, Vector2.up);
-                if (i == 0 && slopeAngle <= maxClimbAngle);
-                if (collisions.descendingSlope)
-                {
-                    collisions.descendingSlope= false;
-                    velocity = collisions.velocityOld;
-                }
 
+                if (i == 0 && slopeAngle <= maxClimbAngle)
                 {
+                    if (collisions.descendingSlope)
+                    {
+                        collisions.descendingSlope = false;
+                        velocity = collisions.velocityOld;
+                    }
                     float distanceToSlopeStart = 0;
                     if (slopeAngle != collisions.slopeAngleOld)
                     {
@@ -104,10 +104,8 @@ public class Controller2D : MonoBehaviour
                     ClimbSlope(ref velocity, slopeAngle);
                     velocity.x += distanceToSlopeStart * directionX;
                 }
-
                 if (!collisions.climbingSlope || slopeAngle > maxClimbAngle)
                 {
-
                     velocity.x = (hit.distance - skinWidth) * directionX;
                     rayLength = hit.distance;
 

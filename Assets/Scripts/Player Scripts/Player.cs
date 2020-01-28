@@ -13,12 +13,14 @@ public class Player : MonoBehaviour
 {
     public float jumpHeight = 4;
     public float timeToJumpApex = .4f;
+    public float wallSlideSpeedMax = 3;
 
     static int ID = 0;
 
     float accelerationTimeGrounded = .1f;
+    float accelerationTimeAirborne = .2f;
     float moveSpeed = 8;
-    float gravity;
+    float gravity = -20;
     float jumpVelocity;
     float velocityXSmoothing;
     public bool movingRight = false;
@@ -59,6 +61,16 @@ public class Player : MonoBehaviour
     //Stops the player from moving building up downward force when standing still.
     void Update()
     {
+        bool wallSliding = false;
+        if ((controller.collisions.left || controller.collisions.right) && !controller.collisions.below && velocity.y < 0)
+        {
+            wallSliding = true;
+
+            if(velocity.y < -wallSlideSpeedMax)
+            {
+                velocity.y = -wallSlideSpeedMax;
+            }
+        }
 
         if (GetHealth() <= 0)
         {
@@ -111,7 +123,7 @@ public class Player : MonoBehaviour
         }
 
         float targetVelocityX = input.x * moveSpeed;
-        velocity.x = Mathf.SmoothDamp(velocity.x, targetVelocityX, ref velocityXSmoothing, (controller.collisions.below) ? accelerationTimeGrounded : accelerationTimeGrounded);
+        velocity.x = Mathf.SmoothDamp(velocity.x, targetVelocityX, ref velocityXSmoothing, (controller.collisions.below) ? accelerationTimeGrounded : accelerationTimeAirborne);
         velocity.y += gravity * Time.deltaTime;
         controller.Move(velocity * Time.deltaTime);
 
