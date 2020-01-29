@@ -22,11 +22,7 @@ public class CheckpointManager : MonoBehaviour
         Debug.LogWarning(col.gameObject.tag);
         if(col.gameObject.tag == "Player")
         {
-            player.checkpointPos = transform.position;
-            print("checkpoint position " + player.checkpointPos);
-            player.sceneToRespawnOn = SceneManager.GetActiveScene().buildIndex;
-            player.checkpointsReceived++;
-            PlayerPrefs.SetInt("checkpointsReceived", player.checkpointsReceived);
+            Player.spawnLocation = transform.position;
             Destroy(gameObject);
         }
     }

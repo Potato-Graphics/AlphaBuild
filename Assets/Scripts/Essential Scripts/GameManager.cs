@@ -10,11 +10,14 @@ public class GameManager : MonoBehaviour
     public static event GameDelegate OnGameStarted;
     public static event GameDelegate OnGameOver;
 
+    Player player;
+
     bool gameOver = false;
         public bool GameOver { get { return gameOver; } }
     void Awake()
     {
         Instance = this;
+        player = FindObjectOfType<Player>();
     }
 
     void OnEnable()
@@ -29,7 +32,8 @@ public class GameManager : MonoBehaviour
 
     void OnPlayerDied()
     {
-        gameOver = true;
+        player.transform.position = Player.spawnLocation;
+        player.SetHealth(3);
     }
 
     // Update is called once per frame

@@ -39,11 +39,11 @@ public class Player : MonoBehaviour
     [SerializeField] GameObject lifeOne = null;
     [SerializeField] GameObject lifeTwo = null;
     [SerializeField] GameObject lifeThree = null;
-    public Vector3 spawnLocation = new Vector3(-4f, 0.47f, 0f);
+    public static Vector3 spawnLocation = new Vector3(-4f, 0.47f, 0f);
     [SerializeField] GameObject player;
-    public Vector3 checkpointPos;
-    public int checkpointsReceived;
-    public int waterRemaining;
+    public static Vector3 checkpointPos;
+    public static int checkpointsReceived;
+    public static int waterRemaining;
 
     public int sceneToRespawnOn;
 
@@ -172,6 +172,11 @@ public class Player : MonoBehaviour
     {
         currentHealth += amount;
 
+    }
+
+    public void SetHealth(int amount)
+    {
+        currentHealth = amount;
     }
 
     public int GetScore()
