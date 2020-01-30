@@ -14,17 +14,24 @@ public class Player : MonoBehaviour
     public float jumpHeight = 4;
     public float timeToJumpApex = .4f;
     public float wallSlideSpeedMax = 3;
+    public float wallStickTime = .25f;
+    public float timeToWallUnstick;
+    public Vector2 wallJumpClimb;
+    public Vector2 wallJumpOff;
+    public Vector2 wallLeap;
 
     static int ID = 0;
 
     float accelerationTimeGrounded = .1f;
     float accelerationTimeAirborne = .2f;
-    float moveSpeed = 8;
+    float moveSpeed = 7;
     float gravity = -20;
     float jumpVelocity;
     float velocityXSmoothing;
+
     public bool movingRight = false;
     public bool rotation = false;
+
     [SerializeField] private const int MAX_HEALTH = 3;
     [SerializeField] private int score = 0;
     public int currentHealth;
@@ -61,6 +68,14 @@ public class Player : MonoBehaviour
     //Stops the player from moving building up downward force when standing still.
     void Update()
     {
+        //Gets the inputs for moving left and right.
+        Vector2 input = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+        int wallDirX = (controller.collisions.left) ? -1 : 1;
+
+        float targetVelocityX = input.x * moveSpeed;
+        velocity.x = Mathf.SmoothDamp(velocity.x, targetVelocityX, ref velocityXSmoothing, (controller.collisions.below) ? accelerationTimeGrounded : accelerationTimeAirborne);
+
+
         bool wallSliding = false;
         if ((controller.collisions.left || controller.collisions.right) && !controller.collisions.below && velocity.y < 0)
         {
@@ -69,6 +84,25 @@ public class Player : MonoBehaviour
             if(velocity.y < -wallSlideSpeedMax)
             {
                 velocity.y = -wallSlideSpeedMax;
+            }
+
+            if (timeToWallUnstick > 0)
+            {
+                velocityXSmoothing = 0;
+                velocity.x = 0;
+
+                if (input.x != wallDirX && input.x != 0)
+                {
+                    timeToWallUnstick -= Time.deltaTime;
+                }
+                else
+                {
+                    timeToWallUnstick = wallStickTime;
+                }
+            }
+            else
+            {
+                timeToWallUnstick = wallStickTime;
             }
         }
 
@@ -97,14 +131,11 @@ public class Player : MonoBehaviour
             lifeTwo.SetActive(true);
             lifeThree.SetActive(true);
         }
+
         if (controller.collisions.above || controller.collisions.below)
             {
                 velocity.y = 0;
             }
-
-        //Gets the inputs for moving left and right.
-        Vector2 input = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
-
         if(input.x < 0)
         {
             direction = -1;
@@ -117,13 +148,32 @@ public class Player : MonoBehaviour
         }
         else { direction = 0; }
 
-        if (Input.GetKeyDown(KeyCode.Space) && controller.collisions.below)
+        if (Input.GetKeyDown(KeyCode.Space))
         {
+            if(wallSliding)
+            {
+                if (wallDirX == input.x)
+                {
+                    velocity.x = -wallDirX * wallJumpClimb.x;
+                    velocity.y = wallJumpClimb.y;
+                }
+                else if (input.x ==0)
+                {
+                    velocity.x = -wallDirX * wallJumpOff.x;
+                    velocity.y = wallJumpOff.y;
+                }
+                else
+                {
+                    velocity.x = -wallDirX * wallLeap.x;
+                    velocity.y = wallLeap.y;
+                }
+            }
+            if (controller.collisions.below) 
+            {
             velocity.y = jumpVelocity;
+            }
         }
 
-        float targetVelocityX = input.x * moveSpeed;
-        velocity.x = Mathf.SmoothDamp(velocity.x, targetVelocityX, ref velocityXSmoothing, (controller.collisions.below) ? accelerationTimeGrounded : accelerationTimeAirborne);
         velocity.y += gravity * Time.deltaTime;
         controller.Move(velocity * Time.deltaTime);
 

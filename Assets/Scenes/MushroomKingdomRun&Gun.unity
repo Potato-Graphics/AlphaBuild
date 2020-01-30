@@ -17512,6 +17512,11 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 488335278978939635, guid: 552511dbc79c1bc45a3621347afee957,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 488335278798706412, guid: 552511dbc79c1bc45a3621347afee957,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -17617,17 +17622,12 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 488335279053146623, guid: 552511dbc79c1bc45a3621347afee957,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 488335279722350162, guid: 552511dbc79c1bc45a3621347afee957,
         type: 3}
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 488335278978939635, guid: 552511dbc79c1bc45a3621347afee957,
+    - target: {fileID: 488335279053146623, guid: 552511dbc79c1bc45a3621347afee957,
         type: 3}
       propertyPath: m_IsActive
       value: 1
@@ -18804,6 +18804,7 @@ GameObject:
   - component: {fileID: 4223115268055553361}
   - component: {fileID: 7664293194638707063}
   - component: {fileID: 4223115268055553364}
+  - component: {fileID: 4223115268055553365}
   m_Layer: 9
   m_Name: Player
   m_TagString: Player
@@ -18859,6 +18860,25 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &4223115268055553365
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4223115268055553363}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: f0220318b67ad3748acc1d68fdf0c6ad, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!4 &4223115268055553373
 Transform:
   m_ObjectHideFlags: 0
@@ -19101,6 +19121,11 @@ MonoBehaviour:
   jumpHeight: 4
   timeToJumpApex: 0.4
   wallSlideSpeedMax: 3
+  wallStickTime: 0.25
+  timeToWallUnstick: 1
+  wallJumpClimb: {x: 7.5, y: 16}
+  wallJumpOff: {x: 8.5, y: 7}
+  wallLeap: {x: 18, y: 17}
   movingRight: 0
   rotation: 0
   score: 0

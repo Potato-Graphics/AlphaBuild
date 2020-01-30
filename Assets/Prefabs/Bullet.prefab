@@ -106,7 +106,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: abeaa3626fad2f94aa848e0ff92c9967, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Velocity: {x: 0, y: 0, z: 0}
+  damageToGive: 0
 --- !u!114 &2341332498175471912
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -120,12 +120,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1716988175235006225, guid: 98367629276291a448f977ddd0f314f0, type: 3}
-  cloud: {fileID: 319747550170441283, guid: c4f604b469727c447ba20895b86dff78, type: 3}
-  tier1Boost: 1
-  tier2Boost: 2
-  tier3Boost: 3
-  tier4Boost: 4
-  tier5Boost: 5
 --- !u!61 &3838420462084670953
 BoxCollider2D:
   m_ObjectHideFlags: 0
