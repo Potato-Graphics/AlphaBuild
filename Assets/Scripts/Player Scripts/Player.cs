@@ -19,6 +19,7 @@ public class Player : MonoBehaviour
     public Vector2 wallJumpClimb;
     public Vector2 wallJumpOff;
     public Vector2 wallLeap;
+    [SerializeField] GameObject firePoint;
 
     static int ID = 0;
 
@@ -63,6 +64,20 @@ public class Player : MonoBehaviour
 
         gravity = -(2 * jumpHeight) / Mathf.Pow(timeToJumpApex, 2);
         jumpVelocity = Mathf.Abs(gravity) * timeToJumpApex;
+    }
+
+    public Transform GetFirePointTransform()
+    {
+        return firePoint.transform;
+    }
+    public Vector3 GetFirePointPosition()
+    {
+        return firePoint.transform.position;
+    }
+
+    public Quaternion GetFirePointRotation()
+    {
+        return firePoint.transform.rotation;
     }
 
     //Stops the player from moving building up downward force when standing still.
