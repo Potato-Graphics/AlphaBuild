@@ -8,7 +8,7 @@ public class Controller2D : MonoBehaviour
 {
     public LayerMask collisionMask;
 
-    const float skinWidth = 0.15f;
+    const float skinWidth = 0.25f;
     public int horizontalRayCount = 4;
     public int verticalRayCount = 4;
 
