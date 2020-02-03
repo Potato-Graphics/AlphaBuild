@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: lava
+  m_Name: Lava
   m_Shader: {fileID: 4800000, guid: 65eaff14ee8d63a49a9e6e621126918f, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
