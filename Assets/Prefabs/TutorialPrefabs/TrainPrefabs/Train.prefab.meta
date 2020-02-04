@@ -1,9 +1,5 @@
 fileFormatVersion: 2
-<<<<<<< HEAD:Assets/Prefabs/GM.prefab.meta
-guid: 76281f9669475b0498636e1e3d6c8468
-=======
-guid: 5250ec41a1a63954a92397bc92885dac
->>>>>>> 6a5ef89a896317cdc67c84d55cbfcae7b313055b:Assets/Prefabs/TutorialPrefabs/TrainPrefabs/Train.prefab.meta
+guid: 0eea05e24f63359408ae99334f85689f
 PrefabImporter:
   externalObjects: {}
   userData: 
