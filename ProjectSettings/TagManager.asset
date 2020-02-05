@@ -9,6 +9,7 @@ TagManager:
   - EnemyProjectile
   - Cloud
   - Castle
+  - firePoint
   layers:
   - Default
   - TransparentFX

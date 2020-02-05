@@ -8,7 +8,7 @@ public class Controller2D : MonoBehaviour
 {
     public LayerMask collisionMask;
 
-    const float skinWidth = 0.15f;
+    const float skinWidth = 0.25f;
     public int horizontalRayCount = 4;
     public int verticalRayCount = 4;
 
@@ -27,6 +27,7 @@ public class Controller2D : MonoBehaviour
     {
         collider = GetComponent<BoxCollider2D>();
         CalculateRaySpacing();
+        collisions.faceDir = 1;
     }
 
     private void Update()
@@ -62,15 +63,17 @@ public class Controller2D : MonoBehaviour
         collisions.Reset();
         collisions.velocityOld = velocity;
 
-        if (velocity.y <= 0)
+        if (velocity.x !=0)
+        {
+            collisions.faceDir = (int)Mathf.Sign(velocity.x);
+        }
+
+        if (velocity.y < 0)
         {
             DescendSlope(ref velocity);
         }
 
-        if (velocity.x !=0)
-        {
             HorizontalCollisions(ref velocity);
-        }
         
         if (velocity.y !=0)
         {
@@ -82,8 +85,13 @@ public class Controller2D : MonoBehaviour
 
     void HorizontalCollisions(ref Vector3 velocity)
     {
-        float directionX = Mathf.Sign(velocity.x);
+        float directionX = collisions.faceDir;
         float rayLength = Mathf.Abs(velocity.x) + skinWidth;
+
+        if (Mathf.Abs (velocity.x) < skinWidth)
+        {
+            rayLength = 2 * skinWidth; // Gives the ray some distance so it can detect a wall
+        }
 
         for (int i = 0; i < horizontalRayCount; i++)
         {
@@ -95,16 +103,16 @@ public class Controller2D : MonoBehaviour
 
             if (hit)
             {
-
+                Debug.DrawLine(hit.point, hit.point + hit.normal);
                 float slopeAngle = Vector2.Angle(hit.normal, Vector2.up);
-                if (i == 0 && slopeAngle <= maxClimbAngle);
-                if (collisions.descendingSlope)
-                {
-                    collisions.descendingSlope= false;
-                    velocity = collisions.velocityOld;
-                }
 
+                if (i == 0 && slopeAngle <= maxClimbAngle)
                 {
+                    if (collisions.descendingSlope)
+                    {
+                        collisions.descendingSlope = false;
+                        velocity = collisions.velocityOld;
+                    }
                     float distanceToSlopeStart = 0;
                     if (slopeAngle != collisions.slopeAngleOld)
                     {
@@ -114,10 +122,8 @@ public class Controller2D : MonoBehaviour
                     ClimbSlope(ref velocity, slopeAngle);
                     velocity.x += distanceToSlopeStart * directionX;
                 }
-
                 if (!collisions.climbingSlope || slopeAngle > maxClimbAngle)
                 {
-
                     velocity.x = (hit.distance - skinWidth) * directionX;
                     rayLength = hit.distance;
 
@@ -265,6 +271,7 @@ public class Controller2D : MonoBehaviour
         public bool descendingSlope;
         public float slopeAngle, slopeAngleOld;
         public Vector3 velocityOld;
+        public int faceDir;
         public void Reset ()
         {
             above = below = false;
