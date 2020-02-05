@@ -9,30 +9,27 @@ using UnityEngine.UI;
 
 
 
+
 public class Player : MonoBehaviour
 {
+
+    public delegate void PlayerDelegate();
+    public static event PlayerDelegate OnPlayerDied;
+
+
     public float jumpHeight = 4;
     public float timeToJumpApex = .4f;
-    public float wallSlideSpeedMax = 3;
-    public float wallStickTime = .25f;
-    public float timeToWallUnstick;
-    public Vector2 wallJumpClimb;
-    public Vector2 wallJumpOff;
-    public Vector2 wallLeap;
-    [SerializeField] GameObject firePoint;
 
     static int ID = 0;
 
     float accelerationTimeGrounded = .1f;
-    float accelerationTimeAirborne = .2f;
-    float moveSpeed = 7;
-    float gravity = -20;
+    float moveSpeed = 8;
+    float gravity;
     float jumpVelocity;
     float velocityXSmoothing;
-
+    public float coins = 0;
     public bool movingRight = false;
     public bool rotation = false;
-
     [SerializeField] private const int MAX_HEALTH = 3;
     [SerializeField] private int score = 0;
     public int currentHealth;
@@ -42,19 +39,39 @@ public class Player : MonoBehaviour
     [SerializeField] GameObject lifeOne = null;
     [SerializeField] GameObject lifeTwo = null;
     [SerializeField] GameObject lifeThree = null;
-    [SerializeField] Vector3 spawnLocation = new Vector3(-11.13f, 9.34f, 0.011f);
+    public static Vector3 spawnLocation = new Vector3(-4f, 0.47f, 0f);
+    [SerializeField] GameObject player;
+    public static Vector3 checkpointPos;
+    public static int checkpointsReceived;
+    public static int waterRemaining;
+
+    public int sceneToRespawnOn;
 
     Vector3 velocity;
 
     float cooldown;
+
 
     Controller2D controller;
 
     public int myID;
 
     // Start is called before the first frame update
+    void Awake()
+    {
+        
+    }
     void Start()
     {
+        waterRemaining = 50;
+        DontDestroyOnLoad(gameObject);
+        print("test1");
+
+        print(checkpointsReceived);
+        print("checkpoint pos " + checkpointPos);
+
+        transform.position = spawnLocation;
+        sceneToRespawnOn = SceneManager.GetActiveScene().buildIndex;
         myID = ID++;
         lifeOne.SetActive(true);
         lifeTwo.SetActive(true);
@@ -66,61 +83,13 @@ public class Player : MonoBehaviour
         jumpVelocity = Mathf.Abs(gravity) * timeToJumpApex;
     }
 
-    public Transform GetFirePointTransform()
-    {
-        return firePoint.transform;
-    }
-    public Vector3 GetFirePointPosition()
-    {
-        return firePoint.transform.position;
-    }
-
-    public Quaternion GetFirePointRotation()
-    {
-        return firePoint.transform.rotation;
-    }
-
     //Stops the player from moving building up downward force when standing still.
     void Update()
     {
-        //Gets the inputs for moving left and right.
-        Vector2 input = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
-        int wallDirX = (controller.collisions.left) ? -1 : 1;
-
-        float targetVelocityX = input.x * moveSpeed;
-        velocity.x = Mathf.SmoothDamp(velocity.x, targetVelocityX, ref velocityXSmoothing, (controller.collisions.below) ? accelerationTimeGrounded : accelerationTimeAirborne);
-
-
-        bool wallSliding = false;
-        if ((controller.collisions.left || controller.collisions.right) && !controller.collisions.below && velocity.y < 0)
+        if(Input.GetKeyDown(KeyCode.F))
         {
-            wallSliding = true;
-
-            if(velocity.y < -wallSlideSpeedMax)
-            {
-                velocity.y = -wallSlideSpeedMax;
-            }
-
-            if (timeToWallUnstick > 0)
-            {
-                velocityXSmoothing = 0;
-                velocity.x = 0;
-
-                if (input.x != wallDirX && input.x != 0)
-                {
-                    timeToWallUnstick -= Time.deltaTime;
-                }
-                else
-                {
-                    timeToWallUnstick = wallStickTime;
-                }
-            }
-            else
-            {
-                timeToWallUnstick = wallStickTime;
-            }
+            UpdateHealth(-GetHealth());
         }
-
         if (GetHealth() <= 0)
         {
             lifeOne.SetActive(false);
@@ -146,11 +115,14 @@ public class Player : MonoBehaviour
             lifeTwo.SetActive(true);
             lifeThree.SetActive(true);
         }
-
         if (controller.collisions.above || controller.collisions.below)
             {
                 velocity.y = 0;
             }
+
+        //Gets the inputs for moving left and right.
+        Vector2 input = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+
         if(input.x < 0)
         {
             direction = -1;
@@ -163,32 +135,13 @@ public class Player : MonoBehaviour
         }
         else { direction = 0; }
 
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) && controller.collisions.below)
         {
-            if(wallSliding)
-            {
-                if (wallDirX == input.x)
-                {
-                    velocity.x = -wallDirX * wallJumpClimb.x;
-                    velocity.y = wallJumpClimb.y;
-                }
-                else if (input.x ==0)
-                {
-                    velocity.x = -wallDirX * wallJumpOff.x;
-                    velocity.y = wallJumpOff.y;
-                }
-                else
-                {
-                    velocity.x = -wallDirX * wallLeap.x;
-                    velocity.y = wallLeap.y;
-                }
-            }
-            if (controller.collisions.below) 
-            {
             velocity.y = jumpVelocity;
-            }
         }
 
+        float targetVelocityX = input.x * moveSpeed;
+        velocity.x = Mathf.SmoothDamp(velocity.x, targetVelocityX, ref velocityXSmoothing, (controller.collisions.below) ? accelerationTimeGrounded : accelerationTimeGrounded);
         velocity.y += gravity * Time.deltaTime;
         controller.Move(velocity * Time.deltaTime);
 
@@ -207,7 +160,7 @@ public class Player : MonoBehaviour
 
     void HandleDeath()
     {
-        SceneManager.LoadScene(1);
+        OnPlayerDied();
     }
 
     public int GetHealth()
@@ -219,6 +172,11 @@ public class Player : MonoBehaviour
     {
         currentHealth += amount;
 
+    }
+
+    public void SetHealth(int amount)
+    {
+        currentHealth = amount;
     }
 
     public int GetScore()
@@ -239,6 +197,16 @@ public class Player : MonoBehaviour
                 isAttackable = false;
                 StartCoroutine(DamagedDelay());
             }
+    }
+
+    void Reload()
+    {
+
+    }
+
+    public void SendReloadText()
+    {
+        //TODO: Send reload text ui
     }
 
     IEnumerator DamagedDelay()
