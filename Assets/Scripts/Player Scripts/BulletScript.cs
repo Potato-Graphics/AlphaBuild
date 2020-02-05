@@ -9,6 +9,7 @@ public class BulletScript : MonoBehaviour
     [SerializeField] float speed = 1.0f;
     Player player;
     Weapon weapon;
+    Controller2D controller;
 
 
     void Start()
@@ -16,6 +17,7 @@ public class BulletScript : MonoBehaviour
         firePoint = GameObject.FindGameObjectWithTag("firePoint");
         player = GameObject.FindObjectOfType<Player>();
         weapon = GameObject.FindObjectOfType<Weapon>();
+        controller = GameObject.FindObjectOfType<Controller2D>();
     }
     void OnCollisionEnter(Collision other)
     {
@@ -34,8 +36,6 @@ public class BulletScript : MonoBehaviour
 
     void Update ()
     {
-        Debug.LogError(weapon.angle);
-        weapon.bulletRB.velocity = VectorFromAngle(-weapon.angle);
         
     }
 }

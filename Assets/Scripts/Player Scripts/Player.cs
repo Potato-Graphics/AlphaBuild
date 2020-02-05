@@ -31,10 +31,10 @@ public class Player : MonoBehaviour
     public bool movingRight = false;
     public bool rotation = false;
     [SerializeField] private const int MAX_HEALTH = 3;
-    [SerializeField] private int score = 0;
+    [SerializeField] private static int score = 0;
     public int currentHealth;
     ///*public */[SerializeField] bool isAttackable = true;
-    public bool isAttackable = true;
+    public static bool isAttackable = true;
     public float direction;
     [SerializeField] GameObject lifeOne = null;
     [SerializeField] GameObject lifeTwo = null;

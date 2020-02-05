@@ -17,6 +17,7 @@ public class Controller2D : MonoBehaviour
 
     public float maxClimbAngle = 60;
     float maxDescendAngle = 75;
+    public Vector3 characterScale;
     new BoxCollider2D collider;
     RaycastOrigins raycastOrigins;
     public CollisionInfo collisions;
@@ -32,7 +33,7 @@ public class Controller2D : MonoBehaviour
 
     private void Update()
     {
-        Vector3 characterScale = transform.localScale;
+        characterScale = transform.localScale;
         Vector3 mousePosition;
         mousePosition = Input.mousePosition - Camera.main.WorldToScreenPoint(transform.position);
         if (transform.position.x > mousePosition.x)

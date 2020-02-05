@@ -9,10 +9,12 @@ public class Weapon : MonoBehaviour
     public LayerMask notToHit;
     public Rigidbody2D bulletPrefab;
     [SerializeField] Player player;
+    Controller2D controller;
     [SerializeField] public float speed = 20;
     public Rigidbody2D bulletRB;
-    public Transform firePoint;
-    public float angle;
+    public Transform firePointUp, firePointUpDiagonal,
+        firePointForward, firePointDownDiagonal, firePointDown;
+    public Vector3 position;
 
     private bool delay = false;
     float timeToFire = 0;
@@ -21,6 +23,7 @@ public class Weapon : MonoBehaviour
     void Start()
     {
         player = GameObject.FindObjectOfType<Player>();
+        controller = GameObject.FindObjectOfType<Controller2D>();
     }
     void Update()
     {
@@ -35,15 +38,50 @@ public class Weapon : MonoBehaviour
     void Shooting()
     {
         Vector3 dir = Input.mousePosition - Camera.main.WorldToScreenPoint(transform.position); // Mouse position directoin.
-        Vector3 firePointPosition = new Vector3(firePoint.position.x, firePoint.position.y); // Stores the firepoint as a Vector2.
-        RaycastHit2D hit = Physics2D.Raycast(firePointPosition, (dir - firePointPosition) * 100, notToHit); //Makes a raycast in the direction of the mouse, stops at 100.
-        Vector3 direction = dir - firePoint.position;
-        direction = firePoint.InverseTransformDirection(direction).normalized;
-        angle = Vector3.Angle(firePointPosition, ((dir - firePointPosition) * 100));
-        Debug.LogWarning(angle);
+        Vector3 firePointPosition = new Vector3(firePointUpDiagonal.position.x, firePointUpDiagonal.position.y); // Stores the firepoint as a Vector2.
         Debug.DrawLine(firePointPosition, (dir - firePointPosition) * 100, Color.red); //Draws the Raycast.
-        bulletRB = Instantiate<Rigidbody2D>(bulletPrefab, firePoint.position, firePoint.rotation);
-        //test.velocity = transform.TransformDirection(dir * (speed * Time.deltaTime));
+        Debug.LogError(dir);
+        if (dir.y > 48 && dir.y < 206 & dir.x < 20 && dir.x > -26)
+        {
+            bulletRB = Instantiate<Rigidbody2D>(bulletPrefab, firePointUp.position, firePointUp.rotation);
+            print("up");
+        }
+        else if (dir.y < -55 && dir.y > -65)
+        {
+            bulletRB = Instantiate<Rigidbody2D>(bulletPrefab, firePointDown.position, firePointDown.rotation);
+            print("down");
+        }
+        else if (dir.y > 55 && dir.y < 127 && dir.x > 0)
+        {
+            bulletRB = Instantiate<Rigidbody2D>(bulletPrefab, firePointUpDiagonal.position, firePointUpDiagonal.rotation);
+            print("RightUpdiagonal");
+        }
+        else if (dir.y > 7 && dir.y < 65 && dir.x > 0)
+        {
+            bulletRB = Instantiate<Rigidbody2D>(bulletPrefab, firePointForward.position, firePointForward.rotation);
+            print("Rightforward");
+        }
+        else if (dir.y > -55 && dir.y < 7 && dir.x > 0)
+        {
+            print("RightDownDiagonal");
+            bulletRB = Instantiate<Rigidbody2D>(bulletPrefab, firePointDownDiagonal.position, firePointDownDiagonal.rotation);
+        }
+        else if (dir.y > 55 && dir.y < 127 && dir.x < 0)
+        {
+            bulletRB = Instantiate<Rigidbody2D>(bulletPrefab, firePointUpDiagonal.position, firePointUpDiagonal.rotation);
+            print("LeftUpdiagonal");
+        }
+        else if (dir.y > 7 && dir.y < 65 && dir.x < 0)
+        {
+            bulletRB = Instantiate<Rigidbody2D>(bulletPrefab, firePointForward.position, firePointForward.rotation);
+            print("Leftforward");
+        }
+        else if (dir.y > -55 && dir.y < 7 && dir.x < 0)
+        {
+            print("LeftDownDiagonal");
+            bulletRB = Instantiate<Rigidbody2D>(bulletPrefab, firePointDownDiagonal.position, firePointDownDiagonal.rotation);
+        }
+
         delay = true;
         StartCoroutine(ShootDelay());
     }
