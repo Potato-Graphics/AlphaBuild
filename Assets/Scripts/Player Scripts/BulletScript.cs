@@ -35,7 +35,7 @@ public class BulletScript : MonoBehaviour
     void Update ()
     {
         Debug.LogError(weapon.angle);
-            weapon.bulletRB.position += (VectorFromAngle(-weapon.angle) * Time.deltaTime);
+        weapon.bulletRB.velocity = VectorFromAngle(-weapon.angle);
         
     }
 }
