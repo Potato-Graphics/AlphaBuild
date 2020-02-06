@@ -5,28 +5,17 @@ using UnityEngine;
 public class BulletScript : MonoBehaviour
 {
     public int damageToGive;
-    [SerializeField] GameObject firePoint;
-    [SerializeField] float speed = 1.0f;
-    Player player;
-    Weapon weapon;
-    Controller2D controller;
-
+    [SerializeField] public static float xDirection = 0.0f;
+    [SerializeField] public static float yDirection = 0.0f;
+    Weapon weaponScript;
 
     void Start()
     {
-        firePoint = GameObject.FindGameObjectWithTag("firePoint");
-        player = GameObject.FindObjectOfType<Player>();
-        weapon = GameObject.FindObjectOfType<Weapon>();
-        controller = GameObject.FindObjectOfType<Controller2D>();
+        weaponScript = GameObject.FindObjectOfType<Weapon>();
     }
     void OnCollisionEnter(Collision other)
     {
-        if (other.gameObject.tag == "Castle")
-        {
-            other.gameObject.GetComponent<CastleDamageScript>().DamageCastle(damageToGive);
-            print("CastleDamaged");
-            Destroy(gameObject);
-        }
+        
     }
 
     Vector2 VectorFromAngle(float theta)
@@ -36,6 +25,9 @@ public class BulletScript : MonoBehaviour
 
     void Update ()
     {
-        
+        Vector2 position = transform.position;
+        position.x += xDirection;
+        position.y += yDirection;
+        transform.position = position;
     }
 }
