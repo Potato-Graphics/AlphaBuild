@@ -10,6 +10,7 @@ public class Weapon : MonoBehaviour
     public Rigidbody2D bulletPrefab;
     public Transform firePoint;
     public Vector3 position;
+    [SerializeField] float speed = 25;
 
     private bool delay = false;
     float timeToFire = 0;
@@ -40,58 +41,74 @@ public class Weapon : MonoBehaviour
         if (direction.y > 350 && direction.y < 600 && direction.x > 450 && direction.x < 542)
         {
             Rigidbody2D bullet = Instantiate<Rigidbody2D>(bulletPrefab, firePoint.position, firePoint.rotation);
-            BulletScript.yDirection = 0.1f;
-            BulletScript.xDirection = 0.0f;
+            //BulletScript.yDirection = 0.1f;
+            //BulletScript.xDirection = 0.0f;
+            Vector2 velocityChange = new Vector2(0.0f, 0.1f);
+            bullet.velocity = velocityChange * (Time.deltaTime * speed);
             print("up");
         }
         else if (direction.y > 0 && direction.y < 240 && direction.x > 450 && direction.x < 542)
         {
             Rigidbody2D bullet = Instantiate<Rigidbody2D>(bulletPrefab, firePoint.position, firePoint.rotation);
-            BulletScript.yDirection = -0.1f;
-            BulletScript.xDirection = 0.0f;
+            //BulletScript.yDirection = -0.1f;
+            // BulletScript.xDirection = 0.0f;
+            Vector2 velocityChange = new Vector2(0, -0.1f);
+            bullet.velocity = velocityChange * (Time.deltaTime * speed);
             print("down");
         }
         else if (direction.x > 600 && direction.x < 1000 && direction.y < 600 && direction.y > 370)
         {
             Rigidbody2D bullet = Instantiate<Rigidbody2D>(bulletPrefab, firePoint.position, firePoint.rotation);
-            BulletScript.xDirection = 0.1f;
-            BulletScript.yDirection = 0.1f;
+            //BulletScript.xDirection = 0.1f;
+            // BulletScript.yDirection = 0.1f;
+            Vector2 velocityChange = new Vector2(0.1f, 0.1f);
+            bullet.velocity = velocityChange * (Time.deltaTime * speed);
             print("RightUpdiagonal");
         }
         else if (direction.x > 525 && direction.x < 1000 && direction.y > 270 && direction.y < 370)
         {
             Rigidbody2D bullet = Instantiate<Rigidbody2D>(bulletPrefab, firePoint.position, firePoint.rotation);
-            BulletScript.xDirection = 0.1f;
-            BulletScript.yDirection = 0.0f;
+            // BulletScript.xDirection = 0.1f;
+            // BulletScript.yDirection = 0.0f;
+            Vector2 velocityChange = new Vector2(0.1f, 0);
+            bullet.velocity = velocityChange * (Time.deltaTime * speed);
             print("Rightforward");
         }
         else if (direction.x > 450 && direction.x < 1000 && direction.y < 270 && direction.y > 0)
         {
             print("RightDownDiagonal");
             Rigidbody2D bullet = Instantiate<Rigidbody2D>(bulletPrefab, firePoint.position, firePoint.rotation);
-            BulletScript.xDirection = 0.1f;
-            BulletScript.yDirection = -0.1f;
+            //BulletScript.xDirection = 0.1f;
+            //BulletScript.yDirection = -0.1f;
+            Vector2 velocityChange = new Vector2(0.1f, -0.1f);
+            bullet.velocity = velocityChange * (Time.deltaTime * speed);
         }
         else if (direction.x > 0 && direction.x < 450 && direction.y < 600 && direction.y > 370)
         {
             Rigidbody2D bullet = Instantiate<Rigidbody2D>(bulletPrefab, firePoint.position, firePoint.rotation);
-            BulletScript.xDirection = -0.1f;
-            BulletScript.yDirection = 0.1f;
+            //BulletScript.xDirection = -0.1f;
+            // BulletScript.yDirection = 0.1f;
+            Vector2 velocityChange = new Vector2(-0.1f, 0.1f);
+            bullet.velocity = velocityChange * (Time.deltaTime * speed);
             print("LeftUpdiagonal");
         }
         else if (direction.x > 0 && direction.x < 525 && direction.y > 270 && direction.y < 370)
         {
             Rigidbody2D bullet = Instantiate<Rigidbody2D>(bulletPrefab, firePoint.position, firePoint.rotation);
-            BulletScript.xDirection = -0.1f;
-            BulletScript.yDirection = 0.0f;
+            //BulletScript.xDirection = -0.1f;
+            // BulletScript.yDirection = 0.0f;
+            Vector2 velocityChange = new Vector2(-0.1f, 0);
+            bullet.velocity = velocityChange * (Time.deltaTime * speed);
             print("Leftforward");
         }
         else if (direction.x > 0 && direction.x < 450 && direction.y < 270 && direction.y > 0)
         {
             print("LeftDownDiagonal");
             Rigidbody2D bullet = Instantiate<Rigidbody2D>(bulletPrefab, firePoint.position, firePoint.rotation);
-            BulletScript.xDirection = -0.1f;
-            BulletScript.yDirection = -0.1f;
+            // BulletScript.xDirection = -0.1f;
+            //  BulletScript.yDirection = -0.1f;
+            Vector2 velocityChange = new Vector2(-0.1f, -0.1f);
+            bullet.velocity = velocityChange * (Time.deltaTime * speed);
         }
 
         delay = true;
