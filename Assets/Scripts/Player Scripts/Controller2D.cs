@@ -23,6 +23,7 @@ public class Controller2D : MonoBehaviour
     public CollisionInfo collisions;
     public bool facingRight = false;
     public bool canDash = true;
+
     // Start is called before the first frame update
     // Gets the collider for the player
     void Start()
