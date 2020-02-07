@@ -21,7 +21,8 @@ public class Controller2D : MonoBehaviour
     new BoxCollider2D collider;
     RaycastOrigins raycastOrigins;
     public CollisionInfo collisions;
-
+    public bool facingRight = false;
+    public bool canDash = true;
     // Start is called before the first frame update
     // Gets the collider for the player
     void Start()
@@ -39,10 +40,12 @@ public class Controller2D : MonoBehaviour
         if (transform.position.x > mousePosition.x)
         {
             characterScale.x = 1;
+            facingRight = false;
         }
         else if (transform.position.x <= mousePosition.x)
         {
             characterScale.x = -1;
+            facingRight = true;
         }
         if (Input.GetAxis("Horizontal") < 0)
         {
@@ -58,6 +61,12 @@ public class Controller2D : MonoBehaviour
 
     }
 
+
+   public IEnumerator DashDelay()
+    {
+        yield return new WaitForSeconds(8f);
+        canDash = true;
+    }
     public void Move(Vector3 velocity)
     {
         UpdateRaycastOrigins();

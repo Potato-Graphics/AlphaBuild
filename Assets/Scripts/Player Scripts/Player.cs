@@ -42,6 +42,7 @@ public class Player : MonoBehaviour
     public static Vector3 spawnLocation = new Vector3(-4f, 0.47f, 0f);
     [SerializeField] GameObject player;
     public static Vector3 checkpointPos;
+    [SerializeField] float dashDistance = 7f;
     public static int checkpointsReceived;
     public static int waterRemaining;
 
@@ -86,9 +87,28 @@ public class Player : MonoBehaviour
     //Stops the player from moving building up downward force when standing still.
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.F))
+        if (Input.GetKeyDown(KeyCode.F))
         {
-            UpdateHealth(-GetHealth());
+            if (!controller.canDash)
+                return;
+            if (controller.facingRight)
+            {
+                Vector2 dashPosition;
+                dashPosition = transform.position;
+                dashPosition.x += dashDistance;
+                transform.position = dashPosition;
+                controller.canDash = false;
+                controller.StartCoroutine(controller.DashDelay());
+            }
+            else
+            {
+                Vector2 dashPosition;
+                dashPosition = transform.position;
+                dashPosition.x -= dashDistance;
+                transform.position = dashPosition;
+                controller.canDash = false;
+                controller.StartCoroutine(controller.DashDelay());
+            }
         }
         if (GetHealth() <= 0)
         {
