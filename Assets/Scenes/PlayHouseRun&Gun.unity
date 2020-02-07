@@ -19606,7 +19606,7 @@ PrefabInstance:
         type: 3}
       propertyPath: lifeOne
       value: 
-      objectReference: {fileID: 1299393647}
+      objectReference: {fileID: 1676343351}
     - target: {fileID: 4980169502407661613, guid: 7bb80834e38736f43859ff25194ccb79,
         type: 3}
       propertyPath: lifeTwo
@@ -19616,12 +19616,42 @@ PrefabInstance:
         type: 3}
       propertyPath: lifeThree
       value: 
-      objectReference: {fileID: 1676343351}
+      objectReference: {fileID: 1299393647}
     - target: {fileID: 4980169502407661613, guid: 7bb80834e38736f43859ff25194ccb79,
         type: 3}
       propertyPath: player
       value: 
       objectReference: {fileID: 1948390827}
+    - target: {fileID: 4980169502407661613, guid: 7bb80834e38736f43859ff25194ccb79,
+        type: 3}
+      propertyPath: wallJumpClimb.x
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4980169502407661613, guid: 7bb80834e38736f43859ff25194ccb79,
+        type: 3}
+      propertyPath: wallJumpClimb.y
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 4980169502407661613, guid: 7bb80834e38736f43859ff25194ccb79,
+        type: 3}
+      propertyPath: wallJumpOff.x
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 4980169502407661613, guid: 7bb80834e38736f43859ff25194ccb79,
+        type: 3}
+      propertyPath: wallJumpOff.y
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 4980169502407661613, guid: 7bb80834e38736f43859ff25194ccb79,
+        type: 3}
+      propertyPath: wallLeap.x
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 4980169502407661613, guid: 7bb80834e38736f43859ff25194ccb79,
+        type: 3}
+      propertyPath: wallLeap.y
+      value: 16
+      objectReference: {fileID: 0}
     - target: {fileID: 2180120490503743008, guid: 7bb80834e38736f43859ff25194ccb79,
         type: 3}
       propertyPath: m_Controller
