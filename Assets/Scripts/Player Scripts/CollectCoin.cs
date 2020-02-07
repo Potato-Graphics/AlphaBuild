@@ -15,7 +15,7 @@ public class CollectCoin : MonoBehaviour
     {
         if(col.gameObject.tag == "Player")
         {
-            player.coins += 1;
+            player.coins += 50;
             Destroy(gameObject);
         }
     }
