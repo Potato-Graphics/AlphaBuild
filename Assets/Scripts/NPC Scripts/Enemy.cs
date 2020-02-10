@@ -64,41 +64,8 @@ public class Enemy : MonoBehaviour
         print("Enemy Health: " + GetHealth());
     }
 
-    bool CanSeePlayer(float distance)
-    {
-        bool val = false;
-        castDist = distance;
 
-
-        if (!movingRight)
-        {
-            castDist = -distance;
-        }
-
-        if (hit.collider != null)
-        {
-            Debug.DrawLine(firePoint.position, endPos, Color.red);
-            if (hit.collider.gameObject.tag.Equals("Player"))
-            {
-                val = true;
-            }
-            else
-            {
-                val = false;
-            }
-
-        }
-        return val;
-    }
-
-    /*
-     * State Functions
-     */
-    /* Sets the state of the enemy
-  * Params: the new state being assigned to enemy
-  */
-
-    //Handles the enemys state
+    //Enemy states
     public enum State
     {
         Idle,

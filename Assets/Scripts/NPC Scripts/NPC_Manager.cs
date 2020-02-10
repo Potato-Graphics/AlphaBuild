@@ -7,7 +7,6 @@ public class NPC_Manager : MonoBehaviour
     private float currentHealth;
     [SerializeField] private float MAX_HEALTH = 0;
     [SerializeField] private bool killable = false;
-    [SerializeField] private float bulletDamage = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -39,7 +38,8 @@ public class NPC_Manager : MonoBehaviour
             print("bullet collision");
             if(killable)
             {
-                UpdateHealth(-bulletDamage);
+                UpdateHealth(-Player.bulletDamage);
+                Player.bulletDamage = 1;
                 if (GetHealth() <= 0)
                 {
                     Destroy(gameObject);
@@ -56,7 +56,8 @@ public class NPC_Manager : MonoBehaviour
             print("bullet collision");
             if (killable)
             {
-                UpdateHealth(-bulletDamage);
+                UpdateHealth(-Player.bulletDamage);
+                Player.bulletDamage = 1;
                 if (GetHealth() <= 0)
                 {
                     Destroy(gameObject);

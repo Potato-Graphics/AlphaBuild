@@ -10,6 +10,7 @@ TagManager:
   - Cloud
   - Castle
   - firePoint
+  - RangeNPC
   layers:
   - Default
   - TransparentFX

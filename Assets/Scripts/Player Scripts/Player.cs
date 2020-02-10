@@ -45,6 +45,12 @@ public class Player : MonoBehaviour
     [SerializeField] float dashDistance = 7f;
     public static int checkpointsReceived;
     public static int waterRemaining;
+    Vector3 lastMouseCoord = Vector3.zero;
+    bool movedUp = false;
+    bool movedDown = false;
+    static int totalPumps = 0;
+    public static float bulletDamage = 0f;
+    bool pumpStarted = false;
 
     public int sceneToRespawnOn;
 
@@ -87,7 +93,37 @@ public class Player : MonoBehaviour
     //Stops the player from moving building up downward force when standing still.
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.F))
+        if (Input.GetAxisRaw("Fire2") != 0)
+        {
+            pumpStarted = true;
+            Vector3 mouseDelta = Input.mousePosition - lastMouseCoord;
+            if (mouseDelta.y > 10 && movedUp == false)
+            {
+                print("Mouse moved up");
+                totalPumps++;
+                movedUp = true;
+                movedDown = false;
+            }
+            if (mouseDelta.y < -10 && movedDown == false)
+            {
+                print("Mouse moved down");
+                totalPumps++;
+                movedDown = true;
+                movedUp = false;
+            }
+            lastMouseCoord = Input.mousePosition;
+        }
+        if(Input.GetAxisRaw("Fire2") == 0 && pumpStarted)
+        {
+            pumpStarted = false;
+            print("Bullet damage was: " + bulletDamage);
+            bulletDamage += totalPumps / 10;
+            print("Bullet damage now: " + bulletDamage);
+            totalPumps = 0;
+            movedDown = false;
+            movedUp = false;
+        }
+            if (Input.GetKeyDown(KeyCode.F))
         {
             if (!controller.canDash)
                 return;
