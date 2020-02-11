@@ -41,10 +41,13 @@ public class Enemy : MonoBehaviour
      */
     Vector3 endPos;
     Vector3 endPos2;
+    Vector3 endPos3;
     RaycastHit2D hit;
+    RaycastHit2D hit2;
     RaycastHit2D infrontInfo;
     RaycastHit2D groundInfo;
     float castDist;
+    float castDist2;
     [SerializeField] Transform firePoint;
     [SerializeField] Transform firePoint2;
 
@@ -106,6 +109,14 @@ public class Enemy : MonoBehaviour
         endPos2 = firePoint2.position + Vector3.right * 0.01f;
         groundInfo = Physics2D.Raycast(firePoint2.position, Vector2.down, 2f);
 
+
+        if (GetEnemyType() == EnemyType.ObstructorNPC)
+        {
+            if(distance < 35)
+            {
+                SetState(State.Attacking);
+            }
+        }
         if (GetEnemyType() == EnemyType.BounceNPC)
         {
             Debug.LogError(GetState());
@@ -125,8 +136,14 @@ public class Enemy : MonoBehaviour
                     endPosition = player.transform.position;
                     endPosition.y = 15;
                     this.transform.position = Lerp(startPosition, endPosition, timeStartedLerping, lerpTime);
+                    shouldLerp = false;
                 }
             }
+        }
+
+        if(GetEnemyType() == EnemyType.ObstructorNPC)
+        {
+
         }
 
         if (currentHealth <= 0)
@@ -201,7 +218,7 @@ public class Enemy : MonoBehaviour
 
             if (GetState() == State.Idle)
             {
-                transform.Translate(Vector2.right * walkSpeed * Time.deltaTime);
+                transform.Translate(Vector3.right * walkSpeed * Time.deltaTime);
             }
         }
     }
@@ -230,20 +247,28 @@ public class Enemy : MonoBehaviour
         SetState(State.Idle);
     }
 
+    private void ObstructorAttack()
+    {
+
+    }
     bool CanSeePlayer(float distance)
     {
         bool val = false;
         castDist = distance;
+        castDist2 = -distance;
 
-
-        if (!movingRight)
+        if (GetEnemyType() != EnemyType.ObstructorNPC)
         {
-            castDist = -distance;
+            if (!movingRight)
+            {
+                castDist = -distance;
+            }
         }
 
         if (hit.collider != null)
         {
             Debug.DrawLine(firePoint.position, endPos, Color.red);
+
             if (hit.collider.gameObject.tag.Equals("Player"))
             {
                 val = true;
@@ -252,7 +277,6 @@ public class Enemy : MonoBehaviour
             {
                 val = false;
             }
-
         }
         return val;
     }
@@ -320,6 +344,8 @@ public class Enemy : MonoBehaviour
         {
             //if the enemys state is attacking
             case State.Attacking:
+                if (GetEnemyType() == EnemyType.ObstructorNPC)
+                    ObstructorAttack();
                 if (GetEnemyType() == EnemyType.BounceNPC)
                     Bounce();
                 if (GetEnemyType() == EnemyType.ChargeNPC)
