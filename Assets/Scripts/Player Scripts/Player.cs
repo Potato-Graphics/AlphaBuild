@@ -26,7 +26,7 @@ public class Player : MonoBehaviour
 
     float accelerationTimeGrounded = .1f;
     float accelerationTimeAirborne = .2f;
-    float moveSpeed = 7;
+    float moveSpeed = 12;
     float gravity = -20;
     float jumpVelocity;
     float velocityXSmoothing;

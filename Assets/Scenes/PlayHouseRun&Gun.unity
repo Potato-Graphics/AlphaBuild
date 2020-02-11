@@ -22438,12 +22438,12 @@ PrefabInstance:
     - target: {fileID: 2180120490503743012, guid: 7bb80834e38736f43859ff25194ccb79,
         type: 3}
       propertyPath: m_Offset.y
-      value: -0.5247512
+      value: -0.17645597
       objectReference: {fileID: 0}
     - target: {fileID: 2180120490503743012, guid: 7bb80834e38736f43859ff25194ccb79,
         type: 3}
       propertyPath: m_Size.y
-      value: 3.830596
+      value: 3.1340055
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7bb80834e38736f43859ff25194ccb79, type: 3}
