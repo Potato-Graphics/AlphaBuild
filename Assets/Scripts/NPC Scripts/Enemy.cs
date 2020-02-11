@@ -86,10 +86,6 @@ public class Enemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (shouldLerp)
-        {
-            transform.position = Lerp(startPosition, endPosition, timeStartedLerping, lerpTime);
-        }
         bounceRange = Random.Range((int)player.transform.position.x - 5, (int)player.transform.position.x + 5);
         // Initialising the player object
         playerObject = GameObject.FindGameObjectWithTag("Player").transform;
@@ -124,8 +120,12 @@ public class Enemy : MonoBehaviour
             }
             if (GetState() == State.Bouncing)
             {
-                targetLocation.y += 100;
-                transform.position = Vector3.MoveTowards(transform.position, targetLocation, chargeSpeed * Time.deltaTime);
+                if (shouldLerp)
+                {
+                    endPosition = player.transform.position;
+                    endPosition.y = 15;
+                    this.transform.position = Lerp(startPosition, endPosition, timeStartedLerping, lerpTime);
+                }
             }
         }
 
@@ -135,8 +135,6 @@ public class Enemy : MonoBehaviour
 
         if (GetEnemyType() == EnemyType.ChargeNPC)
         {
-            if (GetState() == State.Idle)
-            {
                 if (groundInfo.collider == false)
                 {
                     if (movingRight)
@@ -190,14 +188,15 @@ public class Enemy : MonoBehaviour
                     Debug.LogWarning("cant see");
                     SetState(State.Idle);
                 }
-            }
 
 
             if (GetState() == State.Charging)
             {
                 if (timePassed > 5)
                     SetState(State.Idle);
-                transform.position = Vector3.MoveTowards(transform.position, player.transform.position, (chargeSpeed * Time.deltaTime));
+                targetLocation = player.transform.position;
+                targetLocation.y = transform.position.y;
+                transform.position = Vector3.MoveTowards(transform.position, targetLocation, (chargeSpeed * Time.deltaTime));
             }
 
             if (GetState() == State.Idle)
