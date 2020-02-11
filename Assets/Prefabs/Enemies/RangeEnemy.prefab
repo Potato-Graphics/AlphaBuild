@@ -14,8 +14,8 @@ GameObject:
   - component: {fileID: 2666844565713122355}
   - component: {fileID: 2666844565713122353}
   - component: {fileID: 2666844565713122352}
-  m_Layer: 0
-  m_Name: RangeNPC
+  m_Layer: 11
+  m_Name: RangeEnemy
   m_TagString: RangeNPC
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
