@@ -50,6 +50,8 @@ public class Enemy : MonoBehaviour
     float castDist2;
     [SerializeField] Transform firePoint;
     [SerializeField] Transform firePoint2;
+    [SerializeField] GameObject bubblePrefab;
+    public int bubblesSpawned;
 
 
     public Vector3 Lerp(Vector3 start, Vector3 end, float timeStartedLerping, float lerpTime = 1)
@@ -249,7 +251,11 @@ public class Enemy : MonoBehaviour
 
     private void ObstructorAttack()
     {
-
+        if(bubblesSpawned < 10)
+        {
+            Instantiate(bubblePrefab, transform.position, Quaternion.identity);
+            bubblesSpawned++;
+        }
     }
     bool CanSeePlayer(float distance)
     {
