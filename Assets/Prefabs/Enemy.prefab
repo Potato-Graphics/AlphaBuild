@@ -160,7 +160,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 1
 --- !u!114 &1572968045044056574
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -188,20 +188,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1cca1fb22f9c47748b12243d4b20a79e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  distanceToCharge: 6
-  walkSpeed: 1
-  chargeSpeed: 5
-  playerObject: {fileID: 0}
-  playerPosition: {x: 0, y: 0, z: 0}
-  distance: 0
-  enemyPosition: {x: 0, y: 0, z: 0}
-  currentState: 0
-  player: {fileID: 0}
-  idleWalkDistance: 3
-  enemyType: 1
-  movingRight: 1
-  collidingWithPlayer: 0
   spawnPoint: {fileID: 0}
+  playerPosition: {x: 0, y: 0, z: 0}
+  enemyPosition: {x: 0, y: 0, z: 0}
+  collidingWithPlayer: 0
+  movingRight: 1
+  currentState: 0
+  enemyType: 1
   firePoint: {fileID: 811997042224969197}
   firePoint2: {fileID: 1203867104073291823}
 --- !u!114 &5638077117230657819
