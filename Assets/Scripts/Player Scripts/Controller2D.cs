@@ -40,12 +40,12 @@ public class Controller2D : MonoBehaviour
         mousePosition = Input.mousePosition - Camera.main.WorldToScreenPoint(transform.position);
         if (transform.position.x > mousePosition.x)
         {
-            characterScale.x = 1;
+            characterScale.x = -1;
             facingRight = false;
         }
         else if (transform.position.x <= mousePosition.x)
         {
-            characterScale.x = -1;
+            characterScale.x = 1;
             facingRight = true;
         }
         if (Input.GetAxis("Horizontal") < 0)

@@ -52,6 +52,13 @@ public class Player : MonoBehaviour
     public static int checkpointsReceived;
     public static int waterRemaining;
 
+    Vector3 lastMouseCoord = Vector3.zero;
+    bool movedUp = false;
+    bool movedDown = false;
+    static int totalPumps = 0;
+    public static float bulletDamage = 0f;
+    bool pumpStarted = false;
+
     public int sceneToRespawnOn;
 
     Vector3 velocity;
@@ -98,6 +105,37 @@ public class Player : MonoBehaviour
 
         float targetVelocityX = input.x * moveSpeed;
         velocity.x = Mathf.SmoothDamp(velocity.x, targetVelocityX, ref velocityXSmoothing, (controller.collisions.below) ? accelerationTimeGrounded : accelerationTimeAirborne);
+
+        if (Input.GetAxisRaw("Fire2") != 0)
+        {
+            pumpStarted = true;
+            Vector3 mouseDelta = Input.mousePosition - lastMouseCoord;
+            if (mouseDelta.y > 10 && movedUp == false)
+            {
+                print("Mouse moved up");
+                totalPumps++;
+                movedUp = true;
+                movedDown = false;
+            }
+            if (mouseDelta.y < -10 && movedDown == false)
+            {
+                print("Mouse moved down");
+                totalPumps++;
+                movedDown = true;
+                movedUp = false;
+            }
+            lastMouseCoord = Input.mousePosition;
+        }
+        if (Input.GetAxisRaw("Fire2") == 0 && pumpStarted)
+        {
+            pumpStarted = false;
+            print("Bullet damage was: " + bulletDamage);
+            bulletDamage += totalPumps / 10;
+            print("Bullet damage now: " + bulletDamage);
+            totalPumps = 0;
+            movedDown = false;
+            movedUp = false;
+        }
 
         bool wallSliding = false;
         if ((controller.collisions.left || controller.collisions.right) && !controller.collisions.below && velocity.y < 0)
