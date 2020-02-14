@@ -17,9 +17,12 @@ public class Controller2D : MonoBehaviour
 
     public float maxClimbAngle = 60;
     float maxDescendAngle = 75;
+    public Vector3 characterScale;
     new BoxCollider2D collider;
     RaycastOrigins raycastOrigins;
     public CollisionInfo collisions;
+    public bool facingRight = false;
+    public bool canDash = true;
 
     // Start is called before the first frame update
     // Gets the collider for the player
@@ -32,31 +35,39 @@ public class Controller2D : MonoBehaviour
 
     private void Update()
     {
-        Vector3 characterScale = transform.localScale;
+        characterScale = transform.localScale;
         Vector3 mousePosition;
         mousePosition = Input.mousePosition - Camera.main.WorldToScreenPoint(transform.position);
         if (transform.position.x > mousePosition.x)
         {
-            characterScale.x = 1;
+            characterScale.x = -1;
+            facingRight = false;
         }
         else if (transform.position.x <= mousePosition.x)
         {
-            characterScale.x = -1;
+            characterScale.x = 1;
+            facingRight = true;
         }
         if (Input.GetAxis("Horizontal") < 0)
         {
-           // characterScale.x = -1;
+           characterScale.x = -1;
         }
 
         if (Input.GetAxis("Horizontal") > 0)
         {
-            //characterScale.x = 1;
+            characterScale.x = 1;
         }
 
         transform.localScale = characterScale;
 
     }
 
+
+   public IEnumerator DashDelay()
+    {
+        yield return new WaitForSeconds(4f);
+        canDash = true;
+    }
     public void Move(Vector3 velocity)
     {
         UpdateRaycastOrigins();

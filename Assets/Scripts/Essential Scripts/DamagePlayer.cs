@@ -10,7 +10,7 @@ public class DamagePlayer : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        player = GameObject.FindObjectOfType<Player>();
     }
 
     // Update is called once per frame
@@ -34,7 +34,7 @@ public class DamagePlayer : MonoBehaviour
     }
     void OnCollisionEnter2D(Collision2D col)
     {
-        print("test" + col.gameObject.tag);
+      //  print("test" + col.gameObject.tag);
         if (col.gameObject.tag.Equals("Player"))
         {
 

@@ -10,6 +10,7 @@ TagManager:
   - Cloud
   - Castle
   - firePoint
+  - RangeNPC
   layers:
   - Default
   - TransparentFX
@@ -22,7 +23,7 @@ TagManager:
   - PostProcessing
   - Player
   - Obstacle
-  - 
+  - Enemies
   - 
   - 
   - 
