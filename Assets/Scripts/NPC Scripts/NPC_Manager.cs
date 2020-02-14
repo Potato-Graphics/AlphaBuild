@@ -42,6 +42,7 @@ public class NPC_Manager : MonoBehaviour
                 Player.bulletDamage = 1;
                 if (GetHealth() <= 0)
                 {
+                    ScoreManager.scoreValue += 100;
                     Destroy(gameObject);
                 }
             }
