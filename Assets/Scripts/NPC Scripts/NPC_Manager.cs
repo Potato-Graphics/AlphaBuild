@@ -32,7 +32,7 @@ public class NPC_Manager : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D col)
     {
-        print("test collision " + col.gameObject.tag);
+       // print("test collision " + col.gameObject.tag);
         if(col.gameObject.tag == "Bullet")
         {
             print("bullet collision");

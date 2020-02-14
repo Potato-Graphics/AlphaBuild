@@ -34,7 +34,7 @@ public class DamagePlayer : MonoBehaviour
     }
     void OnCollisionEnter2D(Collision2D col)
     {
-        print("test" + col.gameObject.tag);
+      //  print("test" + col.gameObject.tag);
         if (col.gameObject.tag.Equals("Player"))
         {
 

@@ -121,7 +121,8 @@ public class Enemy : MonoBehaviour
         }
         if (GetEnemyType() == EnemyType.BounceNPC)
         {
-            Debug.LogError(GetState());
+           // Debug.LogError(GetState());
+           // Debug.LogError(GetState());
             if (distance > 10)
                 SetState(State.Idle);
             if(GetState() == State.Idle)
