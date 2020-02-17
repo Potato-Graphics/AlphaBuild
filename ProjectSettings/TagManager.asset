@@ -5,6 +5,12 @@ TagManager:
   serializedVersion: 2
   tags:
   - Bullet
+  - Obstacles
+  - EnemyProjectile
+  - Cloud
+  - Castle
+  - firePoint
+  - RangeNPC
   layers:
   - Default
   - TransparentFX
@@ -17,7 +23,7 @@ TagManager:
   - PostProcessing
   - Player
   - Obstacle
-  - 
+  - Enemies
   - 
   - 
   - 

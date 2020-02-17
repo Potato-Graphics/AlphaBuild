@@ -6,6 +6,21 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/SampleScene.unity
+    path: Assets/Scenes/Menu.unity
+    guid: 5f32ba143933ccb4a95c80c8db9c7952
+  - enabled: 0
+    path: 
+    guid: 00000000000000000000000000000000
+  - enabled: 0
+    path: 
+    guid: 00000000000000000000000000000000
+  - enabled: 1
+    path: Assets/Scenes/PlayHouseRun&Gun.unity
+    guid: 96a8367c0435b9d4a9deb7399026ae7a
+  - enabled: 1
+    path: Assets/Scenes/PrincessBoss.unity
     guid: cbfe36cfddfde964d9dfce63a355d5dd
+  - enabled: 1
+    path: Assets/Scenes/DeathScreen.unity
+    guid: f8395c312e4e82547bc5f917302a86c5
   m_configObjects: {}

@@ -41,10 +41,12 @@ GameObject:
   - component: {fileID: 5516824237699301652}
   - component: {fileID: 5516824237699301653}
   - component: {fileID: 5516824237699301654}
-  - component: {fileID: 5516824237699301655}
+  - component: {fileID: 1716988175235006225}
+  - component: {fileID: 4914268120487534462}
   - component: {fileID: 5516824237699301656}
-  - component: {fileID: 5516824237699301657}
-  - component: {fileID: 5516824237699301651}
+  - component: {fileID: 2038226902200458558}
+  - component: {fileID: 6794291584171384042}
+  - component: {fileID: 7357835333213627348}
   m_Layer: 9
   m_Name: Player
   m_TagString: Player
@@ -112,7 +114,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!114 &5516824237699301655
+--- !u!114 &1716988175235006225
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -121,14 +123,34 @@ MonoBehaviour:
   m_GameObject: {fileID: 5516824237699301658}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d355aa57bcc6383419cedc4c746811b9, type: 3}
+  m_Script: {fileID: 11500000, guid: 787478ca5ff69ae49b5c046e9361aa69, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jumpHeight: 3.5
+  jumpHeight: 4
   timeToJumpApex: 0.4
   movingRight: 0
   rotation: 0
+  score: 0
+  currentHealth: 0
+  isAttackable: 1
   direction: 0
+--- !u!114 &4914268120487534462
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5516824237699301658}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a5fc6fd7834346844879f92859e08939, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  collisionMask:
+    serializedVersion: 2
+    m_Bits: 1024
+  horizontalRayCount: 4
+  verticalRayCount: 4
 --- !u!61 &5516824237699301656
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -155,7 +177,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &5516824237699301657
+--- !u!114 &2038226902200458558
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -164,15 +186,36 @@ MonoBehaviour:
   m_GameObject: {fileID: 5516824237699301658}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bc34314f4d9d709478c78d81671fc4d3, type: 3}
+  m_Script: {fileID: 11500000, guid: 5ae1a460129d0fe4da1c38cd5d4b66f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fireRate: 0
+  Damage: 10
+  notToHit:
+    serializedVersion: 2
+    m_Bits: 0
+  bulletPrefab: {fileID: 1221782639785165328, guid: 25d219fd720957c499b152bc3c2ed02a,
+    type: 3}
+  speed: 20
+  firePoint: {fileID: 5516824237259941051}
+--- !u!114 &6794291584171384042
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5516824237699301658}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a5fc6fd7834346844879f92859e08939, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   collisionMask:
     serializedVersion: 2
-    m_Bits: 1024
+    m_Bits: 0
   horizontalRayCount: 4
   verticalRayCount: 4
---- !u!114 &5516824237699301651
+--- !u!114 &7357835333213627348
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -181,16 +224,37 @@ MonoBehaviour:
   m_GameObject: {fileID: 5516824237699301658}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d84da5d3a0495d142bcf2b237d5b8b1e, type: 3}
+  m_Script: {fileID: 11500000, guid: 2b1da2f651803894a8aec4e2823ba268, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  firePoint: {fileID: 5516824237259941051}
-  bulletPrefab: {fileID: 0}
-  speed: 20
-  canShoot: 1
-  delay: 0
-  rotation: 0
-  player: {fileID: 0}
+  boost: 3.5
+  positionLerpTime: 0.2
+  mouseSensitivityCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0.5
+      inSlope: 0
+      outSlope: 5
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 2.5
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  rotationLerpTime: 0.01
+  invertY: 0
 --- !u!1 &5516824238553248951
 GameObject:
   m_ObjectHideFlags: 0
