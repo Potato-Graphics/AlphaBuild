@@ -47,8 +47,8 @@ GameObject:
   - component: {fileID: 3760899537648308626}
   - component: {fileID: 5638077117230657819}
   m_Layer: 0
-  m_Name: Enemy
-  m_TagString: Untagged
+  m_Name: ChargeEnemy
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -199,6 +199,8 @@ MonoBehaviour:
   lerpTime: 0
   firePoint: {fileID: 811997042224969197}
   firePoint2: {fileID: 1203867104073291823}
+  bubblePrefab: {fileID: 0}
+  bubblesSpawned: 0
 --- !u!114 &5638077117230657819
 MonoBehaviour:
   m_ObjectHideFlags: 0
