@@ -6,6 +6,12 @@ using UnityEngine.UI;
 public class ScoreManager : MonoBehaviour
 {
     public static int scoreValue;
+
+    public int ScoreValue
+    {
+        get { return scoreValue; }
+        set { scoreValue = Mathf.Clamp(value, 0, 2147000000); }
+    }
     Text score;
 
     private float timeSecond = 0.0f;
@@ -20,10 +26,14 @@ public class ScoreManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        score.text = "Score: " + scoreValue;
+        if (Input.GetAxis("Fire2") > 0.0f)
+        {
+            ScoreValue += 1000;
+        }
+        score.text = "Score: " + ScoreValue;
         if (Time.time >= timeSecond)
         {
-            scoreValue -= 10;
+            ScoreValue -= 10;
             timeSecond += 3;
         }
     }
