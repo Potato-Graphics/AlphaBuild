@@ -37,6 +37,7 @@ public class Weapon : MonoBehaviour
         Vector3 direction = Input.mousePosition;
         Vector3 firePointPosition = new Vector3(firePoint.position.x, firePoint.position.y); // Stores the firepoint as a Vector2.
         Debug.DrawLine(firePointPosition, (dir - firePointPosition) * 100, Color.red); //Draws the Raycast.
+        Debug.LogWarning("mouse position: " + direction);
         if (direction.y > 350 && direction.y < 600 && direction.x > 450 && direction.x < 542)
         {
             Rigidbody2D bullet = Instantiate<Rigidbody2D>(bulletPrefab, firePoint.position, firePoint.rotation);

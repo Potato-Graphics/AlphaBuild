@@ -116,7 +116,10 @@ public class Enemy : MonoBehaviour
         {
             if(distance < 35)
             {
-                SetState(State.Attacking);
+                if (GetState() == State.Idle)
+                {
+                    SetState(State.Attacking);
+                }
             }
         }
         if (GetEnemyType() == EnemyType.BounceNPC)
@@ -200,12 +203,10 @@ public class Enemy : MonoBehaviour
 
                 if (CanSeePlayer(distanceToCharge))
                 {
-                    Debug.LogWarning("can see");
                     SetState(State.Attacking);
                 }
                 else
                 {
-                    Debug.LogWarning("cant see");
                     SetState(State.Idle);
                 }
 
@@ -250,12 +251,23 @@ public class Enemy : MonoBehaviour
         SetState(State.Idle);
     }
 
+    IEnumerator BubbleCoolDown()
+    {
+        yield return new WaitForSeconds(5);
+        SetState(State.Idle);
+    }
+
     private void ObstructorAttack()
     {
-        if(bubblesSpawned < 10)
+        int bubblesToBeSpawned = Random.Range(6, 13);
+        if(bubblesSpawned < bubblesToBeSpawned)
         {
             Instantiate(bubblePrefab, transform.position, Quaternion.identity);
             bubblesSpawned++;
+        } else
+        {
+            SetState(State.CoolDown);
+            StartCoroutine(BubbleCoolDown());
         }
     }
     bool CanSeePlayer(float distance)
