@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class Weapon : MonoBehaviour
 {
+    private Player player;
+    private Animator anim;
+
+    private bool delay = false;
 
     public float fireRate = 0;
     public LayerMask notToHit;
@@ -12,14 +16,14 @@ public class Weapon : MonoBehaviour
     public Vector3 position;
     [SerializeField] float speed = 25;
 
-    private bool delay = false;
     float timeToFire = 0;
 
 
     void Start()
     {
-       
-      
+        player = GetComponent<Player>();
+        anim = player.GetComponent<Animator>();
+
     }
     void Update()
     {
@@ -30,6 +34,10 @@ public class Weapon : MonoBehaviour
             Shooting();
         }
     }
+
+    //HELLO EARTHLING. BELOW IS THE ANIMATION CALL FOR THE SHOOTING SCRIPT TO BE PUT IN EACH DIRECTION. PLEASE COMMENT EACH DIRECTION WITH ITS DIRECTION
+    //   anim.SetTrigger("FireUp"); anim.SetTrigger("FireDiagUp"); anim.SetTrigger("FireHorizontal"); anim.SetTrigger("FireDiagDown"); anim.SetTrigger("FireDown");
+
 
     void Shooting()
     {
