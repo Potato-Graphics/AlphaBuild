@@ -16,7 +16,7 @@ public class Enemy : MonoBehaviour
     private Vector3 startPosition;
     private float distance; // distance between enemy and player
     private Vector3 enemyPosition; // enemy position
-    private State currentState; // enemys current state
+    [SerializeField]private State currentState; // enemys current state
     private Player player; // the player object
     [SerializeField] private float idleWalkDistance = 5.0f;
     [SerializeField] private EnemyType enemyType; //the enemy type
@@ -88,6 +88,16 @@ public class Enemy : MonoBehaviour
         StartLerping();
 
     }
+
+    void OnCollisionEnter2D(Collision2D col)
+    {
+        print(col.gameObject.name);
+        if(col.gameObject.tag == "Obstacles")
+        {
+            print("test here");
+            rb.AddForce(new Vector2(1, 300));
+        }
+    }
     // Update is called once per frame
     void Update()
     {
@@ -109,50 +119,49 @@ public class Enemy : MonoBehaviour
         infrontInfo = Physics2D.Raycast(firePoint.position, Vector2.right, 0.3f);
 
         endPos2 = firePoint2.position + Vector3.right * 0.01f;
-        groundInfo = Physics2D.Raycast(firePoint2.position, Vector2.down, 2f);
+        groundInfo = Physics2D.Raycast(firePoint2.position, Vector2.down, 4f);
 
 
         if (GetEnemyType() == EnemyType.ObstructorNPC)
         {
             if(distance < 35)
             {
-                SetState(State.Attacking);
-            }
-        }
-        if (GetEnemyType() == EnemyType.BounceNPC)
-        {
-           // Debug.LogError(GetState());
-           // Debug.LogError(GetState());
-            if (distance > 10)
-                SetState(State.Idle);
-            if(GetState() == State.Idle)
-            {
-                if(distance < 10)
+                if (GetState() == State.Idle)
                 {
                     SetState(State.Attacking);
                 }
             }
-            if (GetState() == State.Bouncing)
-            {
-                if (shouldLerp)
-                {
-                    endPosition = player.transform.position;
-                    endPosition.y = 15;
-                    this.transform.position = Lerp(startPosition, endPosition, timeStartedLerping, lerpTime);
-                    shouldLerp = false;
-                }
-            }
         }
+        
 
         if(GetEnemyType() == EnemyType.ObstructorNPC)
         {
-
+            if(GetState() == State.Attacking)
+            {
+                ObstructorAttack();
+            }
         }
 
         if (currentHealth <= 0)
             //if the enemy has no remaining health the enemy is set to dead.
             SetState(State.Dead);
-
+        if (GetEnemyType() == EnemyType.BounceNPC)
+        {
+            transform.Translate(Vector3.right * walkSpeed * Time.deltaTime);
+            if (groundInfo.collider == false)
+            {
+                if(movingRight)
+                {
+                    transform.eulerAngles = new Vector3(0, -180, 0);
+                    movingRight = false;
+                }
+                else
+                {
+                    transform.eulerAngles = new Vector3(0, 0, 0);
+                    movingRight = true;
+                }
+            }
+        }
         if (GetEnemyType() == EnemyType.ChargeNPC)
         {
                 if (groundInfo.collider == false)
@@ -200,12 +209,10 @@ public class Enemy : MonoBehaviour
 
                 if (CanSeePlayer(distanceToCharge))
                 {
-                    Debug.LogWarning("can see");
                     SetState(State.Attacking);
                 }
                 else
                 {
-                    Debug.LogWarning("cant see");
                     SetState(State.Idle);
                 }
 
@@ -250,12 +257,23 @@ public class Enemy : MonoBehaviour
         SetState(State.Idle);
     }
 
+    IEnumerator BubbleCoolDown()
+    {
+        yield return new WaitForSeconds(5);
+        SetState(State.Idle);
+    }
+
     private void ObstructorAttack()
     {
-        if(bubblesSpawned < 10)
+        int bubblesToBeSpawned = Random.Range(6, 13);
+        if(bubblesSpawned < bubblesToBeSpawned)
         {
             Instantiate(bubblePrefab, transform.position, Quaternion.identity);
             bubblesSpawned++;
+        } else
+        {
+            SetState(State.CoolDown);
+            StartCoroutine(BubbleCoolDown());
         }
     }
     bool CanSeePlayer(float distance)
@@ -351,8 +369,6 @@ public class Enemy : MonoBehaviour
         {
             //if the enemys state is attacking
             case State.Attacking:
-                if (GetEnemyType() == EnemyType.ObstructorNPC)
-                    ObstructorAttack();
                 if (GetEnemyType() == EnemyType.BounceNPC)
                     Bounce();
                 if (GetEnemyType() == EnemyType.ChargeNPC)
@@ -365,6 +381,7 @@ public class Enemy : MonoBehaviour
                 break;
             //if the enemy is dead
             case State.Dead:
+                print("dead");
                 Destroy(this.gameObject); // The enemy is destroyed.
                 break;
         }
