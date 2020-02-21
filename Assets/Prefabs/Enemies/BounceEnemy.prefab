@@ -126,7 +126,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 100000
+  m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
@@ -165,11 +165,17 @@ MonoBehaviour:
   walkSpeed: 10
   chargeSpeed: 50
   playerPosition: {x: 0, y: 0, z: 0}
+  currentState: 0
   idleWalkDistance: 5
   enemyType: 2
   collidingWithPlayer: 0
+  endPosition: {x: 0, y: 0}
+  timeStartedLerping: 0
+  lerpTime: 0
   firePoint: {fileID: 207294981443878032}
   firePoint2: {fileID: 1806014294983397714}
+  bubblePrefab: {fileID: 0}
+  bubblesSpawned: 0
 --- !u!114 &5159656131548215398
 MonoBehaviour:
   m_ObjectHideFlags: 0
