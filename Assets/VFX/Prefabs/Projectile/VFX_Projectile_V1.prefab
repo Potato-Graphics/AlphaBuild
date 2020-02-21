@@ -146,10 +146,10 @@ GameObject:
   - component: {fileID: 350768701849546560}
   - component: {fileID: 350768701849546563}
   - component: {fileID: 350768701849546562}
-  - component: {fileID: 350768701849546561}
+  - component: {fileID: 8552255317347334520}
   m_Layer: 0
   m_Name: VFX_Projectile_V1
-  m_TagString: Untagged
+  m_TagString: Bullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -162,7 +162,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 350768701849546567}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: -5.5}
+  m_LocalPosition: {x: 0, y: 1, z: -0.92}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 350768702767525379}
@@ -201,7 +201,7 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.8
   m_Center: {x: 0, y: 0, z: 2}
---- !u!114 &350768701849546561
+--- !u!114 &8552255317347334520
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -210,9 +210,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 350768701849546567}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c2a2b5d73970b1f46863585e4da95316, type: 3}
+  m_Script: {fileID: 11500000, guid: abeaa3626fad2f94aa848e0ff92c9967, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damageToGive: 0
 --- !u!1 &350768702526619876
 GameObject:
   m_ObjectHideFlags: 0
