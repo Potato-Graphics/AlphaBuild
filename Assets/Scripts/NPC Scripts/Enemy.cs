@@ -94,8 +94,11 @@ public class Enemy : MonoBehaviour
         print(col.gameObject.name);
         if(col.gameObject.tag == "Obstacles")
         {
-            print("test here");
-            rb.AddForce(new Vector2(1, 300));
+            if(GetEnemyType() == EnemyType.BounceNPC)
+            {
+                print("test here");
+                rb.AddForce(new Vector2(1, 300));
+            }
         }
     }
     // Update is called once per frame
@@ -119,7 +122,10 @@ public class Enemy : MonoBehaviour
         infrontInfo = Physics2D.Raycast(firePoint.position, Vector2.right, 0.3f);
 
         endPos2 = firePoint2.position + Vector3.right * 0.01f;
-        groundInfo = Physics2D.Raycast(firePoint2.position, Vector2.down, 4f);
+        if(GetEnemyType() == EnemyType.BounceNPC)
+        {
+            groundInfo = Physics2D.Raycast(firePoint2.position, Vector2.down, 4f);
+        }
 
 
         if (GetEnemyType() == EnemyType.ObstructorNPC)
