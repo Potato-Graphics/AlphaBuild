@@ -51,6 +51,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   jumpHeight: 4
   timeToJumpApex: 0.4
+  wallStickTime: 0.25
+  timeToWallUnstick: 0
+  wallSlideSpeedMax: 3
+  wallJumpClimb: {x: 0, y: 0}
+  wallJumpOff: {x: 0, y: 0}
+  wallLeap: {x: 0, y: 0}
   coins: 0
   movingRight: 0
   rotation: 0
@@ -60,6 +66,7 @@ MonoBehaviour:
   lifeTwo: {fileID: 0}
   lifeThree: {fileID: 0}
   player: {fileID: 0}
+  dashDistance: 4
   sceneToRespawnOn: 0
   myID: 0
 --- !u!114 &1656223719560591426
@@ -81,6 +88,8 @@ MonoBehaviour:
   verticalRayCount: 4
   maxClimbAngle: 60
   characterScale: {x: 0, y: 0, z: 0}
+  facingRight: 0
+  canDash: 1
 --- !u!61 &2180120490503743012
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -125,11 +134,9 @@ MonoBehaviour:
     m_Bits: 0
   bulletPrefab: {fileID: 5490648769887065561, guid: 25d219fd720957c499b152bc3c2ed02a,
     type: 3}
-  player: {fileID: 4980169502407661613}
-  speed: 10
-  bulletRB: {fileID: 0}
   firePoint: {fileID: 2180120491014439815}
   position: {x: 0, y: 0, z: 0}
+  speed: 10
 --- !u!212 &2180120490503743009
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -300,7 +307,7 @@ PrefabInstance:
     - target: {fileID: 8172898205851593849, guid: 707dd08444798814987b4bd17d3fcb3b,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -1.05
+      value: -2.45
       objectReference: {fileID: 0}
     - target: {fileID: 8172898205851593849, guid: 707dd08444798814987b4bd17d3fcb3b,
         type: 3}

@@ -48,7 +48,7 @@ public class Player : MonoBehaviour
     public static Vector3 spawnLocation = new Vector3(-4f, 0.47f, 0f);
     [SerializeField] GameObject player;
     public static Vector3 checkpointPos;
-    [SerializeField] float dashDistance = 7f;
+    [SerializeField] float dashDistance = 4f;
     public static int checkpointsReceived;
     public static int waterRemaining;
 
@@ -187,6 +187,7 @@ public class Player : MonoBehaviour
 
             }
         }
+
         //Player Dash
         if (Input.GetKeyDown(KeyCode.LeftShift))
         {
