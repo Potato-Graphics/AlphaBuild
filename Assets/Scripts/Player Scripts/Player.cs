@@ -51,6 +51,7 @@ public class Player : MonoBehaviour
     [SerializeField] float dashDistance = 4f;
     public static int checkpointsReceived;
     public static int waterRemaining;
+    float dashSpeed = 150.0f;
 
     Vector3 lastMouseCoord = Vector3.zero;
     bool movedUp = false;
@@ -68,6 +69,9 @@ public class Player : MonoBehaviour
     Controller2D controller;
 
     public int myID;
+
+    Vector2 dashPosition;
+
 
     private Animator anim;
 
@@ -87,7 +91,7 @@ public class Player : MonoBehaviour
         print(checkpointsReceived);
         print("checkpoint pos " + checkpointPos);
 
-        transform.position = spawnLocation;
+        //transform.position = spawnLocation;
         sceneToRespawnOn = SceneManager.GetActiveScene().buildIndex;
         myID = ID++;
         lifeOne.SetActive(true);
@@ -189,28 +193,32 @@ public class Player : MonoBehaviour
         }
 
         //Player Dash
+        if(controller.dashing)
+        {
+            transform.position = Vector3.MoveTowards(transform.position, dashPosition, dashSpeed * Time.deltaTime);
+        }
         if (Input.GetKeyDown(KeyCode.LeftShift))
         {
             if (!controller.canDash)
                 return;
-
             if (controller.facingRight)
             {
-                Vector2 dashPosition;
+                
                 dashPosition = transform.position;
                 dashPosition.x += dashDistance;
-                transform.position = dashPosition;
+                controller.dashing = true;
                 controller.canDash = false;
                 controller.StartCoroutine(controller.DashDelay());
+                controller.StartCoroutine(controller.Dashing());
             }
             else
             {
-                Vector2 dashPosition;
                 dashPosition = transform.position;
-                dashPosition.x -= dashDistance;
-                transform.position = dashPosition;
+                dashPosition.x += dashDistance;
+                controller.dashing = true;
                 controller.canDash = false;
                 controller.StartCoroutine(controller.DashDelay());
+                controller.StartCoroutine(controller.Dashing());
             }
         }
 

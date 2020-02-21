@@ -23,6 +23,7 @@ public class Controller2D : MonoBehaviour
     public CollisionInfo collisions;
     public bool facingRight = false;
     public bool canDash = true;
+    public bool dashing = false;
 
     // Start is called before the first frame update
     // Gets the collider for the player
@@ -62,6 +63,11 @@ public class Controller2D : MonoBehaviour
 
     }
 
+    public IEnumerator Dashing()
+    {
+        yield return new WaitForSeconds(0.3f);
+        dashing = false;
+    }
 
    public IEnumerator DashDelay()
     {

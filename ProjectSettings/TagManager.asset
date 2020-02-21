@@ -25,8 +25,8 @@ TagManager:
   - Player
   - Obstacle
   - Enemies
-  - 
-  - 
+  - Bubble
+  - Ground
   - 
   - 
   - 
@@ -46,6 +46,9 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Bubble
+    uniqueID: 147193681
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0
