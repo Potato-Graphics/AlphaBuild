@@ -26904,6 +26904,21 @@ PrefabInstance:
       propertyPath: wallLeap.y
       value: 16
       objectReference: {fileID: 0}
+    - target: {fileID: 2180120491014439815, guid: 7bb80834e38736f43859ff25194ccb79,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2180120491014439815, guid: 7bb80834e38736f43859ff25194ccb79,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2180120491014439815, guid: 7bb80834e38736f43859ff25194ccb79,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2180120490503743016, guid: 7bb80834e38736f43859ff25194ccb79,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -26967,7 +26982,7 @@ PrefabInstance:
     - target: {fileID: 5658727794656295426, guid: 7bb80834e38736f43859ff25194ccb79,
         type: 3}
       propertyPath: speed
-      value: 10000
+      value: 100000
       objectReference: {fileID: 0}
     - target: {fileID: 5658727794656295426, guid: 7bb80834e38736f43859ff25194ccb79,
         type: 3}
@@ -26998,13 +27013,18 @@ PrefabInstance:
         type: 3}
       propertyPath: bulletPrefab
       value: 
-      objectReference: {fileID: 2402256129837411189, guid: fdf898f72d3e9dc42b8e2bac606bf2bb,
+      objectReference: {fileID: 8519174226245515227, guid: fdf898f72d3e9dc42b8e2bac606bf2bb,
         type: 3}
     - target: {fileID: 5658727794656295426, guid: 7bb80834e38736f43859ff25194ccb79,
         type: 3}
       propertyPath: player
       value: 
       objectReference: {fileID: 1948390833}
+    - target: {fileID: 5658727794656295426, guid: 7bb80834e38736f43859ff25194ccb79,
+        type: 3}
+      propertyPath: fireHorizontalRight
+      value: 
+      objectReference: {fileID: 2103799560}
     - target: {fileID: 5490504680392972633, guid: 7bb80834e38736f43859ff25194ccb79,
         type: 3}
       propertyPath: m_Mesh
@@ -27019,6 +27039,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Size.y
       value: 3.1340055
+      objectReference: {fileID: 0}
+    - target: {fileID: 2180120491014439808, guid: 7bb80834e38736f43859ff25194ccb79,
+        type: 3}
+      propertyPath: m_Name
+      value: fireHorizontalRight
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 2288684113163870235, guid: 7bb80834e38736f43859ff25194ccb79, type: 3}
