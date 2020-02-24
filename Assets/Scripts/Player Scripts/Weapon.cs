@@ -12,13 +12,13 @@ public class Weapon : MonoBehaviour
     public float fireRate = 0;
     public LayerMask notToHit;
     public Rigidbody2D bulletPrefab;
-    public Transform firePoint;
     public Vector3 position;
     [SerializeField] float speed = 25;
 
     float timeToFire = 0;
 
 
+    public Transform firePoint;
     void Start()
     {
         player = GetComponent<Player>();
@@ -49,18 +49,19 @@ public class Weapon : MonoBehaviour
         if (direction.y > 350 && direction.y < 600 && direction.x > 450 && direction.x < 542)
         {
             //this is up
-            Rigidbody2D bullet = Instantiate<Rigidbody2D>(bulletPrefab, firePoint.position, firePoint.rotation);
+            Rigidbody2D bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
             //BulletScript.yDirection = 0.1f;
             //BulletScript.xDirection = 0.0f;
             Vector2 velocityChange = new Vector2(0.0f, 0.1f);
             bullet.velocity = velocityChange * (Time.deltaTime * speed);
             anim.SetTrigger("FireUp");
         }
+     
         else if (direction.y > 0 && direction.y < 240 && direction.x > 450 && direction.x < 542)
         {
             //this is down
             anim.SetTrigger("FireDown");
-            Rigidbody2D bullet = Instantiate<Rigidbody2D>(bulletPrefab, firePoint.position, firePoint.rotation);
+            Rigidbody2D bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
             //BulletScript.yDirection = -0.1f;
             // BulletScript.xDirection = 0.0f;
             Vector2 velocityChange = new Vector2(0, -0.1f);
@@ -70,7 +71,7 @@ public class Weapon : MonoBehaviour
         {
             //this is right up
             anim.SetTrigger("FireDiagUp");
-            Rigidbody2D bullet = Instantiate<Rigidbody2D>(bulletPrefab, firePoint.position, firePoint.rotation);
+            Rigidbody2D bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.localRotation);
             //BulletScript.xDirection = 0.1f;
             // BulletScript.yDirection = 0.1f;
             Vector2 velocityChange = new Vector2(0.1f, 0.1f);
@@ -80,7 +81,7 @@ public class Weapon : MonoBehaviour
         {
             //this is right
             anim.SetTrigger("FireHorizontal");
-            Rigidbody2D bullet = Instantiate<Rigidbody2D>(bulletPrefab, firePoint.position, firePoint.rotation);
+            Rigidbody2D bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.localRotation);
             // BulletScript.xDirection = 0.1f;
             // BulletScript.yDirection = 0.0f;
             Vector2 velocityChange = new Vector2(0.1f, 0);
@@ -90,7 +91,7 @@ public class Weapon : MonoBehaviour
         {
             //this is right down
             anim.SetTrigger("FireDiagDown");
-            Rigidbody2D bullet = Instantiate<Rigidbody2D>(bulletPrefab, firePoint.position, firePoint.rotation);
+            Rigidbody2D bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.localRotation);
             //BulletScript.xDirection = 0.1f;
             //BulletScript.yDirection = -0.1f;
             Vector2 velocityChange = new Vector2(0.1f, -0.1f);
@@ -100,7 +101,7 @@ public class Weapon : MonoBehaviour
         {
             //this is left up
             anim.SetTrigger("FireDiagUp");
-            Rigidbody2D bullet = Instantiate<Rigidbody2D>(bulletPrefab, firePoint.position, firePoint.rotation);
+            Rigidbody2D bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.localRotation);
             //BulletScript.xDirection = -0.1f;
             // BulletScript.yDirection = 0.1f;
             Vector2 velocityChange = new Vector2(-0.1f, 0.1f);
@@ -110,7 +111,7 @@ public class Weapon : MonoBehaviour
         {
             //this is left
             anim.SetTrigger("FireHorizontal");
-            Rigidbody2D bullet = Instantiate<Rigidbody2D>(bulletPrefab, firePoint.position, firePoint.rotation);
+            Rigidbody2D bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.localRotation);
             //BulletScript.xDirection = -0.1f;
             // BulletScript.yDirection = 0.0f;
             Vector2 velocityChange = new Vector2(-0.1f, 0);
@@ -120,7 +121,7 @@ public class Weapon : MonoBehaviour
         {
             //this is left down
             anim.SetTrigger("FireDiagDown");
-            Rigidbody2D bullet = Instantiate<Rigidbody2D>(bulletPrefab, firePoint.position, firePoint.rotation);
+            Rigidbody2D bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.localRotation);
             // BulletScript.xDirection = -0.1f;
             //  BulletScript.yDirection = -0.1f;
             Vector2 velocityChange = new Vector2(-0.1f, -0.1f);
