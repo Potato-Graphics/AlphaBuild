@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 666636855982040324}
   - component: {fileID: 5425041805608014550}
-  - component: {fileID: 6774877154366197129}
   - component: {fileID: 505710113785576439}
   m_Layer: 0
   m_Name: Scene Settings
@@ -50,15 +49,6 @@ MonoBehaviour:
   blendDistance: 0
   weight: 1
   sharedProfile: {fileID: 11400000, guid: 9459354b4a69db1499a1a5fdd219ae4f, type: 2}
---- !u!45 &6774877154366197129
-Skybox:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6774877154366197128}
-  m_Enabled: 1
-  m_CustomSkybox: {fileID: 2100000, guid: 3b87c3dfa87c61042b8173391a06c932, type: 2}
 --- !u!114 &505710113785576439
 MonoBehaviour:
   m_ObjectHideFlags: 0
