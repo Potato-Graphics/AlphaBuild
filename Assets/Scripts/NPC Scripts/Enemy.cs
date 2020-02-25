@@ -122,54 +122,32 @@ public class Enemy : MonoBehaviour
         infrontInfo = Physics2D.Raycast(firePoint.position, Vector2.right, 0.3f);
 
         endPos2 = firePoint2.position + Vector3.right * 0.01f;
-        if(GetEnemyType() == EnemyType.BounceNPC)
+
+        switch(GetEnemyType())
         {
-            groundInfo = Physics2D.Raycast(firePoint2.position, Vector2.down, 4f);
-        }
+            case EnemyType.RangeNPC:
+                break;
 
 
-        if (GetEnemyType() == EnemyType.ObstructorNPC)
-        {
-            if(distance < 35)
-            {
-                if (GetState() == State.Idle)
+            case EnemyType.BounceNPC:
+                transform.Translate(Vector3.right * walkSpeed * Time.deltaTime);
+                groundInfo = Physics2D.Raycast(firePoint2.position, Vector2.down, 4f);
+                if (groundInfo.collider == false)
                 {
-                    SetState(State.Attacking);
+                    if (movingRight)
+                    {
+                        transform.eulerAngles = new Vector3(0, -180, 0);
+                        movingRight = false;
+                    }
+                    else
+                    {
+                        transform.eulerAngles = new Vector3(0, 0, 0);
+                        movingRight = true;
+                    }
                 }
-            }
-        }
-        
+                break;
 
-        if(GetEnemyType() == EnemyType.ObstructorNPC)
-        {
-            if(GetState() == State.Attacking)
-            {
-                ObstructorAttack();
-            }
-        }
-
-        if (currentHealth <= 0)
-            //if the enemy has no remaining health the enemy is set to dead.
-            SetState(State.Dead);
-        if (GetEnemyType() == EnemyType.BounceNPC)
-        {
-            transform.Translate(Vector3.right * walkSpeed * Time.deltaTime);
-            if (groundInfo.collider == false)
-            {
-                if(movingRight)
-                {
-                    transform.eulerAngles = new Vector3(0, -180, 0);
-                    movingRight = false;
-                }
-                else
-                {
-                    transform.eulerAngles = new Vector3(0, 0, 0);
-                    movingRight = true;
-                }
-            }
-        }
-        if (GetEnemyType() == EnemyType.ChargeNPC)
-        {
+            case EnemyType.ChargeNPC:
                 if (groundInfo.collider == false)
                 {
                     if (movingRight)
@@ -223,20 +201,43 @@ public class Enemy : MonoBehaviour
                 }
 
 
-            if (GetState() == State.Charging)
-            {
-                if (timePassed > 5)
-                    SetState(State.Idle);
-                targetLocation = player.transform.position;
-                targetLocation.y = transform.position.y;
-                transform.position = Vector3.MoveTowards(transform.position, targetLocation, (chargeSpeed * Time.deltaTime));
-            }
+                if (GetState() == State.Charging)
+                {
+                    if (timePassed > 5)
+                        SetState(State.Idle);
+                    targetLocation = player.transform.position;
+                    targetLocation.y = transform.position.y;
+                    transform.position = Vector3.MoveTowards(transform.position, targetLocation, (chargeSpeed * Time.deltaTime));
+                }
 
-            if (GetState() == State.Idle)
-            {
-                transform.Translate(Vector3.right * walkSpeed * Time.deltaTime);
-            }
+                if (GetState() == State.Idle)
+                {
+                    transform.Translate(Vector3.right * walkSpeed * Time.deltaTime);
+                }
+                break;
+
+
+            case EnemyType.ObstructorNPC:
+                if (distance < 35)
+                {
+                    if (GetState() == State.Idle)
+                    {
+                        SetState(State.Attacking);
+                    }
+                }
+                if (GetState() == State.Attacking)
+                {
+                    ObstructorAttack();
+                }
+                break;
         }
+        if(GetEnemyType() == EnemyType.BounceNPC)
+        {
+            groundInfo = Physics2D.Raycast(firePoint2.position, Vector2.down, 4f);
+        }
+        if (currentHealth <= 0)
+            //if the enemy has no remaining health the enemy is set to dead.
+            SetState(State.Dead);
     }
 
 
@@ -404,6 +405,7 @@ public class Enemy : MonoBehaviour
         ObstructorNPC,
         ChargeNPC,
         BounceNPC,
+        RangeNPC
     }
 
     public EnemyType GetEnemyType()

@@ -77,6 +77,9 @@ public class Range_NPC : MonoBehaviour
             //if the enemys state is attacking
             case State.Attacking:
                 targetLocation = player.transform.position;
+                targetLocation.x = player.transform.position.x + Random.Range(2, 10);
+                print(targetLocation);
+                print(player.transform.position);
                 break;
             case State.Dead:
                 Destroy(this.gameObject); // The enemy is destroyed.
