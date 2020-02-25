@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<< HEAD:Assets/Allegorithmic/Plugins/Substance/Substance Engine/Editor/Materials/Substance.mat.meta
 guid: ecdc1903cd762084a9e9ee93f556b1d6
+=======
+guid: 7409d2a8aa7816742b689d10c706d01b
+>>>>>>> remotes/origin/Artists:Assets/Materials/M_Playtower_01.mat.meta
 NativeFormatImporter:
   externalObjects: {}
   mainObjectFileID: 2100000

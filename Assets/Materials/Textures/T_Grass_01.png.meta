@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<< HEAD:Assets/Materials/Textures/T_Grass_01.png.meta
 guid: aee5e1032dfdf344593ee86f610d2093
+=======
+guid: a3fdfcffce38072418f5934f4c57058e
+>>>>>>> remotes/origin/Artists:Assets/Materials/M_Playtower_01_Base_Color.png.meta
 TextureImporter:
   fileIDToRecycleName: {}
   externalObjects: {}
