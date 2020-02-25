@@ -8,7 +8,7 @@ public class BubbleHandler : MonoBehaviour
     public Rigidbody2D rb;
     Player player;
     float idleSpeed = 100;
-    float chaseSpeed = 25;
+    float chaseSpeed = 5;
     Enemy enemy;
     // Start is called before the first frame update
     void Start()
@@ -60,6 +60,10 @@ public class BubbleHandler : MonoBehaviour
         if(collision.gameObject.tag == "Player")
         {
             player.DealDamage(1);
+            Destroy(gameObject);
+        }
+        if(collision.gameObject.tag == "Bullet")
+        {
             Destroy(gameObject);
         }
     }
