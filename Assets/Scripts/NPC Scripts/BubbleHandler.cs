@@ -81,7 +81,7 @@ public class BubbleHandler : MonoBehaviour
         {
             case State.Idle:
                 float randomX = Random.Range(-200, 200);
-                float randomY = Random.Range(-200, 200);
+                float randomY = Random.Range(0, 200);
                 Vector2 force = new Vector2(randomX, randomY);
                 rb.AddForce(force);
                 StartCoroutine(IdleTime());

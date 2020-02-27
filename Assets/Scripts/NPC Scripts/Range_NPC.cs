@@ -19,7 +19,7 @@ public class Range_NPC : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        print(transform.position.x - player.transform.position.x);
+        //print(transform.position.x - player.transform.position.x);
         if(transform.position.x - player.transform.position.x <= 10 && GetState() != State.Attacking)
         {
             SetState(State.Attacking);

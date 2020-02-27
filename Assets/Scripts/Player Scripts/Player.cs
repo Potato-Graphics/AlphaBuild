@@ -59,6 +59,8 @@ public class Player : MonoBehaviour
     static int totalPumps = 0;
     public static float bulletDamage = 0f;
     bool pumpStarted = false;
+    public float airTimeJumpDelay;
+    public bool canJump = false;
 
     public int sceneToRespawnOn;
 
@@ -197,6 +199,10 @@ public class Player : MonoBehaviour
         {
             transform.position = Vector3.MoveTowards(transform.position, dashPosition, dashSpeed * Time.deltaTime);
         }
+        if(Input.GetKeyDown(KeyCode.G))
+        {
+            SetHealth(10000);
+        }
         if (Input.GetKeyDown(KeyCode.LeftShift))
         {
             if (!controller.canDash)
@@ -221,8 +227,22 @@ public class Player : MonoBehaviour
                 controller.StartCoroutine(controller.Dashing());
             }
         }
+        if (!controller.collisions.below)
+        {
+            airTimeJumpDelay += Time.deltaTime;
+            if(airTimeJumpDelay > 0.2)
+            {
+                canJump = false;
+            }
+        }
+        else
+        {
+            airTimeJumpDelay = 0;
+            canJump = true;
+        }
+        
 
-        if (GetHealth() <= 0)
+            if (GetHealth() <= 0)
         {
             lifeOne.SetActive(false);
             lifeTwo.SetActive(false);
@@ -290,9 +310,9 @@ public class Player : MonoBehaviour
                     velocity.y = wallLeap.y;
                 }
             }
-            if (controller.collisions.below)
+            if (canJump)
             {
-                    anim.SetTrigger("Jump");
+                anim.SetTrigger("Jump");
                 velocity.y = jumpVelocity;
             }
         }
