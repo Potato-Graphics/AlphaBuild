@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6443240960771047910}
   - component: {fileID: 7659777221917898559}
   - component: {fileID: 6702260075393335856}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: ProjectileOut
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -25,13 +25,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2308910702391753408}
-  m_LocalRotation: {x: -0.7071068, y: 0, z: -0.7071068, w: 0}
-  m_LocalPosition: {x: -0.2385, y: 0, z: 0}
+  m_LocalRotation: {x: -0.58592117, y: 0.395849, z: 0.395849, w: 0.58592117}
+  m_LocalPosition: {x: -0.2385, y: 0, z: 0.75874}
   m_LocalScale: {x: 0.34744924, y: 0.34744924, z: 0.34744924}
   m_Children: []
   m_Father: {fileID: 263637681619265686}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: -180, y: -90, z: 0}
+  m_LocalEulerAnglesHint: {x: -90, y: 174.47202, z: -106.386}
 --- !u!198 &7659777221917898559
 ParticleSystem:
   m_ObjectHideFlags: 0
@@ -4767,7 +4767,7 @@ GameObject:
   - component: {fileID: 7436738585116189210}
   - component: {fileID: 805812622038760662}
   - component: {fileID: 3963367953247406255}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Particles
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4782,7 +4782,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3439100953908343735}
   m_LocalRotation: {x: -0.4948094, y: 0.33648735, z: 0.4474586, w: 0.66462076}
-  m_LocalPosition: {x: -0.31842, y: 0, z: -0.012}
+  m_LocalPosition: {x: -0.31842, y: 0, z: 0.75177}
   m_LocalScale: {x: 0.34744924, y: 0.34744924, z: 0.34744924}
   m_Children: []
   m_Father: {fileID: 263637681619265686}
@@ -9470,8 +9470,8 @@ GameObject:
   - component: {fileID: 8519174226245515227}
   - component: {fileID: 6250612407168350172}
   - component: {fileID: 4533486903233706810}
-  m_Layer: 0
-  m_Name: VFX_Projectile_Horizontal
+  m_Layer: 9
+  m_Name: VFX_Projectile_Up
   m_TagString: Bullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9636,7 +9636,7 @@ GameObject:
   - component: {fileID: 819935091369387521}
   - component: {fileID: 4542890921447567046}
   - component: {fileID: 5053660110340735219}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: ProjectileIn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9650,13 +9650,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5164906538671233636}
-  m_LocalRotation: {x: 0.39145598, y: 0.5888652, z: 0.39145598, w: 0.5888652}
-  m_LocalPosition: {x: -0.483, y: -0.001, z: 0.021}
+  m_LocalRotation: {x: -0.58577263, y: 0.39606875, z: 0.39606875, w: 0.58577263}
+  m_LocalPosition: {x: -0.257, y: -0.233, z: 0.766}
   m_LocalScale: {x: 0.34744924, y: 0.34744924, z: 0.34744924}
   m_Children: []
   m_Father: {fileID: 263637681619265686}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 67.229004}
+  m_LocalEulerAnglesHint: {x: -90, y: 0.9, z: 67.229004}
 --- !u!198 &4542890921447567046
 ParticleSystem:
   m_ObjectHideFlags: 0
@@ -14391,7 +14391,7 @@ GameObject:
   m_Component:
   - component: {fileID: 550767251923953742}
   - component: {fileID: 8228229164422470180}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Trail
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14406,7 +14406,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7654866632843955960}
   m_LocalRotation: {x: -0.4948094, y: 0.33648735, z: 0.4474586, w: 0.66462076}
-  m_LocalPosition: {x: -0.2385, y: 0.026, z: 0.084}
+  m_LocalPosition: {x: -0.2385, y: 0.026, z: 0.733}
   m_LocalScale: {x: -2.427696, y: -1.073112, z: -1.93512}
   m_Children: []
   m_Father: {fileID: 263637681619265686}
