@@ -12,6 +12,7 @@ TagManager:
   - firePoint
   - RangeNPC
   - Enemy
+  - Zipline
   layers:
   - Default
   - TransparentFX

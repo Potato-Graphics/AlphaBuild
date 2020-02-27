@@ -94,13 +94,12 @@ public class Enemy : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D col)
     {
-        print(col.gameObject.name);
         if(col.gameObject.tag == "Obstacles")
         {
             if(GetEnemyType() == EnemyType.BounceNPC)
             {
                 print("test here");
-                rb.AddForce(new Vector2(1, 300));
+                rb.AddForce(new Vector2(1f, 300));
             }
         }
     }
