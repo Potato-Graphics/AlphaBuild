@@ -52,6 +52,7 @@ public class Player : MonoBehaviour
     public static int checkpointsReceived;
     public static int waterRemaining;
     float dashSpeed = 150.0f;
+    [SerializeField]GameObject endPoint;
 
     Vector3 lastMouseCoord = Vector3.zero;
     bool movedUp = false;
@@ -63,6 +64,8 @@ public class Player : MonoBehaviour
     public bool canJump = false;
 
     public int sceneToRespawnOn;
+
+    public bool ridingZipline = false;
 
     Vector3 velocity;
 
@@ -83,22 +86,6 @@ public class Player : MonoBehaviour
 
     }
 
-    void OnCollisionEnter2D(Collision2D col)
-    {
-        if(col.gameObject.tag == "Zipline")
-        {
-            print("Enter");
-        }
-    }
-
-    void OnCollisionExit2D(Collision2D col)
-    {
-        if (col.gameObject.tag == "Zipline")
-        {
-            print("Leave");
-        }
-
-    }
     void Start()
     {
         anim = player.GetComponent<Animator>();
@@ -211,6 +198,11 @@ public class Player : MonoBehaviour
             }
         }
 
+        if(ridingZipline)
+        {
+            transform.position = Vector3.MoveTowards(transform.position, endPoint.transform.position, Time.deltaTime * 50);
+        }
+
         //Player Dash
         if(controller.dashing)
         {
@@ -222,6 +214,7 @@ public class Player : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.LeftShift))
         {
+            if (ridingZipline) return;
             if (!controller.canDash)
                 return;
             if (controller.facingRight)
@@ -305,6 +298,7 @@ public class Player : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
+            if (ridingZipline) return;
             if (wallSliding)
             {
                 if (wallDirX == input.x)
