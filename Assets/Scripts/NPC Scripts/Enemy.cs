@@ -94,7 +94,6 @@ public class Enemy : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D col)
     {
-        print(col.gameObject.name);
         if(col.gameObject.tag == "Obstacles")
         {
             if(GetEnemyType() == EnemyType.BounceNPC)
