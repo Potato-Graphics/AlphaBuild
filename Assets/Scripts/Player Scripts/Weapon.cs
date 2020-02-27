@@ -72,6 +72,7 @@ public class Weapon : MonoBehaviour
             Vector2 velocityChange = new Vector2(0, -0.1f);
             print("down");
             bullet.velocity = velocityChange * (Time.deltaTime * speed);
+            
         }
         else if (direction.x > 638 && direction.x < 1200 && direction.y < 600 && direction.y > 316)
         {
@@ -83,6 +84,7 @@ public class Weapon : MonoBehaviour
             Vector2 velocityChange = new Vector2(0.1f, 0.1f);
             print("rignht up");
             bullet.velocity = velocityChange * (Time.deltaTime * speed);
+            
         }
         else if (direction.x > 638 && direction.x < 1200 && direction.y > 266 && direction.y < 316)
         {
@@ -94,6 +96,7 @@ public class Weapon : MonoBehaviour
             Vector2 velocityChange = new Vector2(0.1f, 0);
             print("right");
             bullet.velocity = velocityChange * (Time.deltaTime * speed);
+            
         }
         else if (direction.x > 638 && direction.x < 1200 && direction.y < 266 && direction.y > 0)
         {
@@ -105,6 +108,7 @@ public class Weapon : MonoBehaviour
             Vector2 velocityChange = new Vector2(0.1f, -0.1f);
             print("right down");
             bullet.velocity = velocityChange * (Time.deltaTime * speed);
+            
         }
         else if (direction.x > 0 && direction.x < 571 && direction.y < 600 && direction.y > 316)
         {
@@ -117,6 +121,7 @@ public class Weapon : MonoBehaviour
             bullet.transform.eulerAngles = new Vector2(0, -180);
             print("left up");
             bullet.velocity = velocityChange * (Time.deltaTime * speed);
+            
         }
         else if (direction.x > 0 && direction.x < 571 && direction.y > 266 && direction.y < 316)
         {
