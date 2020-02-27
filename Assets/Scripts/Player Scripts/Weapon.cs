@@ -50,7 +50,7 @@ public class Weapon : MonoBehaviour
         Vector3 firePointPosition = new Vector3(firePoint.position.x, firePoint.position.y); // Stores the firepoint as a Vector2.
         Debug.DrawLine(firePointPosition, (dir - firePointPosition) * 100, Color.red); //Draws the Raycast.
         Debug.LogWarning("mouse position: " + direction);
-        if (direction.y > 316 && direction.y < 600 && direction.x > 579 && direction.x < 621)
+        if (direction.y > 237 && direction.y < 327 && direction.x > 337 && direction.x < 360)
         {
             //this is up
             Rigidbody2D bullet = Instantiate(bulletUp, firePoint.position, firePoint.rotation);
@@ -62,7 +62,7 @@ public class Weapon : MonoBehaviour
             anim.SetTrigger("FireUp");
         }
      
-        else if (direction.y > 0 && direction.y < 228 && direction.x > 579 && direction.x < 621)
+        else if (direction.y > 112 && direction.y < 225 && direction.x > 337 && direction.x < 360)
         {
             //this is down
             anim.SetTrigger("FireDown");
@@ -98,7 +98,7 @@ public class Weapon : MonoBehaviour
             bullet.velocity = velocityChange * (Time.deltaTime * speed);
             
         }
-        else if (direction.x > 638 && direction.x < 1200 && direction.y < 266 && direction.y > 0)
+        else if (direction.x > 361 && direction.x < 657 && direction.y < 175 && direction.y > 27)
         {
             //this is right down
             anim.SetTrigger("FireDiagDown");
@@ -110,7 +110,7 @@ public class Weapon : MonoBehaviour
             bullet.velocity = velocityChange * (Time.deltaTime * speed);
             
         }
-        else if (direction.x > 0 && direction.x < 571 && direction.y < 600 && direction.y > 316)
+        else if (direction.x > 166 && direction.x < 339  && direction.y < 377 && direction.y > 228)
         {
             //this is left up
             anim.SetTrigger("FireDiagUp");
@@ -123,7 +123,7 @@ public class Weapon : MonoBehaviour
             bullet.velocity = velocityChange * (Time.deltaTime * speed);
             
         }
-        else if (direction.x > 0 && direction.x < 571 && direction.y > 266 && direction.y < 316)
+        else if (direction.x > 15 && direction.x < 328 && direction.y > 189 && direction.y < 204)
         {
             //this is left
             anim.SetTrigger("FireHorizontal");
@@ -135,7 +135,7 @@ public class Weapon : MonoBehaviour
             print("left");
             bullet.velocity = velocityChange * (Time.deltaTime * speed);
         }
-        else if (direction.x > 0 && direction.x < 571 && direction.y < 266 && direction.y > 0)
+        else if (direction.x > 11 && direction.x < 322 && direction.y < 173 && direction.y > 29)
         {
             //this is left down
             anim.SetTrigger("FireDiagDown");

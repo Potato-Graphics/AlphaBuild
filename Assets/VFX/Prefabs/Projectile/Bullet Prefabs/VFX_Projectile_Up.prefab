@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6443240960771047910}
   - component: {fileID: 7659777221917898559}
   - component: {fileID: 6702260075393335856}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: ProjectileOut
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4767,7 +4767,7 @@ GameObject:
   - component: {fileID: 7436738585116189210}
   - component: {fileID: 805812622038760662}
   - component: {fileID: 3963367953247406255}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Particles
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9470,7 +9470,7 @@ GameObject:
   - component: {fileID: 8519174226245515227}
   - component: {fileID: 6250612407168350172}
   - component: {fileID: 4533486903233706810}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: VFX_Projectile_Up
   m_TagString: Bullet
   m_Icon: {fileID: 0}
@@ -9636,7 +9636,7 @@ GameObject:
   - component: {fileID: 819935091369387521}
   - component: {fileID: 4542890921447567046}
   - component: {fileID: 5053660110340735219}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: ProjectileIn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14391,7 +14391,7 @@ GameObject:
   m_Component:
   - component: {fileID: 550767251923953742}
   - component: {fileID: 8228229164422470180}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Trail
   m_TagString: Untagged
   m_Icon: {fileID: 0}
