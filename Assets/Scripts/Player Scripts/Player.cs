@@ -82,6 +82,23 @@ public class Player : MonoBehaviour
     {
 
     }
+
+    void OnCollisionEnter2D(Collision2D col)
+    {
+        if(col.gameObject.tag == "Zipline")
+        {
+            print("Enter");
+        }
+    }
+
+    void OnCollisionExit2D(Collision2D col)
+    {
+        if (col.gameObject.tag == "Zipline")
+        {
+            print("Leave");
+        }
+
+    }
     void Start()
     {
         anim = player.GetComponent<Animator>();
