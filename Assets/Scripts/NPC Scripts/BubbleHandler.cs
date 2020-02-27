@@ -64,6 +64,7 @@ public class BubbleHandler : MonoBehaviour
         }
         if(collision.gameObject.tag == "Bullet")
         {
+            ScoreManager.scoreValue += 50;
             Destroy(gameObject);
         }
     }
