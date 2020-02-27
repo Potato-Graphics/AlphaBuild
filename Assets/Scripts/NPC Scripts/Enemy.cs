@@ -97,7 +97,7 @@ public class Enemy : MonoBehaviour
             if(GetEnemyType() == EnemyType.BounceNPC)
             {
                 print("test here");
-                rb.AddForce(new Vector2(1, 300));
+                rb.AddForce(new Vector2(1f, 300));
             }
         }
     }
