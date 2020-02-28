@@ -21,6 +21,7 @@ public class Player : MonoBehaviour
     public Vector2 wallJumpClimb;
     public Vector2 wallJumpOff;
     public Vector2 wallLeap;
+    public Transform zipline;
 
     static int ID = 0;
 
@@ -66,6 +67,7 @@ public class Player : MonoBehaviour
     public int sceneToRespawnOn;
 
     public bool ridingZipline = false;
+    Vector3 playerPosition;
 
     Vector3 velocity;
 
@@ -113,7 +115,7 @@ public class Player : MonoBehaviour
     //Stops the player from moving building up downward force when standing still.
     void Update()
     {
-
+        playerPosition = transform.position;
         //JAM CODE
         /////////////////////////////////
         if (controller.collisions.below)
@@ -200,7 +202,9 @@ public class Player : MonoBehaviour
 
         if(ridingZipline)
         {
-            transform.position = Vector3.MoveTowards(transform.position, endPoint.transform.position, Time.deltaTime * 50);
+            playerPosition = zipline.position;
+            playerPosition.y += 0.3f;
+            transform.position = playerPosition;
         }
 
         //Player Dash
