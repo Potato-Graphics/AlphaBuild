@@ -49,20 +49,56 @@ public class Weapon : MonoBehaviour
         Vector3 direction = Input.mousePosition;
         Vector3 firePointPosition = new Vector3(firePoint.position.x, firePoint.position.y); // Stores the firepoint as a Vector2.
         Debug.DrawLine(firePointPosition, (dir - firePointPosition) * 100, Color.red); //Draws the Raycast.
-        Debug.LogWarning("mouse position: " + direction);
-        if (direction.y > 237 && direction.y < 327 && direction.x > 337 && direction.x < 360)
+
+
+
+        //This finds the angle of the mouse cursor
+        Vector3 v3Pos;
+        float fAngle;
+
+        // Project the mouse point into world space at
+        //   at the distance of the player.
+        v3Pos = Input.mousePosition;
+        v3Pos.z = (transform.position.z - Camera.main.transform.position.z);
+        v3Pos = Camera.main.ScreenToWorldPoint(v3Pos);
+        v3Pos = v3Pos - transform.position;
+        fAngle = Mathf.Atan2(v3Pos.y, v3Pos.x) * Mathf.Rad2Deg;
+        if (fAngle < 0.0f) fAngle += 360.0f;
+
+        // Raycast against a mathematical plane in world space
+        Plane plane = new Plane(Vector3.forward, transform.position);
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        float fDist;
+        plane.Raycast(ray, out fDist);
+        v3Pos = ray.GetPoint(fDist);
+        v3Pos = v3Pos - transform.position;
+        fAngle = Mathf.Atan2(v3Pos.y, v3Pos.x) * Mathf.Rad2Deg;
+        if (fAngle < 0.0f) fAngle += 360.0f;
+
+        //Convert the player to Screen coordinates
+        v3Pos = Camera.main.WorldToScreenPoint(transform.position);
+        v3Pos = Input.mousePosition - v3Pos;
+        fAngle = Mathf.Atan2(v3Pos.y, v3Pos.x) * Mathf.Rad2Deg;
+        if (fAngle < 0.0f) fAngle += 360.0f;
+        //end of angle finding
+
+        Debug.LogError(fAngle);
+
+
+
+        if (fAngle >= 77 && fAngle <= 110)
         {
             //this is up
             Rigidbody2D bullet = Instantiate(bulletUp, firePoint.position, firePoint.rotation);
             //BulletScript.yDirection = 0.1f;
             //BulletScript.xDirection = 0.0f;
-            Vector2 velocityChange = new Vector2(0.0f, 0.1f);
+            Vector2 velocityChange = new Vector2(0.0f, 0.3f);
             bullet.velocity = velocityChange * (Time.deltaTime * speed);
             print("up");
             anim.SetTrigger("FireUp");
         }
 
-        else if (direction.y > 112 && direction.y < 225 && direction.x > 337 && direction.x < 360)
+        else if (fAngle >= 246 && fAngle <= 288)
         {
             //this is down
             anim.SetTrigger("FireDown");
@@ -74,7 +110,7 @@ public class Weapon : MonoBehaviour
             bullet.velocity = velocityChange * (Time.deltaTime * speed);
 
         }
-        else if (direction.x > 638 && direction.x < 1200 && direction.y < 600 && direction.y > 316)
+        else if (fAngle < 77 && fAngle >= 19.2)
         {
             //this is right up
             anim.SetTrigger("FireDiagUp");
@@ -86,7 +122,7 @@ public class Weapon : MonoBehaviour
             bullet.velocity = velocityChange * (Time.deltaTime * speed);
 
         }
-        else if (direction.x > 638 && direction.x < 1200 && direction.y > 266 && direction.y < 316)
+        else if (fAngle < 19.2 && fAngle >= 0 || fAngle < 360 && fAngle > 350)
         {
             //this is right
             anim.SetTrigger("FireHorizontal");
@@ -98,7 +134,7 @@ public class Weapon : MonoBehaviour
             bullet.velocity = velocityChange * (Time.deltaTime * speed);
 
         }
-        else if (direction.x > 361 && direction.x < 657 && direction.y < 175 && direction.y > 27)
+        else if (fAngle <= 350 && fAngle > 288)
         {
             //this is right down
             anim.SetTrigger("FireDiagDown");
@@ -110,7 +146,7 @@ public class Weapon : MonoBehaviour
             bullet.velocity = velocityChange * (Time.deltaTime * speed);
 
         }
-        else if (direction.x > 166 && direction.x < 339 && direction.y < 377 && direction.y > 228)
+        else if (fAngle > 110 && fAngle <= 165)
         {
             //this is left up
             anim.SetTrigger("FireDiagUp");
@@ -123,7 +159,7 @@ public class Weapon : MonoBehaviour
             bullet.velocity = velocityChange * (Time.deltaTime * speed);
 
         }
-        else if (direction.x > 15 && direction.x < 328 && direction.y > 189 && direction.y < 204)
+        else if (fAngle > 165 && fAngle <= 190)
         {
             //this is left
             anim.SetTrigger("FireHorizontal");
@@ -135,7 +171,7 @@ public class Weapon : MonoBehaviour
             print("left");
             bullet.velocity = velocityChange * (Time.deltaTime * speed);
         }
-        else if (direction.x > 11 && direction.x < 322 && direction.y < 173 && direction.y > 29)
+        else if (fAngle > 190 && fAngle < 246)
         {
             //this is left down
             anim.SetTrigger("FireDiagDown");

@@ -41,7 +41,7 @@ public class Controller2D : MonoBehaviour
         characterScale = transform.localScale;
         Vector3 mousePosition;
         mousePosition = Input.mousePosition - Camera.main.WorldToScreenPoint(transform.position);
-        Debug.LogError("mousePosition: " + mousePosition);
+        //Debug.LogError("mousePosition: " + mousePosition);
         if (mousePosition.x >= 11.2f)
         {
             characterScale.x = -1;
