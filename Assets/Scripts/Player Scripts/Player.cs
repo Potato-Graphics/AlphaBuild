@@ -115,6 +115,7 @@ public class Player : MonoBehaviour
     //Stops the player from moving building up downward force when standing still.
     void Update()
     {
+      
         playerPosition = transform.position;
         //JAM CODE
         /////////////////////////////////
@@ -203,8 +204,13 @@ public class Player : MonoBehaviour
         if(ridingZipline)
         {
             playerPosition = zipline.position;
-            playerPosition.y += 0.3f;
+            playerPosition.y += 2.2f;
             transform.position = playerPosition;
+            anim.SetBool("ridingZipline", true);
+        }
+        else
+        {
+            anim.SetBool("ridingZipline", false);
         }
 
         //Player Dash

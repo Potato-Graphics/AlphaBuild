@@ -44,7 +44,6 @@ public class ZiplineHandler : MonoBehaviour
         {
             if (player.ridingZipline) return;
             player.ridingZipline = true;
-            player.transform.position = new Vector2(410.58f, 11.77f);
             print("ziplined" + player.ridingZipline);
         }
     }
