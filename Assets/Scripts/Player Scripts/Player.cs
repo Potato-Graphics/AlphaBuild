@@ -21,6 +21,7 @@ public class Player : MonoBehaviour
     public Vector2 wallJumpClimb;
     public Vector2 wallJumpOff;
     public Vector2 wallLeap;
+    public Transform zipline;
 
     static int ID = 0;
 
@@ -48,9 +49,11 @@ public class Player : MonoBehaviour
     public static Vector3 spawnLocation = new Vector3(-4f, 0.47f, 0f);
     [SerializeField] GameObject player;
     public static Vector3 checkpointPos;
-    [SerializeField] float dashDistance = 7f;
+    [SerializeField] float dashDistance = 4f;
     public static int checkpointsReceived;
     public static int waterRemaining;
+    float dashSpeed = 150.0f;
+    [SerializeField]GameObject endPoint;
 
     Vector3 lastMouseCoord = Vector3.zero;
     bool movedUp = false;
@@ -58,8 +61,13 @@ public class Player : MonoBehaviour
     static int totalPumps = 0;
     public static float bulletDamage = 0f;
     bool pumpStarted = false;
+    public float airTimeJumpDelay;
+    public bool canJump = false;
 
     public int sceneToRespawnOn;
+
+    public bool ridingZipline = false;
+    Vector3 playerPosition;
 
     Vector3 velocity;
 
@@ -69,6 +77,9 @@ public class Player : MonoBehaviour
 
     public int myID;
 
+    Vector2 dashPosition;
+
+
     private Animator anim;
 
     // Start is called before the first frame update
@@ -76,6 +87,7 @@ public class Player : MonoBehaviour
     {
 
     }
+
     void Start()
     {
         anim = player.GetComponent<Animator>();
@@ -87,7 +99,7 @@ public class Player : MonoBehaviour
         print(checkpointsReceived);
         print("checkpoint pos " + checkpointPos);
 
-        transform.position = spawnLocation;
+        //transform.position = spawnLocation;
         sceneToRespawnOn = SceneManager.GetActiveScene().buildIndex;
         myID = ID++;
         lifeOne.SetActive(true);
@@ -103,7 +115,8 @@ public class Player : MonoBehaviour
     //Stops the player from moving building up downward force when standing still.
     void Update()
     {
-
+      
+        playerPosition = transform.position;
         //JAM CODE
         /////////////////////////////////
         if (controller.collisions.below)
@@ -187,33 +200,69 @@ public class Player : MonoBehaviour
 
             }
         }
+
+        if(ridingZipline)
+        {
+            playerPosition = zipline.position;
+            playerPosition.y += 2.2f;
+            transform.position = playerPosition;
+            anim.SetBool("ridingZipline", true);
+        }
+        else
+        {
+            anim.SetBool("ridingZipline", false);
+        }
+
         //Player Dash
+        if(controller.dashing)
+        {
+            transform.position = Vector3.MoveTowards(transform.position, dashPosition, dashSpeed * Time.deltaTime);
+        }
+        if(Input.GetKeyDown(KeyCode.G))
+        {
+            SetHealth(10000);
+        }
         if (Input.GetKeyDown(KeyCode.LeftShift))
         {
+            if (ridingZipline) return;
             if (!controller.canDash)
                 return;
-
             if (controller.facingRight)
             {
-                Vector2 dashPosition;
+                
                 dashPosition = transform.position;
                 dashPosition.x += dashDistance;
-                transform.position = dashPosition;
+                controller.dashing = true;
                 controller.canDash = false;
                 controller.StartCoroutine(controller.DashDelay());
+                controller.StartCoroutine(controller.Dashing());
             }
             else
             {
-                Vector2 dashPosition;
                 dashPosition = transform.position;
-                dashPosition.x -= dashDistance;
-                transform.position = dashPosition;
+                dashPosition.x += dashDistance;
+                controller.dashing = true;
                 controller.canDash = false;
                 controller.StartCoroutine(controller.DashDelay());
+                controller.StartCoroutine(controller.Dashing());
             }
         }
+        if (!controller.collisions.below)
+        {
+            airTimeJumpDelay += Time.deltaTime;
+            if(airTimeJumpDelay > 0.2)
+            {
+                canJump = false;
+            }
+        }
+        else
+        {
+            airTimeJumpDelay = 0;
+            canJump = true;
+        }
+        
 
-        if (GetHealth() <= 0)
+            if (GetHealth() <= 0)
         {
             lifeOne.SetActive(false);
             lifeTwo.SetActive(false);
@@ -259,6 +308,7 @@ public class Player : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
+            if (ridingZipline) return;
             if (wallSliding)
             {
                 if (wallDirX == input.x)
@@ -281,9 +331,9 @@ public class Player : MonoBehaviour
                     velocity.y = wallLeap.y;
                 }
             }
-            if (controller.collisions.below)
+            if (canJump)
             {
-                    anim.SetTrigger("Jump");
+                anim.SetTrigger("Jump");
                 velocity.y = jumpVelocity;
             }
         }

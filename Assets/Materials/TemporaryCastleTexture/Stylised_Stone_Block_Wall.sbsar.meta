@@ -21,10 +21,7 @@ ScriptedImporter:
     generateAllOutputs: 0
     generateMipMaps: 1
     preset: " <sbspreset pkgurl=\"pkg://Stylised_Brick_Wall\" label=\"\" >\n  <presetinput
-      identifier=\"$outputsize\" uid=\"107272219\" type=\"8\" value=\"9,9\" />\n  <presetinput
-      identifier=\"$randomseed\" uid=\"1360449097\" type=\"4\" value=\"496\" />\n
-      \ <presetinput identifier=\"outputcolor\" uid=\"1841644118\" type=\"3\" value=\"0.443396,0.443396,0.443396,1\"
-      />\n </sbspreset>\n"
+      identifier=\"$outputsize\" uid=\"107272219\" type=\"8\" value=\"9,9\" />\n </sbspreset>\n"
     shaderName: HDRenderPipeline/LitTessellation
     materialProperties:
       shader: {fileID: 4800000, guid: 756bac9090102564582875f4c7e30202, type: 3}

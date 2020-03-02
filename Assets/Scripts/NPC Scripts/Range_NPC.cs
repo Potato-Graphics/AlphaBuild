@@ -19,7 +19,7 @@ public class Range_NPC : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        print(transform.position.x - player.transform.position.x);
+        //print(transform.position.x - player.transform.position.x);
         if(transform.position.x - player.transform.position.x <= 10 && GetState() != State.Attacking)
         {
             SetState(State.Attacking);
@@ -77,6 +77,9 @@ public class Range_NPC : MonoBehaviour
             //if the enemys state is attacking
             case State.Attacking:
                 targetLocation = player.transform.position;
+                targetLocation.x = player.transform.position.x + Random.Range(2, 10);
+                print(targetLocation);
+                print(player.transform.position);
                 break;
             case State.Dead:
                 Destroy(this.gameObject); // The enemy is destroyed.
