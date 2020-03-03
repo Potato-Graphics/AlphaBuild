@@ -94,6 +94,8 @@ public class Weapon : MonoBehaviour
             //BulletScript.xDirection = 0.0f;
             Vector2 velocityChange = new Vector2(0.0f, 0.3f);
             bullet.velocity = velocityChange * (Time.deltaTime * speed);
+            float angle = 90;
+            firePoint.rotation = Quaternion.AngleAxis(55, Vector3.up);
             print("up");
             anim.SetTrigger("FireUp");
         }

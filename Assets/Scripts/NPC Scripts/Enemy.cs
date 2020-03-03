@@ -95,7 +95,6 @@ public class Enemy : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D col)
     {
-        print(col.gameObject.tag);
         if(col.gameObject.tag == "Obstacles")
         {
             if(GetEnemyType() == EnemyType.RangeNPC)
@@ -104,7 +103,6 @@ public class Enemy : MonoBehaviour
             }
             if(GetEnemyType() == EnemyType.BounceNPC)
             {
-                print("test here");
                 rb.AddForce(new Vector2(1f, 300));
             }
         }
@@ -180,10 +178,10 @@ public class Enemy : MonoBehaviour
             case EnemyType.ChargeNPC:
                 if (groundInfo.collider == false)
                 {
-                    Debug.LogError("false");
+                    //Debug.LogError("false");
                     if (movingRight)
                     {
-                        Debug.LogError("test three");
+                       // Debug.LogError("test three");
                         transform.eulerAngles = new Vector3(0, -180, 0);
                         movingRight = false;
                     }
@@ -197,12 +195,11 @@ public class Enemy : MonoBehaviour
                 {
                     if (hit.collider != null)
                     {
-                        print(hit.collider.tag);
                         if (hit.collider.gameObject.tag != "Player")
                         {
                             if (movingRight)
                             {
-                                Debug.LogError("test two");
+                               // Debug.LogError("test two");
                                 transform.eulerAngles = new Vector3(0, -180, 0);
                                 movingRight = false;
                             }
@@ -217,7 +214,7 @@ public class Enemy : MonoBehaviour
                 if (enemyPosition.x > startPosition.x + idleWalkDistance && movingRight)
                 {
                     movingRight = false;
-                    Debug.LogError("test one");
+//                    Debug.LogError("test one");
                     transform.eulerAngles = new Vector3(0, -180, 0);
                 }
                 if (enemyPosition.x <= startPosition.x - idleWalkDistance && !movingRight)
