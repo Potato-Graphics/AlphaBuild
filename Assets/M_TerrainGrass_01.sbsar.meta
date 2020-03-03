@@ -23,7 +23,8 @@ ScriptedImporter:
     shaderName: HDRenderPipeline/LitTessellation
     materialProperties:
       shader: {fileID: 4800000, guid: 756bac9090102564582875f4c7e30202, type: 3}
-      shaderKeywords: _MASKMAP _NORMALMAP
+      shaderKeywords: _DISPLACEMENT_LOCK_TILING_SCALE _MASKMAP _NORMALMAP _NORMALMAP_TANGENT_SPACE
+        _TESSELLATION_DISPLACEMENT _VERTEX_DISPLACEMENT_LOCK_OBJECT_SCALE
       lightmapFlags: 4
       texEnvs:
       - name: _AnisotropyMap
@@ -160,7 +161,7 @@ ScriptedImporter:
       - name: _DistortionBlurBlendMode
         float: 0
       - name: _DistortionBlurDstBlend
-        float: 0
+        float: 1
       - name: _DistortionBlurRemapMax
         float: 1
       - name: _DistortionBlurRemapMin
@@ -168,11 +169,11 @@ ScriptedImporter:
       - name: _DistortionBlurScale
         float: 1
       - name: _DistortionBlurSrcBlend
-        float: 0
+        float: 1
       - name: _DistortionDepthTest
         float: 1
       - name: _DistortionDstBlend
-        float: 0
+        float: 1
       - name: _DistortionEnable
         float: 0
       - name: _DistortionOnly
@@ -180,7 +181,7 @@ ScriptedImporter:
       - name: _DistortionScale
         float: 1
       - name: _DistortionSrcBlend
-        float: 0
+        float: 1
       - name: _DistortionVectorBias
         float: -1
       - name: _DistortionVectorScale
@@ -196,7 +197,7 @@ ScriptedImporter:
       - name: _EmissiveColorMode
         float: 1
       - name: _EnableBlendModePreserveSpecularLighting
-        float: 1
+        float: 0
       - name: _EnableFogOnTransparent
         float: 1
       - name: _EnableGeometricSpecularAA
@@ -338,11 +339,11 @@ ScriptedImporter:
       - name: _UVEmissive
         float: 0
       - name: _ZTestDepthEqualForOpaque
-        float: 4
+        float: 3
       - name: _ZTestGBuffer
         float: 4
       - name: _ZTestModeDistortion
-        float: 8
+        float: 4
       - name: _ZWrite
         float: 1
       colors:
