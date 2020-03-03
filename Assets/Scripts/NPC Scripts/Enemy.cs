@@ -25,6 +25,7 @@ public class Enemy : MonoBehaviour
     Vector3 targetLocation;
     Vector3 forceVector;
     Rigidbody2D rb;
+    [SerializeField] bool comingFromLeft;
     private float timePassed;
     int bounceRange;
     private Vector3 localScale;
@@ -94,8 +95,13 @@ public class Enemy : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D col)
     {
+        print(col.gameObject.tag);
         if(col.gameObject.tag == "Obstacles")
         {
+            if(GetEnemyType() == EnemyType.RangeNPC)
+            {
+                Destroy(gameObject);
+            }
             if(GetEnemyType() == EnemyType.BounceNPC)
             {
                 print("test here");
@@ -122,8 +128,11 @@ public class Enemy : MonoBehaviour
         Debug.DrawLine(firePoint.position, endPos, Color.blue);
         groundInfo = Physics2D.Raycast(firePoint2.position, Vector2.down, 2f);
         infrontInfo = Physics2D.Raycast(firePoint.position, Vector2.right, 0.3f);
+        Debug.DrawLine(firePoint2.position, endPos3, Color.cyan);
 
         endPos2 = firePoint2.position + Vector3.right * 0.01f;
+        endPos3 = firePoint2.position + Vector3.down;
+        
 
 
         switch(GetEnemyType())
@@ -144,7 +153,7 @@ public class Enemy : MonoBehaviour
                     }
                     else
                     {
-                        transform.position = Vector2.MoveTowards(transform.position, targetLocation, 20 * Time.deltaTime);
+                        transform.position = Vector2.MoveTowards(transform.position, targetLocation, chargeSpeed * Time.deltaTime);
                     }
                 }
                 break;
@@ -152,7 +161,7 @@ public class Enemy : MonoBehaviour
 
             case EnemyType.BounceNPC:
                 transform.Translate(Vector3.right * walkSpeed * Time.deltaTime);
-                groundInfo = Physics2D.Raycast(firePoint2.position, Vector2.down, 4f);
+                groundInfo = Physics2D.Raycast(firePoint2.position, Vector2.down, 5f);
                 if (groundInfo.collider == false)
                 {
                     if (movingRight)
@@ -171,8 +180,10 @@ public class Enemy : MonoBehaviour
             case EnemyType.ChargeNPC:
                 if (groundInfo.collider == false)
                 {
+                    Debug.LogError("false");
                     if (movingRight)
                     {
+                        Debug.LogError("test three");
                         transform.eulerAngles = new Vector3(0, -180, 0);
                         movingRight = false;
                     }
@@ -186,10 +197,12 @@ public class Enemy : MonoBehaviour
                 {
                     if (hit.collider != null)
                     {
+                        print(hit.collider.tag);
                         if (hit.collider.gameObject.tag != "Player")
                         {
                             if (movingRight)
                             {
+                                Debug.LogError("test two");
                                 transform.eulerAngles = new Vector3(0, -180, 0);
                                 movingRight = false;
                             }
@@ -204,6 +217,7 @@ public class Enemy : MonoBehaviour
                 if (enemyPosition.x > startPosition.x + idleWalkDistance && movingRight)
                 {
                     movingRight = false;
+                    Debug.LogError("test one");
                     transform.eulerAngles = new Vector3(0, -180, 0);
                 }
                 if (enemyPosition.x <= startPosition.x - idleWalkDistance && !movingRight)
