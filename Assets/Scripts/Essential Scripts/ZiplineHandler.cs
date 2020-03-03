@@ -11,6 +11,9 @@ public class ZiplineHandler : MonoBehaviour
 
     private float timeStartedLerping;
     public float speed = 1.0f;
+    Transform ziplinePoint;
+    ZipLinePoint ziplPoint;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -18,6 +21,8 @@ public class ZiplineHandler : MonoBehaviour
         startPosition = transform.position;
         timeStartedLerping = Time.time;
         journeyLength = Vector3.Distance(startPosition, endPoint.transform.position);
+        
+        ziplPoint = GameObject.FindObjectOfType<ZipLinePoint>();
     }
 
 
@@ -32,9 +37,17 @@ public class ZiplineHandler : MonoBehaviour
             transform.position = Vector3.Lerp(startPosition, endPoint.transform.position, fractionOfJourney);
             if(fractionOfJourney >= 1)
             {
-                player.ridingZipline = false;
+                IncrementZiplineStage();
+                fractionOfJourney = 0;
+                distCovered = 0;
             }
         }
+    }
+
+    public void IncrementZiplineStage()
+    {
+       // zipLineStage = ziplPoint.ziplinePointID;
+        startPosition = ziplinePoint.position;
     }
 
     void OnCollisionEnter2D(Collision2D col)
@@ -43,7 +56,7 @@ public class ZiplineHandler : MonoBehaviour
         if(col.gameObject.tag == "Player")
         {
             if (player.ridingZipline) return;
-            player.ridingZipline = true;
+           // player.ridingZipline = true;
             print("ziplined" + player.ridingZipline);
         }
     }
