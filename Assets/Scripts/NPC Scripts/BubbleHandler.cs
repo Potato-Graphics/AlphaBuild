@@ -10,6 +10,8 @@ public class BubbleHandler : MonoBehaviour
     float idleSpeed = 100;
     float chaseSpeed = 5;
     Enemy enemy;
+    public int pointsGiven;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -64,7 +66,7 @@ public class BubbleHandler : MonoBehaviour
         }
         if(collision.gameObject.tag == "Bullet")
         {
-            ScoreManager.scoreValue += 50;
+            ScoreManager.scoreValue += pointsGiven;
             Destroy(gameObject);
         }
     }

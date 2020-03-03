@@ -76,7 +76,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8048525329131307495}
-  m_BodyType: 0
+  m_BodyType: 2
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
@@ -101,8 +101,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 13a8a2228415a654ca587310ac606835, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MAX_HEALTH: 2
+  MAX_HEALTH: 15
   killable: 1
+  pointsGiven: 1250
 --- !u!114 &5371719061789728263
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -123,6 +124,7 @@ MonoBehaviour:
   idleWalkDistance: 5
   enemyType: 0
   collidingWithPlayer: 0
+  comingFromLeft: 0
   endPosition: {x: 0, y: 0}
   timeStartedLerping: 0
   lerpTime: 0

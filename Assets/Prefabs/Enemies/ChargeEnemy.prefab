@@ -129,6 +129,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MAX_HEALTH: 2
   killable: 1
+  pointsGiven: 300
 --- !u!114 &3760899537648308626
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -149,6 +150,7 @@ MonoBehaviour:
   idleWalkDistance: 8
   enemyType: 1
   collidingWithPlayer: 0
+  comingFromLeft: 0
   endPosition: {x: 0, y: 0}
   timeStartedLerping: 0
   lerpTime: 0

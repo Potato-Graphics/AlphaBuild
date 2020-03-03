@@ -8,6 +8,8 @@ public class NPC_Manager : MonoBehaviour
     [SerializeField] private float MAX_HEALTH = 0;
     [SerializeField] private bool killable = false;
 
+    public int pointsGiven;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -42,7 +44,7 @@ public class NPC_Manager : MonoBehaviour
                 Player.bulletDamage = 1;
                 if (GetHealth() <= 0)
                 {
-                    ScoreManager.scoreValue += 200;
+                    ScoreManager.scoreValue += pointsGiven;
                     Destroy(gameObject);
                 }
             }
