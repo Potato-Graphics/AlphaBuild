@@ -6,7 +6,7 @@ public class Weapon : MonoBehaviour
 {
     private Player player;
     private Animator anim;
-
+    bool m_BackwardsDiagUp;
     private bool delay = false;
 
     public float fireRate = 0;
@@ -27,7 +27,7 @@ public class Weapon : MonoBehaviour
     {
         player = GetComponent<Player>();
         anim = player.GetComponent<Animator>();
-
+        m_BackwardsDiagUp = false;
     }
     void Update()
     {
@@ -120,7 +120,7 @@ public class Weapon : MonoBehaviour
             //BulletScript.xDirection = 0.1f;
             // BulletScript.yDirection = 0.1f;
             Vector2 velocityChange = new Vector2(0.1f, 0.1f);
-            print("rignht up");
+            print("right up");
             bullet.velocity = velocityChange * (Time.deltaTime * speed);
 
         }
