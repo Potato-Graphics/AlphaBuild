@@ -5,59 +5,51 @@ using UnityEngine;
 public class ZiplineHandler : MonoBehaviour
 {
     [SerializeField]Player player;
-    [SerializeField]GameObject endPoint;
-    Vector3 startPosition;
-    private float journeyLength;
-
-    private float timeStartedLerping;
     public float speed = 1.0f;
-    Transform ziplinePoint;
-    ZipLinePoint ziplPoint;
+    public Transform targetPoint;
+    public List<Transform> ziplinePoints = new List<Transform>();
+    private int targetZiplinePointIndex = 0;
+    private int lastZiplinePointIndex;
+    public float minDistance = 0.1f;
 
     // Start is called before the first frame update
     void Start()
     {
         player = GameObject.FindObjectOfType<Player>();
-        startPosition = transform.position;
-        timeStartedLerping = Time.time;
-        journeyLength = Vector3.Distance(startPosition, endPoint.transform.position);
-        
-        ziplPoint = GameObject.FindObjectOfType<ZipLinePoint>();
+        targetPoint = ziplinePoints[targetZiplinePointIndex];
+        lastZiplinePointIndex = ziplinePoints.Count - 1;
     }
-
-
 
     // Update is called once per frame
     void Update()
     {
-        if(player.ridingZipline)
+        if (player.ridingZipline)
         {
-            float distCovered = (Time.time - timeStartedLerping) * speed;
-            float fractionOfJourney = distCovered / journeyLength;
-            transform.position = Vector3.Lerp(startPosition, endPoint.transform.position, fractionOfJourney);
-            if(fractionOfJourney >= 1)
-            {
-                IncrementZiplineStage();
-                fractionOfJourney = 0;
-                distCovered = 0;
-            }
+            float distance = Vector3.Distance(transform.position, targetPoint.position);
+            CheckDistance(distance);
+            transform.position = Vector3.MoveTowards(transform.position, targetPoint.position, speed * Time.deltaTime);
+           
         }
     }
 
     public void IncrementZiplineStage()
     {
-       // zipLineStage = ziplPoint.ziplinePointID;
-        startPosition = ziplinePoint.position;
+        if (targetZiplinePointIndex > lastZiplinePointIndex)
+        {
+            player.ridingZipline = false;
+            return;
+        }
+
+        targetPoint = ziplinePoints[targetZiplinePointIndex];
     }
 
-    void OnCollisionEnter2D(Collision2D col)
+    void CheckDistance(float currentDistance)
     {
-        Debug.LogError(col.gameObject.tag);
-        if(col.gameObject.tag == "Player")
+        if(currentDistance <= minDistance)
         {
-            if (player.ridingZipline) return;
-           // player.ridingZipline = true;
-            print("ziplined" + player.ridingZipline);
+            targetZiplinePointIndex++;
+            IncrementZiplineStage();
+
         }
     }
 }

@@ -5,10 +5,12 @@ using UnityEngine;
 public class ZipLineTrigger : MonoBehaviour
 {
     Player player;
+    ZiplineHandler ziplineHandler;
     // Start is called before the first frame update
     void Start()
     {
         player = GameObject.FindObjectOfType<Player>();
+        ziplineHandler = GameObject.FindObjectOfType<ZiplineHandler>();
     }
 
     // Update is called once per frame
@@ -21,7 +23,7 @@ public class ZipLineTrigger : MonoBehaviour
     {
         print("zipline trigger tag is " + col.gameObject.tag);
         Debug.LogError("HHDFOIOOFDS");
-        if(col.gameObject.tag == "Player")
+        if(col.gameObject.tag == "Player" && !player.ridingZipline)
         {
             player.ridingZipline = true;
         }
