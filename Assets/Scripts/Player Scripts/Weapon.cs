@@ -45,6 +45,9 @@ public class Weapon : MonoBehaviour
 
     void Shooting()
     {
+        float joyangle = Mathf.Atan2(Input.GetAxis("JoyStickX"), Input.GetAxis("JoyStickY")) * Mathf.Rad2Deg;
+        Debug.LogError("The mouse x axis = " + joyangle + "joystickx : " + Input.GetAxis("JoyStickX") + "joystick y " + Input.GetAxis("JoyStickY") + "mouse y" + Input.GetAxis("Mouse Y") );
+        Debug.LogError("joyangle: " + joyangle);
         Vector3 dir = Input.mousePosition - Camera.main.WorldToScreenPoint(transform.position); // Mouse position directoin.
         Vector3 direction = Input.mousePosition;
         Vector3 firePointPosition = new Vector3(firePoint.position.x, firePoint.position.y); // Stores the firepoint as a Vector2.
@@ -82,11 +85,10 @@ public class Weapon : MonoBehaviour
         if (fAngle < 0.0f) fAngle += 360.0f;
         //end of angle finding
 
-        Debug.LogError(fAngle);
 
 
 
-        if (fAngle >= 77 && fAngle <= 110)
+        if (fAngle >= 77 && fAngle <= 110 || joyangle > 165 && joyangle < 185)
         {
             //this is up
             Rigidbody2D bullet = Instantiate(bulletUp, firePoint.position, firePoint.rotation);
@@ -100,7 +102,7 @@ public class Weapon : MonoBehaviour
             anim.SetTrigger("FireUp");
         }
 
-        else if (fAngle >= 246 && fAngle <= 288)
+        else if (fAngle >= 246 && fAngle <= 288 || joyangle >= -66 && joyangle <= 108)
         {
             //this is down
             anim.SetTrigger("FireDown");

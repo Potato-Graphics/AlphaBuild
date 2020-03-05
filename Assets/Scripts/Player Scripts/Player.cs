@@ -26,9 +26,9 @@ public class Player : MonoBehaviour
     static int ID = 0;
 
     float accelerationTimeGrounded = .1f;
-    float accelerationTimeAirborne = .2f;
+    float accelerationTimeAirborne = .3f;
     float moveSpeed = 12;
-    float gravity = -20;
+    float gravity = -30;
     float jumpVelocity;
     float velocityXSmoothing;
 
@@ -306,7 +306,7 @@ public class Player : MonoBehaviour
         }
         else { direction = 0; }
 
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) || (Input.GetButton("Jump")))
         {
             if (ridingZipline) return;
             if (wallSliding)
