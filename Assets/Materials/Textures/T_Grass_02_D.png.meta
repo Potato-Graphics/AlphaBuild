@@ -1,5 +1,9 @@
 fileFormatVersion: 2
-guid: cc1be5647c4c72142a899df54ea75c56
+<<<<<<< HEAD:Assets/Materials/Textures/T_Grass_01_D.png.meta
+guid: e0ef223931dc25a44a09811317c47b90
+=======
+guid: 3319bf8f6ffe1b84aa61c010b369c53e
+>>>>>>> remotes/origin/Artists:Assets/Materials/T_Rope_01_D.png.meta
 TextureImporter:
   fileIDToRecycleName: {}
   externalObjects: {}
