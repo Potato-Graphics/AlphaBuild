@@ -27,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 2308910702391753408}
   m_LocalRotation: {x: -0.58592117, y: 0.395849, z: 0.395849, w: 0.58592117}
   m_LocalPosition: {x: -0.2385, y: 0, z: 0.75874}
-  m_LocalScale: {x: 0.34744924, y: 0.34744924, z: 0.34744924}
+  m_LocalScale: {x: 0.46, y: -0.59, z: 0.62}
   m_Children: []
   m_Father: {fileID: 263637681619265686}
   m_RootOrder: 0
@@ -4781,13 +4781,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3439100953908343735}
-  m_LocalRotation: {x: -0.4948094, y: 0.33648735, z: 0.4474586, w: 0.66462076}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.31842, y: 0, z: 0.75177}
   m_LocalScale: {x: 0.34744924, y: 0.34744924, z: 0.34744924}
   m_Children: []
   m_Father: {fileID: 263637681619265686}
   m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: -73.506004, y: 0.9, z: 67.229004}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!198 &805812622038760662
 ParticleSystem:
   m_ObjectHideFlags: 0
@@ -9651,8 +9651,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5164906538671233636}
   m_LocalRotation: {x: -0.58577263, y: 0.39606875, z: 0.39606875, w: 0.58577263}
-  m_LocalPosition: {x: -0.257, y: -0.233, z: 0.766}
-  m_LocalScale: {x: 0.34744924, y: 0.34744924, z: 0.34744924}
+  m_LocalPosition: {x: -0.227, y: -0.27, z: 0.756}
+  m_LocalScale: {x: -0.3474492, y: -0.3474492, z: 0.3474492}
   m_Children: []
   m_Father: {fileID: 263637681619265686}
   m_RootOrder: 1
@@ -14405,13 +14405,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7654866632843955960}
-  m_LocalRotation: {x: -0.4948094, y: 0.33648735, z: 0.4474586, w: 0.66462076}
-  m_LocalPosition: {x: -0.2385, y: 0.026, z: 0.733}
-  m_LocalScale: {x: -2.427696, y: -1.073112, z: -1.93512}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.241, y: 0.076, z: 0.756}
+  m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 263637681619265686}
   m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: -73.506004, y: 0.9, z: 67.229004}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!96 &8228229164422470180
 TrailRenderer:
   serializedVersion: 2
@@ -14450,7 +14450,7 @@ TrailRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: -1
-  m_Time: 0.3
+  m_Time: 1
   m_Parameters:
     serializedVersion: 3
     widthMultiplier: 2.5
@@ -14513,6 +14513,6 @@ TrailRenderer:
     textureMode: 0
     shadowBias: 0.5
     generateLightingData: 0
-  m_MinVertexDistance: 0.1
+  m_MinVertexDistance: 0.5
   m_Autodestruct: 0
   m_Emitting: 1
