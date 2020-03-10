@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-[RequireComponent (typeof (Controller2D))]
+[RequireComponent(typeof(Controller2D))]
 
 public class Player : MonoBehaviour
 {
@@ -21,13 +21,14 @@ public class Player : MonoBehaviour
     public Vector2 wallJumpClimb;
     public Vector2 wallJumpOff;
     public Vector2 wallLeap;
+    public Transform zipline;
 
     static int ID = 0;
 
     float accelerationTimeGrounded = .1f;
-    float accelerationTimeAirborne = .2f;
+    float accelerationTimeAirborne = .3f;
     float moveSpeed = 12;
-    float gravity = -20;
+    float gravity = -30;
     float jumpVelocity;
     float velocityXSmoothing;
 
@@ -48,9 +49,11 @@ public class Player : MonoBehaviour
     public static Vector3 spawnLocation = new Vector3(-4f, 0.47f, 0f);
     [SerializeField] GameObject player;
     public static Vector3 checkpointPos;
-    [SerializeField] float dashDistance = 7f;
+    [SerializeField] float dashDistance = 4f;
     public static int checkpointsReceived;
     public static int waterRemaining;
+    float dashSpeed = 150.0f;
+    [SerializeField]GameObject endPoint;
 
     Vector3 lastMouseCoord = Vector3.zero;
     bool movedUp = false;
@@ -58,8 +61,13 @@ public class Player : MonoBehaviour
     static int totalPumps = 0;
     public static float bulletDamage = 0f;
     bool pumpStarted = false;
+    public float airTimeJumpDelay;
+    public bool canJump = false;
 
     public int sceneToRespawnOn;
+
+    public bool ridingZipline = false;
+    Vector3 playerPosition;
 
     Vector3 velocity;
 
@@ -69,13 +77,21 @@ public class Player : MonoBehaviour
 
     public int myID;
 
+    Vector2 dashPosition;
+
+
+    private Animator anim;
+
     // Start is called before the first frame update
     void Awake()
     {
-        
+
     }
+
     void Start()
     {
+        anim = player.GetComponent<Animator>();
+
         waterRemaining = 50;
         DontDestroyOnLoad(gameObject);
         print("test1");
@@ -83,7 +99,7 @@ public class Player : MonoBehaviour
         print(checkpointsReceived);
         print("checkpoint pos " + checkpointPos);
 
-        transform.position = spawnLocation;
+        //transform.position = spawnLocation;
         sceneToRespawnOn = SceneManager.GetActiveScene().buildIndex;
         myID = ID++;
         lifeOne.SetActive(true);
@@ -99,12 +115,27 @@ public class Player : MonoBehaviour
     //Stops the player from moving building up downward force when standing still.
     void Update()
     {
+      
+        playerPosition = transform.position;
+        //JAM CODE
+        /////////////////////////////////
+        if (controller.collisions.below)
+        {
+            anim.SetBool("IsGrounded", true);
+        }
+        else
+        {
+            anim.SetBool("IsGrounded", false);
+        }
+        ///////////////////////////////
+
         //Gets the inputs for moving left and right.
         Vector2 input = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
         int wallDirX = (controller.collisions.left) ? -1 : 1;
 
         float targetVelocityX = input.x * moveSpeed;
         velocity.x = Mathf.SmoothDamp(velocity.x, targetVelocityX, ref velocityXSmoothing, (controller.collisions.below) ? accelerationTimeGrounded : accelerationTimeAirborne);
+        anim.SetFloat("Speed", Mathf.Abs(velocity.x / moveSpeed));
 
         if (Input.GetAxisRaw("Fire2") != 0)
         {
@@ -169,33 +200,69 @@ public class Player : MonoBehaviour
 
             }
         }
+
+        if(ridingZipline)
+        {
+            playerPosition = zipline.position;
+            playerPosition.y += 2.2f;
+            transform.position = playerPosition;
+            anim.SetBool("ridingZipline", true);
+        }
+        else
+        {
+            anim.SetBool("ridingZipline", false);
+        }
+
         //Player Dash
-         if (Input.GetKeyDown(KeyCode.LeftShift))
-         {
+        if(controller.dashing)
+        {
+            transform.position = Vector3.MoveTowards(transform.position, dashPosition, dashSpeed * Time.deltaTime);
+        }
+        if(Input.GetKeyDown(KeyCode.G))
+        {
+            SetHealth(10000);
+        }
+        if (Input.GetKeyDown(KeyCode.LeftShift))
+        {
+            if (ridingZipline) return;
             if (!controller.canDash)
                 return;
-
             if (controller.facingRight)
             {
-                Vector2 dashPosition;
+                
                 dashPosition = transform.position;
                 dashPosition.x += dashDistance;
-                transform.position = dashPosition;
+                controller.dashing = true;
                 controller.canDash = false;
                 controller.StartCoroutine(controller.DashDelay());
+                controller.StartCoroutine(controller.Dashing());
             }
             else
             {
-                Vector2 dashPosition;
                 dashPosition = transform.position;
-                dashPosition.x -= dashDistance;
-                transform.position = dashPosition;
+                dashPosition.x += dashDistance;
+                controller.dashing = true;
                 controller.canDash = false;
                 controller.StartCoroutine(controller.DashDelay());
+                controller.StartCoroutine(controller.Dashing());
             }
         }
+        if (!controller.collisions.below)
+        {
+            airTimeJumpDelay += Time.deltaTime;
+            if(airTimeJumpDelay > 0.2)
+            {
+                canJump = false;
+            }
+        }
+        else
+        {
+            airTimeJumpDelay = 0;
+            canJump = true;
+        }
+        
 
-        if (GetHealth() <= 0)
+            if (GetHealth() <= 0)
         {
             lifeOne.SetActive(false);
             lifeTwo.SetActive(false);
@@ -222,7 +289,7 @@ public class Player : MonoBehaviour
         }
         if (controller.collisions.above || controller.collisions.below)
         {
-                velocity.y = 0;
+            velocity.y = 0;
         }
 
         //Gets the inputs for moving left and right.
@@ -232,35 +299,41 @@ public class Player : MonoBehaviour
             direction = -1;
             movingRight = false;
         }
-        else if(input.x > 0)
+        else if (input.x > 0)
         {
             direction = 1;
             movingRight = true;
         }
         else { direction = 0; }
 
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) || (Input.GetButton("Jump")))
         {
+            if (ridingZipline) return;
             if (wallSliding)
             {
                 if (wallDirX == input.x)
                 {
+                    anim.SetTrigger("Jump");
                     velocity.x = -wallDirX * wallJumpClimb.x;
                     velocity.y = wallJumpClimb.y;
                 }
                 else if (input.x == 0)
                 {
+                    anim.SetTrigger("Jump");
+
                     velocity.x = -wallDirX * wallJumpOff.x;
                     velocity.y = wallJumpOff.y;
                 }
                 else
                 {
+                    anim.SetTrigger("Jump");
                     velocity.x = -wallDirX * wallLeap.x;
                     velocity.y = wallLeap.y;
                 }
             }
-            if (controller.collisions.below)
+            if (canJump)
             {
+                anim.SetTrigger("Jump");
                 velocity.y = jumpVelocity;
             }
         }
@@ -274,7 +347,7 @@ public class Player : MonoBehaviour
             rotation = true;
         }
 
-        if(Input.GetKeyUp(KeyCode.W))
+        if (Input.GetKeyUp(KeyCode.W))
         {
             rotation = false;
         }
@@ -314,12 +387,12 @@ public class Player : MonoBehaviour
 
     public void DealDamage(int amount)
     {
-            if (isAttackable == true)
-            {
-                UpdateHealth(-amount);
-                isAttackable = false;
-                StartCoroutine(DamagedDelay());
-            }
+        if (isAttackable == true)
+        {
+            UpdateHealth(-amount);
+            isAttackable = false;
+            StartCoroutine(DamagedDelay());
+        }
     }
 
     void Reload()

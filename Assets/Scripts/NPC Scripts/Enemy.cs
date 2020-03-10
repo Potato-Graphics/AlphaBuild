@@ -25,6 +25,7 @@ public class Enemy : MonoBehaviour
     Vector3 targetLocation;
     Vector3 forceVector;
     Rigidbody2D rb;
+    [SerializeField] bool comingFromLeft;
     private float timePassed;
     int bounceRange;
     private Vector3 localScale;
@@ -51,7 +52,10 @@ public class Enemy : MonoBehaviour
     [SerializeField] Transform firePoint;
     [SerializeField] Transform firePoint2;
     [SerializeField] GameObject bubblePrefab;
+    [SerializeField] GameObject explosionPrefab;
     public int bubblesSpawned;
+    public int explosionProjectilesSpawned;
+    public bool explodingRight = false;
 
 
     public Vector3 Lerp(Vector3 start, Vector3 end, float timeStartedLerping, float lerpTime = 1)
@@ -91,11 +95,16 @@ public class Enemy : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D col)
     {
-        print(col.gameObject.name);
         if(col.gameObject.tag == "Obstacles")
         {
-            print("test here");
-            rb.AddForce(new Vector2(1, 300));
+            if(GetEnemyType() == EnemyType.RangeNPC)
+            {
+                Destroy(gameObject);
+            }
+            if(GetEnemyType() == EnemyType.BounceNPC)
+            {
+                rb.AddForce(new Vector2(1f, 300));
+            }
         }
     }
     // Update is called once per frame
@@ -117,57 +126,62 @@ public class Enemy : MonoBehaviour
         Debug.DrawLine(firePoint.position, endPos, Color.blue);
         groundInfo = Physics2D.Raycast(firePoint2.position, Vector2.down, 2f);
         infrontInfo = Physics2D.Raycast(firePoint.position, Vector2.right, 0.3f);
+        Debug.DrawLine(firePoint2.position, endPos3, Color.cyan);
 
         endPos2 = firePoint2.position + Vector3.right * 0.01f;
-        groundInfo = Physics2D.Raycast(firePoint2.position, Vector2.down, 4f);
+        endPos3 = firePoint2.position + Vector3.down;
+        
 
 
-        if (GetEnemyType() == EnemyType.ObstructorNPC)
+        switch(GetEnemyType())
         {
-            if(distance < 35)
-            {
-                if (GetState() == State.Idle)
+            case EnemyType.RangeNPC:
+                //print(transform.position.x - player.transform.position.x);
+                if (transform.position.x - player.transform.position.x <= 10 && GetState() != State.Attacking)
                 {
                     SetState(State.Attacking);
                 }
-            }
-        }
-        
-
-        if(GetEnemyType() == EnemyType.ObstructorNPC)
-        {
-            if(GetState() == State.Attacking)
-            {
-                ObstructorAttack();
-            }
-        }
-
-        if (currentHealth <= 0)
-            //if the enemy has no remaining health the enemy is set to dead.
-            SetState(State.Dead);
-        if (GetEnemyType() == EnemyType.BounceNPC)
-        {
-            transform.Translate(Vector3.right * walkSpeed * Time.deltaTime);
-            if (groundInfo.collider == false)
-            {
-                if(movingRight)
+                if (GetState() == State.Attacking)
                 {
-                    transform.eulerAngles = new Vector3(0, -180, 0);
-                    movingRight = false;
+                    targetLocation.y = -0.3f;
+                    if (transform.position.y == targetLocation.y)
+                    {
+                        RangeExplosion();
+                        SetState(State.Dead);
+                    }
+                    else
+                    {
+                        transform.position = Vector2.MoveTowards(transform.position, targetLocation, chargeSpeed * Time.deltaTime);
+                    }
                 }
-                else
-                {
-                    transform.eulerAngles = new Vector3(0, 0, 0);
-                    movingRight = true;
-                }
-            }
-        }
-        if (GetEnemyType() == EnemyType.ChargeNPC)
-        {
+                break;
+
+
+            case EnemyType.BounceNPC:
+                transform.Translate(Vector3.right * walkSpeed * Time.deltaTime);
+                groundInfo = Physics2D.Raycast(firePoint2.position, Vector2.down, 5f);
                 if (groundInfo.collider == false)
                 {
                     if (movingRight)
                     {
+                        transform.eulerAngles = new Vector3(0, -180, 0);
+                        movingRight = false;
+                    }
+                    else
+                    {
+                        transform.eulerAngles = new Vector3(0, 0, 0);
+                        movingRight = true;
+                    }
+                }
+                break;
+
+            case EnemyType.ChargeNPC:
+                if (groundInfo.collider == false)
+                {
+                    //Debug.LogError("false");
+                    if (movingRight)
+                    {
+                       // Debug.LogError("test three");
                         transform.eulerAngles = new Vector3(0, -180, 0);
                         movingRight = false;
                     }
@@ -185,6 +199,7 @@ public class Enemy : MonoBehaviour
                         {
                             if (movingRight)
                             {
+                               // Debug.LogError("test two");
                                 transform.eulerAngles = new Vector3(0, -180, 0);
                                 movingRight = false;
                             }
@@ -199,6 +214,7 @@ public class Enemy : MonoBehaviour
                 if (enemyPosition.x > startPosition.x + idleWalkDistance && movingRight)
                 {
                     movingRight = false;
+//                    Debug.LogError("test one");
                     transform.eulerAngles = new Vector3(0, -180, 0);
                 }
                 if (enemyPosition.x <= startPosition.x - idleWalkDistance && !movingRight)
@@ -217,20 +233,40 @@ public class Enemy : MonoBehaviour
                 }
 
 
-            if (GetState() == State.Charging)
-            {
-                if (timePassed > 5)
-                    SetState(State.Idle);
-                targetLocation = player.transform.position;
-                targetLocation.y = transform.position.y;
-                transform.position = Vector3.MoveTowards(transform.position, targetLocation, (chargeSpeed * Time.deltaTime));
-            }
+                if (GetState() == State.Charging)
+                {
+                    if (timePassed > 5)
+                        SetState(State.Idle);
+                    targetLocation = player.transform.position;
+                    targetLocation.y = transform.position.y;
+                    transform.position = Vector3.MoveTowards(transform.position, targetLocation, (chargeSpeed * Time.deltaTime));
+                }
 
-            if (GetState() == State.Idle)
-            {
-                transform.Translate(Vector3.right * walkSpeed * Time.deltaTime);
-            }
+                if (GetState() == State.Idle)
+                {
+                    transform.Translate(Vector3.right * walkSpeed * Time.deltaTime);
+                }
+                break;
+
+
+            case EnemyType.ObstructorNPC:
+                if (distance < 35)
+                {
+                    if (GetState() == State.Idle)
+                    {
+                        SetState(State.Attacking);
+                    }
+                }
+                if (GetState() == State.Attacking)
+                {
+                    ObstructorAttack();
+                }
+                break;
+
         }
+        if (currentHealth <= 0)
+            //if the enemy has no remaining health the enemy is set to dead.
+            SetState(State.Dead);
     }
 
 
@@ -238,6 +274,12 @@ public class Enemy : MonoBehaviour
     public int GetHealth()
     {
         return currentHealth;
+    }
+
+    public void RangeExplosion()
+    {
+        
+            
     }
 
     /**
@@ -266,8 +308,11 @@ public class Enemy : MonoBehaviour
     private void ObstructorAttack()
     {
         int bubblesToBeSpawned = Random.Range(6, 13);
+        float randomValue = Random.Range(0.05f, 0.2f);
+        Vector3 randomSize = new Vector3(randomValue, randomValue);
         if(bubblesSpawned < bubblesToBeSpawned)
         {
+            bubblePrefab.transform.localScale = randomSize;
             Instantiate(bubblePrefab, transform.position, Quaternion.identity);
             bubblesSpawned++;
         } else
@@ -369,10 +414,21 @@ public class Enemy : MonoBehaviour
         {
             //if the enemys state is attacking
             case State.Attacking:
-                if (GetEnemyType() == EnemyType.BounceNPC)
-                    Bounce();
-                if (GetEnemyType() == EnemyType.ChargeNPC)
-                    Charge(); // enemy does the charge attack if it's the charge npc
+                switch(GetEnemyType())
+                {
+                    case EnemyType.RangeNPC:
+                        targetLocation = player.transform.position;
+                        targetLocation.x = player.transform.position.x + Random.Range(2, 10);
+                        print(targetLocation);
+                        print(player.transform.position);
+                        break;
+                    case EnemyType.BounceNPC:
+                        Bounce();
+                        break;
+                    case EnemyType.ChargeNPC:
+                        Charge();
+                        break;
+                }
                 break;
             //if the enemy is on cooldown
             case State.CoolDown:
@@ -398,6 +454,7 @@ public class Enemy : MonoBehaviour
         ObstructorNPC,
         ChargeNPC,
         BounceNPC,
+        RangeNPC
     }
 
     public EnemyType GetEnemyType()
