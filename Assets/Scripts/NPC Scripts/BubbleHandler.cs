@@ -10,6 +10,8 @@ public class BubbleHandler : MonoBehaviour
     float idleSpeed = 100;
     float chaseSpeed = 5;
     Enemy enemy;
+    public int pointsGiven;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -64,6 +66,7 @@ public class BubbleHandler : MonoBehaviour
         }
         if(collision.gameObject.tag == "Bullet")
         {
+            ScoreManager.scoreValue += pointsGiven;
             Destroy(gameObject);
         }
     }
@@ -81,7 +84,7 @@ public class BubbleHandler : MonoBehaviour
         {
             case State.Idle:
                 float randomX = Random.Range(-200, 200);
-                float randomY = Random.Range(-200, 200);
+                float randomY = Random.Range(0, 200);
                 Vector2 force = new Vector2(randomX, randomY);
                 rb.AddForce(force);
                 StartCoroutine(IdleTime());

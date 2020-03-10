@@ -24,6 +24,7 @@ public class Controller2D : MonoBehaviour
     public bool facingRight = false;
     public bool canDash = true;
     public bool dashing = false;
+    Player player;
 
     // Start is called before the first frame update
     // Gets the collider for the player
@@ -32,6 +33,7 @@ public class Controller2D : MonoBehaviour
         collider = GetComponent<BoxCollider2D>();
         CalculateRaySpacing();
         collisions.faceDir = 1;
+        player = GetComponent<Player>();
     }
 
     private void Update()
@@ -39,23 +41,26 @@ public class Controller2D : MonoBehaviour
         characterScale = transform.localScale;
         Vector3 mousePosition;
         mousePosition = Input.mousePosition - Camera.main.WorldToScreenPoint(transform.position);
-        if (transform.position.x > mousePosition.x)
+        //Debug.LogError("mousePosition: " + mousePosition);
+        if (mousePosition.x >= 11.2f)
         {
             characterScale.x = -1;
             facingRight = false;
         }
-        else if (transform.position.x <= mousePosition.x)
+        else if (mousePosition.x <= -13.8f)
         {
             characterScale.x = 1;
             facingRight = true;
         }
         if (Input.GetAxis("Horizontal") < 0)
         {
-           characterScale.x = -1;
+            if (player.ridingZipline) return;
+            characterScale.x = -1;
         }
 
         if (Input.GetAxis("Horizontal") > 0)
         {
+            if (player.ridingZipline) return;
             characterScale.x = 1;
         }
 
@@ -76,6 +81,7 @@ public class Controller2D : MonoBehaviour
     }
     public void Move(Vector3 velocity)
     {
+        if (player.ridingZipline) return;
         UpdateRaycastOrigins();
         collisions.Reset();
         collisions.velocityOld = velocity;

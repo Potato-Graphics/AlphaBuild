@@ -12,6 +12,7 @@ TagManager:
   - firePoint
   - RangeNPC
   - Enemy
+  - Zipline
   layers:
   - Default
   - TransparentFX
@@ -27,7 +28,7 @@ TagManager:
   - Enemies
   - Bubble
   - Ground
-  - 
+  - Skybox
   - 
   - 
   - 

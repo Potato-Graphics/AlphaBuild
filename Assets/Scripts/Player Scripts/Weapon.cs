@@ -6,12 +6,16 @@ public class Weapon : MonoBehaviour
 {
     private Player player;
     private Animator anim;
-
+    bool m_BackwardsDiagUp;
     private bool delay = false;
 
     public float fireRate = 0;
     public LayerMask notToHit;
-    public Rigidbody2D bulletPrefab;
+    public Rigidbody2D bulletUp;
+    public Rigidbody2D bulletDown;
+    public Rigidbody2D bulletHorizontal;
+    public Rigidbody2D bulletDiagDown;
+    public Rigidbody2D bulletDiagUp;
     public Vector3 position;
     [SerializeField] float speed = 25;
 
@@ -23,7 +27,7 @@ public class Weapon : MonoBehaviour
     {
         player = GetComponent<Player>();
         anim = player.GetComponent<Animator>();
-
+        m_BackwardsDiagUp = false;
     }
     void Update()
     {
@@ -41,90 +45,146 @@ public class Weapon : MonoBehaviour
 
     void Shooting()
     {
+        float joyangle = Mathf.Atan2(Input.GetAxis("JoyStickX"), Input.GetAxis("JoyStickY")) * Mathf.Rad2Deg;
+        Debug.LogError("The mouse x axis = " + joyangle + "joystickx : " + Input.GetAxis("JoyStickX") + "joystick y " + Input.GetAxis("JoyStickY") + "mouse y" + Input.GetAxis("Mouse Y") );
+        Debug.LogError("joyangle: " + joyangle);
         Vector3 dir = Input.mousePosition - Camera.main.WorldToScreenPoint(transform.position); // Mouse position directoin.
         Vector3 direction = Input.mousePosition;
         Vector3 firePointPosition = new Vector3(firePoint.position.x, firePoint.position.y); // Stores the firepoint as a Vector2.
         Debug.DrawLine(firePointPosition, (dir - firePointPosition) * 100, Color.red); //Draws the Raycast.
-        Debug.LogWarning("mouse position: " + direction);
-        if (direction.y > 350 && direction.y < 600 && direction.x > 450 && direction.x < 542)
+
+
+
+        //This finds the angle of the mouse cursor
+        Vector3 v3Pos;
+        float fAngle;
+
+        // Project the mouse point into world space at
+        //   at the distance of the player.
+        v3Pos = Input.mousePosition;
+        v3Pos.z = (transform.position.z - Camera.main.transform.position.z);
+        v3Pos = Camera.main.ScreenToWorldPoint(v3Pos);
+        v3Pos = v3Pos - transform.position;
+        fAngle = Mathf.Atan2(v3Pos.y, v3Pos.x) * Mathf.Rad2Deg;
+        if (fAngle < 0.0f) fAngle += 360.0f;
+
+        // Raycast against a mathematical plane in world space
+        Plane plane = new Plane(Vector3.forward, transform.position);
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        float fDist;
+        plane.Raycast(ray, out fDist);
+        v3Pos = ray.GetPoint(fDist);
+        v3Pos = v3Pos - transform.position;
+        fAngle = Mathf.Atan2(v3Pos.y, v3Pos.x) * Mathf.Rad2Deg;
+        if (fAngle < 0.0f) fAngle += 360.0f;
+
+        //Convert the player to Screen coordinates
+        v3Pos = Camera.main.WorldToScreenPoint(transform.position);
+        v3Pos = Input.mousePosition - v3Pos;
+        fAngle = Mathf.Atan2(v3Pos.y, v3Pos.x) * Mathf.Rad2Deg;
+        if (fAngle < 0.0f) fAngle += 360.0f;
+        //end of angle finding
+
+
+
+
+        if (fAngle >= 77 && fAngle <= 110 || joyangle > 165 && joyangle < 185)
         {
             //this is up
-            Rigidbody2D bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
+            Rigidbody2D bullet = Instantiate(bulletUp, firePoint.position, firePoint.rotation);
             //BulletScript.yDirection = 0.1f;
             //BulletScript.xDirection = 0.0f;
-            Vector2 velocityChange = new Vector2(0.0f, 0.1f);
+            Vector2 velocityChange = new Vector2(0.0f, 0.3f);
             bullet.velocity = velocityChange * (Time.deltaTime * speed);
+            float angle = 90;
+            firePoint.rotation = Quaternion.AngleAxis(55, Vector3.up);
+            print("up");
             anim.SetTrigger("FireUp");
         }
-     
-        else if (direction.y > 0 && direction.y < 240 && direction.x > 450 && direction.x < 542)
+
+        else if (fAngle >= 246 && fAngle <= 288 || joyangle >= -66 && joyangle <= 108)
         {
             //this is down
             anim.SetTrigger("FireDown");
-            Rigidbody2D bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
+            Rigidbody2D bullet = Instantiate(bulletDown, firePoint.position, firePoint.rotation);
             //BulletScript.yDirection = -0.1f;
             // BulletScript.xDirection = 0.0f;
             Vector2 velocityChange = new Vector2(0, -0.1f);
+            print("down");
             bullet.velocity = velocityChange * (Time.deltaTime * speed);
+
         }
-        else if (direction.x > 600 && direction.x < 1000 && direction.y < 600 && direction.y > 370)
+        else if (fAngle < 77 && fAngle >= 19.2)
         {
             //this is right up
             anim.SetTrigger("FireDiagUp");
-            Rigidbody2D bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.localRotation);
+            Rigidbody2D bullet = Instantiate(bulletDiagUp, firePoint.position, firePoint.localRotation);
             //BulletScript.xDirection = 0.1f;
             // BulletScript.yDirection = 0.1f;
             Vector2 velocityChange = new Vector2(0.1f, 0.1f);
+            print("right up");
             bullet.velocity = velocityChange * (Time.deltaTime * speed);
+
         }
-        else if (direction.x > 525 && direction.x < 1000 && direction.y > 270 && direction.y < 370)
+        else if (fAngle < 19.2 && fAngle >= 0 || fAngle < 360 && fAngle > 350)
         {
             //this is right
             anim.SetTrigger("FireHorizontal");
-            Rigidbody2D bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.localRotation);
+            Rigidbody2D bullet = Instantiate(bulletHorizontal, firePoint.position, firePoint.localRotation);
             // BulletScript.xDirection = 0.1f;
             // BulletScript.yDirection = 0.0f;
             Vector2 velocityChange = new Vector2(0.1f, 0);
+            print("right");
             bullet.velocity = velocityChange * (Time.deltaTime * speed);
+
         }
-        else if (direction.x > 450 && direction.x < 1000 && direction.y < 270 && direction.y > 0)
+        else if (fAngle <= 350 && fAngle > 288)
         {
             //this is right down
             anim.SetTrigger("FireDiagDown");
-            Rigidbody2D bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.localRotation);
+            Rigidbody2D bullet = Instantiate(bulletDiagDown, firePoint.position, firePoint.localRotation);
             //BulletScript.xDirection = 0.1f;
             //BulletScript.yDirection = -0.1f;
             Vector2 velocityChange = new Vector2(0.1f, -0.1f);
+            print("right down");
             bullet.velocity = velocityChange * (Time.deltaTime * speed);
+
         }
-        else if (direction.x > 0 && direction.x < 450 && direction.y < 600 && direction.y > 370)
+        else if (fAngle > 110 && fAngle <= 165)
         {
             //this is left up
             anim.SetTrigger("FireDiagUp");
-            Rigidbody2D bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.localRotation);
+            Rigidbody2D bullet = Instantiate(bulletDiagUp, firePoint.position, firePoint.localRotation);
             //BulletScript.xDirection = -0.1f;
             // BulletScript.yDirection = 0.1f;
             Vector2 velocityChange = new Vector2(-0.1f, 0.1f);
+            bullet.transform.eulerAngles = new Vector2(0, -180);
+            print("left up");
             bullet.velocity = velocityChange * (Time.deltaTime * speed);
+
         }
-        else if (direction.x > 0 && direction.x < 525 && direction.y > 270 && direction.y < 370)
+        else if (fAngle > 165 && fAngle <= 190)
         {
             //this is left
             anim.SetTrigger("FireHorizontal");
-            Rigidbody2D bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.localRotation);
+            Rigidbody2D bullet = Instantiate(bulletHorizontal, firePoint.position, firePoint.localRotation);
             //BulletScript.xDirection = -0.1f;
             // BulletScript.yDirection = 0.0f;
             Vector2 velocityChange = new Vector2(-0.1f, 0);
+            bullet.transform.eulerAngles = new Vector2(0, -180);
+            print("left");
             bullet.velocity = velocityChange * (Time.deltaTime * speed);
         }
-        else if (direction.x > 0 && direction.x < 450 && direction.y < 270 && direction.y > 0)
+        else if (fAngle > 190 && fAngle < 246)
         {
             //this is left down
             anim.SetTrigger("FireDiagDown");
-            Rigidbody2D bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.localRotation);
+            Rigidbody2D bullet = Instantiate(bulletDiagDown, firePoint.position, firePoint.localRotation);
             // BulletScript.xDirection = -0.1f;
             //  BulletScript.yDirection = -0.1f;
             Vector2 velocityChange = new Vector2(-0.1f, -0.1f);
+            print("left down");
+            bullet.transform.eulerAngles = new Vector2(0, -180);
             bullet.velocity = velocityChange * (Time.deltaTime * speed);
         }
 

@@ -11,8 +11,8 @@ public class Destroy_onCollision : MonoBehaviour
   
     private void OnCollisionEnter2D(Collision2D col)
     {
-        print("the collision is " + col.gameObject.tag);
-        if (col.gameObject.tag != "Player" || col.gameObject.tag != "Obstacle" || col.gameObject.tag.Contains("Bullet"))
+        Debug.LogError("the collision is " + col.gameObject.tag);
+        if (col.gameObject.tag != "Player" || col.gameObject.tag != "Zipline" || col.gameObject.tag.Contains("Bullet"))
 
         {
             //destroy the bullet.
