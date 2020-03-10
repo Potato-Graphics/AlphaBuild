@@ -36,6 +36,9 @@ public class Enemy : MonoBehaviour
 
     public float timeStartedLerping;
     public float lerpTime;
+    public float twopie = Mathf.PI * 2;
+    public float afloat = 0;
+    public float osculationSpeed = 0.01f;
 
     /*
      * Raycast
@@ -56,6 +59,11 @@ public class Enemy : MonoBehaviour
     public int bubblesSpawned;
     public int explosionProjectilesSpawned;
     public bool explodingRight = false;
+    public float jumpHeight = 300f;
+    public float amount = 3f;
+    public float fallSpeed = 10;
+    public float spinSpeed = 100;
+    bool reached2Pi = false;
 
 
     public Vector3 Lerp(Vector3 start, Vector3 end, float timeStartedLerping, float lerpTime = 1)
@@ -103,7 +111,7 @@ public class Enemy : MonoBehaviour
             }
             if(GetEnemyType() == EnemyType.BounceNPC)
             {
-                rb.AddForce(new Vector2(1f, 300));
+                rb.AddForce(new Vector2(1f, jumpHeight));
             }
         }
     }
@@ -130,6 +138,24 @@ public class Enemy : MonoBehaviour
 
         endPos2 = firePoint2.position + Vector3.right * 0.01f;
         endPos3 = firePoint2.position + Vector3.down;
+
+        
+        if(afloat < twopie)
+        {
+            afloat += osculationSpeed;
+        }
+        else
+        {
+            afloat = 0;
+        }
+
+        if(GetEnemyType() == EnemyType.HelicopterSeed)
+        {
+            Vector3 aVector = new Vector3(startPosition.x + Mathf.Sin(afloat) * amount, startPosition.y, startPosition.z);
+            aVector.y = enemyPosition.y -= Time.deltaTime * fallSpeed;
+            transform.position = aVector;
+            transform.Rotate(new Vector3(0, spinSpeed * Time.deltaTime, 0));
+        }
         
 
 
@@ -454,7 +480,8 @@ public class Enemy : MonoBehaviour
         ObstructorNPC,
         ChargeNPC,
         BounceNPC,
-        RangeNPC
+        RangeNPC,
+        HelicopterSeed
     }
 
     public EnemyType GetEnemyType()
