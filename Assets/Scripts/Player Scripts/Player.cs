@@ -23,8 +23,6 @@ public class Player : MonoBehaviour
     public Vector2 wallLeap;
     public Transform zipline;
 
-    static int ID = 0;
-
     float accelerationTimeGrounded = .1f;
     float accelerationTimeAirborne = .3f;
     float moveSpeed = 12;
@@ -32,6 +30,9 @@ public class Player : MonoBehaviour
     float jumpVelocity;
     float velocityXSmoothing;
 
+    public float xFire;
+    public float yFire;
+    
     public float coins = 0;
 
     public bool movingRight = false;
@@ -54,7 +55,7 @@ public class Player : MonoBehaviour
     public static int waterRemaining;
     float dashSpeed = 150.0f;
     [SerializeField]GameObject endPoint;
-
+    static int ID = 0;
     Vector3 lastMouseCoord = Vector3.zero;
     bool movedUp = false;
     bool movedDown = false;
@@ -115,7 +116,7 @@ public class Player : MonoBehaviour
     //Stops the player from moving building up downward force when standing still.
     void Update()
     {
-      
+
         playerPosition = transform.position;
         //JAM CODE
         /////////////////////////////////

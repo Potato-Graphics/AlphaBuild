@@ -69221,6 +69221,12 @@ PrefabInstance:
       propertyPath: zipline
       value: 
       objectReference: {fileID: 704287808}
+    - target: {fileID: 7464725297625007145, guid: a11e8634021eaab40a5658803b66d3b0,
+        type: 3}
+      propertyPath: firePoint
+      value: 
+      objectReference: {fileID: 263637681619265686, guid: 3adc1cef82f450b4f89ec7e963050984,
+        type: 3}
     - target: {fileID: 7464725297625007146, guid: a11e8634021eaab40a5658803b66d3b0,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -69356,7 +69362,35 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: -0.035
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 5310227999271214353, guid: a11e8634021eaab40a5658803b66d3b0,
+        type: 3}
+      propertyPath: coolDown
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5310227999271214353, guid: a11e8634021eaab40a5658803b66d3b0,
+        type: 3}
+      propertyPath: projectileSpeed
+      value: 500
+      objectReference: {fileID: 0}
+    - target: {fileID: 5310227999271214353, guid: a11e8634021eaab40a5658803b66d3b0,
+        type: 3}
+      propertyPath: projectilePool
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6890621525036053420, guid: a11e8634021eaab40a5658803b66d3b0,
+        type: 3}
+      propertyPath: pooledObjects.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6890621525036053420, guid: a11e8634021eaab40a5658803b66d3b0,
+        type: 3}
+      propertyPath: pooledObjects.Array.data[0]
+      value: 
+      objectReference: {fileID: 4312572089030352148, guid: 3adc1cef82f450b4f89ec7e963050984,
+        type: 3}
+    m_RemovedComponents:
+    - {fileID: 7464725297625007158, guid: a11e8634021eaab40a5658803b66d3b0, type: 3}
+    - {fileID: 6890621525036053420, guid: a11e8634021eaab40a5658803b66d3b0, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: a11e8634021eaab40a5658803b66d3b0, type: 3}
 --- !u!1001 &8466790183017206514
 PrefabInstance:
