@@ -306,7 +306,7 @@ public class Player : MonoBehaviour
         }
         else { direction = 0; }
 
-        if (Input.GetKeyDown(KeyCode.Space) || (Input.GetButton("Jump")))
+        if ((Input.GetButtonDown("Jump")))
         {
             if (ridingZipline) return;
             if (wallSliding)
