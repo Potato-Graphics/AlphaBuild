@@ -6,7 +6,7 @@ public class Weapon : MonoBehaviour
 {
     private Player player;
     private Animator anim;
-
+    bool m_BackwardsDiagUp;
     private bool delay = false;
 
     public float fireRate = 0;
@@ -27,7 +27,7 @@ public class Weapon : MonoBehaviour
     {
         player = GetComponent<Player>();
         anim = player.GetComponent<Animator>();
-
+        m_BackwardsDiagUp = false;
     }
     void Update()
     {
@@ -45,6 +45,9 @@ public class Weapon : MonoBehaviour
 
     void Shooting()
     {
+        float joyangle = Mathf.Atan2(Input.GetAxis("JoyStickX"), Input.GetAxis("JoyStickY")) * Mathf.Rad2Deg;
+        Debug.LogError("The mouse x axis = " + joyangle + "joystickx : " + Input.GetAxis("JoyStickX") + "joystick y " + Input.GetAxis("JoyStickY") + "mouse y" + Input.GetAxis("Mouse Y") );
+        Debug.LogError("joyangle: " + joyangle);
         Vector3 dir = Input.mousePosition - Camera.main.WorldToScreenPoint(transform.position); // Mouse position directoin.
         Vector3 direction = Input.mousePosition;
         Vector3 firePointPosition = new Vector3(firePoint.position.x, firePoint.position.y); // Stores the firepoint as a Vector2.
@@ -82,11 +85,10 @@ public class Weapon : MonoBehaviour
         if (fAngle < 0.0f) fAngle += 360.0f;
         //end of angle finding
 
-        Debug.LogError(fAngle);
 
 
 
-        if (fAngle >= 77 && fAngle <= 110)
+        if (fAngle >= 77 && fAngle <= 110 || joyangle > 165 && joyangle < 185)
         {
             //this is up
             Rigidbody2D bullet = Instantiate(bulletUp, firePoint.position, firePoint.rotation);
@@ -94,11 +96,13 @@ public class Weapon : MonoBehaviour
             //BulletScript.xDirection = 0.0f;
             Vector2 velocityChange = new Vector2(0.0f, 0.3f);
             bullet.velocity = velocityChange * (Time.deltaTime * speed);
+            float angle = 90;
+            firePoint.rotation = Quaternion.AngleAxis(55, Vector3.up);
             print("up");
             anim.SetTrigger("FireUp");
         }
 
-        else if (fAngle >= 246 && fAngle <= 288)
+        else if (fAngle >= 246 && fAngle <= 288 || joyangle >= -66 && joyangle <= 108)
         {
             //this is down
             anim.SetTrigger("FireDown");
@@ -118,7 +122,7 @@ public class Weapon : MonoBehaviour
             //BulletScript.xDirection = 0.1f;
             // BulletScript.yDirection = 0.1f;
             Vector2 velocityChange = new Vector2(0.1f, 0.1f);
-            print("rignht up");
+            print("right up");
             bullet.velocity = velocityChange * (Time.deltaTime * speed);
 
         }
