@@ -58,7 +58,7 @@ public class Player : MonoBehaviour
     Vector3 lastMouseCoord = Vector3.zero;
     bool movedUp = false;
     bool movedDown = false;
-    static int totalPumps = 0;
+    public static int totalPumps = 0;
     public static float bulletDamage = 0f;
     bool pumpStarted = false;
     public float airTimeJumpDelay;
@@ -79,8 +79,12 @@ public class Player : MonoBehaviour
 
     Vector2 dashPosition;
 
+    public float bulletSizeMultiplier = 1;
+
 
     private Animator anim;
+
+    [SerializeField]public Image specialBar;
 
     // Start is called before the first frame update
     void Awake()
@@ -98,6 +102,7 @@ public class Player : MonoBehaviour
 
         print(checkpointsReceived);
         print("checkpoint pos " + checkpointPos);
+        totalPumps = 0;
 
         //transform.position = spawnLocation;
         sceneToRespawnOn = SceneManager.GetActiveScene().buildIndex;
@@ -107,6 +112,7 @@ public class Player : MonoBehaviour
         lifeThree.SetActive(true);
         controller = GetComponent<Controller2D>();
         isAttackable = true;
+        specialBar.fillAmount = 0;
 
         gravity = -(2 * jumpHeight) / Mathf.Pow(timeToJumpApex, 2);
         jumpVelocity = Mathf.Abs(gravity) * timeToJumpApex;
@@ -143,14 +149,20 @@ public class Player : MonoBehaviour
             Vector3 mouseDelta = Input.mousePosition - lastMouseCoord;
             if (mouseDelta.y > 10 && movedUp == false)
             {
-                print("Mouse moved up");
+                if (totalPumps >= 10) return;
                 totalPumps++;
+                if (specialBar.fillAmount >= 1.0) return;
+                specialBar.fillAmount += 0.1f;
+                bulletSizeMultiplier += 0.3f;
                 movedUp = true;
                 movedDown = false;
             }
             if (mouseDelta.y < -10 && movedDown == false)
             {
-                print("Mouse moved down");
+                if (totalPumps >= 10) return;
+                if (specialBar.fillAmount >= 1.0) return;
+                specialBar.fillAmount += 0.1f;
+                bulletSizeMultiplier += 0.3f;
                 totalPumps++;
                 movedDown = true;
                 movedUp = false;
@@ -160,12 +172,11 @@ public class Player : MonoBehaviour
         if (Input.GetAxisRaw("Fire2") == 0 && pumpStarted)
         {
             pumpStarted = false;
-            print("Bullet damage was: " + bulletDamage);
             bulletDamage += totalPumps / 10;
-            print("Bullet damage now: " + bulletDamage);
             totalPumps = 0;
             movedDown = false;
             movedUp = false;
+            
         }
 
         bool wallSliding = false;
