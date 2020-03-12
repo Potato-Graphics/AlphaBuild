@@ -128,16 +128,18 @@ public class Enemy : MonoBehaviour
         //Initiliasing the distance between the enemy and player vector
         distance = Vector2.Distance(playerPosition, enemyPosition);
         timePassed += Time.deltaTime;
+        if (GetEnemyType() != EnemyType.HelicopterSeed)
+        {
+            endPos = firePoint.position + Vector3.right * castDist;
+            hit = Physics2D.Linecast(firePoint.position, endPos);
+            Debug.DrawLine(firePoint.position, endPos, Color.blue);
+            groundInfo = Physics2D.Raycast(firePoint2.position, Vector2.down, 2f);
+            infrontInfo = Physics2D.Raycast(firePoint.position, Vector2.right, 0.3f);
+            Debug.DrawLine(firePoint2.position, endPos3, Color.cyan);
 
-        endPos = firePoint.position + Vector3.right * castDist;
-        hit = Physics2D.Linecast(firePoint.position, endPos);
-        Debug.DrawLine(firePoint.position, endPos, Color.blue);
-        groundInfo = Physics2D.Raycast(firePoint2.position, Vector2.down, 2f);
-        infrontInfo = Physics2D.Raycast(firePoint.position, Vector2.right, 0.3f);
-        Debug.DrawLine(firePoint2.position, endPos3, Color.cyan);
-
-        endPos2 = firePoint2.position + Vector3.right * 0.01f;
-        endPos3 = firePoint2.position + Vector3.down;
+            endPos2 = firePoint2.position + Vector3.right * 0.01f;
+            endPos3 = firePoint2.position + Vector3.down;
+        }
 
         
         if(afloat < twopie)
