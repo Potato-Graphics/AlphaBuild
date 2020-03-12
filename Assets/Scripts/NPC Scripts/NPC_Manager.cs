@@ -1,12 +1,15 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class NPC_Manager : MonoBehaviour
 {
     private float currentHealth;
     [SerializeField] private float MAX_HEALTH = 0;
     [SerializeField] private bool killable = false;
+    [SerializeField] Image healthBar;
+    float fillAmount = 1.0f;
 
     public int pointsGiven;
 
@@ -30,6 +33,9 @@ public class NPC_Manager : MonoBehaviour
    public void UpdateHealth(float amount)
     {
         currentHealth += amount;
+        fillAmount = currentHealth / MAX_HEALTH;
+        Debug.LogError("currentHealth: " + currentHealth + "fill amount: " + fillAmount + "Max Health: " + MAX_HEALTH);
+        healthBar.fillAmount = fillAmount;
     }
 
     void OnCollisionEnter2D(Collision2D col)

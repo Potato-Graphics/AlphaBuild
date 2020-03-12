@@ -16,6 +16,7 @@ public class Weapon : MonoBehaviour
     public Rigidbody2D bulletHorizontal;
     public Rigidbody2D bulletDiagDown;
     public Rigidbody2D bulletDiagUp;
+    public float shootDelay = 0.5f;
     public Vector3 position;
     Vector3 startLocalScale;
     [SerializeField] float speed = 25;
@@ -160,10 +161,9 @@ public class Weapon : MonoBehaviour
             Debug.LogError("bullet size: " + bulletSize + "bullet local scale " + bullet.transform.localScale);
             bullet.transform.localScale = bulletSize;
             player.bulletSizeMultiplier = 1.0f;
-            // BulletScript.xDirection = 0.1f;
-            // BulletScript.yDirection = 0.0f;
+            //BulletScript.xDirection = -0.1f;
+            // BulletScript.yDirection = 0.1f;
             Vector2 velocityChange = new Vector2(0.1f, 0);
-            print("right");
             bullet.velocity = velocityChange * (Time.deltaTime * speed);
 
         }
@@ -208,16 +208,17 @@ public class Weapon : MonoBehaviour
         {
             //this is left
             anim.SetTrigger("FireHorizontal");
-            Vector3 bulletSize = new Vector3(0.05f, 0.05f, 0.05f);
-            bulletHorizontal.transform.localScale = bulletSize;
-            player.bulletSizeMultiplier = 1.0f;
             Rigidbody2D bullet = Instantiate(bulletHorizontal, firePoint.position, firePoint.localRotation);
-           
+            Vector3 bulletSize = transform.localScale;
+            bulletSize.x = bullet.transform.localScale.x * player.bulletSizeMultiplier;
+            bulletSize.y = bullet.transform.localScale.y * player.bulletSizeMultiplier;
+            Debug.LogError("bullet size: " + bulletSize + "bullet local scale " + bullet.transform.localScale);
+            bullet.transform.localScale = bulletSize;
+            player.bulletSizeMultiplier = 1.0f;
             //BulletScript.xDirection = -0.1f;
-            // BulletScript.yDirection = 0.0f;
+            // BulletScript.yDirection = 0.1f;
             Vector2 velocityChange = new Vector2(-0.1f, 0);
             bullet.transform.eulerAngles = new Vector2(0, -180);
-            print("left");
             bullet.velocity = velocityChange * (Time.deltaTime * speed);
         }
         else if (fAngle > 190 && fAngle < 246)
@@ -247,7 +248,7 @@ public class Weapon : MonoBehaviour
 
     IEnumerator ShootDelay()
     {
-        yield return new WaitForSeconds(.1f);
+        yield return new WaitForSeconds(shootDelay);
         delay = false;
     }
 }

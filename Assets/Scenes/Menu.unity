@@ -322,17 +322,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
-      - m_Target: {fileID: 865465007}
-        m_MethodName: ResetMenu
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &127375758
@@ -2336,8 +2325,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   OptionsScreen: {fileID: 474938103}
   StartScreen: {fileID: 1122005445}
-  PlayScreen: {fileID: 0}
-  QuitScreen: {fileID: 0}
 --- !u!1 &880924526
 GameObject:
   m_ObjectHideFlags: 0

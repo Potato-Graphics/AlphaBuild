@@ -59,7 +59,7 @@ public class Player : MonoBehaviour
     bool movedUp = false;
     bool movedDown = false;
     public static int totalPumps = 0;
-    public static float bulletDamage = 0f;
+    public static float bulletDamage = 1f;
     bool pumpStarted = false;
     public float airTimeJumpDelay;
     public bool canJump = false;
@@ -153,7 +153,7 @@ public class Player : MonoBehaviour
                 totalPumps++;
                 if (specialBar.fillAmount >= 1.0) return;
                 specialBar.fillAmount += 0.1f;
-                bulletSizeMultiplier += 0.3f;
+                bulletSizeMultiplier += 0.1f;
                 movedUp = true;
                 movedDown = false;
             }
@@ -162,7 +162,7 @@ public class Player : MonoBehaviour
                 if (totalPumps >= 10) return;
                 if (specialBar.fillAmount >= 1.0) return;
                 specialBar.fillAmount += 0.1f;
-                bulletSizeMultiplier += 0.3f;
+                bulletSizeMultiplier += 0.1f;
                 totalPumps++;
                 movedDown = true;
                 movedUp = false;

@@ -25,7 +25,7 @@ public class ScreenManager : MonoBehaviour
         {
             curAnim = GetComponent<Animator>();
         }
-        if (!curAnim)
+        if (curAnim)
         {
             curAnim.SetBool("IsActive", false);
         }    
