@@ -46,7 +46,7 @@ public class Player : MonoBehaviour
     [SerializeField] GameObject lifeOne = null;
     [SerializeField] GameObject lifeTwo = null;
     [SerializeField] GameObject lifeThree = null;
-    public static Vector3 spawnLocation = new Vector3(-4f, 0.47f, 0f);
+    public static Vector3 spawnLocation = new Vector3(-52.7122f, 4.03075f, -0.3430906f);
     [SerializeField] GameObject player;
     public static Vector3 checkpointPos;
     [SerializeField] float dashDistance = 4f;
@@ -67,6 +67,7 @@ public class Player : MonoBehaviour
     public int sceneToRespawnOn;
 
     public bool ridingZipline = false;
+    public bool usingController = true;
     Vector3 playerPosition;
 
     Vector3 velocity;
@@ -116,6 +117,16 @@ public class Player : MonoBehaviour
 
         gravity = -(2 * jumpHeight) / Mathf.Pow(timeToJumpApex, 2);
         jumpVelocity = Mathf.Abs(gravity) * timeToJumpApex;
+    }
+
+    void OnEnable()
+    {
+        GameManager.OnGameOver += HandleDeath;
+    }
+
+    void OnDisable()
+    {
+        GameManager.OnGameOver -= HandleDeath;
     }
 
     //Stops the player from moving building up downward force when standing still.

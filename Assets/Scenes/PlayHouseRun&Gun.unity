@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.32338256, g: 0.46919268, b: 0.77554435, a: 1}
+  m_IndirectSpecularColor: {r: 0.32338265, g: 0.46919274, b: 0.7755444, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -8719,7 +8719,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &192806067
 Transform:
   m_ObjectHideFlags: 0
@@ -9370,6 +9370,7 @@ GameObject:
   - component: {fileID: 202220695}
   - component: {fileID: 202220699}
   - component: {fileID: 202220698}
+  - component: {fileID: 202220700}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -9524,6 +9525,18 @@ MonoBehaviour:
       enableFptlForForwardOpaque: 1
       enableBigTilePrepass: 1
       isFptlEnabled: 1
+--- !u!114 &202220700
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 202220694}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3684d1217ef459a4e97bc07574f644f5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &202501678
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -98366,12 +98379,22 @@ PrefabInstance:
     - target: {fileID: 7183406628732752073, guid: 48b2f1eb92d5385488be9a7dc025752a,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6356439584906133390, guid: 48b2f1eb92d5385488be9a7dc025752a,
         type: 3}
       propertyPath: m_FillAmount
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6356439584906133390, guid: 48b2f1eb92d5385488be9a7dc025752a,
+        type: 3}
+      propertyPath: m_Color.g
+      value: 0.50387293
+      objectReference: {fileID: 0}
+    - target: {fileID: 6356439584906133390, guid: 48b2f1eb92d5385488be9a7dc025752a,
+        type: 3}
+      propertyPath: m_Color.b
+      value: 0.93333334
       objectReference: {fileID: 0}
     - target: {fileID: 7183406628732752077, guid: 48b2f1eb92d5385488be9a7dc025752a,
         type: 3}
@@ -98476,6 +98499,21 @@ PrefabInstance:
     - target: {fileID: 7183406628732752077, guid: 48b2f1eb92d5385488be9a7dc025752a,
         type: 3}
       propertyPath: m_Pivot.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9166744316905797815, guid: 48b2f1eb92d5385488be9a7dc025752a,
+        type: 3}
+      propertyPath: m_Color.r
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9166744316905797815, guid: 48b2f1eb92d5385488be9a7dc025752a,
+        type: 3}
+      propertyPath: m_Color.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9166744316905797815, guid: 48b2f1eb92d5385488be9a7dc025752a,
+        type: 3}
+      propertyPath: m_Color.b
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
