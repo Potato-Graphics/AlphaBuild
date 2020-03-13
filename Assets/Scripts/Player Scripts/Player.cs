@@ -54,6 +54,7 @@ public class Player : MonoBehaviour
     public static int waterRemaining;
     float dashSpeed = 150.0f;
     [SerializeField]GameObject endPoint;
+    [SerializeField] public bool usingController = true; 
 
     Vector3 lastMouseCoord = Vector3.zero;
     bool movedUp = false;
