@@ -130,6 +130,7 @@ MonoBehaviour:
   walkSpeed: 10
   chargeSpeed: 50
   playerPosition: {x: 0, y: 0, z: 0}
+  startPosition: {x: 0, y: 0, z: 0}
   currentState: 0
   idleWalkDistance: 5
   enemyType: 4
@@ -152,6 +153,8 @@ MonoBehaviour:
   amount: 1
   fallSpeed: 2
   spinSpeed: 1000
+  NPC_ID: 0
+  enemyPrefab: {fileID: 4532078227853945053}
 --- !u!1 &6102295068569091456
 GameObject:
   m_ObjectHideFlags: 0

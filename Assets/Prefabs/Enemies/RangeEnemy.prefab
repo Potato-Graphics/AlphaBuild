@@ -82,17 +82,11 @@ PrefabInstance:
       propertyPath: enemyType
       value: 3
       objectReference: {fileID: 0}
-    - target: {fileID: 224435482923101185, guid: 4a2e2367d86ec9143a4746a39b3a9212,
+    - target: {fileID: 3760899537648308626, guid: 4a2e2367d86ec9143a4746a39b3a9212,
         type: 3}
-      propertyPath: m_GravityScale
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5200206340292902180, guid: 4a2e2367d86ec9143a4746a39b3a9212,
-        type: 3}
-      propertyPath: m_Sprite
+      propertyPath: enemyPrefab
       value: 
-      objectReference: {fileID: 21300000, guid: 8f817ae1302865244936a85c3677b850,
-        type: 3}
+      objectReference: {fileID: 324795402140547486}
     - target: {fileID: 2847122818296448478, guid: 4a2e2367d86ec9143a4746a39b3a9212,
         type: 3}
       propertyPath: m_Offset.y
@@ -108,5 +102,22 @@ PrefabInstance:
       propertyPath: pointsGiven
       value: 250
       objectReference: {fileID: 0}
+    - target: {fileID: 224435482923101185, guid: 4a2e2367d86ec9143a4746a39b3a9212,
+        type: 3}
+      propertyPath: m_GravityScale
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5200206340292902180, guid: 4a2e2367d86ec9143a4746a39b3a9212,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 8f817ae1302865244936a85c3677b850,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4a2e2367d86ec9143a4746a39b3a9212, type: 3}
+--- !u!1 &324795402140547486 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1229292578974043762, guid: 4a2e2367d86ec9143a4746a39b3a9212,
+    type: 3}
+  m_PrefabInstance: {fileID: 1553377541975308268}
+  m_PrefabAsset: {fileID: 0}

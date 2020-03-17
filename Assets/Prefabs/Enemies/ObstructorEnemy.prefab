@@ -221,6 +221,7 @@ MonoBehaviour:
   walkSpeed: 10
   chargeSpeed: 50
   playerPosition: {x: 0, y: 0, z: 0}
+  startPosition: {x: 0, y: 0, z: 0}
   currentState: 0
   idleWalkDistance: 5
   enemyType: 0
@@ -244,6 +245,8 @@ MonoBehaviour:
   amount: 3
   fallSpeed: 10
   spinSpeed: 100
+  NPC_ID: 0
+  enemyPrefab: {fileID: 8048525329131307495}
 --- !u!114 &3495692121104727694
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -490,6 +493,16 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.x
       value: 137.9
       objectReference: {fileID: 0}
+    - target: {fileID: 6947598397353485698, guid: 6adafcde58647c045a102ac3aee433a4,
+        type: 3}
+      propertyPath: m_PreserveAspect
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6947598397353485698, guid: 6adafcde58647c045a102ac3aee433a4,
+        type: 3}
+      propertyPath: m_FillAmount
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3027150668777236869, guid: 6adafcde58647c045a102ac3aee433a4,
         type: 3}
       propertyPath: m_SizeDelta.x
@@ -549,16 +562,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.y
       value: 0.91
-      objectReference: {fileID: 0}
-    - target: {fileID: 6947598397353485698, guid: 6adafcde58647c045a102ac3aee433a4,
-        type: 3}
-      propertyPath: m_PreserveAspect
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6947598397353485698, guid: 6adafcde58647c045a102ac3aee433a4,
-        type: 3}
-      propertyPath: m_FillAmount
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5146099877731394235, guid: 6adafcde58647c045a102ac3aee433a4,
         type: 3}

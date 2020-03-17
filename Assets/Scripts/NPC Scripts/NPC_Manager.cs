@@ -34,7 +34,6 @@ public class NPC_Manager : MonoBehaviour
     {
         currentHealth += amount;
         fillAmount = currentHealth / MAX_HEALTH;
-        Debug.LogError("currentHealth: " + currentHealth + "fill amount: " + fillAmount + "Max Health: " + MAX_HEALTH);
         healthBar.fillAmount = fillAmount;
     }
 

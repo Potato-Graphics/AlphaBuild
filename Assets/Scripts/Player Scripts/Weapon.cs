@@ -103,7 +103,7 @@ public class Weapon : MonoBehaviour
                 anim.SetTrigger("FireUp");
             }
 
-            else if (fAngle >= 246 && fAngle <= 288 || joyangle >= -66 && joyangle <= 108)
+            else if (fAngle >= 246 && fAngle <= 288)
             {
                 //this is down
                 anim.SetTrigger("FireDown");

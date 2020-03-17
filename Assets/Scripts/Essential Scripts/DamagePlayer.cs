@@ -5,12 +5,14 @@ using UnityEngine;
 public class DamagePlayer : MonoBehaviour
 {
     [SerializeField] Player player;
+    Enemy enemy;
     [SerializeField] bool destroyable;
     [SerializeField] int damageAmount = 0;
     // Start is called before the first frame update
     void Start()
     {
         player = GameObject.FindObjectOfType<Player>();
+        enemy = GameObject.FindObjectOfType<Enemy>();
     }
 
     // Update is called once per frame
@@ -28,7 +30,9 @@ public class DamagePlayer : MonoBehaviour
 
             if (destroyable)
             {
-                Destroy(gameObject);
+                GameManager.respawnEnemies.Add(new RespawnEnemy(enemy.NPC_ID, enemy.startPosition, enemy.enemyPrefab));
+                gameObject.SetActive(false);
+                // Destroy(gameObject);
             }
         }
     }
@@ -42,7 +46,9 @@ public class DamagePlayer : MonoBehaviour
 
             if (destroyable)
             {
-                Destroy(gameObject);
+                GameManager.respawnEnemies.Add(new RespawnEnemy(enemy.NPC_ID, enemy.startPosition, enemy.enemyPrefab));
+                // Destroy(gameObject);
+                gameObject.SetActive(false);
             }
         }
     }

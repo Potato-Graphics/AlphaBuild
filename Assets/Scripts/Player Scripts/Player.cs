@@ -132,7 +132,10 @@ public class Player : MonoBehaviour
     //Stops the player from moving building up downward force when standing still.
     void Update()
     {
-      
+      if(Input.GetKeyDown(KeyCode.R))
+        {
+            Debug.LogError(GameManager.respawnEnemies.Count);
+        }
         playerPosition = transform.position;
         //JAM CODE
         /////////////////////////////////

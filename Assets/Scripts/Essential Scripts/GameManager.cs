@@ -10,14 +10,18 @@ public class GameManager : MonoBehaviour
     public static event GameDelegate OnGameStarted;
     public static event GameDelegate OnGameOver;
 
+    public static List<RespawnEnemy> respawnEnemies = new List<RespawnEnemy>();
+
     Player player;
+    Enemy enemy;
 
     bool gameOver = false;
         public bool GameOver { get { return gameOver; } }
     void Awake()
     {
         Instance = this;
-        player = FindObjectOfType<Player>();
+        player = GameObject.FindObjectOfType<Player>();
+        enemy = GameObject.FindObjectOfType<Enemy>();
     }
 
     void OnEnable()
@@ -34,6 +38,10 @@ public class GameManager : MonoBehaviour
     {
         player.transform.position = Player.spawnLocation;
         player.SetHealth(3);
+        foreach (RespawnEnemy enemy in respawnEnemies)
+        {
+            enemy.enemy.SetActive(true);
+        }
     }
 
     // Update is called once per frame
