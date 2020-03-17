@@ -1,20 +1,26 @@
 fileFormatVersion: 2
-guid: 01a608b82d895ff458877f2203baf75f
+guid: 92bc7382fcfdacb4da17e8ca06afa6b6
 ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
     100000: //RootNode
     400000: //RootNode
-    2100000: lambert1
+    2100000: M_Leads_02
+    2100002: M_Tree_03
     2300000: //RootNode
     3300000: //RootNode
-    4300000: Cauldron
+    4300000: pPlane31
   externalObjects:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: lambert1
-    second: {fileID: 2100000, guid: 17c14e96743cef94cb6f89a2adcc61ae, type: 2}
+      name: M_Leads_02
+    second: {fileID: 2100000, guid: 6ea8b4e2cc64738459c7d79023cf6e88, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: M_Tree_03
+    second: {fileID: 2100000, guid: ff5c5c7df3d72f44ea1766635740c164, type: 2}
   materials:
     importMaterials: 1
     materialName: 0
