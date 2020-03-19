@@ -5,8 +5,14 @@ using UnityEngine.AI;
 
 public class Enemy : MonoBehaviour
 {
+    public static List<Enemy> enemies = new List<Enemy>();
+
+    public delegate void EnemyDelegate();
+    public static event EnemyDelegate OnEnemyDied;
+
+
     [SerializeField] private int distanceToCharge = 6; // distanced required for the enemy to charge
-    private const int MAX_HEALTH = 25;
+    public int MAX_HEALTH = 25;
     private int currentHealth; // enemys current health
     [SerializeField] private float walkSpeed = 10.0f; // charge speed
     [SerializeField] private float chargeSpeed = 50.0f;
@@ -101,31 +107,31 @@ public class Enemy : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         SetState(State.Idle);
         startPosition = transform.position;
-        StartLerping();
-        switch(GetEnemyType())
-        {
-            case EnemyType.BounceStressBall:
-                enemyPrefab = Resources.Load("Assets/Prefabs/Enemies/BounceEnemy.prefab") as GameObject;
-                break;
-            case EnemyType.ChargeBuggy:
-                enemyPrefab = Resources.Load("Assets/Prefabs/Enemies/ChargeEnemy(6) Variant.prefab") as GameObject;
-                break;
-            case EnemyType.ChargeCar:
-                enemyPrefab = Resources.Load("Assets/Prefabs/Enemies/ChargeEnemy.prefab") as GameObject;
-                break;
-            case EnemyType.HelicopterSeed:
-                enemyPrefab = Resources.Load("Assets/Prefabs/Enemies/HelicopterSeed.prefab") as GameObject;
-                break;
-            case EnemyType.ObstructorFrog:
-                enemyPrefab = Resources.Load("Assets/Prefabs/Enemies/ObstructorEnemy.prefab") as GameObject;
-                break;
-            case EnemyType.RangePlane:
-                enemyPrefab = Resources.Load("Assets/Prefabs/Enemies/RangeEnemy.prefab") as GameObject;
-                break;
 
-        }
+        enemies.Add(this);
+     
 
     }
+    void OnEnable()
+    {
+        GameManager.OnEnemyDeath += HandleDeath;
+    }
+
+    void OnDisable()
+    {
+        GameManager.OnEnemyDeath -= HandleDeath;
+    }
+
+    public void HandleDeath()
+    {
+        OnEnemyDied();
+    }
+
+    public void AddToRespawnList()
+    {
+        GameManager.Instance.AddRespawnObj(NPC_ID, startPosition, this.gameObject);
+    }
+
 
     void OnCollisionEnter2D(Collision2D col)
     {
@@ -133,11 +139,16 @@ public class Enemy : MonoBehaviour
         {
             if(GetEnemyType() == EnemyType.RangePlane)
             {
-                GameManager.respawnEnemies.Add(new RespawnEnemy(NPC_ID, startPosition, enemyPrefab));
                 //Destroy(gameObject);
+                AddToRespawnList();
+                SetHealth(MAX_HEALTH);
                 gameObject.SetActive(false);
             }
-            if(GetEnemyType() == EnemyType.BounceStressBall)
+            if (GetEnemyType() == EnemyType.HelicopterSeed)
+            {
+                transform.position = startPosition;
+            }
+            if (GetEnemyType() == EnemyType.BounceStressBall)
             {
                 rb.AddForce(new Vector2(1f, jumpHeight));
             }
@@ -339,6 +350,11 @@ public class Enemy : MonoBehaviour
             
     }
 
+    public void SetHealth(int amount)
+    {
+        currentHealth = amount;
+    }
+
     /**
      * Updates the enemy health
      * Params: the amount the health is changed.
@@ -495,8 +511,14 @@ public class Enemy : MonoBehaviour
                 break;
             //if the enemy is dead
             case State.Dead:
-                GameManager.respawnEnemies.Add(new RespawnEnemy(NPC_ID, startPosition, enemyPrefab));
+                AddToRespawnList();
                 //Destroy(this.gameObject); // The enemy is destroyed.
+                if (GetEnemyType() == EnemyType.HelicopterSeed)
+                {
+                    transform.position = startPosition;
+                }
+                SetHealth(MAX_HEALTH);
+                SetState(State.Idle);
                 gameObject.SetActive(false);
                 break;
         }

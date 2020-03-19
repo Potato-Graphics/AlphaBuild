@@ -30,7 +30,9 @@ public class DamagePlayer : MonoBehaviour
 
             if (destroyable)
             {
-                GameManager.respawnEnemies.Add(new RespawnEnemy(enemy.NPC_ID, enemy.startPosition, enemy.enemyPrefab));
+                enemy.AddToRespawnList();
+                enemy.UpdateHealth(enemy.MAX_HEALTH);
+                enemy.SetState(Enemy.State.Idle);
                 gameObject.SetActive(false);
                 // Destroy(gameObject);
             }
@@ -46,8 +48,10 @@ public class DamagePlayer : MonoBehaviour
 
             if (destroyable)
             {
-                GameManager.respawnEnemies.Add(new RespawnEnemy(enemy.NPC_ID, enemy.startPosition, enemy.enemyPrefab));
+                enemy.AddToRespawnList();
                 // Destroy(gameObject);
+                enemy.UpdateHealth(enemy.MAX_HEALTH);
+                enemy.SetState(Enemy.State.Idle);
                 gameObject.SetActive(false);
             }
         }

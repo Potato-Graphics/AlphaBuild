@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Weapon : MonoBehaviour
 {
@@ -18,6 +19,7 @@ public class Weapon : MonoBehaviour
     public Rigidbody2D bulletDiagUp;
     public Vector3 position;
     [SerializeField] float speed = 25;
+    public Image specialBar;
 
     float timeToFire = 0;
 
@@ -294,6 +296,7 @@ public class Weapon : MonoBehaviour
 
         delay = true;
         StartCoroutine(ShootDelay());
+        specialBar.fillAmount = 0;
     }
 
     IEnumerator ShootDelay()

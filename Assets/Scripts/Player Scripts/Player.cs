@@ -22,6 +22,7 @@ public class Player : MonoBehaviour
     public Vector2 wallJumpOff;
     public Vector2 wallLeap;
     public Transform zipline;
+    public int checkpointID = 0;
 
     static int ID = 0;
 
@@ -246,6 +247,10 @@ public class Player : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.G))
         {
             SetHealth(10000);
+        }
+        if (Input.GetKeyDown(KeyCode.H))
+        {
+            SetHealth(0);
         }
         if (Input.GetKeyDown(KeyCode.LeftShift))
         {

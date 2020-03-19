@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour
     public delegate void GameDelegate();
     public static event GameDelegate OnGameStarted;
     public static event GameDelegate OnGameOver;
+    public static event GameDelegate OnEnemyDeath;
 
     public static List<RespawnEnemy> respawnEnemies = new List<RespawnEnemy>();
 
@@ -27,21 +28,42 @@ public class GameManager : MonoBehaviour
     void OnEnable()
     {
         Player.OnPlayerDied += OnPlayerDied;
+        Enemy.OnEnemyDied += OnEnemyDied;
+
     }
 
     void OnDisable()
     {
         Player.OnPlayerDied -= OnPlayerDied;
+        Enemy.OnEnemyDied -= OnEnemyDied;
     }
 
-    void OnPlayerDied()
+
+    void OnEnemyDied()
     {
-        player.transform.position = Player.spawnLocation;
-        player.SetHealth(3);
+        
+       
+    }
+
+    public void AddRespawnObj(int npc_id, Vector3 spwanPos, GameObject go)
+    {
+        respawnEnemies.Add(new RespawnEnemy(npc_id, spwanPos, go));
+    }
+
+
+    public void RespawnNpc()
+    {
         foreach (RespawnEnemy enemy in respawnEnemies)
         {
             enemy.enemy.SetActive(true);
         }
+    }
+    void OnPlayerDied()
+    {
+        player.transform.position = Player.spawnLocation;
+        player.SetHealth(3);
+        RespawnNpc();
+        
     }
 
     // Update is called once per frame

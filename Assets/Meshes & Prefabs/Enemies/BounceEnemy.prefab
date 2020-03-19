@@ -167,6 +167,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   distanceToCharge: 6
+  MAX_HEALTH: 25
   walkSpeed: 10
   chargeSpeed: 50
   playerPosition: {x: 0, y: 0, z: 0}
@@ -194,7 +195,7 @@ MonoBehaviour:
   fallSpeed: 10
   spinSpeed: 100
   NPC_ID: 0
-  enemyPrefab: {fileID: 1777775854304610063}
+  enemyPrefab: {fileID: 0}
 --- !u!114 &5159656131548215398
 MonoBehaviour:
   m_ObjectHideFlags: 0

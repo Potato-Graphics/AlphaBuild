@@ -9,6 +9,7 @@ public class NPC_Manager : MonoBehaviour
     [SerializeField] private float MAX_HEALTH = 0;
     [SerializeField] private bool killable = false;
     [SerializeField] Image healthBar;
+    Enemy enemy;
     float fillAmount = 1.0f;
 
     public int pointsGiven;
@@ -16,6 +17,7 @@ public class NPC_Manager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        enemy = GameObject.FindObjectOfType<Enemy>();
         UpdateHealth(MAX_HEALTH);
     }
 
@@ -50,7 +52,11 @@ public class NPC_Manager : MonoBehaviour
                 if (GetHealth() <= 0)
                 {
                     ScoreManager.scoreValue += pointsGiven;
-                    Destroy(gameObject);
+                    // Destroy(gameObject);
+                    enemy.UpdateHealth(enemy.MAX_HEALTH);
+                    enemy.AddToRespawnList();
+                    enemy.SetState(Enemy.State.Idle);
+                    gameObject.SetActive(false);
                 }
             }
         }
@@ -68,7 +74,11 @@ public class NPC_Manager : MonoBehaviour
                 Player.bulletDamage = 1;
                 if (GetHealth() <= 0)
                 {
-                    Destroy(gameObject);
+                    // Destroy(gameObject);
+                    enemy.UpdateHealth(enemy.MAX_HEALTH);
+                    enemy.AddToRespawnList();
+                    enemy.SetState(Enemy.State.Idle);
+                    gameObject.SetActive(false);
                 }
             }
         }
