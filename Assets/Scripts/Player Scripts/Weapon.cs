@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Weapon : MonoBehaviour
 {
@@ -18,6 +19,7 @@ public class Weapon : MonoBehaviour
     public Rigidbody2D bulletDiagUp;
     public Vector3 position;
     [SerializeField] float speed = 25;
+    public Image specialBar;
 
     float timeToFire = 0;
 
@@ -46,7 +48,7 @@ public class Weapon : MonoBehaviour
     void Shooting()
     {
         float joyangle = Mathf.Atan2(Input.GetAxis("JoyStickX"), Input.GetAxis("JoyStickY")) * Mathf.Rad2Deg;
-        Debug.LogError("The mouse x axis = " + joyangle + "joystickx : " + Input.GetAxis("JoyStickX") + "joystick y " + Input.GetAxis("JoyStickY") + "mouse y" + Input.GetAxis("Mouse Y") );
+        Debug.LogError("The mouse x axis = " + joyangle + "joystickx : " + Input.GetAxis("JoyStickX") + "joystick y " + Input.GetAxis("JoyStickY") + "mouse y" + Input.GetAxis("Mouse Y"));
         Debug.LogError("joyangle: " + joyangle);
         Vector3 dir = Input.mousePosition - Camera.main.WorldToScreenPoint(transform.position); // Mouse position directoin.
         Vector3 direction = Input.mousePosition;
@@ -103,7 +105,7 @@ public class Weapon : MonoBehaviour
                 anim.SetTrigger("FireUp");
             }
 
-            else if (fAngle >= 246 && fAngle <= 288 || joyangle >= -66 && joyangle <= 108)
+            else if (fAngle >= 246 && fAngle <= 288)
             {
                 //this is down
                 anim.SetTrigger("FireDown");
@@ -189,7 +191,7 @@ public class Weapon : MonoBehaviour
                 bullet.velocity = velocityChange * (Time.deltaTime * speed);
             }
         }
-        else if(player.usingController)
+        else if (player.usingController)
         {
             if (joyangle < 34 && joyangle > -34)
             {
@@ -294,6 +296,7 @@ public class Weapon : MonoBehaviour
 
         delay = true;
         StartCoroutine(ShootDelay());
+        specialBar.fillAmount = 0;
     }
 
     IEnumerator ShootDelay()

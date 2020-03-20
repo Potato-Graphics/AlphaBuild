@@ -5,15 +5,21 @@ using UnityEngine.AI;
 
 public class Enemy : MonoBehaviour
 {
+    public static List<Enemy> enemies = new List<Enemy>();
+
+    public delegate void EnemyDelegate();
+    public static event EnemyDelegate OnEnemyDied;
+
+
     [SerializeField] private int distanceToCharge = 6; // distanced required for the enemy to charge
-    private const int MAX_HEALTH = 25;
+    public int MAX_HEALTH = 25;
     private int currentHealth; // enemys current health
     [SerializeField] private float walkSpeed = 10.0f; // charge speed
     [SerializeField] private float chargeSpeed = 50.0f;
     private Transform playerObject; // the player transform object
     [SerializeField] private Vector3 playerPosition; // players position
     private Vector2 dir = new Vector2(-1, 0);
-    private Vector3 startPosition;
+    public Vector3 startPosition;
     private float distance; // distance between enemy and player
     private Vector3 enemyPosition; // enemy position
     [SerializeField]private State currentState; // enemys current state
@@ -65,6 +71,10 @@ public class Enemy : MonoBehaviour
     public float spinSpeed = 100;
     bool reached2Pi = false;
 
+    public int NPC_ID = 0;
+    public GameObject enemyPrefab;
+
+
 
     public Vector3 Lerp(Vector3 start, Vector3 end, float timeStartedLerping, float lerpTime = 1)
     {
@@ -97,19 +107,48 @@ public class Enemy : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         SetState(State.Idle);
         startPosition = transform.position;
-        StartLerping();
+
+        enemies.Add(this);
+     
 
     }
+    void OnEnable()
+    {
+        GameManager.OnEnemyDeath += HandleDeath;
+    }
+
+    void OnDisable()
+    {
+        GameManager.OnEnemyDeath -= HandleDeath;
+    }
+
+    public void HandleDeath()
+    {
+        OnEnemyDied();
+    }
+
+    public void AddToRespawnList()
+    {
+        GameManager.Instance.AddRespawnObj(NPC_ID, startPosition, this.gameObject);
+    }
+
 
     void OnCollisionEnter2D(Collision2D col)
     {
         if(col.gameObject.tag == "Obstacles")
         {
-            if(GetEnemyType() == EnemyType.RangeNPC)
+            if(GetEnemyType() == EnemyType.RangePlane)
             {
-                Destroy(gameObject);
+                //Destroy(gameObject);
+                AddToRespawnList();
+                SetHealth(MAX_HEALTH);
+                gameObject.SetActive(false);
             }
-            if(GetEnemyType() == EnemyType.BounceNPC)
+            if (GetEnemyType() == EnemyType.HelicopterSeed)
+            {
+                transform.position = startPosition;
+            }
+            if (GetEnemyType() == EnemyType.BounceStressBall)
             {
                 rb.AddForce(new Vector2(1f, jumpHeight));
             }
@@ -118,7 +157,7 @@ public class Enemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        bounceRange = Random.Range((int)player.transform.position.x - 5, (int)player.transform.position.x + 5);
+     
         // Initialising the player object
         playerObject = GameObject.FindGameObjectWithTag("Player").transform;
         //Initiliasing the players position
@@ -128,16 +167,18 @@ public class Enemy : MonoBehaviour
         //Initiliasing the distance between the enemy and player vector
         distance = Vector2.Distance(playerPosition, enemyPosition);
         timePassed += Time.deltaTime;
+        if (GetEnemyType() != EnemyType.HelicopterSeed)
+        {
+            endPos = firePoint.position + Vector3.right * castDist;
+            hit = Physics2D.Linecast(firePoint.position, endPos);
+            Debug.DrawLine(firePoint.position, endPos, Color.blue);
+            groundInfo = Physics2D.Raycast(firePoint2.position, Vector2.down, 2f);
+            infrontInfo = Physics2D.Raycast(firePoint.position, Vector2.right, 0.3f);
+            Debug.DrawLine(firePoint2.position, endPos3, Color.cyan);
 
-        endPos = firePoint.position + Vector3.right * castDist;
-        hit = Physics2D.Linecast(firePoint.position, endPos);
-        Debug.DrawLine(firePoint.position, endPos, Color.blue);
-        groundInfo = Physics2D.Raycast(firePoint2.position, Vector2.down, 2f);
-        infrontInfo = Physics2D.Raycast(firePoint.position, Vector2.right, 0.3f);
-        Debug.DrawLine(firePoint2.position, endPos3, Color.cyan);
-
-        endPos2 = firePoint2.position + Vector3.right * 0.01f;
-        endPos3 = firePoint2.position + Vector3.down;
+            endPos2 = firePoint2.position + Vector3.right * 0.01f;
+            endPos3 = firePoint2.position + Vector3.down;
+        }
 
         
         if(afloat < twopie)
@@ -161,7 +202,7 @@ public class Enemy : MonoBehaviour
 
         switch(GetEnemyType())
         {
-            case EnemyType.RangeNPC:
+            case EnemyType.RangePlane:
                 //print(transform.position.x - player.transform.position.x);
                 if (transform.position.x - player.transform.position.x <= 10 && GetState() != State.Attacking)
                 {
@@ -183,7 +224,7 @@ public class Enemy : MonoBehaviour
                 break;
 
 
-            case EnemyType.BounceNPC:
+            case EnemyType.BounceStressBall:
                 transform.Translate(Vector3.right * walkSpeed * Time.deltaTime);
                 groundInfo = Physics2D.Raycast(firePoint2.position, Vector2.down, 5f);
                 if (groundInfo.collider == false)
@@ -201,7 +242,8 @@ public class Enemy : MonoBehaviour
                 }
                 break;
 
-            case EnemyType.ChargeNPC:
+            case EnemyType.ChargeCar:
+            case EnemyType.ChargeBuggy:
                 if (groundInfo.collider == false)
                 {
                     //Debug.LogError("false");
@@ -275,7 +317,7 @@ public class Enemy : MonoBehaviour
                 break;
 
 
-            case EnemyType.ObstructorNPC:
+            case EnemyType.ObstructorFrog:
                 if (distance < 35)
                 {
                     if (GetState() == State.Idle)
@@ -306,6 +348,11 @@ public class Enemy : MonoBehaviour
     {
         
             
+    }
+
+    public void SetHealth(int amount)
+    {
+        currentHealth = amount;
     }
 
     /**
@@ -353,7 +400,7 @@ public class Enemy : MonoBehaviour
         castDist = distance;
         castDist2 = -distance;
 
-        if (GetEnemyType() != EnemyType.ObstructorNPC)
+        if (GetEnemyType() != EnemyType.ObstructorFrog)
         {
             if (!movingRight)
             {
@@ -442,16 +489,17 @@ public class Enemy : MonoBehaviour
             case State.Attacking:
                 switch(GetEnemyType())
                 {
-                    case EnemyType.RangeNPC:
+                    case EnemyType.RangePlane:
                         targetLocation = player.transform.position;
                         targetLocation.x = player.transform.position.x + Random.Range(2, 10);
                         print(targetLocation);
                         print(player.transform.position);
                         break;
-                    case EnemyType.BounceNPC:
+                    case EnemyType.BounceStressBall:
                         Bounce();
                         break;
-                    case EnemyType.ChargeNPC:
+                    case EnemyType.ChargeCar:
+                    case EnemyType.ChargeBuggy:
                         Charge();
                         break;
                 }
@@ -463,8 +511,15 @@ public class Enemy : MonoBehaviour
                 break;
             //if the enemy is dead
             case State.Dead:
-                print("dead");
-                Destroy(this.gameObject); // The enemy is destroyed.
+                AddToRespawnList();
+                //Destroy(this.gameObject); // The enemy is destroyed.
+                if (GetEnemyType() == EnemyType.HelicopterSeed)
+                {
+                    transform.position = startPosition;
+                }
+                SetHealth(MAX_HEALTH);
+                SetState(State.Idle);
+                gameObject.SetActive(false);
                 break;
         }
     }
@@ -477,10 +532,11 @@ public class Enemy : MonoBehaviour
     //Handles the type of the enemy.
     public enum EnemyType
     {
-        ObstructorNPC,
-        ChargeNPC,
-        BounceNPC,
-        RangeNPC,
+        ObstructorFrog,
+        ChargeCar,
+        ChargeBuggy,
+        BounceStressBall,
+        RangePlane,
         HelicopterSeed
     }
 
