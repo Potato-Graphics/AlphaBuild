@@ -57,8 +57,8 @@ public class GameManager : MonoBehaviour
         foreach (RespawnEnemy enemy in respawnEnemies)
         {
             enemy.enemy.transform.position = enemy.spawnPoint;
-            enemy.enemy.SetActive(true);
             enemy.enemy.GetComponent<Enemy>().SetState(Enemy.State.Idle);
+            enemy.enemy.SetActive(true);
         }
         respawnEnemies.Clear();
     }
@@ -69,6 +69,7 @@ public class GameManager : MonoBehaviour
             OnPlayerDied();
         }
         player.transform.position = Player.spawnLocation;
+        Debug.LogError("the list contains: " + respawnEnemies.Count);
         RespawnNpc();
         
     }

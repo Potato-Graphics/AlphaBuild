@@ -55,7 +55,7 @@ public class Player : MonoBehaviour
     public static int waterRemaining;
     float dashSpeed = 150.0f;
     [SerializeField]GameObject endPoint;
-    [SerializeField] public bool usingController = true; 
+    [SerializeField] public bool usingController = false; 
 
     Vector3 lastMouseCoord = Vector3.zero;
     bool movedUp = false;
@@ -69,7 +69,6 @@ public class Player : MonoBehaviour
     public int sceneToRespawnOn;
 
     public bool ridingZipline = false;
-    public bool usingController = true;
     Vector3 playerPosition;
 
     Vector3 velocity;

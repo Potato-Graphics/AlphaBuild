@@ -26,14 +26,13 @@ public class DamagePlayer : MonoBehaviour
         print("test" + col.gameObject.tag);
         if (col.gameObject.tag.Equals("Player"))
         {
-            player.DealDamage(damageAmount);
-
             if (destroyable)
             {
                 enemy.UpdateHealth(enemy.MAX_HEALTH);
                 enemy.SetState(Enemy.State.Dead);
 
             }
+            player.DealDamage(damageAmount);
         }
     }
     void OnCollisionEnter2D(Collision2D col)
@@ -41,16 +40,13 @@ public class DamagePlayer : MonoBehaviour
         //  print("test" + col.gameObject.tag);
         if (col.gameObject.tag.Equals("Player"))
         {
-
-            player.DealDamage(damageAmount);
-
             if (destroyable)
             {
-
                 enemy.UpdateHealth(enemy.MAX_HEALTH);
                 enemy.SetState(Enemy.State.Dead);
 
             }
+            player.DealDamage(damageAmount);
         }
     }
 }
