@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -27,14 +28,14 @@ public class GameManager : MonoBehaviour
 
     void OnEnable()
     {
-        Player.OnPlayerDied += OnPlayerDied;
+        Player.OnPlayerDied += OnPlayerLostLife;
         Enemy.OnEnemyDied += OnEnemyDied;
 
     }
 
     void OnDisable()
     {
-        Player.OnPlayerDied -= OnPlayerDied;
+        Player.OnPlayerDied -= OnPlayerLostLife;
         Enemy.OnEnemyDied -= OnEnemyDied;
     }
 
@@ -55,15 +56,26 @@ public class GameManager : MonoBehaviour
     {
         foreach (RespawnEnemy enemy in respawnEnemies)
         {
+            enemy.enemy.transform.position = enemy.spawnPoint;
             enemy.enemy.SetActive(true);
+            enemy.enemy.GetComponent<Enemy>().SetState(Enemy.State.Idle);
         }
+        respawnEnemies.Clear();
     }
-    void OnPlayerDied()
+    void OnPlayerLostLife()
     {
+        if(player.GetHealth() <= 0)
+        {
+            OnPlayerDied();
+        }
         player.transform.position = Player.spawnLocation;
-        player.SetHealth(3);
         RespawnNpc();
         
+    }
+
+    void OnPlayerDied()
+    {
+        SceneManager.LoadScene(2);
     }
 
     // Update is called once per frame

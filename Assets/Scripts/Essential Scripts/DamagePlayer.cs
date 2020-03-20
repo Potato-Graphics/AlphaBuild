@@ -12,7 +12,7 @@ public class DamagePlayer : MonoBehaviour
     void Start()
     {
         player = GameObject.FindObjectOfType<Player>();
-        enemy = GameObject.FindObjectOfType<Enemy>();
+        enemy = GetComponent<Enemy>();
     }
 
     // Update is called once per frame
@@ -30,17 +30,15 @@ public class DamagePlayer : MonoBehaviour
 
             if (destroyable)
             {
-                enemy.AddToRespawnList();
                 enemy.UpdateHealth(enemy.MAX_HEALTH);
-                enemy.SetState(Enemy.State.Idle);
-                gameObject.SetActive(false);
-                // Destroy(gameObject);
+                enemy.SetState(Enemy.State.Dead);
+
             }
         }
     }
     void OnCollisionEnter2D(Collision2D col)
     {
-      //  print("test" + col.gameObject.tag);
+        //  print("test" + col.gameObject.tag);
         if (col.gameObject.tag.Equals("Player"))
         {
 
@@ -48,11 +46,10 @@ public class DamagePlayer : MonoBehaviour
 
             if (destroyable)
             {
-                enemy.AddToRespawnList();
-                // Destroy(gameObject);
+
                 enemy.UpdateHealth(enemy.MAX_HEALTH);
-                enemy.SetState(Enemy.State.Idle);
-                gameObject.SetActive(false);
+                enemy.SetState(Enemy.State.Dead);
+
             }
         }
     }

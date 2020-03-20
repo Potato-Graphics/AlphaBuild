@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-public class RespawnEnemy : MonoBehaviour, IComparable<RespawnEnemy>
+public class RespawnEnemy : IComparable<RespawnEnemy>
 {
     public GameObject enemy;
     public Vector3 spawnPoint;

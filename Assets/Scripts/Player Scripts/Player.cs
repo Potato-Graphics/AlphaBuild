@@ -420,6 +420,7 @@ public class Player : MonoBehaviour
         if (isAttackable == true)
         {
             UpdateHealth(-amount);
+            HandleDeath();
             isAttackable = false;
             StartCoroutine(DamagedDelay());
         }
