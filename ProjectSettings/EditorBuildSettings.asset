@@ -20,7 +20,7 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/PrincessBoss.unity
     guid: cbfe36cfddfde964d9dfce63a355d5dd
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/DeathScreen.unity
     guid: f8395c312e4e82547bc5f917302a86c5
   m_configObjects: {}
