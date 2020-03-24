@@ -53,7 +53,7 @@ public class Player : MonoBehaviour
     [SerializeField] float dashDistance = 4f;
     public static int checkpointsReceived;
     public static int waterRemaining;
-    float dashSpeed = 150.0f;
+    public float dashSpeed = 150.0f;
     [SerializeField]GameObject endPoint;
     [SerializeField] public bool usingController = false; 
 
