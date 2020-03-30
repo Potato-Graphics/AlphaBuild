@@ -47,13 +47,13 @@ public class Player : MonoBehaviour
     [SerializeField] GameObject lifeOne = null;
     [SerializeField] GameObject lifeTwo = null;
     [SerializeField] GameObject lifeThree = null;
-    public static Vector3 spawnLocation = new Vector3(-52.7122f, 4.03075f, -0.3430906f);
+    public static Vector3 spawnLocation;
     [SerializeField] GameObject player;
     public static Vector3 checkpointPos;
     [SerializeField] float dashDistance = 4f;
     public static int checkpointsReceived;
     public static int waterRemaining;
-    float dashSpeed = 150.0f;
+    public float dashSpeed = 150.0f;
     [SerializeField]GameObject endPoint;
     [SerializeField] public bool usingController = false; 
 
@@ -100,10 +100,6 @@ public class Player : MonoBehaviour
 
         waterRemaining = 50;
         DontDestroyOnLoad(gameObject);
-        print("test1");
-
-        print(checkpointsReceived);
-        print("checkpoint pos " + checkpointPos);
         totalPumps = 0;
 
         //transform.position = spawnLocation;
