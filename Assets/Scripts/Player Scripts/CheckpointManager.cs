@@ -19,7 +19,6 @@ public class CheckpointManager : MonoBehaviour
     }
     void OnTriggerEnter2D(Collider2D col)
     {
-        Debug.LogWarning(col.gameObject.tag);
         if(col.gameObject.tag == "Player")
         {
             Player.spawnLocation = transform.position;
