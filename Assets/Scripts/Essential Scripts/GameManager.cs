@@ -16,7 +16,6 @@ public class GameManager : MonoBehaviour
 
     Player player;
     Enemy enemy;
-    private Pathfinding pathfinding;
 
     bool gameOver = false;
         public bool GameOver { get { return gameOver; } }
@@ -25,7 +24,6 @@ public class GameManager : MonoBehaviour
         Instance = this;
         player = GameObject.FindObjectOfType<Player>();
         enemy = GameObject.FindObjectOfType<Enemy>();
-        pathfinding = new Pathfinding(1000, 10);
     }
 
     void OnEnable()
