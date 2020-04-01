@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Weapon : MonoBehaviour
 {
@@ -18,6 +19,7 @@ public class Weapon : MonoBehaviour
     public Rigidbody2D bulletDiagUp;
     public Vector3 position;
     [SerializeField] float speed = 25;
+    public Image specialBar;
 
     float timeToFire = 0;
 
@@ -46,7 +48,7 @@ public class Weapon : MonoBehaviour
     void Shooting()
     {
         float joyangle = Mathf.Atan2(Input.GetAxis("JoyStickX"), Input.GetAxis("JoyStickY")) * Mathf.Rad2Deg;
-        Debug.LogError("The mouse x axis = " + joyangle + "joystickx : " + Input.GetAxis("JoyStickX") + "joystick y " + Input.GetAxis("JoyStickY") + "mouse y" + Input.GetAxis("Mouse Y") );
+        Debug.LogError("The mouse x axis = " + joyangle + "joystickx : " + Input.GetAxis("JoyStickX") + "joystick y " + Input.GetAxis("JoyStickY") + "mouse y" + Input.GetAxis("Mouse Y"));
         Debug.LogError("joyangle: " + joyangle);
         Vector3 dir = Input.mousePosition - Camera.main.WorldToScreenPoint(transform.position); // Mouse position directoin.
         Vector3 direction = Input.mousePosition;
@@ -87,109 +89,231 @@ public class Weapon : MonoBehaviour
 
 
 
+        if (!player.usingController)
+        {
+            if (fAngle >= 77 && fAngle <= 110 || joyangle > 165 && joyangle < 185)
+            {
+                //this is up
+                Rigidbody2D bullet = Instantiate(bulletUp, firePoint.position, firePoint.rotation);
+                bullet.transform.localScale *= player.bulletSizeMultiplier;
+                //BulletScript.yDirection = 0.1f;
+                //BulletScript.xDirection = 0.0f;
+                Vector2 velocityChange = new Vector2(0.0f, 0.3f);
+                bullet.velocity = velocityChange * (Time.deltaTime * speed);
+                float angle = 90;
+                firePoint.rotation = Quaternion.AngleAxis(55, Vector3.up);
+                print("up");
+                anim.SetTrigger("FireUp");
+            }
 
-        if (fAngle >= 77 && fAngle <= 110 || joyangle > 165 && joyangle < 185)
-        {
-            //this is up
-            Rigidbody2D bullet = Instantiate(bulletUp, firePoint.position, firePoint.rotation);
-            //BulletScript.yDirection = 0.1f;
-            //BulletScript.xDirection = 0.0f;
-            Vector2 velocityChange = new Vector2(0.0f, 0.3f);
-            bullet.velocity = velocityChange * (Time.deltaTime * speed);
-            float angle = 90;
-            firePoint.rotation = Quaternion.AngleAxis(55, Vector3.up);
-            print("up");
-            anim.SetTrigger("FireUp");
-        }
+            else if (fAngle >= 246 && fAngle <= 288)
+            {
+                //this is down
+                anim.SetTrigger("FireDown");
+                Rigidbody2D bullet = Instantiate(bulletDown, firePoint.position, firePoint.rotation);
+                bullet.transform.localScale *= player.bulletSizeMultiplier;
+                //BulletScript.yDirection = -0.1f;
+                // BulletScript.xDirection = 0.0f;
+                Vector2 velocityChange = new Vector2(0, -0.1f);
+                print("down");
+                bullet.velocity = velocityChange * (Time.deltaTime * speed);
 
-        else if (fAngle >= 246 && fAngle <= 288 || joyangle >= -66 && joyangle <= 108)
-        {
-            //this is down
-            anim.SetTrigger("FireDown");
-            Rigidbody2D bullet = Instantiate(bulletDown, firePoint.position, firePoint.rotation);
-            //BulletScript.yDirection = -0.1f;
-            // BulletScript.xDirection = 0.0f;
-            Vector2 velocityChange = new Vector2(0, -0.1f);
-            print("down");
-            bullet.velocity = velocityChange * (Time.deltaTime * speed);
+            }
+            else if (fAngle < 77 && fAngle >= 19.2)
+            {
+                //this is right up
+                anim.SetTrigger("FireDiagUp");
+                Rigidbody2D bullet = Instantiate(bulletDiagUp, firePoint.position, firePoint.localRotation);
+                bullet.transform.localScale *= player.bulletSizeMultiplier;
+                //BulletScript.xDirection = 0.1f;
+                // BulletScript.yDirection = 0.1f;
+                Vector2 velocityChange = new Vector2(0.1f, 0.1f);
+                print("right up");
+                bullet.velocity = velocityChange * (Time.deltaTime * speed);
 
-        }
-        else if (fAngle < 77 && fAngle >= 19.2)
-        {
-            //this is right up
-            anim.SetTrigger("FireDiagUp");
-            Rigidbody2D bullet = Instantiate(bulletDiagUp, firePoint.position, firePoint.localRotation);
-            //BulletScript.xDirection = 0.1f;
-            // BulletScript.yDirection = 0.1f;
-            Vector2 velocityChange = new Vector2(0.1f, 0.1f);
-            print("right up");
-            bullet.velocity = velocityChange * (Time.deltaTime * speed);
+            }
+            else if (fAngle < 19.2 && fAngle >= 0 || fAngle < 360 && fAngle > 350)
+            {
+                //this is right
+                anim.SetTrigger("FireHorizontal");
+                Rigidbody2D bullet = Instantiate(bulletHorizontal, firePoint.position, firePoint.localRotation);
+                bullet.transform.localScale *= player.bulletSizeMultiplier;
+                // BulletScript.xDirection = 0.1f;
+                // BulletScript.yDirection = 0.0f;
+                Vector2 velocityChange = new Vector2(0.1f, 0);
+                print("right");
+                bullet.velocity = velocityChange * (Time.deltaTime * speed);
 
-        }
-        else if (fAngle < 19.2 && fAngle >= 0 || fAngle < 360 && fAngle > 350)
-        {
-            //this is right
-            anim.SetTrigger("FireHorizontal");
-            Rigidbody2D bullet = Instantiate(bulletHorizontal, firePoint.position, firePoint.localRotation);
-            // BulletScript.xDirection = 0.1f;
-            // BulletScript.yDirection = 0.0f;
-            Vector2 velocityChange = new Vector2(0.1f, 0);
-            print("right");
-            bullet.velocity = velocityChange * (Time.deltaTime * speed);
+            }
+            else if (fAngle <= 350 && fAngle > 288)
+            {
+                //this is right down
+                anim.SetTrigger("FireDiagDown");
+                Rigidbody2D bullet = Instantiate(bulletDiagDown, firePoint.position, firePoint.localRotation);
+                bullet.transform.localScale *= player.bulletSizeMultiplier;
+                //BulletScript.xDirection = 0.1f;
+                //BulletScript.yDirection = -0.1f;
+                Vector2 velocityChange = new Vector2(0.1f, -0.1f);
+                print("right down");
+                bullet.velocity = velocityChange * (Time.deltaTime * speed);
 
-        }
-        else if (fAngle <= 350 && fAngle > 288)
-        {
-            //this is right down
-            anim.SetTrigger("FireDiagDown");
-            Rigidbody2D bullet = Instantiate(bulletDiagDown, firePoint.position, firePoint.localRotation);
-            //BulletScript.xDirection = 0.1f;
-            //BulletScript.yDirection = -0.1f;
-            Vector2 velocityChange = new Vector2(0.1f, -0.1f);
-            print("right down");
-            bullet.velocity = velocityChange * (Time.deltaTime * speed);
+            }
+            else if (fAngle > 110 && fAngle <= 165)
+            {
+                //this is left up
+                anim.SetTrigger("FireDiagUp");
+                Rigidbody2D bullet = Instantiate(bulletDiagUp, firePoint.position, firePoint.localRotation);
+                bullet.transform.localScale *= player.bulletSizeMultiplier;
+                //BulletScript.xDirection = -0.1f;
+                // BulletScript.yDirection = 0.1f;
+                Vector2 velocityChange = new Vector2(-0.1f, 0.1f);
+                bullet.transform.eulerAngles = new Vector2(0, -180);
+                print("left up");
+                bullet.velocity = velocityChange * (Time.deltaTime * speed);
 
+            }
+            else if (fAngle > 165 && fAngle <= 190)
+            {
+                //this is left
+                anim.SetTrigger("FireHorizontal");
+                Rigidbody2D bullet = Instantiate(bulletHorizontal, firePoint.position, firePoint.localRotation);
+                bullet.transform.localScale *= player.bulletSizeMultiplier;
+                //BulletScript.xDirection = -0.1f;
+                // BulletScript.yDirection = 0.0f;
+                Vector2 velocityChange = new Vector2(-0.1f, 0);
+                bullet.transform.eulerAngles = new Vector2(0, -180);
+                print("left");
+                bullet.velocity = velocityChange * (Time.deltaTime * speed);
+            }
+            else if (fAngle > 190 && fAngle < 246)
+            {
+                //this is left down
+                anim.SetTrigger("FireDiagDown");
+                Rigidbody2D bullet = Instantiate(bulletDiagDown, firePoint.position, firePoint.localRotation);
+                bullet.transform.localScale *= player.bulletSizeMultiplier;
+                // BulletScript.xDirection = -0.1f;
+                //  BulletScript.yDirection = -0.1f;
+                Vector2 velocityChange = new Vector2(-0.1f, -0.1f);
+                print("left down");
+                bullet.transform.eulerAngles = new Vector2(0, -180);
+                bullet.velocity = velocityChange * (Time.deltaTime * speed);
+            }
         }
-        else if (fAngle > 110 && fAngle <= 165)
+        else if (player.usingController)
         {
-            //this is left up
-            anim.SetTrigger("FireDiagUp");
-            Rigidbody2D bullet = Instantiate(bulletDiagUp, firePoint.position, firePoint.localRotation);
-            //BulletScript.xDirection = -0.1f;
-            // BulletScript.yDirection = 0.1f;
-            Vector2 velocityChange = new Vector2(-0.1f, 0.1f);
-            bullet.transform.eulerAngles = new Vector2(0, -180);
-            print("left up");
-            bullet.velocity = velocityChange * (Time.deltaTime * speed);
+            if (joyangle < 34 && joyangle > -34)
+            {
+                //this is up
+                Rigidbody2D bullet = Instantiate(bulletUp, firePoint.position, firePoint.rotation);
+                bullet.transform.localScale *= player.bulletSizeMultiplier;
+                //BulletScript.yDirection = 0.1f;
+                //BulletScript.xDirection = 0.0f;
+                Vector2 velocityChange = new Vector2(0.0f, 0.3f);
+                bullet.velocity = velocityChange * (Time.deltaTime * speed);
+                float angle = 90;
+                firePoint.rotation = Quaternion.AngleAxis(55, Vector3.up);
+                print("up");
+                anim.SetTrigger("FireUp");
+            }
 
-        }
-        else if (fAngle > 165 && fAngle <= 190)
-        {
-            //this is left
-            anim.SetTrigger("FireHorizontal");
-            Rigidbody2D bullet = Instantiate(bulletHorizontal, firePoint.position, firePoint.localRotation);
-            //BulletScript.xDirection = -0.1f;
-            // BulletScript.yDirection = 0.0f;
-            Vector2 velocityChange = new Vector2(-0.1f, 0);
-            bullet.transform.eulerAngles = new Vector2(0, -180);
-            print("left");
-            bullet.velocity = velocityChange * (Time.deltaTime * speed);
-        }
-        else if (fAngle > 190 && fAngle < 246)
-        {
-            //this is left down
-            anim.SetTrigger("FireDiagDown");
-            Rigidbody2D bullet = Instantiate(bulletDiagDown, firePoint.position, firePoint.localRotation);
-            // BulletScript.xDirection = -0.1f;
-            //  BulletScript.yDirection = -0.1f;
-            Vector2 velocityChange = new Vector2(-0.1f, -0.1f);
-            print("left down");
-            bullet.transform.eulerAngles = new Vector2(0, -180);
-            bullet.velocity = velocityChange * (Time.deltaTime * speed);
+            else if (joyangle > 125 && joyangle < 180 || joyangle < -161 && joyangle > -180)
+            {
+                //this is down
+                anim.SetTrigger("FireDown");
+                Rigidbody2D bullet = Instantiate(bulletDown, firePoint.position, firePoint.rotation);
+                bullet.transform.localScale *= player.bulletSizeMultiplier;
+                //BulletScript.yDirection = -0.1f;
+                // BulletScript.xDirection = 0.0f;
+                Vector2 velocityChange = new Vector2(0, -0.1f);
+                print("down");
+                bullet.velocity = velocityChange * (Time.deltaTime * speed);
+
+            }
+            else if (joyangle > 34 && joyangle < 65)
+            {
+                //this is right up
+                anim.SetTrigger("FireDiagUp");
+                Rigidbody2D bullet = Instantiate(bulletDiagUp, firePoint.position, firePoint.localRotation);
+                bullet.transform.localScale *= player.bulletSizeMultiplier;
+                //BulletScript.xDirection = 0.1f;
+                // BulletScript.yDirection = 0.1f;
+                Vector2 velocityChange = new Vector2(0.1f, 0.1f);
+                print("right up");
+                bullet.velocity = velocityChange * (Time.deltaTime * speed);
+
+            }
+            else if (joyangle > 65 && joyangle < 90)
+            {
+                //this is right
+                anim.SetTrigger("FireHorizontal");
+                Rigidbody2D bullet = Instantiate(bulletHorizontal, firePoint.position, firePoint.localRotation);
+                bullet.transform.localScale *= player.bulletSizeMultiplier;
+                // BulletScript.xDirection = 0.1f;
+                // BulletScript.yDirection = 0.0f;
+                Vector2 velocityChange = new Vector2(0.1f, 0);
+                print("right");
+                bullet.velocity = velocityChange * (Time.deltaTime * speed);
+
+            }
+            else if (joyangle > 90 && joyangle < 125)
+            {
+                //this is right down
+                anim.SetTrigger("FireDiagDown");
+                Rigidbody2D bullet = Instantiate(bulletDiagDown, firePoint.position, firePoint.localRotation);
+                bullet.transform.localScale *= player.bulletSizeMultiplier;
+                //BulletScript.xDirection = 0.1f;
+                //BulletScript.yDirection = -0.1f;
+                Vector2 velocityChange = new Vector2(0.1f, -0.1f);
+                print("right down");
+                bullet.velocity = velocityChange * (Time.deltaTime * speed);
+
+            }
+            else if (joyangle < -34 && joyangle > -65)
+            {
+                //this is left up
+                anim.SetTrigger("FireDiagUp");
+                Rigidbody2D bullet = Instantiate(bulletDiagUp, firePoint.position, firePoint.localRotation);
+                bullet.transform.localScale *= player.bulletSizeMultiplier;
+                //BulletScript.xDirection = -0.1f;
+                // BulletScript.yDirection = 0.1f;
+                Vector2 velocityChange = new Vector2(-0.1f, 0.1f);
+                bullet.transform.eulerAngles = new Vector2(0, -180);
+                print("left up");
+                bullet.velocity = velocityChange * (Time.deltaTime * speed);
+
+            }
+            else if (joyangle < -65 && joyangle > -90)
+            {
+                //this is left
+                anim.SetTrigger("FireHorizontal");
+                Rigidbody2D bullet = Instantiate(bulletHorizontal, firePoint.position, firePoint.localRotation);
+                bullet.transform.localScale *= player.bulletSizeMultiplier;
+                //BulletScript.xDirection = -0.1f;
+                // BulletScript.yDirection = 0.0f;
+                Vector2 velocityChange = new Vector2(-0.1f, 0);
+                bullet.transform.eulerAngles = new Vector2(0, -180);
+                print("left");
+                bullet.velocity = velocityChange * (Time.deltaTime * speed);
+            }
+            else if (joyangle < -90 && joyangle > -125)
+            {
+                //this is left down
+                anim.SetTrigger("FireDiagDown");
+                Rigidbody2D bullet = Instantiate(bulletDiagDown, firePoint.position, firePoint.localRotation);
+                bullet.transform.localScale *= player.bulletSizeMultiplier;
+                // BulletScript.xDirection = -0.1f;
+                //  BulletScript.yDirection = -0.1f;
+                Vector2 velocityChange = new Vector2(-0.1f, -0.1f);
+                print("left down");
+                bullet.transform.eulerAngles = new Vector2(0, -180);
+                bullet.velocity = velocityChange * (Time.deltaTime * speed);
+            }
         }
 
         delay = true;
         StartCoroutine(ShootDelay());
+        specialBar.fillAmount = 0;
+        player.bulletSizeMultiplier = 1;
     }
 
     IEnumerator ShootDelay()
