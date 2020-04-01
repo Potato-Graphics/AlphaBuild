@@ -22,6 +22,7 @@ public class Player : MonoBehaviour
     public Vector2 wallJumpOff;
     public Vector2 wallLeap;
     public Transform zipline;
+    public int checkpointID = 0;
 
     static int ID = 0;
 
@@ -46,20 +47,21 @@ public class Player : MonoBehaviour
     [SerializeField] GameObject lifeOne = null;
     [SerializeField] GameObject lifeTwo = null;
     [SerializeField] GameObject lifeThree = null;
-    public static Vector3 spawnLocation = new Vector3(-4f, 0.47f, 0f);
+    public static Vector3 spawnLocation = new Vector3(-52.7122f, 4.03075f, -0.3430906f);
     [SerializeField] GameObject player;
     public static Vector3 checkpointPos;
     [SerializeField] float dashDistance = 4f;
     public static int checkpointsReceived;
     public static int waterRemaining;
-    float dashSpeed = 150.0f;
+    public float dashSpeed = 150.0f;
     [SerializeField]GameObject endPoint;
+    [SerializeField] public bool usingController = false; 
 
     Vector3 lastMouseCoord = Vector3.zero;
     bool movedUp = false;
     bool movedDown = false;
-    static int totalPumps = 0;
-    public static float bulletDamage = 0f;
+    public static int totalPumps = 0;
+    public static float bulletDamage = 1f;
     bool pumpStarted = false;
     public float airTimeJumpDelay;
     public bool canJump = false;
@@ -79,8 +81,12 @@ public class Player : MonoBehaviour
 
     Vector2 dashPosition;
 
+    public float bulletSizeMultiplier = 1;
+
 
     private Animator anim;
+
+    [SerializeField]public Image specialBar;
 
     // Start is called before the first frame update
     void Awake()
@@ -98,6 +104,7 @@ public class Player : MonoBehaviour
 
         print(checkpointsReceived);
         print("checkpoint pos " + checkpointPos);
+        totalPumps = 0;
 
         //transform.position = spawnLocation;
         sceneToRespawnOn = SceneManager.GetActiveScene().buildIndex;
@@ -107,15 +114,29 @@ public class Player : MonoBehaviour
         lifeThree.SetActive(true);
         controller = GetComponent<Controller2D>();
         isAttackable = true;
+        specialBar.fillAmount = 0;
 
         gravity = -(2 * jumpHeight) / Mathf.Pow(timeToJumpApex, 2);
         jumpVelocity = Mathf.Abs(gravity) * timeToJumpApex;
     }
 
+    void OnEnable()
+    {
+        GameManager.OnGameOver += HandleDeath;
+    }
+
+    void OnDisable()
+    {
+        GameManager.OnGameOver -= HandleDeath;
+    }
+
     //Stops the player from moving building up downward force when standing still.
     void Update()
     {
-      
+      if(Input.GetKeyDown(KeyCode.R))
+        {
+            Debug.LogError(GameManager.respawnEnemies.Count);
+        }
         playerPosition = transform.position;
         //JAM CODE
         /////////////////////////////////
@@ -143,14 +164,20 @@ public class Player : MonoBehaviour
             Vector3 mouseDelta = Input.mousePosition - lastMouseCoord;
             if (mouseDelta.y > 10 && movedUp == false)
             {
-                print("Mouse moved up");
+                if (totalPumps >= 10) return;
                 totalPumps++;
+                if (specialBar.fillAmount >= 1.0) return;
+                specialBar.fillAmount += 0.1f;
+                bulletSizeMultiplier += 0.1f;
                 movedUp = true;
                 movedDown = false;
             }
             if (mouseDelta.y < -10 && movedDown == false)
             {
-                print("Mouse moved down");
+                if (totalPumps >= 10) return;
+                if (specialBar.fillAmount >= 1.0) return;
+                specialBar.fillAmount += 0.1f;
+                bulletSizeMultiplier += 0.1f;
                 totalPumps++;
                 movedDown = true;
                 movedUp = false;
@@ -160,12 +187,11 @@ public class Player : MonoBehaviour
         if (Input.GetAxisRaw("Fire2") == 0 && pumpStarted)
         {
             pumpStarted = false;
-            print("Bullet damage was: " + bulletDamage);
             bulletDamage += totalPumps / 10;
-            print("Bullet damage now: " + bulletDamage);
             totalPumps = 0;
             movedDown = false;
             movedUp = false;
+            
         }
 
         bool wallSliding = false;
@@ -221,6 +247,10 @@ public class Player : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.G))
         {
             SetHealth(10000);
+        }
+        if (Input.GetKeyDown(KeyCode.H))
+        {
+            SetHealth(0);
         }
         if (Input.GetKeyDown(KeyCode.LeftShift))
         {
@@ -306,7 +336,7 @@ public class Player : MonoBehaviour
         }
         else { direction = 0; }
 
-        if (Input.GetKeyDown(KeyCode.Space) || (Input.GetButton("Jump")))
+        if ((Input.GetButtonDown("Jump")))
         {
             if (ridingZipline) return;
             if (wallSliding)
@@ -390,6 +420,7 @@ public class Player : MonoBehaviour
         if (isAttackable == true)
         {
             UpdateHealth(-amount);
+            HandleDeath();
             isAttackable = false;
             StartCoroutine(DamagedDelay());
         }
