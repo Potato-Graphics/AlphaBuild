@@ -1,26 +1,20 @@
 fileFormatVersion: 2
-guid: 7443b65e8ba715948aa2f1b0288443c4
+guid: ccbd2e7373803b647950ebdbbf9b17f2
 ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
     100000: //RootNode
     400000: //RootNode
-    2100000: M_Leads_02
-    2100002: M_Tree_03
+    2100000: lambert2
     2300000: //RootNode
     3300000: //RootNode
-    4300000: SM_Tree_04
+    4300000: SM_Tire_01
   externalObjects:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: M_Leads_02
-    second: {fileID: 2100000, guid: 6ea8b4e2cc64738459c7d79023cf6e88, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: M_Tree_03
-    second: {fileID: 2100000, guid: ff5c5c7df3d72f44ea1766635740c164, type: 2}
+      name: lambert2
+    second: {fileID: 2100000, guid: 9d4cca259417cc44e921358dacd01b89, type: 2}
   materials:
     importMaterials: 1
     materialName: 0
