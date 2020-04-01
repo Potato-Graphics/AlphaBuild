@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 92bc7382fcfdacb4da17e8ca06afa6b6
+guid: 7443b65e8ba715948aa2f1b0288443c4
 ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
@@ -9,7 +9,7 @@ ModelImporter:
     2100002: M_Tree_03
     2300000: //RootNode
     3300000: //RootNode
-    4300000: pPlane31
+    4300000: SM_Tree_04
   externalObjects:
   - first:
       type: UnityEngine:Material
