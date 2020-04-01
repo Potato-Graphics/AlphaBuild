@@ -12,10 +12,6 @@ public class BubbleHandler : MonoBehaviour
     Enemy enemy;
     public int pointsGiven;
 
-    private int currentPathIndex;
-    private List<Vector3> pathVectorList;
-
-
     // Start is called before the first frame update
     void Start()
     {
@@ -24,9 +20,8 @@ public class BubbleHandler : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         StartCoroutine(DestroyBubbleDelay());
         player = GameObject.FindObjectOfType<Player>();
-        SetTargetPosition();
 
-
+       
 
     }
 
@@ -35,30 +30,7 @@ public class BubbleHandler : MonoBehaviour
     {
         if(GetState() == State.Attacking)
         {
-            HandleChase();
-        }
-    }
-
-    private void HandleChase()
-    {
-        if(pathVectorList != null)
-        {
-            Vector3 targetPosition = pathVectorList[currentPathIndex];
-            if(Vector3.Distance(transform.position, targetPosition) > 1f)
-            {
-                Vector3 moveDir = (targetPosition - targetPosition).normalized;
-
-                float distanceBefore = Vector3.Distance(transform.position, targetPosition);
-                transform.position = transform.position + moveDir * chaseSpeed * Time.deltaTime;
-            } else
-            {
-                currentPathIndex++;
-                if(currentPathIndex >= pathVectorList.Count)
-                {
-                    SetState(State.Idle);
-                    pathVectorList = null;
-                }
-            }
+            transform.position = Vector3.MoveTowards(this.transform.position, player.transform.position, Time.deltaTime * chaseSpeed);
         }
     }
 
@@ -106,16 +78,6 @@ public class BubbleHandler : MonoBehaviour
         enemy.bubblesSpawned--;
     }
 
-    public void SetTargetPosition()
-    {
-        currentPathIndex = 0;
-        pathVectorList = Pathfinding.Instance.FindPath(transform.position, player.transform.position);
-
-        if(pathVectorList != null && pathVectorList.Count > 1)
-        {
-            pathVectorList.RemoveAt(0);
-        }
-    }
     private void HandleNewState(State newState)
     {
         switch(newState)
