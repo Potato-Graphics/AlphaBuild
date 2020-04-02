@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Impact03_AddScroll
-  m_Shader: {fileID: 4800000, guid: 16ca7b3ae9757d3449b1fd11fe40e235, type: 3}
+  m_Shader: {fileID: 4800000, guid: 86bf63d1700646847b7dd4680e69974f, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -22,13 +22,19 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - Texture2D_6626A7F4:
-        m_Texture: {fileID: 2800000, guid: 29a190de4067cd34ea6b09bb27253e8b, type: 3}
+        m_Texture: {fileID: 2800000, guid: 712cb6ef5ae602d4ea4f7575f86c7112, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
     - Vector1_1D409D9: 20
     - Vector1_3BD88EA6: -0.05
+    - Vector1_3F347A89: 6
+    - Vector1_401B482B: 0.1
+    - Vector1_489B072: 7
+    - Vector1_66295161: 2
     m_Colors:
-    - Color_8E6C8CEA: {r: 14.251831, g: 12.908727, b: 12.908727, a: 1}
+    - Color_8E6C8CEA: {r: 191.74902, g: 191.74902, b: 191.74902, a: 1}
+    - Color_C5EF52A3: {r: 0.01568627, g: 0.6187257, b: 1, a: 0}
+    - Color_CD7F5E0E: {r: 0, g: 1.427451, b: 1.678431, a: 0}
     - Vector2_B3A0242A: {r: 0.3, g: 0.1, b: 0, a: 0}
     - _Vector_2: {r: 0, g: 0, b: 0, a: 0}
