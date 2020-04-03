@@ -158,7 +158,51 @@ public class Player : MonoBehaviour
         velocity.x = Mathf.SmoothDamp(velocity.x, targetVelocityX, ref velocityXSmoothing, (controller.collisions.below) ? accelerationTimeGrounded : accelerationTimeAirborne);
         anim.SetFloat("Speed", Mathf.Abs(velocity.x / moveSpeed));
 
-        if (Input.GetAxisRaw("Fire2") != 0)
+        if (Input.GetAxisRaw("ContFire2") != 0 && usingController)
+        {
+            Debug.LogError("Pump button pressed");
+            pumpStarted = true;
+            float joyangle = Mathf.Atan2(Input.GetAxis("JoyStickX"), Input.GetAxis("JoyStickY")) * Mathf.Rad2Deg;
+            Debug.LogError("joyangle: " + joyangle);
+            //UP = joyangle < 34 && joyangle > -34
+            //Down = joyangle > 125 && joyangle < 180 || joyangle < -161 && joyangle > -180
+            Debug.LogError("movedDown: " + movedDown);
+            Debug.LogError("movedUp: " + movedUp);
+            if (joyangle < 34 && joyangle > -34 && !movedDown)
+            {
+                Debug.LogError("moved down");
+                if (totalPumps >= 10) return;
+                if (specialBar.fillAmount >= 1.0) return;
+                specialBar.fillAmount += 0.1f;
+                bulletSizeMultiplier += 0.1f;
+                totalPumps++;
+                movedDown = true;
+                movedUp = false;
+            }
+            if (joyangle < 34 && joyangle > -34 && !movedUp)
+            {
+                Debug.LogError("moved up");
+                if (totalPumps >= 10) return;
+                totalPumps++;
+                if (specialBar.fillAmount >= 1.0) return;
+                specialBar.fillAmount += 0.1f;
+                bulletSizeMultiplier += 0.1f;
+                movedUp = true;
+                movedDown = false;
+            }
+
+
+        }
+        if (Input.GetAxisRaw("ContFire2") == 0 && pumpStarted && usingController)
+        {
+            pumpStarted = false;
+            bulletDamage += totalPumps / 10;
+            totalPumps = 0;
+            movedDown = false;
+            movedUp = false;
+
+        }
+        if (Input.GetAxisRaw("Fire2") != 0 && !usingController)
         {
             pumpStarted = true;
             Vector3 mouseDelta = Input.mousePosition - lastMouseCoord;
@@ -184,14 +228,14 @@ public class Player : MonoBehaviour
             }
             lastMouseCoord = Input.mousePosition;
         }
-        if (Input.GetAxisRaw("Fire2") == 0 && pumpStarted)
+        if (Input.GetAxisRaw("Fire2") == 0 && pumpStarted && !usingController)
         {
             pumpStarted = false;
             bulletDamage += totalPumps / 10;
             totalPumps = 0;
             movedDown = false;
             movedUp = false;
-            
+
         }
 
         bool wallSliding = false;
