@@ -143,10 +143,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
-  endPosition: {x: 0, y: 0}
-  endPoint: {fileID: 0}
-  timeStartedLerping: 0
-  lerpTime: 0
+  speed: 1
+  targetPoint: {fileID: 0}
+  ziplinePoints: []
+  minDistance: 0.1
 --- !u!1 &4428919291179801600
 GameObject:
   m_ObjectHideFlags: 0

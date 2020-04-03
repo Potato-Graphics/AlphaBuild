@@ -26,14 +26,10 @@ public class ScoreManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetAxis("Fire2") > 0.0f)
-        {
-            ScoreValue += 1000;
-        }
-        score.text = "Score: " + ScoreValue;
+        score.text = "" + ScoreValue;
         if (Time.time >= timeSecond)
         {
-            ScoreValue -= 10;
+            ScoreValue -= ScoreValue / 10;
             timeSecond += 3;
         }
     }
