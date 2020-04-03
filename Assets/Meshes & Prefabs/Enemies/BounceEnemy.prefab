@@ -486,12 +486,12 @@ PrefabInstance:
     - target: {fileID: 6249186008181750452, guid: 6adafcde58647c045a102ac3aee433a4,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: 100
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 6249186008181750452, guid: 6adafcde58647c045a102ac3aee433a4,
         type: 3}
       propertyPath: m_SizeDelta.y
-      value: 100
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 6249186008181750452, guid: 6adafcde58647c045a102ac3aee433a4,
         type: 3}
@@ -538,20 +538,30 @@ PrefabInstance:
       propertyPath: m_LocalScale.y
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 236843299483654078, guid: 6adafcde58647c045a102ac3aee433a4,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 236843299483654078, guid: 6adafcde58647c045a102ac3aee433a4,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 4150845589612561632, guid: 6adafcde58647c045a102ac3aee433a4,
         type: 3}
       propertyPath: m_AnchoredPosition.x
       value: 137.9
       objectReference: {fileID: 0}
-    - target: {fileID: 6947598397353485698, guid: 6adafcde58647c045a102ac3aee433a4,
+    - target: {fileID: 4150845589612561632, guid: 6adafcde58647c045a102ac3aee433a4,
         type: 3}
-      propertyPath: m_PreserveAspect
-      value: 1
+      propertyPath: m_SizeDelta.x
+      value: 10
       objectReference: {fileID: 0}
-    - target: {fileID: 6947598397353485698, guid: 6adafcde58647c045a102ac3aee433a4,
+    - target: {fileID: 4150845589612561632, guid: 6adafcde58647c045a102ac3aee433a4,
         type: 3}
-      propertyPath: m_FillAmount
-      value: 1
+      propertyPath: m_SizeDelta.y
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 3027150668777236869, guid: 6adafcde58647c045a102ac3aee433a4,
         type: 3}
@@ -617,6 +627,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.y
       value: 0.91
+      objectReference: {fileID: 0}
+    - target: {fileID: 6947598397353485698, guid: 6adafcde58647c045a102ac3aee433a4,
+        type: 3}
+      propertyPath: m_PreserveAspect
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6947598397353485698, guid: 6adafcde58647c045a102ac3aee433a4,
+        type: 3}
+      propertyPath: m_FillAmount
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5146099877731394235, guid: 6adafcde58647c045a102ac3aee433a4,
         type: 3}
