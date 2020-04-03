@@ -132,6 +132,8 @@ MonoBehaviour:
   killable: 1
   healthBar: {fileID: 4093433686169822518}
   pointsGiven: 500
+  floatingScore: {fileID: 3051565879488939703, guid: 255e198948137384ba957a14c3247d79,
+    type: 3}
 --- !u!114 &3760899537648308626
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -503,6 +505,16 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.x
       value: 137.9
       objectReference: {fileID: 0}
+    - target: {fileID: 6947598397353485698, guid: 6adafcde58647c045a102ac3aee433a4,
+        type: 3}
+      propertyPath: m_PreserveAspect
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6947598397353485698, guid: 6adafcde58647c045a102ac3aee433a4,
+        type: 3}
+      propertyPath: m_FillAmount
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3027150668777236869, guid: 6adafcde58647c045a102ac3aee433a4,
         type: 3}
       propertyPath: m_SizeDelta.x
@@ -562,16 +574,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.y
       value: 0.91
-      objectReference: {fileID: 0}
-    - target: {fileID: 6947598397353485698, guid: 6adafcde58647c045a102ac3aee433a4,
-        type: 3}
-      propertyPath: m_PreserveAspect
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6947598397353485698, guid: 6adafcde58647c045a102ac3aee433a4,
-        type: 3}
-      propertyPath: m_FillAmount
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5146099877731394235, guid: 6adafcde58647c045a102ac3aee433a4,
         type: 3}

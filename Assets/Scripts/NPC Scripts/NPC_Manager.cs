@@ -41,7 +41,6 @@ public class NPC_Manager : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D col)
     {
-        // print("test collision " + col.gameObject.tag);
         if (col.gameObject.tag == "Bullet")
         {
             print("bullet collision");
@@ -52,10 +51,8 @@ public class NPC_Manager : MonoBehaviour
                 if (GetHealth() <= 0)
                 {
                     ScoreManager.scoreValue += pointsGiven;
-
                     enemy.UpdateHealth(enemy.MAX_HEALTH);
                     enemy.SetState(Enemy.State.Dead);
-
                 }
             }
         }
@@ -75,7 +72,6 @@ public class NPC_Manager : MonoBehaviour
                 {
                     enemy.UpdateHealth(enemy.MAX_HEALTH);
                     enemy.SetState(Enemy.State.Dead);
-
                 }
             }
         }
