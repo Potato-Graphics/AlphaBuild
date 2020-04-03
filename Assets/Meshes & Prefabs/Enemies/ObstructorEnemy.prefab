@@ -204,7 +204,7 @@ MonoBehaviour:
   MAX_HEALTH: 15
   killable: 1
   healthBar: {fileID: 6836167148852058575}
-  pointsGiven: 1250
+  pointsGiven: 2250
 --- !u!114 &5371719061789728263
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -447,12 +447,12 @@ PrefabInstance:
     - target: {fileID: 6249186008181750452, guid: 6adafcde58647c045a102ac3aee433a4,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: 100
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 6249186008181750452, guid: 6adafcde58647c045a102ac3aee433a4,
         type: 3}
       propertyPath: m_SizeDelta.y
-      value: 100
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 6249186008181750452, guid: 6adafcde58647c045a102ac3aee433a4,
         type: 3}
@@ -489,21 +489,34 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 0.59999996
       objectReference: {fileID: 0}
+    - target: {fileID: 236843299483654078, guid: 6adafcde58647c045a102ac3aee433a4,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 236843299483654078, guid: 6adafcde58647c045a102ac3aee433a4,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 4150845589612561632, guid: 6adafcde58647c045a102ac3aee433a4,
         type: 3}
       propertyPath: m_AnchoredPosition.x
       value: 137.9
       objectReference: {fileID: 0}
-    - target: {fileID: 6947598397353485698, guid: 6adafcde58647c045a102ac3aee433a4,
+<<<<<<< HEAD
+=======
+    - target: {fileID: 4150845589612561632, guid: 6adafcde58647c045a102ac3aee433a4,
         type: 3}
-      propertyPath: m_PreserveAspect
-      value: 1
+      propertyPath: m_SizeDelta.x
+      value: 10
       objectReference: {fileID: 0}
-    - target: {fileID: 6947598397353485698, guid: 6adafcde58647c045a102ac3aee433a4,
+    - target: {fileID: 4150845589612561632, guid: 6adafcde58647c045a102ac3aee433a4,
         type: 3}
-      propertyPath: m_FillAmount
-      value: 1
+      propertyPath: m_SizeDelta.y
+      value: 10
       objectReference: {fileID: 0}
+>>>>>>> 0acd05c9d305e1b0b51f173e6350076150c8ee2d
     - target: {fileID: 3027150668777236869, guid: 6adafcde58647c045a102ac3aee433a4,
         type: 3}
       propertyPath: m_SizeDelta.x
@@ -563,6 +576,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.y
       value: 0.91
+      objectReference: {fileID: 0}
+    - target: {fileID: 6947598397353485698, guid: 6adafcde58647c045a102ac3aee433a4,
+        type: 3}
+      propertyPath: m_PreserveAspect
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6947598397353485698, guid: 6adafcde58647c045a102ac3aee433a4,
+        type: 3}
+      propertyPath: m_FillAmount
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5146099877731394235, guid: 6adafcde58647c045a102ac3aee433a4,
         type: 3}

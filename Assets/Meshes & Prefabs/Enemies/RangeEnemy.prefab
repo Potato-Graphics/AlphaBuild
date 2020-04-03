@@ -100,7 +100,7 @@ PrefabInstance:
     - target: {fileID: 1572968045044056574, guid: 4a2e2367d86ec9143a4746a39b3a9212,
         type: 3}
       propertyPath: pointsGiven
-      value: 250
+      value: 450
       objectReference: {fileID: 0}
     - target: {fileID: 224435482923101185, guid: 4a2e2367d86ec9143a4746a39b3a9212,
         type: 3}
@@ -113,5 +113,25 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 21300000, guid: 8f817ae1302865244936a85c3677b850,
         type: 3}
+    - target: {fileID: 6624074221304764170, guid: 4a2e2367d86ec9143a4746a39b3a9212,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 6624074221304764170, guid: 4a2e2367d86ec9143a4746a39b3a9212,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7007279700897449044, guid: 4a2e2367d86ec9143a4746a39b3a9212,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7007279700897449044, guid: 4a2e2367d86ec9143a4746a39b3a9212,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 10
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4a2e2367d86ec9143a4746a39b3a9212, type: 3}
