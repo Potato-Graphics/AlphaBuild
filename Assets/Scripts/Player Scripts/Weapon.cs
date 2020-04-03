@@ -48,12 +48,9 @@ public class Weapon : MonoBehaviour
     void Shooting()
     {
         float joyangle = Mathf.Atan2(Input.GetAxis("JoyStickX"), Input.GetAxis("JoyStickY")) * Mathf.Rad2Deg;
-        Debug.LogError("The mouse x axis = " + joyangle + "joystickx : " + Input.GetAxis("JoyStickX") + "joystick y " + Input.GetAxis("JoyStickY") + "mouse y" + Input.GetAxis("Mouse Y"));
-        Debug.LogError("joyangle: " + joyangle);
         Vector3 dir = Input.mousePosition - Camera.main.WorldToScreenPoint(transform.position); // Mouse position directoin.
         Vector3 direction = Input.mousePosition;
         Vector3 firePointPosition = new Vector3(firePoint.position.x, firePoint.position.y); // Stores the firepoint as a Vector2.
-        Debug.DrawLine(firePointPosition, (dir - firePointPosition) * 100, Color.red); //Draws the Raycast.
 
 
 
