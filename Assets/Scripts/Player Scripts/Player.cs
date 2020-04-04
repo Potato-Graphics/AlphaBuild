@@ -54,8 +54,8 @@ public class Player : MonoBehaviour
     public static int checkpointsReceived;
     public static int waterRemaining;
     public float dashSpeed = 150.0f;
-    [SerializeField]GameObject endPoint;
-    [SerializeField] public bool usingController = false; 
+    [SerializeField] GameObject endPoint;
+    [SerializeField] public bool usingController = false;
 
     Vector3 lastMouseCoord = Vector3.zero;
     bool movedUp = false;
@@ -86,7 +86,7 @@ public class Player : MonoBehaviour
 
     private Animator anim;
 
-    [SerializeField]public Image specialBar;
+    [SerializeField] public Image specialBar;
 
     // Start is called before the first frame update
     void Awake()
@@ -133,7 +133,7 @@ public class Player : MonoBehaviour
     //Stops the player from moving building up downward force when standing still.
     void Update()
     {
-      if(Input.GetKeyDown(KeyCode.R))
+        if (Input.GetKeyDown(KeyCode.R))
         {
             Debug.LogError(GameManager.respawnEnemies.Count);
         }
@@ -157,38 +157,45 @@ public class Player : MonoBehaviour
         float targetVelocityX = input.x * moveSpeed;
         velocity.x = Mathf.SmoothDamp(velocity.x, targetVelocityX, ref velocityXSmoothing, (controller.collisions.below) ? accelerationTimeGrounded : accelerationTimeAirborne);
         anim.SetFloat("Speed", Mathf.Abs(velocity.x / moveSpeed));
-
         if (Input.GetAxisRaw("ContFire2") != 0 && usingController)
         {
             Debug.LogError("Pump button pressed");
             pumpStarted = true;
             float joyangle = Mathf.Atan2(Input.GetAxis("JoyStickX"), Input.GetAxis("JoyStickY")) * Mathf.Rad2Deg;
+            bool controllerDown = false;
+            bool controllerUp = false;
             Debug.LogError("joyangle: " + joyangle);
             //UP = joyangle < 34 && joyangle > -34
             //Down = joyangle > 125 && joyangle < 180 || joyangle < -161 && joyangle > -180
-            Debug.LogError("movedDown: " + movedDown);
-            Debug.LogError("movedUp: " + movedUp);
-            if (joyangle < 34 && joyangle > -34 && !movedDown)
+            Debug.LogError("movedDown: " + controllerDown);
+            Debug.LogError("movedUp: " + controllerUp);
+            Debug.LogError(specialBar.fillAmount);
+            Debug.LogError(totalPumps);
+            if (joyangle < 34 && joyangle > -34)
             {
                 Debug.LogError("moved down");
+                if (controllerDown) return;
                 if (totalPumps >= 10) return;
                 if (specialBar.fillAmount >= 1.0) return;
                 specialBar.fillAmount += 0.1f;
                 bulletSizeMultiplier += 0.1f;
                 totalPumps++;
-                movedDown = true;
-                movedUp = false;
+                controllerDown = true;
+                controllerUp = false;
+                return;
             }
-            if (joyangle < 34 && joyangle > -34 && !movedUp)
+            if (joyangle < 34 && joyangle > -34)
             {
                 Debug.LogError("moved up");
+                if (controllerUp) return;
                 if (totalPumps >= 10) return;
                 totalPumps++;
                 if (specialBar.fillAmount >= 1.0) return;
                 specialBar.fillAmount += 0.1f;
                 bulletSizeMultiplier += 0.1f;
-                movedUp = true;
-                movedDown = false;
+                controllerUp = true;
+                controllerDown = false;
+                return;
             }
 
 
@@ -211,6 +218,7 @@ public class Player : MonoBehaviour
                 if (totalPumps >= 10) return;
                 totalPumps++;
                 if (specialBar.fillAmount >= 1.0) return;
+                //Anim.SetTrigger("IsPumping");
                 specialBar.fillAmount += 0.1f;
                 bulletSizeMultiplier += 0.1f;
                 movedUp = true;
@@ -220,6 +228,7 @@ public class Player : MonoBehaviour
             {
                 if (totalPumps >= 10) return;
                 if (specialBar.fillAmount >= 1.0) return;
+                //Anim.SetTrigger("IsPumping");
                 specialBar.fillAmount += 0.1f;
                 bulletSizeMultiplier += 0.1f;
                 totalPumps++;
@@ -271,7 +280,7 @@ public class Player : MonoBehaviour
             }
         }
 
-        if(ridingZipline)
+        if (ridingZipline)
         {
             playerPosition = zipline.position;
             playerPosition.y += 2.2f;
@@ -284,11 +293,8 @@ public class Player : MonoBehaviour
         }
 
         //Player Dash
-        if(controller.dashing)
-        {
-            transform.position = Vector3.MoveTowards(transform.position, dashPosition, dashSpeed * Time.deltaTime);
-        }
-        if(Input.GetKeyDown(KeyCode.G))
+
+        if (Input.GetKeyDown(KeyCode.G))
         {
             SetHealth(10000);
         }
@@ -303,7 +309,7 @@ public class Player : MonoBehaviour
                 return;
             if (controller.facingRight)
             {
-                
+
                 dashPosition = transform.position;
                 dashPosition.x += dashDistance;
                 controller.dashing = true;
@@ -321,10 +327,15 @@ public class Player : MonoBehaviour
                 controller.StartCoroutine(controller.Dashing());
             }
         }
+        if (controller.dashing)
+        {
+            anim.SetTrigger("Dashed");
+            transform.position = Vector3.MoveTowards(transform.position, dashPosition, dashSpeed * Time.deltaTime);
+        }
         if (!controller.collisions.below)
         {
             airTimeJumpDelay += Time.deltaTime;
-            if(airTimeJumpDelay > 0.2)
+            if (airTimeJumpDelay > 0.2)
             {
                 canJump = false;
             }
@@ -334,10 +345,12 @@ public class Player : MonoBehaviour
             airTimeJumpDelay = 0;
             canJump = true;
         }
-        
 
-            if (GetHealth() <= 0)
+
+        if (GetHealth() <= 0)
         {
+            
+
             lifeOne.SetActive(false);
             lifeTwo.SetActive(false);
             lifeThree.SetActive(false);
@@ -345,15 +358,20 @@ public class Player : MonoBehaviour
         }
         if (GetHealth() == 1)
         {
+            
             lifeOne.SetActive(false);
             lifeTwo.SetActive(false);
             lifeThree.SetActive(true);
+            
+
         }
         if (GetHealth() == 2)
         {
+            
             lifeOne.SetActive(false);
             lifeTwo.SetActive(true);
             lifeThree.SetActive(true);
+            
         }
         if (GetHealth() == 3)
         {
@@ -463,10 +481,13 @@ public class Player : MonoBehaviour
     {
         if (isAttackable == true)
         {
+            
             UpdateHealth(-amount);
-            HandleDeath();
             isAttackable = false;
+            anim.SetBool("IsDamaged", true);
+            Debug.LogError(anim.GetBool("IsDamaged"));
             StartCoroutine(DamagedDelay());
+            StartCoroutine(RespawnDelay());
         }
     }
 
@@ -484,5 +505,12 @@ public class Player : MonoBehaviour
     {
         yield return new WaitForSeconds(2);
         isAttackable = true;
+    }
+    IEnumerator RespawnDelay()
+    {
+        yield return new WaitForSeconds(1);
+        HandleDeath();
+        anim.SetBool("IsDamaged", false);
+        Debug.LogError(anim.GetBool("IsDamaged"));
     }
 }
