@@ -25,13 +25,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1199522907360813890}
-  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
+  m_LocalRotation: {x: -0.27059805, y: 0.6532815, z: 0.27059805, w: 0.6532815}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1199522907752861298}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
+  m_LocalEulerAnglesHint: {x: -45, y: 90, z: 0}
 --- !u!198 &1199522907360813889
 ParticleSystem:
   m_ObjectHideFlags: 0
@@ -4791,7 +4791,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1199522907392395739}
   m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0.386, y: 0.301, z: -0.098}
+  m_LocalPosition: {x: -0.0124, y: 0.4268, z: -0.4474}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1199522907752861298}
@@ -9531,7 +9531,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1199522907752861298}
   m_Layer: 0
-  m_Name: VFX_Muzzle_V3_Horizontal
+  m_Name: VFX_Muzzle_V4_DiagUp
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9579,13 +9579,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1199522908136309965}
-  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
+  m_LocalRotation: {x: -0.27059805, y: 0.6532815, z: 0.27059805, w: 0.6532815}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1199522907752861298}
   m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
+  m_LocalEulerAnglesHint: {x: -45, y: 90, z: 0}
 --- !u!198 &1199522908136309960
 ParticleSystem:
   m_ObjectHideFlags: 0
@@ -9722,7 +9722,7 @@ ParticleSystem:
     startSpeed:
       serializedVersion: 2
       minMaxState: 2
-      scalar: 11.967778
+      scalar: 14.215832
       minScalar: 0.5
       maxCurve:
         serializedVersion: 2
@@ -10160,7 +10160,7 @@ ParticleSystem:
     gravityModifier:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 1
+      scalar: 2
       minScalar: 0
       maxCurve:
         serializedVersion: 2
@@ -10214,7 +10214,7 @@ ParticleSystem:
     serializedVersion: 6
     enabled: 1
     type: 4
-    angle: 29.072693
+    angle: 50.09638
     length: 5
     boxThickness: {x: 0, y: 0, z: 0}
     radiusThickness: 1
@@ -11095,7 +11095,7 @@ ParticleSystem:
     flipU: 0
     flipV: 0
   VelocityModule:
-    enabled: 0
+    enabled: 1
     x:
       serializedVersion: 2
       minMaxState: 0
@@ -11311,7 +11311,7 @@ ParticleSystem:
     orbitalY:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0
+      scalar: 10
       minScalar: 0
       maxCurve:
         serializedVersion: 2
@@ -14266,7 +14266,7 @@ ParticleSystemRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: e2413b95635b37e46ba9e40f9be22fcf, type: 2}
+  - {fileID: 2100000, guid: a2622bf4b0fe03b49a16a001f1e454e3, type: 2}
   - {fileID: 2100000, guid: c71447e39fb5e9946824de0eed11f703, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0

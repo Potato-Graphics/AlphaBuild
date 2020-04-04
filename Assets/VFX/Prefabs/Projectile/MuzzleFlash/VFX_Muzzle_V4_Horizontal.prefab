@@ -9531,7 +9531,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1199522907752861298}
   m_Layer: 0
-  m_Name: VFX_Muzzle_V3_Horizontal
+  m_Name: VFX_Muzzle_V4_Horizontal
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10214,7 +10214,7 @@ ParticleSystem:
     serializedVersion: 6
     enabled: 1
     type: 4
-    angle: 29.072693
+    angle: 18.535084
     length: 5
     boxThickness: {x: 0, y: 0, z: 0}
     radiusThickness: 1
@@ -11152,7 +11152,7 @@ ParticleSystem:
     y:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0
+      scalar: 45
       minScalar: 0
       maxCurve:
         serializedVersion: 2
@@ -11257,7 +11257,7 @@ ParticleSystem:
         m_RotationOrder: 4
     orbitalX:
       serializedVersion: 2
-      minMaxState: 0
+      minMaxState: 3
       scalar: 0
       minScalar: 0
       maxCurve:
@@ -11310,7 +11310,7 @@ ParticleSystem:
         m_RotationOrder: 4
     orbitalY:
       serializedVersion: 2
-      minMaxState: 0
+      minMaxState: 3
       scalar: 0
       minScalar: 0
       maxCurve:
@@ -11363,7 +11363,7 @@ ParticleSystem:
         m_RotationOrder: 4
     orbitalZ:
       serializedVersion: 2
-      minMaxState: 0
+      minMaxState: 3
       scalar: 0
       minScalar: 0
       maxCurve:
@@ -14266,7 +14266,7 @@ ParticleSystemRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: e2413b95635b37e46ba9e40f9be22fcf, type: 2}
+  - {fileID: 2100000, guid: a2622bf4b0fe03b49a16a001f1e454e3, type: 2}
   - {fileID: 2100000, guid: c71447e39fb5e9946824de0eed11f703, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
