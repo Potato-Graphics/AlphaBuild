@@ -20,20 +20,27 @@ public class ScreenManager : MonoBehaviour
     #region UI Actions
     public void SwitchScreens(int aID)
     {
+        Debug.LogError("SWITCH_SCREENS");
         curScreenID = aID;
-        if(!curAnim)
+        Debug.LogError(curAnim.GetBool("IsActive"));
+        if (!curAnim)
         {
             curAnim = GetComponent<Animator>();
         }
-        if (curAnim)
+        if (curAnim.GetBool("IsActive"))
         {
             curAnim.SetBool("IsActive", false);
-        }    
+        }
+        Debug.LogError(curAnim.GetBool("IsActive"));
     }
     #endregion
     public void ResetMenu()
     {
         if (!curAnim)
+        {
+            curAnim = GetComponent<Animator>();
+        }
+        if (!curAnim.GetBool("IsActive"))
         {
             curAnim.SetBool("IsActive", true);
         }

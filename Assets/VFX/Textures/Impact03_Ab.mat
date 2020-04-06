@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Impact03_Ab
-  m_Shader: {fileID: 4800000, guid: 16ca7b3ae9757d3449b1fd11fe40e235, type: 3}
+  m_Shader: {fileID: 4800000, guid: 86bf63d1700646847b7dd4680e69974f, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -22,13 +22,13 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - Texture2D_6626A7F4:
-        m_Texture: {fileID: 2800000, guid: 29a190de4067cd34ea6b09bb27253e8b, type: 3}
+        m_Texture: {fileID: 2800000, guid: 5a81bcbc845a2444a9a49bbb9a3fdd64, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - Vector1_1D409D9: 10
+    - Vector1_1D409D9: 0
     - Vector1_3BD88EA6: 0.05
     m_Colors:
-    - Color_8E6C8CEA: {r: 8.031373, g: 8.031373, b: 8.031373, a: 1}
-    - Vector2_B3A0242A: {r: 0.03, g: 1, b: 0, a: 0}
+    - Color_8E6C8CEA: {r: 5.992157, g: 5.992157, b: 5.992157, a: 1}
+    - Vector2_B3A0242A: {r: 0, g: 0, b: 0, a: 0}
     - _Vector_2: {r: 0, g: 0, b: 0, a: 0}
