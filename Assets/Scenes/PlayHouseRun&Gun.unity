@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
+  m_IndirectSpecularColor: {r: 0.32338354, g: 0.46919316, b: 0.7755462, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -8304,7 +8304,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 319, y: -157}
+  m_AnchoredPosition: {x: 319, y: -110}
   m_SizeDelta: {x: 166.14, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &169689805
@@ -41071,7 +41071,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -7.3999634, y: -157.1}
+  m_AnchoredPosition: {x: -7.3999634, y: -106.9}
   m_SizeDelta: {x: 166.14, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &858568581
@@ -103321,7 +103321,7 @@ PrefabInstance:
     - target: {fileID: 7183406628242903007, guid: 48b2f1eb92d5385488be9a7dc025752a,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -431
+      value: -328.1
       objectReference: {fileID: 0}
     - target: {fileID: 7183406628242903007, guid: 48b2f1eb92d5385488be9a7dc025752a,
         type: 3}
@@ -103351,7 +103351,7 @@ PrefabInstance:
     - target: {fileID: 7183406627846848628, guid: 48b2f1eb92d5385488be9a7dc025752a,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -431
+      value: -328.10004
       objectReference: {fileID: 0}
     - target: {fileID: 7183406627846848628, guid: 48b2f1eb92d5385488be9a7dc025752a,
         type: 3}
@@ -103381,7 +103381,7 @@ PrefabInstance:
     - target: {fileID: 7183406628284103891, guid: 48b2f1eb92d5385488be9a7dc025752a,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -430.99988
+      value: -328.0999
       objectReference: {fileID: 0}
     - target: {fileID: 7183406628284103891, guid: 48b2f1eb92d5385488be9a7dc025752a,
         type: 3}
