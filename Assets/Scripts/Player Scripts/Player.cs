@@ -218,7 +218,8 @@ public class Player : MonoBehaviour
                 if (totalPumps >= 10) return;
                 totalPumps++;
                 if (specialBar.fillAmount >= 1.0) return;
-                //Anim.SetTrigger("IsPumping");
+                
+                anim.SetBool("IsPumping", true);
                 specialBar.fillAmount += 0.1f;
                 bulletSizeMultiplier += 0.1f;
                 movedUp = true;
@@ -228,7 +229,7 @@ public class Player : MonoBehaviour
             {
                 if (totalPumps >= 10) return;
                 if (specialBar.fillAmount >= 1.0) return;
-                //Anim.SetTrigger("IsPumping");
+                anim.SetBool("IsPumping", true);
                 specialBar.fillAmount += 0.1f;
                 bulletSizeMultiplier += 0.1f;
                 totalPumps++;
@@ -236,10 +237,13 @@ public class Player : MonoBehaviour
                 movedUp = false;
             }
             lastMouseCoord = Input.mousePosition;
+        
         }
         if (Input.GetAxisRaw("Fire2") == 0 && pumpStarted && !usingController)
         {
             pumpStarted = false;
+            anim.SetBool("IsPumping", false);
+            Debug.Log("ISFALSE");
             bulletDamage += totalPumps / 10;
             totalPumps = 0;
             movedDown = false;
