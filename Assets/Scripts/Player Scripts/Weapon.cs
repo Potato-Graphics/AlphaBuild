@@ -194,7 +194,7 @@ public class Weapon : MonoBehaviour
                 // BulletScript.yDirection = 0.1f;
                 Vector2 velocityChange = new Vector2(-0.1f, 0.1f);
                 bullet.transform.eulerAngles = new Vector2(0, -180);
-                firePointUpDiagonal.transform.eulerAngles = new Vector2(0, -180);
+                muzzleFlash.transform.eulerAngles = new Vector2(0, -180);
                 muzzleFlash.transform.eulerAngles = new Vector2(0, -180);
                 print("left up");
                 bullet.velocity = velocityChange * (Time.deltaTime * speed);
@@ -212,7 +212,7 @@ public class Weapon : MonoBehaviour
                 Vector2 velocityChange = new Vector2(-0.1f, 0);
                 bullet.transform.eulerAngles = new Vector2(0, -180);
                 muzzleFlash.transform.eulerAngles = new Vector2(0, -180);
-                firePointHorizontal.transform.eulerAngles = new Vector2(0, -180);
+                muzzleFlash.transform.eulerAngles = new Vector2(0, -180);
                 print("left");
                 bullet.velocity = velocityChange * (Time.deltaTime * speed);
             }
@@ -229,7 +229,7 @@ public class Weapon : MonoBehaviour
                 print("left down");
                 bullet.transform.eulerAngles = new Vector2(0, -180);
                 muzzleFlash.transform.eulerAngles = new Vector2(0, -180);
-                firePointDownDiagonal.transform.eulerAngles = new Vector2(0, -180);
+                muzzleFlash.transform.eulerAngles = new Vector2(0, -180);
                 bullet.velocity = velocityChange * (Time.deltaTime * speed);
             }
         }
