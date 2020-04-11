@@ -26,6 +26,9 @@ public class Player : MonoBehaviour
 
     static int ID = 0;
 
+    public float gameTimer = 0;
+    public Text timer;
+
     float accelerationTimeGrounded = .1f;
     float accelerationTimeAirborne = .3f;
     float moveSpeed = 12;
@@ -97,6 +100,7 @@ public class Player : MonoBehaviour
     void Start()
     {
         anim = player.GetComponent<Animator>();
+        timer = GetComponent<Text>();
 
         waterRemaining = 50;
         DontDestroyOnLoad(gameObject);
