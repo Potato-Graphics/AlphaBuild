@@ -139,7 +139,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _UnlitColorMap:
-        m_Texture: {fileID: 2800000, guid: a800c135ae802ea408089345eee181d7, type: 3}
+        m_Texture: {fileID: 2800000, guid: 97648eeac798914489b73a1ea9073c40, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
@@ -147,7 +147,7 @@ Material:
     - _AORemapMin: 0
     - _ATDistance: 1
     - _AlbedoAffectEmissive: 0
-    - _AlphaCutoff: 0.261
+    - _AlphaCutoff: 0.3
     - _AlphaCutoffEnable: 1
     - _AlphaCutoffPostpass: 0.5
     - _AlphaCutoffPrepass: 0.5
@@ -157,7 +157,7 @@ Material:
     - _CoatMask: 0
     - _CullMode: 0
     - _CullModeForward: 0
-    - _Cutoff: 0.261
+    - _Cutoff: 0.3
     - _DepthOffsetEnable: 0
     - _DetailAlbedoScale: 1
     - _DetailNormalMapScale: 1
@@ -278,4 +278,4 @@ Material:
     - _UVDetailsMappingMask: {r: 1, g: 0, b: 0, a: 0}
     - _UVMappingMask: {r: 1, g: 0, b: 0, a: 0}
     - _UVMappingMaskEmissive: {r: 1, g: 0, b: 0, a: 0}
-    - _UnlitColor: {r: 0.8375994, g: 0.9245283, b: 0.75444996, a: 1}
+    - _UnlitColor: {r: 0.9622642, g: 0.8903772, b: 0.4493592, a: 1}
