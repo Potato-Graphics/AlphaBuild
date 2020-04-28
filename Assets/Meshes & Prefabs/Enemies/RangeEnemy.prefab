@@ -15,17 +15,17 @@ PrefabInstance:
     - target: {fileID: 5073690491984152149, guid: 4a2e2367d86ec9143a4746a39b3a9212,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -43.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5073690491984152149, guid: 4a2e2367d86ec9143a4746a39b3a9212,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 4.46
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5073690491984152149, guid: 4a2e2367d86ec9143a4746a39b3a9212,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.17
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5073690491984152149, guid: 4a2e2367d86ec9143a4746a39b3a9212,
         type: 3}
@@ -90,22 +90,32 @@ PrefabInstance:
     - target: {fileID: 2847122818296448478, guid: 4a2e2367d86ec9143a4746a39b3a9212,
         type: 3}
       propertyPath: m_Offset.y
-      value: -0.37368262
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2847122818296448478, guid: 4a2e2367d86ec9143a4746a39b3a9212,
         type: 3}
       propertyPath: m_Size.y
-      value: 2.9499538
+      value: 4
       objectReference: {fileID: 0}
-    - target: {fileID: 1572968045044056574, guid: 4a2e2367d86ec9143a4746a39b3a9212,
+    - target: {fileID: 2847122818296448478, guid: 4a2e2367d86ec9143a4746a39b3a9212,
         type: 3}
-      propertyPath: pointsGiven
-      value: 450
+      propertyPath: m_Offset.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2847122818296448478, guid: 4a2e2367d86ec9143a4746a39b3a9212,
+        type: 3}
+      propertyPath: m_Size.x
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 224435482923101185, guid: 4a2e2367d86ec9143a4746a39b3a9212,
         type: 3}
       propertyPath: m_GravityScale
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1572968045044056574, guid: 4a2e2367d86ec9143a4746a39b3a9212,
+        type: 3}
+      propertyPath: pointsGiven
+      value: 450
       objectReference: {fileID: 0}
     - target: {fileID: 5200206340292902180, guid: 4a2e2367d86ec9143a4746a39b3a9212,
         type: 3}
