@@ -42,7 +42,7 @@ public class Weapon : MonoBehaviour
     public Rigidbody2D muzzleFlashUpDiag;
     public Rigidbody2D muzzleFlashDownDiag;
 
-
+    public Transform firePoint;
     void Start()
     {
         player = GetComponent<Player>();
@@ -110,7 +110,7 @@ public class Weapon : MonoBehaviour
             {
                 //this is up
                 Rigidbody2D bullet = Instantiate(bulletUp, firePointUp.position, firePointUp.rotation);
-               Rigidbody2D muzzleFlash = Instantiate(muzzleFlashUp, muzzlePointUp.position, muzzlePointUp.rotation);
+                Rigidbody2D muzzleFlash = Instantiate(muzzleFlashUp, muzzlePointUp.position, muzzlePointUp.rotation);
                 bullet.transform.localScale *= player.bulletSizeMultiplier;
                 //BulletScript.yDirection = 0.1f;
                 //BulletScript.xDirection = 0.0f;
@@ -194,7 +194,7 @@ public class Weapon : MonoBehaviour
                 // BulletScript.yDirection = 0.1f;
                 Vector2 velocityChange = new Vector2(-0.1f, 0.1f);
                 bullet.transform.eulerAngles = new Vector2(0, -180);
-                firePointUpDiagonal.transform.eulerAngles = new Vector2(0, -180);
+                muzzleFlash.transform.eulerAngles = new Vector2(0, -180);
                 muzzleFlash.transform.eulerAngles = new Vector2(0, -180);
                 print("left up");
                 bullet.velocity = velocityChange * (Time.deltaTime * speed);
@@ -212,7 +212,7 @@ public class Weapon : MonoBehaviour
                 Vector2 velocityChange = new Vector2(-0.1f, 0);
                 bullet.transform.eulerAngles = new Vector2(0, -180);
                 muzzleFlash.transform.eulerAngles = new Vector2(0, -180);
-                firePointHorizontal.transform.eulerAngles = new Vector2(0, -180);
+                muzzleFlash.transform.eulerAngles = new Vector2(0, -180);
                 print("left");
                 bullet.velocity = velocityChange * (Time.deltaTime * speed);
             }
@@ -229,17 +229,17 @@ public class Weapon : MonoBehaviour
                 print("left down");
                 bullet.transform.eulerAngles = new Vector2(0, -180);
                 muzzleFlash.transform.eulerAngles = new Vector2(0, -180);
-                firePointDownDiagonal.transform.eulerAngles = new Vector2(0, -180);
+                muzzleFlash.transform.eulerAngles = new Vector2(0, -180);
                 bullet.velocity = velocityChange * (Time.deltaTime * speed);
             }
         }
-        /*
+
         else if (player.usingController)
         {
             if (joyangle < 34 && joyangle > -34)
             {
                 //this is up
-                Rigidbody2D bullet = Instantiate(bulletUp, firePoint.position, firePoint.rotation);
+                Rigidbody2D bullet = Instantiate(bulletUp, firePointUp.position, firePointUp.rotation);
                 bullet.transform.localScale *= player.bulletSizeMultiplier;
                 //BulletScript.yDirection = 0.1f;
                 //BulletScript.xDirection = 0.0f;
@@ -255,7 +255,7 @@ public class Weapon : MonoBehaviour
             {
                 //this is down
                 anim.SetTrigger("FireDown");
-                Rigidbody2D bullet = Instantiate(bulletDown, firePoint.position, firePoint.rotation);
+                Rigidbody2D bullet = Instantiate(bulletDown, firePointDown.position, firePointDown.localRotation);
                 bullet.transform.localScale *= player.bulletSizeMultiplier;
                 //BulletScript.yDirection = -0.1f;
                 // BulletScript.xDirection = 0.0f;
@@ -268,7 +268,7 @@ public class Weapon : MonoBehaviour
             {
                 //this is right up
                 anim.SetTrigger("FireDiagUp");
-                Rigidbody2D bullet = Instantiate(bulletDiagUp, firePoint.position, firePoint.localRotation);
+                Rigidbody2D bullet = Instantiate(bulletDiagUp, firePointUpDiagonal.position, firePointUpDiagonal.localRotation);
                 bullet.transform.localScale *= player.bulletSizeMultiplier;
                 //BulletScript.xDirection = 0.1f;
                 // BulletScript.yDirection = 0.1f;
@@ -281,7 +281,7 @@ public class Weapon : MonoBehaviour
             {
                 //this is right
                 anim.SetTrigger("FireHorizontal");
-                Rigidbody2D bullet = Instantiate(bulletHorizontal, firePoint.position, firePoint.localRotation);
+                Rigidbody2D bullet = Instantiate(bulletHorizontal, firePointHorizontal.position, firePointHorizontal.localRotation);
                 bullet.transform.localScale *= player.bulletSizeMultiplier;
                 // BulletScript.xDirection = 0.1f;
                 // BulletScript.yDirection = 0.0f;
@@ -294,7 +294,7 @@ public class Weapon : MonoBehaviour
             {
                 //this is right down
                 anim.SetTrigger("FireDiagDown");
-                Rigidbody2D bullet = Instantiate(bulletDiagDown, firePoint.position, firePoint.localRotation);
+                Rigidbody2D bullet = Instantiate(bulletDiagDown, firePointDownDiagonal.position, firePointDownDiagonal.localRotation);
                 bullet.transform.localScale *= player.bulletSizeMultiplier;
                 //BulletScript.xDirection = 0.1f;
                 //BulletScript.yDirection = -0.1f;
@@ -307,7 +307,7 @@ public class Weapon : MonoBehaviour
             {
                 //this is left up
                 anim.SetTrigger("FireDiagUp");
-                Rigidbody2D bullet = Instantiate(bulletDiagUp, firePoint.position, firePoint.localRotation);
+                Rigidbody2D bullet = Instantiate(bulletDiagUp, firePointUpDiagonal.position, firePointUpDiagonal.localRotation);
                 bullet.transform.localScale *= player.bulletSizeMultiplier;
                 //BulletScript.xDirection = -0.1f;
                 // BulletScript.yDirection = 0.1f;
@@ -321,7 +321,7 @@ public class Weapon : MonoBehaviour
             {
                 //this is left
                 anim.SetTrigger("FireHorizontal");
-                Rigidbody2D bullet = Instantiate(bulletHorizontal, firePoint.position, firePoint.localRotation);
+                Rigidbody2D bullet = Instantiate(bulletHorizontal, firePointHorizontal.position, firePointHorizontal.localRotation);
                 bullet.transform.localScale *= player.bulletSizeMultiplier;
                 //BulletScript.xDirection = -0.1f;
                 // BulletScript.yDirection = 0.0f;
@@ -334,7 +334,7 @@ public class Weapon : MonoBehaviour
             {
                 //this is left down
                 anim.SetTrigger("FireDiagDown");
-                Rigidbody2D bullet = Instantiate(bulletDiagDown, firePoint.position, firePoint.localRotation);
+                Rigidbody2D bullet = Instantiate(bulletDiagDown, firePointDownDiagonal.position, firePointDownDiagonal.localRotation);
                 bullet.transform.localScale *= player.bulletSizeMultiplier;
                 // BulletScript.xDirection = -0.1f;
                 //  BulletScript.yDirection = -0.1f;
@@ -343,7 +343,7 @@ public class Weapon : MonoBehaviour
                 bullet.transform.eulerAngles = new Vector2(0, -180);
                 bullet.velocity = velocityChange * (Time.deltaTime * speed);
             }
-        }*/
+        } 
 
         delay = true;
         StartCoroutine(ShootDelay());
