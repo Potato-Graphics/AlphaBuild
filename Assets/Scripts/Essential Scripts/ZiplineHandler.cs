@@ -34,6 +34,7 @@ public class ZiplineHandler : MonoBehaviour
 
     public void IncrementZiplineStage()
     {
+        Debug.LogError("targetZipLinePointIndex: " + targetZiplinePointIndex + "lastZiplinePointIndex " + lastZiplinePointIndex);
         if (targetZiplinePointIndex > lastZiplinePointIndex)
         {
             player.ridingZipline = false;

@@ -248,7 +248,7 @@ Animator:
   m_GameObject: {fileID: 1229292578974043762}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 5648183c75975ce47b7b82d812292e0b, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -393,6 +393,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 405756520686909959}
     m_Modifications:
+    - target: {fileID: 1425679719675262578, guid: 6adafcde58647c045a102ac3aee433a4,
+        type: 3}
+      propertyPath: m_Name
+      value: EnemyHealthBar
+      objectReference: {fileID: 0}
     - target: {fileID: 6249186008181750452, guid: 6adafcde58647c045a102ac3aee433a4,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -517,11 +522,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_PreserveAspect
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1425679719675262578, guid: 6adafcde58647c045a102ac3aee433a4,
-        type: 3}
-      propertyPath: m_Name
-      value: EnemyHealthBar
       objectReference: {fileID: 0}
     - target: {fileID: 236843299483654078, guid: 6adafcde58647c045a102ac3aee433a4,
         type: 3}
