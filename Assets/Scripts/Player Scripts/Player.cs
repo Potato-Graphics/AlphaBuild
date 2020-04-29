@@ -39,6 +39,7 @@ public class Player : MonoBehaviour
     public float coins = 0;
 
     public bool movingRight = false;
+    public bool moving = false;
     public bool rotation = false;
 
     [SerializeField] private const int MAX_HEALTH = 3;
@@ -393,6 +394,9 @@ public class Player : MonoBehaviour
         }
 
         //Gets the inputs for moving left and right.
+        if (input.x == 0) moving = false;
+        else moving = true;
+       
 
         if (input.x < 0)
         {
