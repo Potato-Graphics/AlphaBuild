@@ -2,9 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Audio;
 
 public class OptionsScreen : MonoBehaviour
 {
+    public AudioMixer mixer;
+
     
 
     public Dropdown resolutionDropdown;
@@ -48,7 +51,8 @@ public class OptionsScreen : MonoBehaviour
 
     public void SetVolume(float Volume)
     {
-        Debug.Log("Slideybody");
+        Debug.Log ("Slideboii");
+        mixer.SetFloat ("MasterVol", Mathf.Log10 (Volume) *20 );
     }
 
     public void SetQuality(int qualityIndex)
