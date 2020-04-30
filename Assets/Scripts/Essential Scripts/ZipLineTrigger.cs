@@ -5,12 +5,15 @@ using UnityEngine;
 public class ZipLineTrigger : MonoBehaviour
 {
     Player player;
+    Animator anim;
+    
     ZiplineHandler ziplineHandler;
     // Start is called before the first frame update
     void Start()
     {
         player = GameObject.FindObjectOfType<Player>();
         ziplineHandler = GameObject.FindObjectOfType<ZiplineHandler>();
+        anim = player.GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -22,10 +25,13 @@ public class ZipLineTrigger : MonoBehaviour
     void OnTriggerEnter2D(Collider2D col)
     {
         print("zipline trigger tag is " + col.gameObject.tag);
-        Debug.LogError("HHDFOIOOFDS");
-        if(col.gameObject.tag == "Player" && !player.ridingZipline)
+        Debug.LogError("zipline");
+        if (col.gameObject.tag == "Player" && !player.ridingZipline)
         {
             player.ridingZipline = true;
+            anim.SetBool("IsGrounded", true);
         }
+   
+
     }
 }

@@ -147,11 +147,27 @@ public class Player : MonoBehaviour
         /////////////////////////////////
         if (controller.collisions.below)
         {
-            anim.SetBool("IsGrounded", true);
+            if (ridingZipline) 
+            {
+                anim.SetBool("IsGrounded", true);
+            }
+            else
+            {
+
+                anim.SetBool("IsGrounded", true);
+            }
+
         }
         else
         {
-            anim.SetBool("IsGrounded", false);
+            if (ridingZipline)
+            {
+                anim.SetBool("IsGrounded", true);
+            }
+            else
+            {
+                anim.SetBool("IsGrounded", false);
+            }
         }
         ///////////////////////////////
 
