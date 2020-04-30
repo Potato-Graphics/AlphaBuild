@@ -62,7 +62,7 @@ public class NPC_Manager : MonoBehaviour
                     enemy.SetState(Enemy.State.Dead);
                     if (enemy.GetEnemyType() != Enemy.EnemyType.HelicopterSeed)
                     {
-                        if (Random.Range(0, 4) == 0)
+                        if (Random.Range(0, 8) == 0)
                         {
                             Instantiate(life, transform.position, transform.rotation);
                         } else
