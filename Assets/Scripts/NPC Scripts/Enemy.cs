@@ -136,7 +136,14 @@ public class Enemy : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D col)
     {
-        if(col.gameObject.tag == "Obstacles")
+        if (col.gameObject.tag == "Enemy")
+        {
+            if (GetEnemyType() == EnemyType.HelicopterSeed)
+            {
+                transform.position = startPosition;
+            }
+        }
+        if (col.gameObject.tag == "Obstacles")
         {
             if(GetEnemyType() == EnemyType.RangePlane)
             {
