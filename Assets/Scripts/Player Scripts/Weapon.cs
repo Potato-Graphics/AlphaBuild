@@ -7,6 +7,7 @@ public class Weapon : MonoBehaviour
 {
     private Player player;
     private Animator anim;
+    private Controller2D controller;
     bool m_BackwardsDiagUp;
     private bool delay = false;
 
@@ -45,6 +46,7 @@ public class Weapon : MonoBehaviour
     public Transform firePoint;
     void Start()
     {
+        controller = GetComponent<Controller2D>();
         player = GetComponent<Player>();
         anim = player.GetComponent<Animator>();
         m_BackwardsDiagUp = false;
@@ -109,8 +111,48 @@ public class Weapon : MonoBehaviour
             if (fAngle >= 77 && fAngle <= 110 || joyangle > 165 && joyangle < 185)
             {
                 //this is up
-                Rigidbody2D bullet = Instantiate(bulletUp, firePointUp.position, firePointUp.rotation);
-                Rigidbody2D muzzleFlash = Instantiate(muzzleFlashUp, muzzlePointUp.position, muzzlePointUp.rotation);
+                Vector3 firePointAddition = Vector3.zero;
+                Vector3 muzzlePointAddition = Vector3.zero;
+                Vector3 firePointPosition = Vector3.zero;
+                Vector3 muzzlePointPosition = Vector3.zero;
+                if (player.moving)
+                {
+                    if (player.movingRight)
+                    {
+                        firePointAddition = new Vector3(1.0f, 2.2f, 0.2f);
+                        muzzlePointAddition = new Vector3(.71f, 1.55f, -0.1f);
+                        firePointPosition = player.transform.position + firePointAddition;
+                        muzzlePointPosition = player.transform.position + muzzlePointAddition;
+                    }
+                    else if (!player.movingRight)
+                    {
+                        firePointAddition = new Vector3(.1f, 2.2f, -0.1f);
+                        muzzlePointAddition = new Vector3(-.4f, 1.55f, -0.1f);
+                        firePointPosition = player.transform.position + firePointAddition;
+                        muzzlePointPosition = player.transform.position + muzzlePointAddition;
+                    }
+                }
+                else if (!player.moving)
+                {
+                    if (!controller.facingRight)
+                    {
+                        firePointAddition = new Vector3(1.1f, 2.8f, 0.2f);
+                        muzzlePointAddition = new Vector3(.37f, 2.6f, -0.1f);
+                        firePointPosition = player.transform.position + firePointAddition;
+                        muzzlePointPosition = player.transform.position + muzzlePointAddition;
+                    }
+                    else
+                    {
+                        firePointAddition = new Vector3(.1f, 2.8f, 0.2f);
+                        muzzlePointAddition = new Vector3(-.37f, 2.6f, -0.1f);
+                        firePointPosition = player.transform.position + firePointAddition;
+                        muzzlePointPosition = player.transform.position + muzzlePointAddition;
+                    }
+                }
+                Debug.LogError("PLAYER POSITION: " + player.transform.position + " FIREPOINT POSITION: " + firePointUp.position + "firePointPosition " + firePointPosition);
+                Debug.LogError("PLAYER POSITION: " + player.transform.position + " MUZZLE POSITION: " + muzzlePointUp.position + "firePointPosition " + muzzlePointPosition);
+                Rigidbody2D bullet = Instantiate(bulletUp, firePointPosition, firePointUp.rotation);
+                Rigidbody2D muzzleFlash = Instantiate(muzzleFlashUp, muzzlePointPosition, muzzlePointUp.rotation);
                 bullet.transform.localScale *= player.bulletSizeMultiplier;
                 //BulletScript.yDirection = 0.1f;
                 //BulletScript.xDirection = 0.0f;
@@ -126,9 +168,49 @@ public class Weapon : MonoBehaviour
             else if (fAngle >= 246 && fAngle <= 288)
             {
                 //this is down
+                Vector3 firePointAddition = Vector3.zero;
+                Vector3 muzzlePointAddition = Vector3.zero;
+                Vector3 firePointPosition = Vector3.zero;
+                Vector3 muzzlePointPosition = Vector3.zero;
+                if (player.moving)
+                {
+                    if (player.movingRight)
+                    {
+                        firePointAddition = new Vector3(.9f, -1.8f, -0.1f);
+                        muzzlePointAddition = new Vector3(1.4f, -1.8f, -0.1f);
+                        firePointPosition = player.transform.position + firePointAddition;
+                        muzzlePointPosition = player.transform.position + muzzlePointAddition;
+                    }
+                    else if(!player.movingRight)
+                    {
+                        firePointAddition = new Vector3(-.3f, -1.8f, -0.1f);
+                        muzzlePointAddition = new Vector3(-2.4f, -1.8f, -0.1f);
+                        firePointPosition = player.transform.position + firePointAddition;
+                        muzzlePointPosition = player.transform.position + muzzlePointAddition;
+                    }
+                }
+                else if(!player.moving)
+                {
+                    if (!controller.facingRight)
+                    {
+                        firePointAddition = new Vector3(1.1f, -1.8f, 0.2f);
+                        muzzlePointAddition = new Vector3(.37f, -1.8f, -0.1f);
+                        firePointPosition = player.transform.position + firePointAddition;
+                        muzzlePointPosition = player.transform.position + muzzlePointAddition;
+                    }
+                    else
+                    {
+                        firePointAddition = new Vector3(-.5f, -1.8f, 0.2f);
+                        muzzlePointAddition = new Vector3(-.37f, -1.8f, -0.1f);
+                        firePointPosition = player.transform.position + firePointAddition;
+                        muzzlePointPosition = player.transform.position + muzzlePointAddition;
+                    }
+                }
+                Debug.LogError("PLAYER POSITION: " + player.transform.position + " FIREPOINT POSITION: " + firePointDown.position + "firePointPosition " + firePointPosition);
+                Debug.LogError("PLAYER POSITION: " + player.transform.position + " MUZZLE POSITION: " + muzzlePointDown.position + "firePointPosition " + muzzlePointPosition);
                 anim.SetTrigger("FireDown");
-                Rigidbody2D bullet = Instantiate(bulletDown, firePointDown.position, firePointDown.rotation);
-                Rigidbody2D muzzleFlash = Instantiate(muzzleFlashDown, muzzlePointDown.position, muzzlePointDown.rotation);
+                Rigidbody2D bullet = Instantiate(bulletDown, firePointPosition, firePointDown.rotation);
+                Rigidbody2D muzzleFlash = Instantiate(muzzleFlashDown, muzzlePointPosition, muzzlePointDown.rotation);
                 bullet.transform.localScale *= player.bulletSizeMultiplier;
                 //BulletScript.yDirection = -0.1f;
                 // BulletScript.xDirection = 0.0f;
@@ -141,9 +223,30 @@ public class Weapon : MonoBehaviour
             else if (fAngle < 77 && fAngle >= 19.2)
             {
                 //this is right up
+                Vector3 firePointAddition;
+                Vector3 muzzlePointAddition;
+                Vector3 firePointPosition;
+                Vector3 muzzlePointPosition;
+                if (player.moving && !player.movingRight) return;
+                if (player.moving && player.movingRight)
+                {
+                    firePointAddition = new Vector3(2.3f, 1.4f, -0.1f);
+                    muzzlePointAddition = new Vector3(2.4f, .9f, -0.1f);
+                    firePointPosition = player.transform.position + firePointAddition;
+                    muzzlePointPosition = player.transform.position + muzzlePointAddition;
+                }
+                else
+                {
+                    firePointAddition = new Vector3(1.7f, 1.67f, 0.2f);
+                    muzzlePointAddition = new Vector3(1.4f, 1.9f, -0.1f);
+                    firePointPosition = player.transform.position + firePointAddition;
+                    muzzlePointPosition = player.transform.position + muzzlePointAddition;
+                }
+                Debug.LogError("PLAYER POSITION: " + player.transform.position + " FIREPOINT POSITION: " + firePointUpDiagonal.position + "firePointPosition " + firePointPosition);
+                Debug.LogError("PLAYER POSITION: " + player.transform.position + " MUZZLE POSITION: " + muzzlePointUpDiag.position + "firePointPosition " + muzzlePointPosition);
                 anim.SetTrigger("FireDiagUp");
-                Rigidbody2D bullet = Instantiate(bulletDiagUp, firePointUpDiagonal.position, firePointUpDiagonal.localRotation);
-                Rigidbody2D muzzleFlash = Instantiate(muzzleFlashUpDiag, muzzlePointUpDiag.position, muzzlePointUpDiag.rotation);
+                Rigidbody2D bullet = Instantiate(bulletDiagUp, firePointPosition, firePointUpDiagonal.localRotation);
+                Rigidbody2D muzzleFlash = Instantiate(muzzleFlashUpDiag, muzzlePointPosition, muzzlePointUpDiag.rotation);
                 bullet.transform.localScale *= player.bulletSizeMultiplier;
                 //BulletScript.xDirection = 0.1f;
                 // BulletScript.yDirection = 0.1f;
@@ -155,10 +258,29 @@ public class Weapon : MonoBehaviour
             }
             else if (fAngle < 19.2 && fAngle >= 0 || fAngle < 360 && fAngle > 350)
             {
+                Vector3 firePointAddition;
+                Vector3 muzzlePointAddition;
+                Vector3 firePointPosition;
+                Vector3 muzzlePointPosition;
+                if (player.moving && !player.movingRight) return;
+                if (player.moving && player.movingRight)
+                {
+                    muzzlePointAddition = new Vector3(2.1f, -0.2f, 0.0f);
+                    firePointAddition = new Vector3(3.3f, -0.3f, -0.1f);
+                    firePointPosition = player.transform.position + firePointAddition;
+                    muzzlePointPosition = player.transform.position + muzzlePointAddition;
+                }
+                else
+                {
+                    muzzlePointAddition = new Vector3(1.3f, 0.4f, 0.0f);
+                    firePointAddition = new Vector3(2.3f, 0.3f, -0.1f);
+                    firePointPosition = player.transform.position + firePointAddition;
+                    muzzlePointPosition = player.transform.position + muzzlePointAddition;
+                }
                 //this is right
                 anim.SetTrigger("FireHorizontal");
-                Rigidbody2D bullet = Instantiate(bulletHorizontal, firePointHorizontal.position, firePointHorizontal.localRotation);
-                Rigidbody2D muzzleFlash = Instantiate(muzzleFlashHorizontal, muzzlePointHorizontal.position, muzzlePointHorizontal.rotation);
+                Rigidbody2D bullet = Instantiate(bulletHorizontal, firePointPosition, firePointHorizontal.localRotation);
+                Rigidbody2D muzzleFlash = Instantiate(muzzleFlashHorizontal, muzzlePointPosition, muzzlePointHorizontal.rotation);
                 bullet.transform.localScale *= player.bulletSizeMultiplier;
                 // BulletScript.xDirection = 0.1f;
                 // BulletScript.yDirection = 0.0f;
@@ -170,10 +292,32 @@ public class Weapon : MonoBehaviour
             }
             else if (fAngle <= 350 && fAngle > 288)
             {
+            Vector3 firePointAddition;
+            Vector3 muzzlePointAddition;
+            Vector3 firePointPosition;
+            Vector3 muzzlePointPosition;
+                if (player.moving && !player.movingRight) return;
+                if (player.moving && player.movingRight)
+                {
+                    firePointAddition = new Vector3(1.8f, -1.1f, -0.1f);
+                    muzzlePointAddition = new Vector3(1.8f, -1.1f, -0.1f);
+                    firePointPosition = player.transform.position + firePointAddition;
+                    muzzlePointPosition = player.transform.position + firePointAddition;
+                }
+                else
+                {
+                    firePointAddition = new Vector3(1.3f, -1.1f, -0.1f);
+                    muzzlePointAddition = new Vector3(1.3f, -1.1f, -0.1f);
+                    firePointPosition = player.transform.position + firePointAddition;
+                    muzzlePointPosition = player.transform.position + muzzlePointAddition;
+                }
+                    Debug.LogError("PLAYER POSITION: " + player.transform.position + " FIREPOINT POSITION: " + firePointDownDiagonal.position + "firePointPosition " + firePointPosition);
+                    Debug.LogError("PLAYER POSITION: " + player.transform.position + " MUZZLE POSITION: " + muzzlePointDownDiag.position + "firePointPosition " + muzzlePointPosition);
+
                 //this is right down
                 anim.SetTrigger("FireDiagDown");
-                Rigidbody2D bullet = Instantiate(bulletDiagDown, firePointDownDiagonal.position, firePointDownDiagonal.localRotation);
-                Rigidbody2D muzzleFlash = Instantiate(muzzleFlashDownDiag, muzzlePointDownDiag.position, muzzlePointDownDiag.rotation);
+                Rigidbody2D bullet = Instantiate(bulletDiagDown, firePointPosition, firePointDownDiagonal.localRotation);
+                Rigidbody2D muzzleFlash = Instantiate(muzzleFlashDownDiag, muzzlePointPosition, muzzlePointDownDiag.rotation);
                 bullet.transform.localScale *= player.bulletSizeMultiplier;
                 //BulletScript.xDirection = 0.1f;
                 //BulletScript.yDirection = -0.1f;
@@ -186,9 +330,28 @@ public class Weapon : MonoBehaviour
             else if (fAngle > 110 && fAngle <= 165)
             {
                 //this is left up
+                Vector3 firePointAddition;
+                Vector3 muzzlePointAddition;
+                Vector3 firePointPosition;
+                Vector3 muzzlePointPosition;
+                if (player.moving && player.movingRight) return;
+                if (player.moving && !player.movingRight)
+                {
+                    firePointAddition = new Vector3(-2.3f, 1.4f, -0.1f);
+                    muzzlePointAddition = new Vector3(-2.4f, .9f, -0.1f);
+                    firePointPosition = player.transform.position + firePointAddition;
+                    muzzlePointPosition = player.transform.position + muzzlePointAddition;
+                }
+                else
+                {
+                    firePointAddition = new Vector3(-1.7f, 1.67f, 0.2f);
+                    muzzlePointAddition = new Vector3(-1.4f, 1.9f, -0.1f);
+                    firePointPosition = player.transform.position + firePointAddition;
+                    muzzlePointPosition = player.transform.position + muzzlePointAddition;
+                }
                 anim.SetTrigger("FireDiagUp");
-                Rigidbody2D bullet = Instantiate(bulletDiagUp, firePointUpDiagonal.position, firePointUpDiagonal.localRotation);
-                Rigidbody2D muzzleFlash = Instantiate(muzzleFlashUpDiag, muzzlePointUpDiag.position, muzzlePointUpDiag.rotation);
+                Rigidbody2D bullet = Instantiate(bulletDiagUp, firePointPosition, firePointUpDiagonal.localRotation);
+                Rigidbody2D muzzleFlash = Instantiate(muzzleFlashUpDiag, muzzlePointPosition, muzzlePointUpDiag.rotation);
                 bullet.transform.localScale *= player.bulletSizeMultiplier;
                 //BulletScript.xDirection = -0.1f;
                 // BulletScript.yDirection = 0.1f;
@@ -203,9 +366,28 @@ public class Weapon : MonoBehaviour
             else if (fAngle > 165 && fAngle <= 190)
             {
                 //this is left
+                Vector3 firePointAddition;
+                Vector3 muzzlePointAddition;
+                Vector3 firePointPosition;
+                Vector3 muzzlePointPosition;
+                if (player.moving && player.movingRight) return;
+                if (player.moving && !player.movingRight)
+                {
+                    muzzlePointAddition = new Vector3(-2.4f, -0.4f, 0.0f);
+                    firePointAddition = new Vector3(-3.9f, -0.3f, -0.1f);
+                    firePointPosition = player.transform.position + firePointAddition;
+                    muzzlePointPosition = player.transform.position + muzzlePointAddition;
+                }
+                else
+                {
+                    muzzlePointAddition = new Vector3(-1.3f, 0.4f, 0.0f);
+                    firePointAddition = new Vector3(-2.3f, 0.3f, -0.1f);
+                    firePointPosition = player.transform.position + firePointAddition;
+                    muzzlePointPosition = player.transform.position + muzzlePointAddition;
+                }
                 anim.SetTrigger("FireHorizontal");
-                Rigidbody2D bullet = Instantiate(bulletHorizontal, firePointHorizontal.position, firePointHorizontal.localRotation);
-                Rigidbody2D muzzleFlash = Instantiate(muzzleFlashHorizontal, muzzlePointHorizontal.position, muzzlePointHorizontal.rotation);
+                Rigidbody2D bullet = Instantiate(bulletHorizontal, firePointPosition, firePointHorizontal.localRotation);
+                Rigidbody2D muzzleFlash = Instantiate(muzzleFlashHorizontal, muzzlePointPosition, muzzlePointHorizontal.rotation);
                 bullet.transform.localScale *= player.bulletSizeMultiplier;
                 //BulletScript.xDirection = -0.1f;
                 // BulletScript.yDirection = 0.0f;
@@ -219,9 +401,28 @@ public class Weapon : MonoBehaviour
             else if (fAngle > 190 && fAngle < 246)
             {
                 //this is left down
+                Vector3 firePointAddition;
+                Vector3 muzzlePointAddition;
+                Vector3 firePointPosition;
+                Vector3 muzzlePointPosition;
+                if (player.moving && player.movingRight) return;
+                if (player.moving && !player.movingRight)
+                {
+                    firePointAddition = new Vector3(-1.8f, -1.1f, -0.1f);
+                    muzzlePointAddition = new Vector3(-1.8f, -1.1f, -0.1f);
+                    firePointPosition = player.transform.position + firePointAddition;
+                    muzzlePointPosition = player.transform.position + firePointAddition;
+                }
+                else
+                {
+                    firePointAddition = new Vector3(-1.3f, -1.1f, -0.1f);
+                    muzzlePointAddition = new Vector3(-1.3f, -1.1f, -0.1f);
+                    firePointPosition = player.transform.position + firePointAddition;
+                    muzzlePointPosition = player.transform.position + muzzlePointAddition;
+                }
                 anim.SetTrigger("FireDiagDown");
-                Rigidbody2D bullet = Instantiate(bulletDiagDown, firePointDownDiagonal.position, firePointDownDiagonal.localRotation);
-                Rigidbody2D muzzleFlash = Instantiate(muzzleFlashDownDiag, muzzlePointDownDiag.position, muzzlePointDownDiag.rotation);
+                Rigidbody2D bullet = Instantiate(bulletDiagDown, firePointPosition, firePointDownDiagonal.localRotation);
+                Rigidbody2D muzzleFlash = Instantiate(muzzleFlashDownDiag, muzzlePointPosition, muzzlePointDownDiag.rotation);
                 bullet.transform.localScale *= player.bulletSizeMultiplier;
                 // BulletScript.xDirection = -0.1f;
                 //  BulletScript.yDirection = -0.1f;
