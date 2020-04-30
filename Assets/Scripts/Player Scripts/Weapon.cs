@@ -59,7 +59,6 @@ public class Weapon : MonoBehaviour
     }
     void Update()
     {
-        Debug.LogError("recharging " + rechargingWater);
         if(!rechargingWater)
         {
             rechargingWater = true;
@@ -82,13 +81,13 @@ public class Weapon : MonoBehaviour
         yield return new WaitForSeconds(waterGainTimer);
         UpdateWaterRemaining(1);
         rechargingWater = false;
-        Debug.LogError("You have gained one water  you now have " + waterRemaining);
     }
 
     public void UpdateWaterRemaining(int amount)
     {
-        Mathf.Clamp(waterRemaining, 0, MAX_WATER);
         waterRemaining += amount;
+        if (waterRemaining < 0) waterRemaining = 0;
+        if (waterRemaining >= MAX_WATER) waterRemaining = MAX_WATER;
     }
 
 
@@ -586,7 +585,6 @@ public class Weapon : MonoBehaviour
         StartCoroutine(ShootDelay());
         specialBar.fillAmount = 0;
         player.bulletSizeMultiplier = 1;
-        Debug.LogError("you now have " + waterRemaining + " water left");
     }
 
     IEnumerator ShootDelay()

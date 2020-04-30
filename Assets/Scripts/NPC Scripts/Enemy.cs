@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using Pathfinding;
 
 public class Enemy : MonoBehaviour
 {
@@ -31,6 +32,7 @@ public class Enemy : MonoBehaviour
     Vector3 targetLocation;
     Vector3 forceVector;
     Rigidbody2D rb;
+    public GameObject pathfinding;
     [SerializeField] bool comingFromLeft;
     private float timePassed;
     int bounceRange;
@@ -72,6 +74,9 @@ public class Enemy : MonoBehaviour
     bool reached2Pi = false;
     bool canLaunchBubble = true;
 
+    public AIPath aiPath;
+    
+
     public int NPC_ID = 0;
     public GameObject enemyPrefab;
 
@@ -98,6 +103,7 @@ public class Enemy : MonoBehaviour
     // Start is called before the first frame update
     private void Start()
     {
+        aiPath = GetComponent<AIPath>();
         player = GameObject.FindObjectOfType<Player>();
         currentHealth = MAX_HEALTH;
         //Sets the enemy to idle on start
@@ -212,6 +218,7 @@ public class Enemy : MonoBehaviour
         switch(GetEnemyType())
         {
             case EnemyType.RangePlane:
+           
                 //print(transform.position.x - player.transform.position.x);
                 if (transform.position.x - player.transform.position.x <= 10 && GetState() != State.Attacking)
                 {
@@ -219,16 +226,7 @@ public class Enemy : MonoBehaviour
                 }
                 if (GetState() == State.Attacking)
                 {
-                    targetLocation.y = -0.3f;
-                    if (transform.position.y == targetLocation.y)
-                    {
-                        RangeExplosion();
-                        SetState(State.Dead);
-                    }
-                    else
-                    {
-                        transform.position = Vector2.MoveTowards(transform.position, targetLocation, chargeSpeed * Time.deltaTime);
-                    }
+                    aiPath.enabled = true;
                 }
                 break;
 
