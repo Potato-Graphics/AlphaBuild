@@ -70,7 +70,6 @@ public class GameManager : MonoBehaviour
             OnPlayerDied();
         }
         Debug.LogError("the list contains: " + respawnEnemies.Count);
-        RespawnNpc();
         
     }
 
@@ -84,6 +83,7 @@ public class GameManager : MonoBehaviour
         {
             enemy.GetComponent<Enemy>().UpdateHealth(enemy.GetComponent<Enemy>().MAX_HEALTH);
         }
+        RespawnNpc();
     }
 
     // Update is called once per frame

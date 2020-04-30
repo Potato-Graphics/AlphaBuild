@@ -385,8 +385,9 @@ public class Enemy : MonoBehaviour
         Vector3 randomSize = new Vector3(randomValue, randomValue);
         if(bubblesSpawned < bubblesToBeSpawned)
         {
-            bubblePrefab.transform.localScale = randomSize;
-            Instantiate(bubblePrefab, transform.position, Quaternion.identity);
+            GameObject bubbles = bubblePrefab;
+            bubbles.transform.localScale = randomSize;
+            Instantiate(bubbles, transform.position, Quaternion.identity);
             bubblesSpawned++;
         } else
         {
