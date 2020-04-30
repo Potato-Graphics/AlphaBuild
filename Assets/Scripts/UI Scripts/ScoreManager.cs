@@ -5,8 +5,6 @@ using UnityEngine.UI;
 
 public class ScoreManager : MonoBehaviour
 {
-    private bool hasWon = false;
-
     public static int scoreValue;
 
     public int ScoreValue
@@ -17,10 +15,7 @@ public class ScoreManager : MonoBehaviour
 
     Text score;
 
-    public EndMenu endMenu;
-
     private float timeSecond = 0.0f;
-
 
     // Start is called before the first frame update
     void Start()
@@ -38,11 +33,4 @@ public class ScoreManager : MonoBehaviour
             timeSecond += 3;
         }
     }
-
-    public void OnWin()
-    {
-        hasWon = true;
-        PlayerPrefs.SetFloat("Highscore", ScoreValue);
-    }
-  
 }
