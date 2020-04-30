@@ -6,16 +6,21 @@ using UnityEngine.SceneManagement;
 
 public class EndMenu : MonoBehaviour
 {
-    public Text scoreText;
+
+    public void Update()
+    {
+        
+    }
 
     public void Menu()
     {
         SceneManager.LoadScene("Menu");
-        print("pressed menu button");
+        print("Returning to menu... ");
     }
 
     public void Quit()
     {
+        Debug.Log("Quitting game... ");
         Application.Quit();
     }
 }

@@ -21,6 +21,7 @@ public class UIAppear : MonoBehaviour
             
             endMenu.SetActive(true);
             Image.SetActive(true);
+            Time.timeScale = 0;
         }
     }
 }
