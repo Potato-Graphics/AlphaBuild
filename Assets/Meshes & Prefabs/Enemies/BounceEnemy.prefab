@@ -204,6 +204,7 @@ MonoBehaviour:
   MAX_HEALTH: 2
   killable: 1
   healthBar: {fileID: 3113294504046302801}
+  coin: {fileID: 6893153700885626828, guid: 931de1f2d9373074995c201f3671624c, type: 3}
   pointsGiven: 600
 --- !u!114 &4437691164210436335
 MonoBehaviour:

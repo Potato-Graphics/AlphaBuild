@@ -54,12 +54,15 @@ public class NPC_Manager : MonoBehaviour
             {
                 UpdateHealth(-Player.bulletDamage);
                 Player.bulletDamage = 1;
-                Instantiate(coin, transform.position, transform.rotation);
                 if (GetHealth() <= 0)
                 {
                     ScoreManager.scoreValue += pointsGiven;
                     enemy.UpdateHealth(enemy.MAX_HEALTH);
                     enemy.SetState(Enemy.State.Dead);
+                    if (enemy.GetEnemyType() != Enemy.EnemyType.HelicopterSeed)
+                    {
+                        Instantiate(coin, transform.position, transform.rotation);
+                    }
                 }
             }
         }
