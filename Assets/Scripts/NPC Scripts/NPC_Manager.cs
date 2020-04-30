@@ -10,6 +10,7 @@ public class NPC_Manager : MonoBehaviour
     [SerializeField] private bool killable = false;
     [SerializeField] Image healthBar;
     Enemy enemy;
+    public GameObject coin;
     float fillAmount = 1.0f;
 
     public int pointsGiven;
@@ -53,6 +54,7 @@ public class NPC_Manager : MonoBehaviour
             {
                 UpdateHealth(-Player.bulletDamage);
                 Player.bulletDamage = 1;
+                Instantiate(coin, transform.position, transform.rotation);
                 if (GetHealth() <= 0)
                 {
                     ScoreManager.scoreValue += pointsGiven;
