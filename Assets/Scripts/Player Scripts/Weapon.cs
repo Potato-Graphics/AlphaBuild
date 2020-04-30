@@ -22,6 +22,10 @@ public class Weapon : MonoBehaviour
     [SerializeField] float speed = 25;
     public Image specialBar;
 
+    public int waterRemaining = 0;
+    public int MAX_WATER = 10;
+    public float waterGainTimer = 0.5f;
+
     float timeToFire = 0;
 
 
@@ -46,6 +50,7 @@ public class Weapon : MonoBehaviour
     public Transform firePoint;
     void Start()
     {
+        waterRemaining = MAX_WATER;
         controller = GetComponent<Controller2D>();
         player = GetComponent<Player>();
         anim = player.GetComponent<Animator>();
@@ -64,6 +69,23 @@ public class Weapon : MonoBehaviour
     //HELLO EARTHLING. BELOW IS THE ANIMATION CALL FOR THE SHOOTING SCRIPT TO BE PUT IN EACH DIRECTION. PLEASE COMMENT EACH DIRECTION WITH ITS DIRECTION
     //   anim.SetTrigger("FireUp"); anim.SetTrigger("FireDiagUp"); anim.SetTrigger("FireHorizontal"); anim.SetTrigger("FireDiagDown"); anim.SetTrigger("FireDown");
 
+    IEnumerator WaterGain()
+    {
+        yield return new WaitForSeconds(waterGainTimer);
+        UpdateWaterRemaining(+1);
+        Debug.LogError("You have gained one water  you now have " + waterRemaining);
+    }
+
+    public void UpdateWaterRemaining(int amount)
+    {
+        waterRemaining += amount;
+    }
+
+    public int GetWaterRemaining()
+    {
+        return waterRemaining;
+    }
+
 
     void Shooting()
     {
@@ -71,6 +93,8 @@ public class Weapon : MonoBehaviour
         Vector3 dir = Input.mousePosition - Camera.main.WorldToScreenPoint(transform.position); // Mouse position directoin.
         Vector3 direction = Input.mousePosition;
         //Vector3 firePointPosition = new Vector3(firePoint.position.x, firePoint.position.y); // Stores the firepoint as a Vector2.
+
+        StartCoroutine(WaterGain());
 
 
 
@@ -535,8 +559,16 @@ public class Weapon : MonoBehaviour
                 bullet.transform.eulerAngles = new Vector2(0, -180);
                 bullet.velocity = velocityChange * (Time.deltaTime * speed);
             }
-        } 
-
+        }
+        int drainAmount = 1;
+            if (player.bulletSizeMultiplier == 1)
+        {
+            drainAmount = 1;
+        } else
+        {
+            drainAmount = Mathf.RoundToInt(player.bulletSizeMultiplier * 2.4f);
+        }
+        UpdateWaterRemaining(-1);
         delay = true;
         StartCoroutine(ShootDelay());
         specialBar.fillAmount = 0;
