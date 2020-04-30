@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class ScoreManager : MonoBehaviour
 {
+    private bool hasWon = false;
+
     public static int scoreValue;
 
     public int ScoreValue
@@ -12,7 +14,10 @@ public class ScoreManager : MonoBehaviour
         get { return scoreValue; }
         set { scoreValue = Mathf.Clamp(value, 0, 2147000000); }
     }
+
     Text score;
+
+    public EndMenu endMenu;
 
     private float timeSecond = 0.0f;
 
@@ -32,6 +37,13 @@ public class ScoreManager : MonoBehaviour
             ScoreValue -= ScoreValue / 10;
             timeSecond += 3;
         }
+    }
+
+    public void OnWin()
+    {
+        hasWon = true;
+        PlayerPrefs.SetFloat("Highscore", ScoreValue);
+        endMenu.ToggleEndMenu(ScoreValue);
     }
   
 }
