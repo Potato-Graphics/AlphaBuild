@@ -7,9 +7,10 @@ using UnityEngine.UI;
 
 [RequireComponent(typeof(Controller2D))]
 
+
 public class Player : MonoBehaviour
 {
-
+    AudioSource audioGame;
     public delegate void PlayerDelegate();
     public static event PlayerDelegate OnPlayerDied;
 
@@ -100,6 +101,7 @@ public class Player : MonoBehaviour
 
     void Start()
     {
+        audioGame = GameObject.FindObjectOfType<AudioSource>();
         anim = player.GetComponent<Animator>();
         timer = GetComponent<Text>();
 
@@ -239,8 +241,11 @@ public class Player : MonoBehaviour
                 if (totalPumps >= 10) return;
                 totalPumps++;
                 if (specialBar.fillAmount >= 1.0) return;
-                
+
+
+
                 anim.SetBool("IsPumping", true);
+                SoundManager.PlaySound("playerpump");
                 specialBar.fillAmount += 0.1f;
                 bulletSizeMultiplier += 0.1f;
                 movedUp = true;
@@ -355,6 +360,7 @@ public class Player : MonoBehaviour
         if (controller.dashing)
         {
             anim.SetTrigger("Dashed");
+            
             transform.position = Vector3.MoveTowards(transform.position, dashPosition, dashSpeed * Time.deltaTime);
         }
         if (!controller.collisions.below)
@@ -454,7 +460,11 @@ public class Player : MonoBehaviour
             if (canJump)
             {
                 anim.SetTrigger("Jump");
+
                 velocity.y = jumpVelocity;
+
+                SoundManager.PlaySound("playerjump");
+                Debug.Log("jumpsound" + audioGame.isPlaying);
             }
         }
 
@@ -513,6 +523,7 @@ public class Player : MonoBehaviour
             UpdateHealth(-amount);
             isAttackable = false;
             anim.SetBool("IsDamaged", true);
+            SoundManager.PlaySound("playerdamage");
             Debug.LogError(anim.GetBool("IsDamaged"));
             StartCoroutine(DamagedDelay());
             StartCoroutine(RespawnDelay());
