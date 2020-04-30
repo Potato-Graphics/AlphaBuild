@@ -13,6 +13,7 @@ public class NPC_Manager : MonoBehaviour
     public GameObject coin;
     public GameObject life;
     float fillAmount = 1.0f;
+    public bool dropLoot = true;
 
     public int pointsGiven;
 
@@ -60,6 +61,8 @@ public class NPC_Manager : MonoBehaviour
                     ScoreManager.scoreValue += pointsGiven;
                     enemy.UpdateHealth(enemy.MAX_HEALTH);
                     enemy.SetState(Enemy.State.Dead);
+                    if(dropLoot)
+                    {
                     if (enemy.GetEnemyType() != Enemy.EnemyType.HelicopterSeed)
                     {
                         if (Random.Range(0, 8) == 0)
@@ -69,6 +72,7 @@ public class NPC_Manager : MonoBehaviour
                         {
                             Instantiate(coin, transform.position, transform.rotation);
                         }
+                      }
                     }
                 }
             }

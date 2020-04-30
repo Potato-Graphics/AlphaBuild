@@ -136,6 +136,15 @@ public class Enemy : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D col)
     {
+        Debug.LogError("the enemy is: " + gameObject.name + "the state is: " + GetState());
+        if (col.gameObject.tag == "Enemy")
+        {
+          //  Physics2D.IgnoreCollision(gameObject.GetComponent<BoxCollider2D>(), col.gameObject.GetComponent<BoxCollider2D>());
+            if (GetEnemyType() == EnemyType.HelicopterSeed)
+            {
+                transform.position = startPosition;
+            }
+        }
         if(col.gameObject.tag == "Obstacles")
         {
             if(GetEnemyType() == EnemyType.RangePlane)

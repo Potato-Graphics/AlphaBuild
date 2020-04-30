@@ -37,7 +37,6 @@ public class DamagePlayer : MonoBehaviour
     }
     void OnTriggerEnter2D(Collider2D col)
     {
-        print("test" + col.gameObject.tag);
         if (col.gameObject.tag.Equals("Player"))
         {
             if (destroyable)

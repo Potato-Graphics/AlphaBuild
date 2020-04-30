@@ -42,7 +42,7 @@ public class Controller2D : MonoBehaviour
     IEnumerator colliderChange()
     {
         yield return new WaitForSeconds(2);
-        collider.size = new Vector2(1.52f, 3.25f);
+        collider.size = new Vector2(1.32f, 3.25f);
     }
 
     private void Update()

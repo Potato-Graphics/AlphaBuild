@@ -21,10 +21,14 @@ public class CollectLife : MonoBehaviour
         }
         if (col.gameObject.tag == "Player")
         {
-            if(player.GetHealth() < 3)
+            if (player.GetHealth() < 3)
             {
                 player.UpdateHealth(1);
                 Destroy(gameObject);
+            }
+            else
+            {
+                Debug.LogError("HEALTH IS FULL" +player.GetHealth());
             }
         }
     }

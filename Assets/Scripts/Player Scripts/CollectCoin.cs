@@ -17,7 +17,6 @@ public class CollectCoin : MonoBehaviour
     }
   void OnTriggerEnter2D(Collider2D col)
     {
-        Debug.LogError(col.gameObject.tag);
         if (col.gameObject.tag == "Obstacles")
         {
             rb.velocity = Vector3.zero;

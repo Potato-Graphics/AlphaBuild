@@ -25,7 +25,7 @@ public class ZipLineTrigger : MonoBehaviour
     void OnTriggerEnter2D(Collider2D col)
     {
         print("zipline trigger tag is " + col.gameObject.tag);
-        Debug.LogError("zipline");
+        Debug.LogError("zipline" + col.gameObject.name);
         if (col.gameObject.tag == "Player" && !player.ridingZipline)
         {
             player.ridingZipline = true;
