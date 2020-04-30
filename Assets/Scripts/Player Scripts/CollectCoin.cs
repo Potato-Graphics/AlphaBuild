@@ -5,6 +5,7 @@ using UnityEngine;
 public class CollectCoin : MonoBehaviour
 {
     Player player;
+    public int scoreAmount = 75;
 
 
     void Start()
@@ -15,7 +16,8 @@ public class CollectCoin : MonoBehaviour
     {
         if(col.gameObject.tag == "Player")
         {
-            player.coins += 50;
+            player.UpdateScore(scoreAmount);
+            player.coins++;
             Destroy(gameObject);
         }
     }
