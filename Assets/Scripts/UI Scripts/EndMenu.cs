@@ -8,21 +8,10 @@ public class EndMenu : MonoBehaviour
 {
     public Text scoreText;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        gameObject.SetActive(false);
-    }
-
-    public void ToggleEndMenu(float ScoreValue)
-    {
-        gameObject.SetActive(true);
-        scoreText.text = ((int)ScoreValue).ToString();
-    }
-
     public void Menu()
     {
         SceneManager.LoadScene("Menu");
+        print("pressed menu button");
     }
 
     public void Quit()

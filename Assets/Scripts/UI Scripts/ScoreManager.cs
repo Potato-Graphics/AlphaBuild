@@ -43,7 +43,6 @@ public class ScoreManager : MonoBehaviour
     {
         hasWon = true;
         PlayerPrefs.SetFloat("Highscore", ScoreValue);
-        endMenu.ToggleEndMenu(ScoreValue);
     }
   
 }
