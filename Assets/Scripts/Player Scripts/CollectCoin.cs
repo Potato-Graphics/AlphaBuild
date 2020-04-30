@@ -5,6 +5,8 @@ using UnityEngine;
 public class CollectCoin : MonoBehaviour
 {
     Player player;
+    public int scoreMaxAmount = 100;
+    public int scoreMinAmount = 40;
 
 
     void Start()
@@ -15,7 +17,8 @@ public class CollectCoin : MonoBehaviour
     {
         if(col.gameObject.tag == "Player")
         {
-            player.coins += 50;
+            player.UpdateScore(Random.Range(scoreMinAmount, scoreMaxAmount));
+            player.coins++;
             Destroy(gameObject);
         }
     }

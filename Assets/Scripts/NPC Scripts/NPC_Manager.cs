@@ -10,6 +10,7 @@ public class NPC_Manager : MonoBehaviour
     [SerializeField] private bool killable = false;
     [SerializeField] Image healthBar;
     Enemy enemy;
+    public GameObject coin;
     float fillAmount = 1.0f;
 
     public int pointsGiven;
@@ -58,6 +59,10 @@ public class NPC_Manager : MonoBehaviour
                     ScoreManager.scoreValue += pointsGiven;
                     enemy.UpdateHealth(enemy.MAX_HEALTH);
                     enemy.SetState(Enemy.State.Dead);
+                    if (enemy.GetEnemyType() != Enemy.EnemyType.HelicopterSeed)
+                    {
+                        Instantiate(coin, transform.position, transform.rotation);
+                    }
                 }
             }
         }
