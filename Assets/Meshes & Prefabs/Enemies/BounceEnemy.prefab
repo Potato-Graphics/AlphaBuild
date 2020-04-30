@@ -205,6 +205,7 @@ MonoBehaviour:
   killable: 1
   healthBar: {fileID: 3113294504046302801}
   coin: {fileID: 6893153700885626828, guid: 931de1f2d9373074995c201f3671624c, type: 3}
+  life: {fileID: 596983824544147416, guid: dda0bf367ba04954db31e6db281aedfb, type: 3}
   pointsGiven: 600
 --- !u!114 &4437691164210436335
 MonoBehaviour:
@@ -364,10 +365,15 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1725984650659398307}
     m_Modifications:
-    - target: {fileID: 1425679719675262578, guid: 6adafcde58647c045a102ac3aee433a4,
+    - target: {fileID: 6947598397353485698, guid: 6adafcde58647c045a102ac3aee433a4,
         type: 3}
-      propertyPath: m_Name
-      value: EnemyHealthBar
+      propertyPath: m_PreserveAspect
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6947598397353485698, guid: 6adafcde58647c045a102ac3aee433a4,
+        type: 3}
+      propertyPath: m_FillAmount
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6249186008181750452, guid: 6adafcde58647c045a102ac3aee433a4,
         type: 3}
@@ -489,15 +495,10 @@ PrefabInstance:
       propertyPath: m_LocalScale.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 6947598397353485698, guid: 6adafcde58647c045a102ac3aee433a4,
+    - target: {fileID: 1425679719675262578, guid: 6adafcde58647c045a102ac3aee433a4,
         type: 3}
-      propertyPath: m_PreserveAspect
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6947598397353485698, guid: 6adafcde58647c045a102ac3aee433a4,
-        type: 3}
-      propertyPath: m_FillAmount
-      value: 1
+      propertyPath: m_Name
+      value: EnemyHealthBar
       objectReference: {fileID: 0}
     - target: {fileID: 7162241267142145460, guid: 6adafcde58647c045a102ac3aee433a4,
         type: 3}

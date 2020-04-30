@@ -11,6 +11,7 @@ public class NPC_Manager : MonoBehaviour
     [SerializeField] Image healthBar;
     Enemy enemy;
     public GameObject coin;
+    public GameObject life;
     float fillAmount = 1.0f;
 
     public int pointsGiven;
@@ -61,7 +62,13 @@ public class NPC_Manager : MonoBehaviour
                     enemy.SetState(Enemy.State.Dead);
                     if (enemy.GetEnemyType() != Enemy.EnemyType.HelicopterSeed)
                     {
-                        Instantiate(coin, transform.position, transform.rotation);
+                        if (Random.Range(0, 4) == 0)
+                        {
+                            Instantiate(life, transform.position, transform.rotation);
+                        } else
+                        {
+                            Instantiate(coin, transform.position, transform.rotation);
+                        }
                     }
                 }
             }
@@ -75,14 +82,11 @@ public class NPC_Manager : MonoBehaviour
     }
     void OnCollisionEnter(Collision col)
     {
-        print("this is the collision" + col.gameObject.tag);
         if (col.gameObject.tag == "Bullet")
         {
-            print("bullet collision");
             Debug.LogError(col.gameObject.GetComponent<Enemy>().GetState());
             if (enemy.GetEnemyType() == Enemy.EnemyType.HelicopterSeed)
             {
-                Debug.LogError("w");
                 transform.position = enemy.startPosition;
             }
             if (killable)
