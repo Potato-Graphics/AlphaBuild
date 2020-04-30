@@ -568,7 +568,7 @@ public class Weapon : MonoBehaviour
         {
             drainAmount = Mathf.RoundToInt(player.bulletSizeMultiplier * 2.4f);
         }
-        UpdateWaterRemaining(-1);
+        UpdateWaterRemaining(-drainAmount);
         delay = true;
         StartCoroutine(ShootDelay());
         specialBar.fillAmount = 0;
