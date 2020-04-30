@@ -43,7 +43,12 @@ public class NPC_Manager : MonoBehaviour
     {
         if (col.gameObject.tag == "Bullet")
         {
-            print("bullet collision");
+            print("bullet collision" );
+            if (enemy.GetEnemyType() == Enemy.EnemyType.HelicopterSeed)
+            {
+                transform.position = new Vector3(1000, 1000, 1000);
+                StartCoroutine(RespawnHelicopter());
+            }
             if (killable)
             {
                 UpdateHealth(-Player.bulletDamage);
@@ -58,12 +63,23 @@ public class NPC_Manager : MonoBehaviour
         }
     }
 
+    IEnumerator RespawnHelicopter()
+    {
+        yield return new WaitForSeconds(1);
+        transform.position = enemy.startPosition;
+    }
     void OnCollisionEnter(Collision col)
     {
         print("this is the collision" + col.gameObject.tag);
         if (col.gameObject.tag == "Bullet")
         {
             print("bullet collision");
+            Debug.LogError(col.gameObject.GetComponent<Enemy>().GetState());
+            if (enemy.GetEnemyType() == Enemy.EnemyType.HelicopterSeed)
+            {
+                Debug.LogError("w");
+                transform.position = enemy.startPosition;
+            }
             if (killable)
             {
                 UpdateHealth(-Player.bulletDamage);

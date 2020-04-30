@@ -11,12 +11,14 @@ public class ShowUI : MonoBehaviour
         uiObject.SetActive(false);
     }
     // Update is called once per frame
-    void OnTriggerEnter2D(Collider2D player)
+ 
+    void OnTriggerEnter2D(Collider2D col)
     {
-        if (player.gameObject.tag == "Player")
+        Debug.LogError("Entered");
+        if (col.gameObject.tag == "Player")
         {
             uiObject.SetActive(true);
-            StartCoroutine("WaitForSec");
+            StartCoroutine(WaitForSec());
         }
     }
     IEnumerator WaitForSec()

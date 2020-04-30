@@ -203,7 +203,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MAX_HEALTH: 2
   killable: 1
-  healthBar: {fileID: 0}
+  healthBar: {fileID: 3113294504046302801}
   pointsGiven: 600
 --- !u!114 &4437691164210436335
 MonoBehaviour:
@@ -225,7 +225,7 @@ MonoBehaviour:
   startPosition: {x: 0, y: 0, z: 0}
   currentState: 0
   idleWalkDistance: 5
-  enemyType: 2
+  enemyType: 3
   collidingWithPlayer: 0
   comingFromLeft: 0
   endPosition: {x: 0, y: 0}
@@ -601,3 +601,15 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 5430909274308539347}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &3113294504046302801 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6947598397353485698, guid: 6adafcde58647c045a102ac3aee433a4,
+    type: 3}
+  m_PrefabInstance: {fileID: 5430909274308539347}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

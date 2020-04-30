@@ -58,6 +58,7 @@ public class GameManager : MonoBehaviour
         {
             enemy.enemy.transform.position = enemy.spawnPoint;
             enemy.enemy.GetComponent<Enemy>().SetState(Enemy.State.Idle);
+            enemy.enemy.GetComponent<Enemy>().UpdateHealth(enemy.enemy.GetComponent<Enemy>().MAX_HEALTH);
             enemy.enemy.SetActive(true);
         }
         respawnEnemies.Clear();
@@ -68,7 +69,6 @@ public class GameManager : MonoBehaviour
         {
             OnPlayerDied();
         }
-        player.transform.position = Player.spawnLocation;
         Debug.LogError("the list contains: " + respawnEnemies.Count);
         RespawnNpc();
         
@@ -76,7 +76,14 @@ public class GameManager : MonoBehaviour
 
     void OnPlayerDied()
     {
-        SceneManager.LoadScene(2);
+        player.transform.position = Player.spawnLocation;
+        player.UpdateHealth(3);
+        GameObject[] enemies;
+        enemies = GameObject.FindGameObjectsWithTag("Enemy");
+        foreach (GameObject enemy in enemies)
+        {
+            enemy.GetComponent<Enemy>().UpdateHealth(enemy.GetComponent<Enemy>().MAX_HEALTH);
+        }
     }
 
     // Update is called once per frame

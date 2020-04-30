@@ -225,6 +225,7 @@ public class Controller2D : MonoBehaviour
     
     void DescendSlope(ref Vector3 Velocity)
     {
+       // Debug.LogError("is this the func");
         float directionX = Mathf.Sign(Velocity.x);
         Vector2 rayOrigin = (directionX == -1) ? raycastOrigins.bottomRight : raycastOrigins.bottomLeft;
         RaycastHit2D hit = Physics2D.Raycast(rayOrigin, -Vector2.up, Mathf.Infinity, collisionMask);

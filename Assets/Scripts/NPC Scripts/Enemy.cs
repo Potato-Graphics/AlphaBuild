@@ -511,15 +511,20 @@ public class Enemy : MonoBehaviour
                 break;
             //if the enemy is dead
             case State.Dead:
-                AddToRespawnList();
                 //Destroy(this.gameObject); // The enemy is destroyed.
                 if (GetEnemyType() == EnemyType.HelicopterSeed)
                 {
                     transform.position = startPosition;
+                    SetHealth(MAX_HEALTH);
+                    SetState(State.Idle);
                 }
-                SetHealth(MAX_HEALTH);
-                SetState(State.Idle);
-                gameObject.SetActive(false);
+                else
+                {
+                    AddToRespawnList();
+                    SetHealth(MAX_HEALTH);
+                    SetState(State.Idle);
+                    gameObject.SetActive(false);
+                }
                 break;
         }
     }
