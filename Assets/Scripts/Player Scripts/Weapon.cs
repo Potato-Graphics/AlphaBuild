@@ -21,10 +21,11 @@ public class Weapon : MonoBehaviour
     public Vector3 position;
     [SerializeField] float speed = 25;
     public Image specialBar;
+    bool rechargingWater = false;
 
-    public int waterRemaining = 0;
+    public int waterRemaining = 10;
     public int MAX_WATER = 10;
-    public float waterGainTimer = 0.5f;
+    public float waterGainTimer = 2.5f;
 
     float timeToFire = 0;
 
@@ -58,6 +59,13 @@ public class Weapon : MonoBehaviour
     }
     void Update()
     {
+        Debug.LogError("recharging " + rechargingWater);
+        if(!rechargingWater)
+        {
+            rechargingWater = true;
+            StartCoroutine(WaterGain());
+        }
+
         //If the button is held down, starts auto firing until button is released.
         if (Input.GetAxis("Fire1") > 0.0f && !delay)
         {
@@ -72,14 +80,18 @@ public class Weapon : MonoBehaviour
     IEnumerator WaterGain()
     {
         yield return new WaitForSeconds(waterGainTimer);
-        UpdateWaterRemaining(+1);
+        UpdateWaterRemaining(1);
+        rechargingWater = false;
         Debug.LogError("You have gained one water  you now have " + waterRemaining);
     }
 
     public void UpdateWaterRemaining(int amount)
     {
+        Mathf.Clamp(waterRemaining, 0, MAX_WATER);
         waterRemaining += amount;
     }
+
+
 
     public int GetWaterRemaining()
     {
@@ -89,12 +101,12 @@ public class Weapon : MonoBehaviour
 
     void Shooting()
     {
+        if(waterRemaining <= 0) return;
         float joyangle = Mathf.Atan2(Input.GetAxis("JoyStickX"), Input.GetAxis("JoyStickY")) * Mathf.Rad2Deg;
         Vector3 dir = Input.mousePosition - Camera.main.WorldToScreenPoint(transform.position); // Mouse position directoin.
         Vector3 direction = Input.mousePosition;
         //Vector3 firePointPosition = new Vector3(firePoint.position.x, firePoint.position.y); // Stores the firepoint as a Vector2.
 
-        StartCoroutine(WaterGain());
 
 
 
@@ -569,10 +581,12 @@ public class Weapon : MonoBehaviour
             drainAmount = Mathf.RoundToInt(player.bulletSizeMultiplier * 2.4f);
         }
         UpdateWaterRemaining(-drainAmount);
+        drainAmount = 0;
         delay = true;
         StartCoroutine(ShootDelay());
         specialBar.fillAmount = 0;
         player.bulletSizeMultiplier = 1;
+        Debug.LogError("you now have " + waterRemaining + " water left");
     }
 
     IEnumerator ShootDelay()
