@@ -70,6 +70,7 @@ public class Enemy : MonoBehaviour
     public float fallSpeed = 10;
     public float spinSpeed = 100;
     bool reached2Pi = false;
+    bool canLaunchBubble = true;
 
     public int NPC_ID = 0;
     public GameObject enemyPrefab;
@@ -378,17 +379,31 @@ public class Enemy : MonoBehaviour
         SetState(State.Idle);
     }
 
+    IEnumerator BubbleDelay()
+    {
+        yield return new WaitForSeconds(0.2f);
+        canLaunchBubble = true;
+    }
+
     private void ObstructorAttack()
     {
         int bubblesToBeSpawned = Random.Range(6, 13);
         float randomValue = Random.Range(0.05f, 0.2f);
         Vector3 randomSize = new Vector3(randomValue, randomValue);
+        Vector3 spawnPosition = transform.position;
+        spawnPosition.x = transform.position.x - 2f;
+        spawnPosition.y = transform.position.y + Random.Range(0, 1);
         if(bubblesSpawned < bubblesToBeSpawned)
         {
-            GameObject bubbles = bubblePrefab;
-            bubbles.transform.localScale = randomSize;
-            Instantiate(bubbles, transform.position, Quaternion.identity);
-            bubblesSpawned++;
+            if(canLaunchBubble)
+            {
+                GameObject bubbles = bubblePrefab;
+                bubbles.transform.localScale = randomSize;
+                Instantiate(bubbles, spawnPosition, Quaternion.identity);
+                bubblesSpawned++;
+                canLaunchBubble = false;
+                StartCoroutine(BubbleDelay());
+            }
         } else
         {
             SetState(State.CoolDown);
