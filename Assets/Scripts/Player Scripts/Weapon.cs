@@ -227,6 +227,7 @@ public class Weapon : MonoBehaviour
                 Vector3 muzzlePointAddition;
                 Vector3 firePointPosition;
                 Vector3 muzzlePointPosition;
+                if (player.moving && !player.movingRight) return;
                 if (player.moving && player.movingRight)
                 {
                     firePointAddition = new Vector3(2.3f, 1.4f, -0.1f);
@@ -261,6 +262,7 @@ public class Weapon : MonoBehaviour
                 Vector3 muzzlePointAddition;
                 Vector3 firePointPosition;
                 Vector3 muzzlePointPosition;
+                if (player.moving && !player.movingRight) return;
                 if (player.moving && player.movingRight)
                 {
                     muzzlePointAddition = new Vector3(2.1f, -0.2f, 0.0f);
@@ -294,6 +296,7 @@ public class Weapon : MonoBehaviour
             Vector3 muzzlePointAddition;
             Vector3 firePointPosition;
             Vector3 muzzlePointPosition;
+                if (player.moving && !player.movingRight) return;
                 if (player.moving && player.movingRight)
                 {
                     firePointAddition = new Vector3(1.8f, -1.1f, -0.1f);
@@ -331,6 +334,7 @@ public class Weapon : MonoBehaviour
                 Vector3 muzzlePointAddition;
                 Vector3 firePointPosition;
                 Vector3 muzzlePointPosition;
+                if (player.moving && player.movingRight) return;
                 if (player.moving && !player.movingRight)
                 {
                     firePointAddition = new Vector3(-2.3f, 1.4f, -0.1f);
@@ -366,6 +370,7 @@ public class Weapon : MonoBehaviour
                 Vector3 muzzlePointAddition;
                 Vector3 firePointPosition;
                 Vector3 muzzlePointPosition;
+                if (player.moving && player.movingRight) return;
                 if (player.moving && !player.movingRight)
                 {
                     muzzlePointAddition = new Vector3(-2.4f, -0.4f, 0.0f);
@@ -400,6 +405,7 @@ public class Weapon : MonoBehaviour
                 Vector3 muzzlePointAddition;
                 Vector3 firePointPosition;
                 Vector3 muzzlePointPosition;
+                if (player.moving && player.movingRight) return;
                 if (player.moving && !player.movingRight)
                 {
                     firePointAddition = new Vector3(-1.8f, -1.1f, -0.1f);
