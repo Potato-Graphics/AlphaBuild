@@ -34,6 +34,15 @@ public class Controller2D : MonoBehaviour
         CalculateRaySpacing();
         collisions.faceDir = 1;
         player = GetComponent<Player>();
+        Debug.LogError(collider.bounds);
+        Debug.LogError(collider.size);
+        StartCoroutine(colliderChange());
+    }
+
+    IEnumerator colliderChange()
+    {
+        yield return new WaitForSeconds(2);
+        collider.size = new Vector2(1.52f, 3.25f);
     }
 
     private void Update()
