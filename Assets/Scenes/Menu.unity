@@ -1180,7 +1180,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 
+  m_Text: Low
 --- !u!222 &304701656
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1964,6 +1964,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae9fff5bed19e2745b7c50b94a66942e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mixer: {fileID: 24100000, guid: ee98da778faa4d04b8d564d2db32f41b, type: 2}
   resolutionDropdown: {fileID: 854787553}
 --- !u!1 &477456408
 GameObject:
@@ -4418,7 +4419,7 @@ MonoBehaviour:
   m_FillRect: {fileID: 950314550}
   m_HandleRect: {fileID: 1159281580}
   m_Direction: 0
-  m_MinValue: 0
+  m_MinValue: 0.0001
   m_MaxValue: 1
   m_WholeNumbers: 0
   m_Value: 1
@@ -5968,7 +5969,8 @@ AudioSource:
   m_GameObject: {fileID: 1663106710}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 24300002, guid: ee98da778faa4d04b8d564d2db32f41b,
+    type: 2}
   m_audioClip: {fileID: 8300000, guid: 88ed25f215c65104aaf79e3d12a0e516, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1

@@ -13,6 +13,7 @@ TagManager:
   - RangeNPC
   - Enemy
   - Zipline
+  - Score
   layers:
   - Default
   - TransparentFX
