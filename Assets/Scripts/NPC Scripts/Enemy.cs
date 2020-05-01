@@ -164,6 +164,7 @@ public class Enemy : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D col)
     {
+        Debug.LogError("I am " + gameObject.name + " and i collide with " + col.gameObject.tag);
         if (col.gameObject.tag == "Enemy")
         {
             if(circleCollider != null)
