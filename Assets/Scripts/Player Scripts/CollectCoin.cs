@@ -15,6 +15,13 @@ public class CollectCoin : MonoBehaviour
     {
         player = GameObject.FindObjectOfType<Player>();
         rb = GetComponent<Rigidbody2D>();
+        StartCoroutine(DestroyCoin());
+    }
+
+    IEnumerator DestroyCoin()
+    {
+        yield return new WaitForSeconds(6);
+        Destroy(gameObject);
     }
   void OnTriggerEnter2D(Collider2D col)
     {

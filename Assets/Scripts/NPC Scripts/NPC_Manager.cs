@@ -8,7 +8,7 @@ public class NPC_Manager : MonoBehaviour
     private float currentHealth;
     [SerializeField] private float MAX_HEALTH = 0;
     [SerializeField] private bool killable = false;
-    [SerializeField] Image healthBar;
+    [SerializeField] public Image healthBar;
     Enemy enemy;
     public GameObject coin;
     public GameObject life;

@@ -14,6 +14,13 @@ public class CollectLife : MonoBehaviour
     {
         player = GameObject.FindObjectOfType<Player>();
         rb = GetComponent<Rigidbody2D>();
+        StartCoroutine(DestroyLife());
+    }
+
+    IEnumerator DestroyLife()
+    {
+        yield return new WaitForSeconds(6);
+        Destroy(gameObject);
     }
     void OnTriggerEnter2D(Collider2D col)
     {
@@ -29,6 +36,7 @@ public class CollectLife : MonoBehaviour
                 player.UpdateHealth(1);
                 playercollect.Play();
                 Destroy(gameObject);
+                return;
             }
             else
             {
