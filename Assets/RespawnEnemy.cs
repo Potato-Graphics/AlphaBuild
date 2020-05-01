@@ -8,10 +8,10 @@ public class RespawnEnemy : IComparable<RespawnEnemy>
     public GameObject enemy;
     public Vector3 spawnPoint;
     public int enemyID;
-    public int MAX_HEALTH;
+    public float MAX_HEALTH;
 
 
-    public RespawnEnemy(int ID, Vector3 spawnLocation, GameObject enemyPrefab, int MAX_HEALTH)
+    public RespawnEnemy(int ID, Vector3 spawnLocation, GameObject enemyPrefab, float MAX_HEALTH)
     {
         enemyID = ID;
         spawnPoint = spawnLocation;
