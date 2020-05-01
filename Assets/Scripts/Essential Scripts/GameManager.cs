@@ -16,6 +16,7 @@ public class GameManager : MonoBehaviour
 
     Player player;
     Enemy enemy;
+    ZiplineHandler ziplineHandler;
 
     bool gameOver = false;
         public bool GameOver { get { return gameOver; } }
@@ -24,6 +25,7 @@ public class GameManager : MonoBehaviour
         Instance = this;
         player = GameObject.FindObjectOfType<Player>();
         enemy = GameObject.FindObjectOfType<Enemy>();
+        ziplineHandler = GameObject.FindObjectOfType<ZiplineHandler>();
     }
 
     void OnEnable()
@@ -46,7 +48,7 @@ public class GameManager : MonoBehaviour
        
     }
 
-    public void AddRespawnObj(int npc_id, Vector3 spwanPos, GameObject go, float MAX_HEALTH)
+    public void AddRespawnObj(int npc_id, Vector3 spwanPos, GameObject go, int MAX_HEALTH)
     {
         respawnEnemies.Add(new RespawnEnemy(npc_id, spwanPos, go, MAX_HEALTH));
     }
@@ -59,7 +61,7 @@ public class GameManager : MonoBehaviour
             enemy.enemy.transform.position = enemy.spawnPoint;
             enemy.enemy.SetActive(true);
             enemy.enemy.GetComponent<Enemy>().SetState(Enemy.State.Idle);
-            enemy.enemy.GetComponent<Enemy>().UpdateHealth(enemy.enemy.GetComponent<Enemy>().MAX_HEALTH);
+            enemy.enemy.GetComponent<Enemy>().UpdateHealth(enemy.MAX_HEALTH);
         }
         respawnEnemies.Clear();
     }
@@ -78,6 +80,8 @@ public class GameManager : MonoBehaviour
         GameObject[] enemies;
         enemies = GameObject.FindGameObjectsWithTag("Enemy");
         RespawnNpc();
+        ziplineHandler.ResetZipline();
+        player.ridingZipline = false;
     }
 
     // Update is called once per frame
