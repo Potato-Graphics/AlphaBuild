@@ -39,7 +39,7 @@ public class NPC_Manager : MonoBehaviour
     {
         currentHealth += amount;
         fillAmount = currentHealth / MAX_HEALTH;
-        healthBar.fillAmount = fillAmount;
+        if(healthBar != null) healthBar.fillAmount = fillAmount;
     }
 
     void OnCollisionEnter2D(Collision2D col)

@@ -563,7 +563,7 @@ public class Weapon : MonoBehaviour
             {
                 //this is left down
                 anim.SetTrigger("FireDiagDown");
-                playerfire.Play();
+               
                 Rigidbody2D bullet = Instantiate(bulletDiagDown, firePointDownDiagonal.position, firePointDownDiagonal.localRotation);
                 bullet.transform.localScale *= player.bulletSizeMultiplier;
                 // BulletScript.xDirection = -0.1f;
@@ -587,6 +587,16 @@ public class Weapon : MonoBehaviour
         StartCoroutine(ShootDelay());
         specialBar.fillAmount = 0;
         player.bulletSizeMultiplier = 1;
+        if (playerfire != null)
+        {
+            playerfire.PlayOneShot(playerfire.clip);
+            Debug.LogError("is playing? " + playerfire.isPlaying);
+        }
+        else
+        {
+            Debug.LogError("null");
+        }
+       
     }
 
     IEnumerator ShootDelay()

@@ -14,7 +14,6 @@ public class ShowUI : MonoBehaviour
  
     void OnTriggerEnter2D(Collider2D col)
     {
-        Debug.LogError("Entered");
         if (col.gameObject.tag == "Player")
         {
             uiObject.SetActive(true);

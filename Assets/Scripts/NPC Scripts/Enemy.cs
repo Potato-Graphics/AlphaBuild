@@ -114,6 +114,7 @@ public class Enemy : MonoBehaviour
     // Start is called before the first frame update
     private void Start()
     {
+        
         aiPath = GetComponent<AIPath>();
         player = GameObject.FindObjectOfType<Player>();
         currentHealth = MAX_HEALTH;
@@ -147,7 +148,7 @@ public class Enemy : MonoBehaviour
 
     public void AddToRespawnList()
     {
-        GameManager.Instance.AddRespawnObj(NPC_ID, startPosition, this.gameObject);
+        GameManager.Instance.AddRespawnObj(NPC_ID, startPosition, gameObject, MAX_HEALTH);
     }
 
 
