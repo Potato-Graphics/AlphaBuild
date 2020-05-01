@@ -31,7 +31,10 @@ public class BubbleHandler : MonoBehaviour
     void Update()
     {
         if (player.GetHealth() <= 0)
+        {
             Destroy(gameObject);
+        }
+      
         
     }
 

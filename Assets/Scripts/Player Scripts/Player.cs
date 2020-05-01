@@ -150,7 +150,6 @@ public class Player : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.R))
         {
-            Debug.LogError(GameManager.respawnEnemies.Count);
         }
         playerPosition = transform.position;
         //JAM CODE
@@ -226,7 +225,6 @@ public class Player : MonoBehaviour
         {
             pumpStarted = false;
             anim.SetBool("IsPumping", false);
-            Debug.Log("ISFALSE");
             bulletDamage += totalPumps / 10;
             totalPumps = 0;
             movedDown = false;
@@ -429,7 +427,6 @@ public class Player : MonoBehaviour
                 velocity.y = jumpVelocity;
 
                 playerjump.Play();
-                Debug.Log("jumpsound" + audioGame.isPlaying);
             }
         }
 
@@ -491,7 +488,6 @@ public class Player : MonoBehaviour
             isAttackable = false;
             anim.SetBool("IsDamaged", true);
             playerdamage.Play();
-            Debug.LogError(anim.GetBool("IsDamaged"));
             StartCoroutine(DamagedDelay());
             StartCoroutine(RespawnDelay());
         }
@@ -517,6 +513,5 @@ public class Player : MonoBehaviour
         yield return new WaitForSeconds(1);
         HandleDeath();
         anim.SetBool("IsDamaged", false);
-        Debug.LogError(anim.GetBool("IsDamaged"));
     }
 }

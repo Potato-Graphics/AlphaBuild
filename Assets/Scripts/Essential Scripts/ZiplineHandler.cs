@@ -24,13 +24,10 @@ public class ZiplineHandler : MonoBehaviour
 
     public void ResetZipline()
     {
-        Debug.LogError("test");
         player.ridingZipline = false;
         targetZiplinePointIndex = 0;
         targetPoint = ziplinePoints[targetZiplinePointIndex];
-        Debug.LogError("pos: " + transform.position);
         transform.position = startPosition;
-        Debug.LogError("pos: " + transform.position);
 
     }
 
@@ -48,7 +45,6 @@ public class ZiplineHandler : MonoBehaviour
 
     public void IncrementZiplineStage()
     {
-        Debug.LogError("targetZipLinePointIndex: " + targetZiplinePointIndex + "lastZiplinePointIndex " + lastZiplinePointIndex);
         if (targetZiplinePointIndex > lastZiplinePointIndex)
         {
             player.ridingZipline = false;

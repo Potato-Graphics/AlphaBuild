@@ -14,6 +14,7 @@ TagManager:
   - Enemy
   - Zipline
   - Score
+  - wall
   layers:
   - Default
   - TransparentFX

@@ -88,7 +88,6 @@ public class NPC_Manager : MonoBehaviour
     {
         if (col.gameObject.tag == "Bullet")
         {
-            Debug.LogError(col.gameObject.GetComponent<Enemy>().GetState());
             if (enemy.GetEnemyType() == Enemy.EnemyType.HelicopterSeed)
             {
                 transform.position = enemy.startPosition;
