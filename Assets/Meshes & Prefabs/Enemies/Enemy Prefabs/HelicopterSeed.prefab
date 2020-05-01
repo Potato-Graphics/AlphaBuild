@@ -128,6 +128,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1cca1fb22f9c47748b12243d4b20a79e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  chargerpatrol: {fileID: 0}
+  chargerexplosion: {fileID: 0}
+  planedive: {fileID: 0}
+  bubblepop: {fileID: 0}
+  frogcroak: {fileID: 0}
+  ballbounce: {fileID: 0}
   distanceToCharge: 6
   MAX_HEALTH: 25
   walkSpeed: 10
@@ -138,6 +144,7 @@ MonoBehaviour:
   idleWalkDistance: 5
   enemyType: 4
   collidingWithPlayer: 0
+  pathfinding: {fileID: 0}
   comingFromLeft: 0
   endPosition: {x: 0, y: 0}
   timeStartedLerping: 0
@@ -145,6 +152,8 @@ MonoBehaviour:
   twopie: 6.2831855
   afloat: 0
   osculationSpeed: 0.05
+  frogSoundPlaying: 0
+  planeSounddPlaying: 0
   firePoint: {fileID: 0}
   firePoint2: {fileID: 0}
   bubblePrefab: {fileID: 0}
@@ -156,6 +165,8 @@ MonoBehaviour:
   amount: 1
   fallSpeed: 2
   spinSpeed: 1000
+  startHealth: 0
+  aiPath: {fileID: 0}
   NPC_ID: 0
   enemyPrefab: {fileID: 0}
 --- !u!50 &5293625758470508408
@@ -178,7 +189,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!61 &4754396732099541107
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -237,6 +248,7 @@ MonoBehaviour:
   healthBar: {fileID: 0}
   coin: {fileID: 6893153700885626828, guid: 931de1f2d9373074995c201f3671624c, type: 3}
   life: {fileID: 596983824544147416, guid: dda0bf367ba04954db31e6db281aedfb, type: 3}
+  dropLoot: 1
   pointsGiven: 0
 --- !u!1 &6102295068569091456
 GameObject:
