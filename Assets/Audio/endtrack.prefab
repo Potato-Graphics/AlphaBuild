@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4032566052175277238}
   - component: {fileID: 4032566052175277239}
   m_Layer: 0
-  m_Name: playerfire
+  m_Name: endtrack
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -43,7 +43,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 24300002, guid: ee98da778faa4d04b8d564d2db32f41b,
     type: 2}
-  m_audioClip: {fileID: 8300000, guid: 5833121069c922043a934310153ba782, type: 3}
+  m_audioClip: {fileID: 8300000, guid: ecbcbc3a4c182ae4691557f38bb3d4a8, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 0.083
   m_Pitch: 1

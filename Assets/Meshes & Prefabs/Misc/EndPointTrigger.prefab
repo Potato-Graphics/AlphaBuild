@@ -92,6 +92,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c96504b1c144af44b87bbe1739543d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  endtrack: {fileID: 0}
   endMenu: {fileID: 0}
   Image: {fileID: 0}
   healthUI: {fileID: 0}

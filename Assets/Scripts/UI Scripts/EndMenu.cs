@@ -12,15 +12,10 @@ public class EndMenu : MonoBehaviour
         
     }
 
-    public void Menu()
-    {
-        SceneManager.LoadScene("Menu");
-        print("Returning to menu... ");
-    }
-
     public void Quit()
     {
-        Debug.Log("Quitting game... ");
         Application.Quit();
+        print ("Quitting game...");
+        
     }
 }
