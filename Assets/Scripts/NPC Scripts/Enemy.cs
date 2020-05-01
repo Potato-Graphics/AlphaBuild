@@ -164,7 +164,7 @@ public class Enemy : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D col)
     {
-        Debug.LogError("I am " + gameObject.name + " and i collide with " + col.gameObject.tag);
+
         if (col.gameObject.tag == "Enemy")
         {
             if(circleCollider != null)
@@ -240,6 +240,7 @@ public class Enemy : MonoBehaviour
             transform.position = startPosition;
             currentHealth = startHealth;
             SetState(State.Idle);
+            npcManager.healthBar.fillAmount = 1;
         }
      
         // Initialising the player object
@@ -328,7 +329,6 @@ public class Enemy : MonoBehaviour
                     {
                     if (Vector3.Distance(transform.position, player.transform.position) < 10)
                     {
-                        Debug.LogError("etf");
                         chargerpatrol.Play();
                         carSoundPlaying = true;
                         StartCoroutine(CarSoundDelay());
@@ -507,7 +507,7 @@ public class Enemy : MonoBehaviour
                 if(!frogSoundPlaying)
                 {
                 
-                        Debug.LogError("etdsf");
+                    
                         bubblepop.Play();
                         StartCoroutine(FrogSoundDelay());
                     

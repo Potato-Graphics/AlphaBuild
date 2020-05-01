@@ -58,11 +58,12 @@ public class GameManager : MonoBehaviour
     {
         foreach (RespawnEnemy enemy in respawnEnemies)
         {
-            enemy.enemy.transform.position = enemy.spawnPoint;
+            Vector3 spawnLocation = enemy.spawnPoint;
+            spawnLocation.x = enemy.spawnPoint.x -= .3f;
+            enemy.enemy.transform.position = spawnLocation;
             enemy.enemy.SetActive(true);
             enemy.enemy.GetComponent<Enemy>().SetState(Enemy.State.Idle);
             enemy.enemy.GetComponent<Enemy>().UpdateHealth(enemy.MAX_HEALTH);
-            Debug.LogError(enemy.enemy.GetComponent<Enemy>().GetState());
         }
         respawnEnemies.Clear();
     }
@@ -73,14 +74,19 @@ public class GameManager : MonoBehaviour
             OnPlayerDied();
         }
     }
+    IEnumerator UpdateHealth()
+    {
+        yield return new WaitForSeconds(0.8f);
+        player.UpdateHealth(3);
+        RespawnNpc();
+    }
 
     void OnPlayerDied()
     {
         player.transform.position = Player.spawnLocation;
-        player.UpdateHealth(3);
+        StartCoroutine(UpdateHealth());
         GameObject[] enemies;
         enemies = GameObject.FindGameObjectsWithTag("Enemy");
-        RespawnNpc();
         ziplineHandler.ResetZipline();
         player.ridingZipline = false;
     }

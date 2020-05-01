@@ -34,8 +34,6 @@ public class Controller2D : MonoBehaviour
         CalculateRaySpacing();
         collisions.faceDir = 1;
         player = GetComponent<Player>();
-        Debug.LogError(collider.bounds);
-        Debug.LogError(collider.size);
         StartCoroutine(colliderChange());
     }
 
@@ -50,7 +48,6 @@ public class Controller2D : MonoBehaviour
         characterScale = transform.localScale;
         Vector3 mousePosition;
         mousePosition = Input.mousePosition - Camera.main.WorldToScreenPoint(transform.position);
-        //Debug.LogError("mousePosition: " + mousePosition);
         if (mousePosition.x >= 11.2f)
         {
             characterScale.x = -1;
@@ -235,7 +232,6 @@ public class Controller2D : MonoBehaviour
     
     void DescendSlope(ref Vector3 Velocity)
     {
-       // Debug.LogError("is this the func");
         float directionX = Mathf.Sign(Velocity.x);
         Vector2 rayOrigin = (directionX == -1) ? raycastOrigins.bottomRight : raycastOrigins.bottomLeft;
         RaycastHit2D hit = Physics2D.Raycast(rayOrigin, -Vector2.up, Mathf.Infinity, collisionMask);
