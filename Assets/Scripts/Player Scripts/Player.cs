@@ -230,7 +230,6 @@ public class Player : MonoBehaviour
             Debug.Log("ISFALSE");
             bulletDamage += totalPumps / 10;
             totalPumps = 0;
-            specialBar.fillAmount = 0;
 
             movedDown = false;
             movedUp = false;
