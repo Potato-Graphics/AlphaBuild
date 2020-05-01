@@ -2,8 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
+
 public class BubbleHandler : MonoBehaviour
 {
+
+    public AudioSource bubblepop;
+
     State currentState;
     public Rigidbody2D rb;
     Player player;
@@ -52,12 +57,14 @@ public class BubbleHandler : MonoBehaviour
         {
             player.DealDamage(1);
             Destroy(gameObject);
+            bubblepop.Play();
         }
         if(collision.gameObject.tag == "Bullet")
         {
             ScoreManager.scoreValue += pointsGiven;
             enemy.bubblesSpawned--;
             Destroy(gameObject);
+            bubblepop.Play();
         }
     }
 

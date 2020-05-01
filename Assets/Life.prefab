@@ -84,6 +84,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd9b7c6d73280324cad41885b0cd60df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playercollect: {fileID: 6350546987846414571, guid: a3e655eb98770e04881108c64ce6c270,
+    type: 3}
 --- !u!212 &6052210816682589523
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -224,3 +226,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd9b7c6d73280324cad41885b0cd60df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playercollect: {fileID: 0}

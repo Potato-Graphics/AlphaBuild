@@ -14,6 +14,7 @@ public class Player : MonoBehaviour
     public delegate void PlayerDelegate();
     public static event PlayerDelegate OnPlayerDied;
 
+
     public float jumpHeight = 4;
     public float timeToJumpApex = .4f;
     public float wallStickTime = .25f;
@@ -42,6 +43,7 @@ public class Player : MonoBehaviour
     public bool movingRight = false;
     public bool moving = false;
     public bool rotation = false;
+    public bool playerdashaudio = false;
 
     [SerializeField] private const int MAX_HEALTH = 3;
     [SerializeField] private static int score = 0;
@@ -70,6 +72,13 @@ public class Player : MonoBehaviour
     bool pumpStarted = false;
     public float airTimeJumpDelay;
     public bool canJump = false;
+
+   
+    public AudioSource playerdash;
+    public AudioSource playerjump;
+    public AudioSource playercollect;
+    public AudioSource playerdamage;
+    public AudioSource playerpump;
 
     public int sceneToRespawnOn;
 
@@ -245,7 +254,7 @@ public class Player : MonoBehaviour
 
 
                 anim.SetBool("IsPumping", true);
-                SoundManager.PlaySound("playerpump");
+                playerpump.Play();
                 specialBar.fillAmount += 0.1f;
                 bulletSizeMultiplier += 0.1f;
                 movedUp = true;
@@ -360,8 +369,16 @@ public class Player : MonoBehaviour
         if (controller.dashing)
         {
             anim.SetTrigger("Dashed");
+            if (!playerdashaudio)
+            {
+                playerdashaudio = true;
+
+                playerdash.Play();
+            }
             
             transform.position = Vector3.MoveTowards(transform.position, dashPosition, dashSpeed * Time.deltaTime);
+
+
         }
         if (!controller.collisions.below)
         {
@@ -463,7 +480,7 @@ public class Player : MonoBehaviour
 
                 velocity.y = jumpVelocity;
 
-                SoundManager.PlaySound("playerjump");
+                playerjump.Play();
                 Debug.Log("jumpsound" + audioGame.isPlaying);
             }
         }
@@ -523,7 +540,7 @@ public class Player : MonoBehaviour
             UpdateHealth(-amount);
             isAttackable = false;
             anim.SetBool("IsDamaged", true);
-            SoundManager.PlaySound("playerdamage");
+            playerdamage.Play();
             Debug.LogError(anim.GetBool("IsDamaged"));
             StartCoroutine(DamagedDelay());
             StartCoroutine(RespawnDelay());

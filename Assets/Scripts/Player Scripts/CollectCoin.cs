@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class CollectCoin : MonoBehaviour
 {
+    public AudioSource playercollect;
     Player player;
     public int scoreMaxAmount = 100;
     public int scoreMinAmount = 40;
@@ -26,6 +27,7 @@ public class CollectCoin : MonoBehaviour
         {
             player.UpdateScore(Random.Range(scoreMinAmount, scoreMaxAmount));
             player.coins++;
+            playercollect.Play();
             Destroy(gameObject);
         }
     }

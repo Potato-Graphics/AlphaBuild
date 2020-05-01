@@ -134,6 +134,7 @@ MonoBehaviour:
   healthBar: {fileID: 4093433686169822518}
   coin: {fileID: 6893153700885626828, guid: 931de1f2d9373074995c201f3671624c, type: 3}
   life: {fileID: 596983824544147416, guid: dda0bf367ba04954db31e6db281aedfb, type: 3}
+  dropLoot: 1
   pointsGiven: 500
 --- !u!114 &3760899537648308626
 MonoBehaviour:
@@ -147,6 +148,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1cca1fb22f9c47748b12243d4b20a79e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  chargerpatrol: {fileID: 7735000034229139786, guid: 3fcd1add3c5ce8f4299ef692fae575b9,
+    type: 3}
+  chargerexplosion: {fileID: 8915193698486236873, guid: 6457cc345ec316641a4daa82073d6f43,
+    type: 3}
+  planedive: {fileID: 4281221424505353247, guid: 84e7fa22a4c65924d868e81134522fd3,
+    type: 3}
+  bubblepop: {fileID: 6639470761764727235, guid: 1be8d79e6f456e54ab8dcbdd42314277,
+    type: 3}
+  frogcroak: {fileID: 8707096754153932132, guid: b3a3b964338e44341bb1907962d776bc,
+    type: 3}
+  ballbounce: {fileID: 5061740241438705698, guid: 2c3c2c777b3c34e44961b9be00539189,
+    type: 3}
   distanceToCharge: 6
   MAX_HEALTH: 25
   walkSpeed: 6
@@ -157,6 +170,7 @@ MonoBehaviour:
   idleWalkDistance: 8
   enemyType: 1
   collidingWithPlayer: 0
+  pathfinding: {fileID: 0}
   comingFromLeft: 0
   endPosition: {x: 0, y: 0}
   timeStartedLerping: 0
@@ -164,6 +178,8 @@ MonoBehaviour:
   twopie: 6.2831855
   afloat: 0
   osculationSpeed: 0.01
+  frogSoundPlaying: 0
+  planeSounddPlaying: 0
   firePoint: {fileID: 811997042224969197}
   firePoint2: {fileID: 1203867104073291823}
   bubblePrefab: {fileID: 0}
@@ -175,6 +191,7 @@ MonoBehaviour:
   amount: 3
   fallSpeed: 10
   spinSpeed: 100
+  aiPath: {fileID: 0}
   NPC_ID: 0
   enemyPrefab: {fileID: 1229292578974043762}
 --- !u!114 &5638077117230657819
@@ -395,10 +412,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 405756520686909959}
     m_Modifications:
-    - target: {fileID: 6947598397353485698, guid: 6adafcde58647c045a102ac3aee433a4,
+    - target: {fileID: 1425679719675262578, guid: 6adafcde58647c045a102ac3aee433a4,
         type: 3}
-      propertyPath: m_PreserveAspect
-      value: 1
+      propertyPath: m_Name
+      value: EnemyHealthBar
       objectReference: {fileID: 0}
     - target: {fileID: 6249186008181750452, guid: 6adafcde58647c045a102ac3aee433a4,
         type: 3}
@@ -520,10 +537,30 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 0.59999996
       objectReference: {fileID: 0}
-    - target: {fileID: 1425679719675262578, guid: 6adafcde58647c045a102ac3aee433a4,
+    - target: {fileID: 6947598397353485698, guid: 6adafcde58647c045a102ac3aee433a4,
         type: 3}
-      propertyPath: m_Name
-      value: EnemyHealthBar
+      propertyPath: m_PreserveAspect
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 236843299483654078, guid: 6adafcde58647c045a102ac3aee433a4,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 236843299483654078, guid: 6adafcde58647c045a102ac3aee433a4,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 4150845589612561632, guid: 6adafcde58647c045a102ac3aee433a4,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 4150845589612561632, guid: 6adafcde58647c045a102ac3aee433a4,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 7162241267142145460, guid: 6adafcde58647c045a102ac3aee433a4,
         type: 3}
@@ -589,26 +626,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_UseSpriteMesh
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 236843299483654078, guid: 6adafcde58647c045a102ac3aee433a4,
-        type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 236843299483654078, guid: 6adafcde58647c045a102ac3aee433a4,
-        type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 4150845589612561632, guid: 6adafcde58647c045a102ac3aee433a4,
-        type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 4150845589612561632, guid: 6adafcde58647c045a102ac3aee433a4,
-        type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6adafcde58647c045a102ac3aee433a4, type: 3}

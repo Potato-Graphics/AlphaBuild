@@ -2,27 +2,49 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class SoundManager : MonoBehaviour
 {
-    public static AudioClip PlayerFire, PlayerJump, PlayerDash, PlayerCollect, PlayerDamage, PlayerPump, BubblePop, PlaneDive, FrogCroak, BallBounce;
-    static AudioSource audioGame;
+ 
+    public static AudioSource playerfire, playerjump, playerdash, playercollect, playerdamage, playerpump, bubblepop, planedive, frogcroak, chargerpatrol, chargerexplosion, ballbounce;
+   
 
 
     // Start is called before the first frame update
     void Start()
     {
-        PlayerFire = Resources.Load<AudioClip>("playerfire");
-        PlayerJump = Resources.Load<AudioClip>("playerjump");
-        PlayerDash = Resources.Load<AudioClip>("playerdash");
-        PlayerCollect = Resources.Load<AudioClip>("playercollect");
-        PlayerDamage = Resources.Load<AudioClip>("playerdamage");
-        PlayerPump = Resources.Load<AudioClip>("playerpump");
-        BubblePop = Resources.Load<AudioClip>("bubblepop");
-        PlaneDive = Resources.Load<AudioClip>("planedive");
-        FrogCroak = Resources.Load<AudioClip>("frogcroak");
-        BallBounce = Resources.Load<AudioClip>("ballbounce");
 
-        audioGame = GetComponent<AudioSource> ();
+
+       // Resources.Load("playerfire", PlayerFire);
+      //  Resources.Load("playerjump", AudioClip);
+      //  Resources.Load("playerdash", AudioClip);
+      //  Resources.Load("playercollect", AudioClip);
+       // Resources.Load("playerdamage", AudioClip);
+       // Resources.Load("playerpump", AudioClip);
+      //  Resources.Load("bubblepop", AudioClip);
+      //  Resources.Load("planedive", AudioClip);
+       // Resources.Load("frogcroak", AudioClip);
+      //  Resources.Load("ballbounce", AudioClip);
+       /// Resources.Load("chargerpatrol", AudioClip);
+        //Resources.Load("chargerexplosion", AudioClip);
+
+
+
+
+        playerfire = GetComponent<AudioSource>();
+        playerjump = GetComponent<AudioSource>();
+        playerdash = GetComponent<AudioSource>();
+        playerdamage = GetComponent<AudioSource>();
+        playercollect = GetComponent<AudioSource>();
+        bubblepop = GetComponent<AudioSource>();
+        planedive = GetComponent<AudioSource>();
+        frogcroak = GetComponent<AudioSource>();
+        chargerpatrol = GetComponent<AudioSource>();
+        playerpump = GetComponent<AudioSource>();
+        chargerexplosion = GetComponent<AudioSource>();
+        
+
+
     }
 
     // Update is called once per frame
@@ -36,39 +58,47 @@ public class SoundManager : MonoBehaviour
         switch (clip)
         {
             case "playerfire":
-                audioGame.PlayOneShot(PlayerFire);
-                break;
+                playerfire.Play();
+                break; 
          case "playerjump":
-                audioGame.PlayOneShot(PlayerJump);
+                playerjump.Play();
                 break;
-         case "playerDash":
-                audioGame.PlayOneShot(PlayerDash);
+         case "playerdash":
+                playerdash.Play();
                 break;
          case "playercollect":
-                audioGame.PlayOneShot(PlayerCollect);
+                playercollect.Play();
                 break;
-            case "playerDamage":
-                audioGame.PlayOneShot(PlayerDamage);
+            case "playerdamage":
+                playerdamage.Play();
                 break;
             case
             "playerpump":
-                audioGame.PlayOneShot(PlayerPump);
+                playerpump.Play();
                 break;
             case
             "bubblepop":
-                audioGame.PlayOneShot(BubblePop);
+                bubblepop.Play();
                 break;
             case
             "planedive":
-                audioGame.PlayOneShot(PlaneDive);
+                planedive.Play();
                 break;
             case
             "frogcroak":
-                audioGame.PlayOneShot(FrogCroak);
+                frogcroak.Play();
                 break;
             case
             "ballbounce":
-                audioGame.PlayOneShot(BallBounce);
+                ballbounce.Play();
+                break;
+            case
+            "chargerpatrol":
+                chargerpatrol.Play();
+                break;
+            case
+            "chargerexplosion":
+                chargerexplosion.Play();
                 break;
         }
     }

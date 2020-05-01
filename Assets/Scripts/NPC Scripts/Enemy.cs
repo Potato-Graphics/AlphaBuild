@@ -11,6 +11,14 @@ public class Enemy : MonoBehaviour
     public delegate void EnemyDelegate();
     public static event EnemyDelegate OnEnemyDied;
 
+    public AudioSource chargerpatrol;
+    public AudioSource chargerexplosion;
+    public AudioSource planedive;
+    public AudioSource bubblepop;
+    public AudioSource frogcroak;
+    public AudioSource ballbounce;
+    
+
 
     [SerializeField] private int distanceToCharge = 6; // distanced required for the enemy to charge
     public int MAX_HEALTH = 25;
@@ -36,6 +44,7 @@ public class Enemy : MonoBehaviour
     [SerializeField] bool comingFromLeft;
     private float timePassed;
     int bounceRange;
+    bool carSoundPlaying = false;
     private Vector3 localScale;
 
     private bool shouldLerp = false;
@@ -47,6 +56,8 @@ public class Enemy : MonoBehaviour
     public float twopie = Mathf.PI * 2;
     public float afloat = 0;
     public float osculationSpeed = 0.01f;
+    public bool frogSoundPlaying = false;
+    public bool planeSounddPlaying = false;
 
     /*
      * Raycast
@@ -103,6 +114,7 @@ public class Enemy : MonoBehaviour
     // Start is called before the first frame update
     private void Start()
     {
+        
         aiPath = GetComponent<AIPath>();
         player = GameObject.FindObjectOfType<Player>();
         currentHealth = MAX_HEALTH;
@@ -136,7 +148,7 @@ public class Enemy : MonoBehaviour
 
     public void AddToRespawnList()
     {
-        GameManager.Instance.AddRespawnObj(NPC_ID, startPosition, gameObject);
+        GameManager.Instance.AddRespawnObj(NPC_ID, startPosition, gameObject, MAX_HEALTH);
     }
 
 
@@ -165,9 +177,18 @@ public class Enemy : MonoBehaviour
             }
             if (GetEnemyType() == EnemyType.BounceStressBall)
             {
+                if(Vector3.Distance(transform.position, player.transform.position) < 25)
+                {
+                    ballbounce.Play();
+                }
                 rb.AddForce(new Vector2(1f, jumpHeight));
             }
         }
+    }
+    IEnumerator CarSoundDelay()
+    {
+        yield return new WaitForSeconds(7);
+        carSoundPlaying = false;
     }
     // Update is called once per frame
     void Update()
@@ -227,6 +248,9 @@ public class Enemy : MonoBehaviour
                 if (GetState() == State.Attacking)
                 {
                     aiPath.enabled = true;
+                    planedive.Play();
+                    planeSounddPlaying = true;
+                    StartCoroutine(PlaneSoundDelay());
                 }
                 break;
 
@@ -251,6 +275,15 @@ public class Enemy : MonoBehaviour
 
             case EnemyType.ChargeCar:
             case EnemyType.ChargeBuggy:
+                if(GetState() == State.Charging || GetState() == State.Attacking)
+                {
+                    if(!carSoundPlaying)
+                    {
+                        chargerpatrol.Play();
+                        carSoundPlaying = true;
+                        StartCoroutine(CarSoundDelay());
+                    }
+                }
                 if (groundInfo.collider == false)
                 {
                     //Debug.LogError("false");
@@ -391,6 +424,18 @@ public class Enemy : MonoBehaviour
         canLaunchBubble = true;
     }
 
+    IEnumerator FrogSoundDelay()
+    {
+        yield return new WaitForSeconds(129);
+        frogSoundPlaying = false;
+    }
+
+    IEnumerator PlaneSoundDelay()
+    {
+        yield return new WaitForSeconds(20f);
+        planeSounddPlaying = false;
+    }
+
     private void ObstructorAttack()
     {
         int bubblesToBeSpawned = Random.Range(6, 13);
@@ -408,6 +453,11 @@ public class Enemy : MonoBehaviour
                 Instantiate(bubbles, spawnPosition, Quaternion.identity);
                 bubblesSpawned++;
                 canLaunchBubble = false;
+                if(!frogSoundPlaying)
+                {
+                    bubblepop.Play();
+                    StartCoroutine(FrogSoundDelay());
+                }
                 StartCoroutine(BubbleDelay());
             }
         } else
@@ -530,6 +580,21 @@ public class Enemy : MonoBehaviour
                 break;
             //if the enemy is dead
             case State.Dead:
+                if (GetEnemyType() == EnemyType.BounceStressBall)
+                {
+                    if (GetEnemyType() == EnemyType.BounceStressBall)
+                    {
+                        bubblepop.Play();
+                    }
+                    if (GetEnemyType() == EnemyType.ChargeBuggy)                   {
+                        chargerexplosion.Play();
+                    }
+                    if (GetEnemyType() == EnemyType.ChargeCar)
+                    {
+                        chargerexplosion.Play();
+                    }
+                }
+
                 //Destroy(this.gameObject); // The enemy is destroyed.
                 if (GetEnemyType() == EnemyType.HelicopterSeed)
                 {

@@ -30,6 +30,8 @@ public class Weapon : MonoBehaviour
     float timeToFire = 0;
 
 
+    public AudioSource playerfire;
+
     public Transform firePointDown;
     public Transform firePointUp;
     public Transform firePointHorizontal;
@@ -195,7 +197,7 @@ public class Weapon : MonoBehaviour
                 float angle = 90;
                 //firePointUp.rotation = Quaternion.AngleAxis(55, Vector3.up);
                 anim.SetTrigger("FireUp");
-                SoundManager.PlaySound("playerfire");
+                playerfire.Play();
             }
 
             else if (fAngle >= 246 && fAngle <= 288)
@@ -240,7 +242,7 @@ public class Weapon : MonoBehaviour
                     }
                 }
                 anim.SetTrigger("FireDown");
-                SoundManager.PlaySound("playerfire");
+                playerfire.Play(); 
                 Rigidbody2D bullet = Instantiate(bulletDown, firePointPosition, firePointDown.rotation);
                 Rigidbody2D muzzleFlash = Instantiate(muzzleFlashDown, muzzlePointPosition, muzzlePointDown.rotation);
                 bullet.transform.localScale *= player.bulletSizeMultiplier;
@@ -274,7 +276,7 @@ public class Weapon : MonoBehaviour
                     muzzlePointPosition = player.transform.position + muzzlePointAddition;
                 }
                 anim.SetTrigger("FireDiagUp");
-                SoundManager.PlaySound("playerfire");
+                playerfire.Play();
                 Rigidbody2D bullet = Instantiate(bulletDiagUp, firePointPosition, firePointUpDiagonal.localRotation);
                 Rigidbody2D muzzleFlash = Instantiate(muzzleFlashUpDiag, muzzlePointPosition, muzzlePointUpDiag.rotation);
                 bullet.transform.localScale *= player.bulletSizeMultiplier;
@@ -308,7 +310,7 @@ public class Weapon : MonoBehaviour
                 }
                 //this is right
                 anim.SetTrigger("FireHorizontal");
-                SoundManager.PlaySound("playerfire");
+                playerfire.Play();
                 Rigidbody2D bullet = Instantiate(bulletHorizontal, firePointPosition, firePointHorizontal.localRotation);
                 Rigidbody2D muzzleFlash = Instantiate(muzzleFlashHorizontal, muzzlePointPosition, muzzlePointHorizontal.rotation);
                 bullet.transform.localScale *= player.bulletSizeMultiplier;
@@ -343,7 +345,7 @@ public class Weapon : MonoBehaviour
 
                 //this is right down
                 anim.SetTrigger("FireDiagDown");
-                SoundManager.PlaySound("playerfire");
+                playerfire.Play();
                 Rigidbody2D bullet = Instantiate(bulletDiagDown, firePointPosition, firePointDownDiagonal.localRotation);
                 Rigidbody2D muzzleFlash = Instantiate(muzzleFlashDownDiag, muzzlePointPosition, muzzlePointDownDiag.rotation);
                 bullet.transform.localScale *= player.bulletSizeMultiplier;
@@ -377,7 +379,7 @@ public class Weapon : MonoBehaviour
                     muzzlePointPosition = player.transform.position + muzzlePointAddition;
                 }
                 anim.SetTrigger("FireDiagUp");
-                SoundManager.PlaySound("playerfire");
+                playerfire.Play();
                 Rigidbody2D bullet = Instantiate(bulletDiagUp, firePointPosition, firePointUpDiagonal.localRotation);
                 Rigidbody2D muzzleFlash = Instantiate(muzzleFlashUpDiag, muzzlePointPosition, muzzlePointUpDiag.rotation);
                 bullet.transform.localScale *= player.bulletSizeMultiplier;
@@ -413,7 +415,7 @@ public class Weapon : MonoBehaviour
                     muzzlePointPosition = player.transform.position + muzzlePointAddition;
                 }
                 anim.SetTrigger("FireHorizontal");
-                SoundManager.PlaySound("playerfire");
+                playerfire.Play();
                 Rigidbody2D bullet = Instantiate(bulletHorizontal, firePointPosition, firePointHorizontal.localRotation);
                 Rigidbody2D muzzleFlash = Instantiate(muzzleFlashHorizontal, muzzlePointPosition, muzzlePointHorizontal.rotation);
                 bullet.transform.localScale *= player.bulletSizeMultiplier;
@@ -448,7 +450,7 @@ public class Weapon : MonoBehaviour
                     muzzlePointPosition = player.transform.position + muzzlePointAddition;
                 }
                 anim.SetTrigger("FireDiagDown");
-                SoundManager.PlaySound("playerfire");
+                playerfire.Play();
                 Rigidbody2D bullet = Instantiate(bulletDiagDown, firePointPosition, firePointDownDiagonal.localRotation);
                 Rigidbody2D muzzleFlash = Instantiate(muzzleFlashDownDiag, muzzlePointPosition, muzzlePointDownDiag.rotation);
                 bullet.transform.localScale *= player.bulletSizeMultiplier;
@@ -476,7 +478,7 @@ public class Weapon : MonoBehaviour
                 float angle = 90;
                 firePoint.rotation = Quaternion.AngleAxis(55, Vector3.up);
                 anim.SetTrigger("FireUp");
-                SoundManager.PlaySound("playerfire");
+                playerfire.Play(); ;
             }
 
             else if (joyangle > 125 && joyangle < 180 || joyangle < -161 && joyangle > -180)
@@ -495,7 +497,7 @@ public class Weapon : MonoBehaviour
             {
                 //this is right up
                 anim.SetTrigger("FireDiagUp");
-                SoundManager.PlaySound("playerfire");
+                playerfire.Play(); 
                 Rigidbody2D bullet = Instantiate(bulletDiagUp, firePointUpDiagonal.position, firePointUpDiagonal.localRotation);
                 bullet.transform.localScale *= player.bulletSizeMultiplier;
                 //BulletScript.xDirection = 0.1f;
@@ -508,7 +510,7 @@ public class Weapon : MonoBehaviour
             {
                 //this is right
                 anim.SetTrigger("FireHorizontal");
-                SoundManager.PlaySound("playerfire");
+                playerfire.Play();
                 Rigidbody2D bullet = Instantiate(bulletHorizontal, firePointHorizontal.position, firePointHorizontal.localRotation);
                 bullet.transform.localScale *= player.bulletSizeMultiplier;
                 // BulletScript.xDirection = 0.1f;
@@ -521,7 +523,7 @@ public class Weapon : MonoBehaviour
             {
                 //this is right down
                 anim.SetTrigger("FireDiagDown");
-                SoundManager.PlaySound("playerfire");
+                playerfire.Play();
                 Rigidbody2D bullet = Instantiate(bulletDiagDown, firePointDownDiagonal.position, firePointDownDiagonal.localRotation);
                 bullet.transform.localScale *= player.bulletSizeMultiplier;
                 //BulletScript.xDirection = 0.1f;
@@ -534,7 +536,7 @@ public class Weapon : MonoBehaviour
             {
                 //this is left up
                 anim.SetTrigger("FireDiagUp");
-                SoundManager.PlaySound("playerfire");
+                playerfire.Play();
                 Rigidbody2D bullet = Instantiate(bulletDiagUp, firePointUpDiagonal.position, firePointUpDiagonal.localRotation);
                 bullet.transform.localScale *= player.bulletSizeMultiplier;
                 //BulletScript.xDirection = -0.1f;
@@ -548,7 +550,7 @@ public class Weapon : MonoBehaviour
             {
                 //this is left
                 anim.SetTrigger("FireHorizontal");
-                SoundManager.PlaySound("playerfire");
+                playerfire.Play();
                 Rigidbody2D bullet = Instantiate(bulletHorizontal, firePointHorizontal.position, firePointHorizontal.localRotation);
                 bullet.transform.localScale *= player.bulletSizeMultiplier;
                 //BulletScript.xDirection = -0.1f;
@@ -561,7 +563,7 @@ public class Weapon : MonoBehaviour
             {
                 //this is left down
                 anim.SetTrigger("FireDiagDown");
-                SoundManager.PlaySound("playerfire");
+               
                 Rigidbody2D bullet = Instantiate(bulletDiagDown, firePointDownDiagonal.position, firePointDownDiagonal.localRotation);
                 bullet.transform.localScale *= player.bulletSizeMultiplier;
                 // BulletScript.xDirection = -0.1f;
@@ -585,6 +587,16 @@ public class Weapon : MonoBehaviour
         StartCoroutine(ShootDelay());
         specialBar.fillAmount = 0;
         player.bulletSizeMultiplier = 1;
+        if (playerfire != null)
+        {
+            playerfire.PlayOneShot(playerfire.clip);
+            Debug.LogError("is playing? " + playerfire.isPlaying);
+        }
+        else
+        {
+            Debug.LogError("null");
+        }
+       
     }
 
     IEnumerator ShootDelay()

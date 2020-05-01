@@ -432,7 +432,9 @@ MonoBehaviour:
   timer: {fileID: 0}
   coins: 0
   movingRight: 0
+  moving: 0
   rotation: 0
+  playerdashaudio: 0
   currentHealth: 3
   direction: 0
   lifeOne: {fileID: 0}
@@ -445,6 +447,16 @@ MonoBehaviour:
   usingController: 0
   airTimeJumpDelay: 0.2
   canJump: 1
+  playerdash: {fileID: 2329814828400844063, guid: 36a16ee3dacc93b41903b50ec87be638,
+    type: 3}
+  playerjump: {fileID: 8347966813196685848, guid: f5b22bbf1b153904f8ab74a052a27fa2,
+    type: 3}
+  playercollect: {fileID: 6350546987846414571, guid: a3e655eb98770e04881108c64ce6c270,
+    type: 3}
+  playerdamage: {fileID: 6321509088413832673, guid: 8de706e8bc41b4c4b882d292288f93ce,
+    type: 3}
+  playerpump: {fileID: 5061740241438705698, guid: 986c0d354672faf4090a0b033af1fcb7,
+    type: 3}
   sceneToRespawnOn: 0
   ridingZipline: 0
   myID: 0
@@ -527,6 +539,11 @@ MonoBehaviour:
   position: {x: 0, y: 0, z: 0}
   speed: 10000
   specialBar: {fileID: 0}
+  waterRemaining: 10
+  MAX_WATER: 10
+  waterGainTimer: 2.5
+  playerfire: {fileID: 4032566052175277238, guid: 2a15c07fca6d7974cb2057594c83121f,
+    type: 3}
   firePointDown: {fileID: 5671482856801330126}
   firePointUp: {fileID: 5671482857220513950}
   firePointHorizontal: {fileID: 5671482858762280146}
@@ -542,6 +559,7 @@ MonoBehaviour:
   muzzleFlashHorizontal: {fileID: 2967079989964466040}
   muzzleFlashUpDiag: {fileID: 2967079990088917063}
   muzzleFlashDownDiag: {fileID: 2967079989866540759}
+  firePoint: {fileID: 0}
 --- !u!95 &2967079990089364822
 Animator:
   serializedVersion: 3
@@ -1142,11 +1160,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5671482856906167265}
     m_Modifications:
-    - target: {fileID: 1199522907752861301, guid: 136f7eca3283dac4c8f29e8c44e03c8b,
-        type: 3}
-      propertyPath: m_Name
-      value: VFX_Muzzle_V4_DiagDown
-      objectReference: {fileID: 0}
     - target: {fileID: 1199522907752861298, guid: 136f7eca3283dac4c8f29e8c44e03c8b,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1201,6 +1214,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1199522907752861301, guid: 136f7eca3283dac4c8f29e8c44e03c8b,
+        type: 3}
+      propertyPath: m_Name
+      value: VFX_Muzzle_V4_DiagDown
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 136f7eca3283dac4c8f29e8c44e03c8b, type: 3}
@@ -1304,11 +1322,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5671482858642648474}
     m_Modifications:
-    - target: {fileID: 1199522907752861301, guid: e83427c480ce1584db3071f05dba272f,
-        type: 3}
-      propertyPath: m_Name
-      value: VFX_Muzzle_V4_Horizontal
-      objectReference: {fileID: 0}
     - target: {fileID: 1199522907752861298, guid: e83427c480ce1584db3071f05dba272f,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1363,6 +1376,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1199522907752861301, guid: e83427c480ce1584db3071f05dba272f,
+        type: 3}
+      propertyPath: m_Name
+      value: VFX_Muzzle_V4_Horizontal
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e83427c480ce1584db3071f05dba272f, type: 3}

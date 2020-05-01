@@ -46,9 +46,9 @@ public class GameManager : MonoBehaviour
        
     }
 
-    public void AddRespawnObj(int npc_id, Vector3 spwanPos, GameObject go)
+    public void AddRespawnObj(int npc_id, Vector3 spwanPos, GameObject go, float MAX_HEALTH)
     {
-        respawnEnemies.Add(new RespawnEnemy(npc_id, spwanPos, go));
+        respawnEnemies.Add(new RespawnEnemy(npc_id, spwanPos, go, MAX_HEALTH));
     }
 
 

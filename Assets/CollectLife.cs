@@ -3,8 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
+
+
 public class CollectLife : MonoBehaviour
 {
+    public AudioSource playercollect;
     Player player;
     Rigidbody2D rb;
     void Start()
@@ -24,6 +27,7 @@ public class CollectLife : MonoBehaviour
             if (player.GetHealth() < 3)
             {
                 player.UpdateHealth(1);
+                playercollect.Play();
                 Destroy(gameObject);
             }
             else

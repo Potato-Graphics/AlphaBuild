@@ -92,6 +92,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0b2e85c4efdd564786dc9ada814be5d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
+  player: {fileID: 2967079990089364810, guid: 37a473b320f04b148ad9862b9fb6f75f, type: 3}
   destroyable: 0
   damageAmount: 3
