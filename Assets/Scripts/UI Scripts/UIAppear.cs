@@ -11,6 +11,8 @@ public class UIAppear : MonoBehaviour
 
     public GameObject healthUI;
 
+    public GameObject scoreAmount;
+
     void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.tag == "Player")
@@ -18,7 +20,7 @@ public class UIAppear : MonoBehaviour
             Debug.LogError("wergwerp");
             healthUI.SetActive(false);
 
-            
+            scoreAmount.SetActive(true);
             endMenu.SetActive(true);
             Image.SetActive(true);
             Time.timeScale = 0;
