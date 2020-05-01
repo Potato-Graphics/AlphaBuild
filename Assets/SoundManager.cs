@@ -40,6 +40,8 @@ public class SoundManager : MonoBehaviour
             case "playerfire":
                 audioGame.PlayOneShot(PlayerFire);
                 break;
+            
+                break;
          case "playerjump":
                 audioGame.PlayOneShot(PlayerJump);
                 break;
@@ -62,7 +64,7 @@ public class SoundManager : MonoBehaviour
                 break;
             case
             "planedive":
-                audioGame.PlayOneShot(PlaneDive);
+                audioGame.PlayOneShot(PlaneDive, 0.5f);
                 break;
             case
             "frogcroak":
