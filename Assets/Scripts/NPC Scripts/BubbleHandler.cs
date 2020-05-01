@@ -30,7 +30,9 @@ public class BubbleHandler : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-     
+        if (player.GetHealth() <= 0)
+            Destroy(gameObject);
+        
     }
 
     enum State

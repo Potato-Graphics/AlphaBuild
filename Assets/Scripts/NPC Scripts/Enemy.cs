@@ -215,9 +215,12 @@ public class Enemy : MonoBehaviour
             }
             if (GetEnemyType() == EnemyType.BounceStressBall)
             {
-                if(Vector3.Distance(transform.position, player.transform.position) < 25)
+                if(Vector3.Distance(transform.position, player.transform.position) < 10)
                 {
-                    ballbounce.Play();
+                    if (Vector3.Distance(transform.position, player.transform.position) < 10)
+                    {
+                        ballbounce.Play();
+                    }
                 }
                 rb.AddForce(new Vector2(1f, jumpHeight));
             }
@@ -286,7 +289,7 @@ public class Enemy : MonoBehaviour
                 if (GetState() == State.Attacking)
                 {
                     aiPath.enabled = true;
-                    planedive.Play();
+                    //planedive.Play();
                     planeSounddPlaying = true;
                     StartCoroutine(PlaneSoundDelay());
                 }
@@ -313,14 +316,17 @@ public class Enemy : MonoBehaviour
 
             case EnemyType.ChargeCar:
             case EnemyType.ChargeBuggy:
-                if(GetState() == State.Charging || GetState() == State.Attacking)
-                {
+         
                     if(!carSoundPlaying)
                     {
+                    if (Vector3.Distance(transform.position, player.transform.position) < 10)
+                    {
+                        Debug.LogError("etf");
                         chargerpatrol.Play();
                         carSoundPlaying = true;
                         StartCoroutine(CarSoundDelay());
                     }
+                    
                 }
                 if (groundInfo.collider == false)
                 {
@@ -493,8 +499,11 @@ public class Enemy : MonoBehaviour
                 canLaunchBubble = false;
                 if(!frogSoundPlaying)
                 {
-                    bubblepop.Play();
-                    StartCoroutine(FrogSoundDelay());
+                
+                        Debug.LogError("etdsf");
+                        bubblepop.Play();
+                        StartCoroutine(FrogSoundDelay());
+                    
                 }
                 StartCoroutine(BubbleDelay());
             }
