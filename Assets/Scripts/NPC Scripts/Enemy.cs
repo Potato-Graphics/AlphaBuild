@@ -8,6 +8,8 @@ public class Enemy : MonoBehaviour
 {
     public static List<Enemy> enemies = new List<Enemy>();
 
+    NPC_Manager npcManager;
+
     public delegate void EnemyDelegate();
     public static event EnemyDelegate OnEnemyDied;
 
@@ -82,6 +84,7 @@ public class Enemy : MonoBehaviour
     public float amount = 3f;
     public float fallSpeed = 10;
     public float spinSpeed = 100;
+    public int startHealth;
     bool reached2Pi = false;
     bool canLaunchBubble = true;
 
@@ -116,6 +119,7 @@ public class Enemy : MonoBehaviour
     {
         
         aiPath = GetComponent<AIPath>();
+        npcManager = GetComponent<NPC_Manager>();
         player = GameObject.FindObjectOfType<Player>();
         currentHealth = MAX_HEALTH;
         //Sets the enemy to idle on start
@@ -126,6 +130,7 @@ public class Enemy : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         SetState(State.Idle);
         startPosition = transform.position;
+        startHealth = currentHealth;
 
         enemies.Add(this);
      
@@ -148,7 +153,7 @@ public class Enemy : MonoBehaviour
 
     public void AddToRespawnList()
     {
-        GameManager.Instance.AddRespawnObj(NPC_ID, startPosition, gameObject, MAX_HEALTH);
+        GameManager.Instance.AddRespawnObj(NPC_ID, startPosition, gameObject, startHealth);
     }
 
 
@@ -167,8 +172,9 @@ public class Enemy : MonoBehaviour
             if(GetEnemyType() == EnemyType.RangePlane)
             {
                 //Destroy(gameObject);
-                AddToRespawnList();
                 SetHealth(MAX_HEALTH);
+                AddToRespawnList();
+                SetState(State.Dead);
                 gameObject.SetActive(false);
             }
             if (GetEnemyType() == EnemyType.HelicopterSeed)
@@ -604,9 +610,10 @@ public class Enemy : MonoBehaviour
                 }
                 else
                 {
-                    AddToRespawnList();
                     SetHealth(MAX_HEALTH);
+                    AddToRespawnList();
                     SetState(State.Idle);
+                    npcManager.healthBar.fillAmount = 1;
                     gameObject.SetActive(false);
                 }
                 break;
