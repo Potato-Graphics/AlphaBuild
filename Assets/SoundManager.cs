@@ -2,17 +2,33 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class SoundManager : MonoBehaviour
 {
-    public static AudioClip PlayerFire, PlayerJump, PlayerDash, PlayerCollect, PlayerDamage, PlayerPump, BubblePop, PlaneDive, FrogCroak, BallBounce, ChargerPatrol, ChargerExplosion;
-    static AudioSource playerfire, playerjump, playerdash, playercollect, playerdamage, playerpump, bubblepop, planedive, frogcroak, chargerpatrol, chargerexplosion, ballbounce;
+ 
+    public static AudioSource playerfire, playerjump, playerdash, playercollect, playerdamage, playerpump, bubblepop, planedive, frogcroak, chargerpatrol, chargerexplosion, ballbounce;
    
 
 
     // Start is called before the first frame update
     void Start()
     {
-        
+
+
+       // Resources.Load("playerfire", PlayerFire);
+      //  Resources.Load("playerjump", AudioClip);
+      //  Resources.Load("playerdash", AudioClip);
+      //  Resources.Load("playercollect", AudioClip);
+       // Resources.Load("playerdamage", AudioClip);
+       // Resources.Load("playerpump", AudioClip);
+      //  Resources.Load("bubblepop", AudioClip);
+      //  Resources.Load("planedive", AudioClip);
+       // Resources.Load("frogcroak", AudioClip);
+      //  Resources.Load("ballbounce", AudioClip);
+       /// Resources.Load("chargerpatrol", AudioClip);
+        //Resources.Load("chargerexplosion", AudioClip);
+
+
 
 
         playerfire = GetComponent<AudioSource>();

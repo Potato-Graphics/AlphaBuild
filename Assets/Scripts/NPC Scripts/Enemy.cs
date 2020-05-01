@@ -11,6 +11,14 @@ public class Enemy : MonoBehaviour
     public delegate void EnemyDelegate();
     public static event EnemyDelegate OnEnemyDied;
 
+    public AudioSource chargerpatrol;
+    public AudioSource chargerexplosion;
+    public AudioSource planedive;
+    public AudioSource bubblepop;
+    public AudioSource frogcroak;
+    public AudioSource ballbounce;
+    
+
 
     [SerializeField] private int distanceToCharge = 6; // distanced required for the enemy to charge
     public int MAX_HEALTH = 25;
@@ -168,6 +176,10 @@ public class Enemy : MonoBehaviour
             }
             if (GetEnemyType() == EnemyType.BounceStressBall)
             {
+                if(Vector3.Distance(transform.position, player.transform.position) < 25)
+                {
+                    ballbounce.Play();
+                }
                 rb.AddForce(new Vector2(1f, jumpHeight));
             }
         }
@@ -235,7 +247,7 @@ public class Enemy : MonoBehaviour
                 if (GetState() == State.Attacking)
                 {
                     aiPath.enabled = true;
-                    SoundManager.PlaySound("planedive");
+                    planedive.Play();
                     planeSounddPlaying = true;
                     StartCoroutine(PlaneSoundDelay());
                 }
@@ -266,7 +278,7 @@ public class Enemy : MonoBehaviour
                 {
                     if(!carSoundPlaying)
                     {
-                        SoundManager.PlaySound("chargerpatrol");
+                        chargerpatrol.Play();
                         carSoundPlaying = true;
                         StartCoroutine(CarSoundDelay());
                     }
@@ -442,7 +454,7 @@ public class Enemy : MonoBehaviour
                 canLaunchBubble = false;
                 if(!frogSoundPlaying)
                 {
-                    SoundManager.PlaySound("bubblepop");
+                    bubblepop.Play();
                     StartCoroutine(FrogSoundDelay());
                 }
                 StartCoroutine(BubbleDelay());
@@ -571,14 +583,14 @@ public class Enemy : MonoBehaviour
                 {
                     if (GetEnemyType() == EnemyType.BounceStressBall)
                     {
-                        SoundManager.PlaySound("bubblepop");
+                        bubblepop.Play();
                     }
                     if (GetEnemyType() == EnemyType.ChargeBuggy)                   {
-                        SoundManager.PlaySound("chargerexplosion");
+                        chargerexplosion.Play();
                     }
                     if (GetEnemyType() == EnemyType.ChargeCar)
                     {
-                        SoundManager.PlaySound("chargerexplosion");
+                        chargerexplosion.Play();
                     }
                 }
 

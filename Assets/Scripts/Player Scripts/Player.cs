@@ -73,6 +73,13 @@ public class Player : MonoBehaviour
     public float airTimeJumpDelay;
     public bool canJump = false;
 
+   
+    public AudioSource playerdash;
+    public AudioSource playerjump;
+    public AudioSource playercollect;
+    public AudioSource playerdamage;
+    public AudioSource playerpump;
+
     public int sceneToRespawnOn;
 
     public bool ridingZipline = false;
@@ -247,7 +254,7 @@ public class Player : MonoBehaviour
 
 
                 anim.SetBool("IsPumping", true);
-                SoundManager.PlaySound("playerpump");
+                playerpump.Play();
                 specialBar.fillAmount += 0.1f;
                 bulletSizeMultiplier += 0.1f;
                 movedUp = true;
@@ -366,7 +373,7 @@ public class Player : MonoBehaviour
             {
                 playerdashaudio = true;
 
-                SoundManager.PlaySound("playerdash");
+                playerdash.Play();
             }
             
             transform.position = Vector3.MoveTowards(transform.position, dashPosition, dashSpeed * Time.deltaTime);
@@ -473,7 +480,7 @@ public class Player : MonoBehaviour
 
                 velocity.y = jumpVelocity;
 
-                SoundManager.PlaySound("playerjump");
+                playerjump.Play();
                 Debug.Log("jumpsound" + audioGame.isPlaying);
             }
         }
@@ -533,7 +540,7 @@ public class Player : MonoBehaviour
             UpdateHealth(-amount);
             isAttackable = false;
             anim.SetBool("IsDamaged", true);
-            SoundManager.PlaySound("playerdamage");
+            playerdamage.Play();
             Debug.LogError(anim.GetBool("IsDamaged"));
             StartCoroutine(DamagedDelay());
             StartCoroutine(RespawnDelay());
