@@ -52,12 +52,14 @@ public class BubbleHandler : MonoBehaviour
         {
             player.DealDamage(1);
             Destroy(gameObject);
+            SoundManager.PlaySound("bubblepop");
         }
         if(collision.gameObject.tag == "Bullet")
         {
             ScoreManager.scoreValue += pointsGiven;
             enemy.bubblesSpawned--;
             Destroy(gameObject);
+            SoundManager.PlaySound("bubblepop");
         }
     }
 

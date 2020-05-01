@@ -14,6 +14,7 @@ public class Player : MonoBehaviour
     public delegate void PlayerDelegate();
     public static event PlayerDelegate OnPlayerDied;
 
+
     public float jumpHeight = 4;
     public float timeToJumpApex = .4f;
     public float wallStickTime = .25f;
@@ -42,6 +43,7 @@ public class Player : MonoBehaviour
     public bool movingRight = false;
     public bool moving = false;
     public bool rotation = false;
+    public bool playerdashaudio = false;
 
     [SerializeField] private const int MAX_HEALTH = 3;
     [SerializeField] private static int score = 0;
@@ -360,8 +362,16 @@ public class Player : MonoBehaviour
         if (controller.dashing)
         {
             anim.SetTrigger("Dashed");
+            if (!playerdashaudio)
+            {
+                playerdashaudio = true;
+
+                SoundManager.PlaySound("playerdash");
+            }
             
             transform.position = Vector3.MoveTowards(transform.position, dashPosition, dashSpeed * Time.deltaTime);
+
+
         }
         if (!controller.collisions.below)
         {

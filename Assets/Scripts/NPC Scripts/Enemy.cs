@@ -36,6 +36,7 @@ public class Enemy : MonoBehaviour
     [SerializeField] bool comingFromLeft;
     private float timePassed;
     int bounceRange;
+    bool carSoundPlaying = false;
     private Vector3 localScale;
 
     private bool shouldLerp = false;
@@ -47,6 +48,8 @@ public class Enemy : MonoBehaviour
     public float twopie = Mathf.PI * 2;
     public float afloat = 0;
     public float osculationSpeed = 0.01f;
+    public bool frogSoundPlaying = false;
+    public bool planeSounddPlaying = false;
 
     /*
      * Raycast
@@ -169,6 +172,11 @@ public class Enemy : MonoBehaviour
             }
         }
     }
+    IEnumerator CarSoundDelay()
+    {
+        yield return new WaitForSeconds(7);
+        carSoundPlaying = false;
+    }
     // Update is called once per frame
     void Update()
     {
@@ -227,6 +235,9 @@ public class Enemy : MonoBehaviour
                 if (GetState() == State.Attacking)
                 {
                     aiPath.enabled = true;
+                    SoundManager.PlaySound("planedive");
+                    planeSounddPlaying = true;
+                    StartCoroutine(PlaneSoundDelay());
                 }
                 break;
 
@@ -251,6 +262,15 @@ public class Enemy : MonoBehaviour
 
             case EnemyType.ChargeCar:
             case EnemyType.ChargeBuggy:
+                if(GetState() == State.Charging || GetState() == State.Attacking)
+                {
+                    if(!carSoundPlaying)
+                    {
+                        SoundManager.PlaySound("chargerpatrol");
+                        carSoundPlaying = true;
+                        StartCoroutine(CarSoundDelay());
+                    }
+                }
                 if (groundInfo.collider == false)
                 {
                     //Debug.LogError("false");
@@ -391,6 +411,18 @@ public class Enemy : MonoBehaviour
         canLaunchBubble = true;
     }
 
+    IEnumerator FrogSoundDelay()
+    {
+        yield return new WaitForSeconds(129);
+        frogSoundPlaying = false;
+    }
+
+    IEnumerator PlaneSoundDelay()
+    {
+        yield return new WaitForSeconds(20f);
+        planeSounddPlaying = false;
+    }
+
     private void ObstructorAttack()
     {
         int bubblesToBeSpawned = Random.Range(6, 13);
@@ -408,6 +440,11 @@ public class Enemy : MonoBehaviour
                 Instantiate(bubbles, spawnPosition, Quaternion.identity);
                 bubblesSpawned++;
                 canLaunchBubble = false;
+                if(!frogSoundPlaying)
+                {
+                    SoundManager.PlaySound("bubblepop");
+                    StartCoroutine(FrogSoundDelay());
+                }
                 StartCoroutine(BubbleDelay());
             }
         } else
@@ -533,6 +570,21 @@ public class Enemy : MonoBehaviour
                 break;
             //if the enemy is dead
             case State.Dead:
+                if (GetEnemyType() == EnemyType.BounceStressBall)
+                {
+                    if (GetEnemyType() == EnemyType.BounceStressBall)
+                    {
+                        SoundManager.PlaySound("bubblepop");
+                    }
+                    if (GetEnemyType() == EnemyType.ChargeBuggy)                   {
+                        SoundManager.PlaySound("chargerexplosion");
+                    }
+                    if (GetEnemyType() == EnemyType.ChargeCar)
+                    {
+                        SoundManager.PlaySound("chargerexplosion");
+                    }
+                }
+
                 //Destroy(this.gameObject); // The enemy is destroyed.
                 if (GetEnemyType() == EnemyType.HelicopterSeed)
                 {

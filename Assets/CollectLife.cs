@@ -24,6 +24,7 @@ public class CollectLife : MonoBehaviour
             if (player.GetHealth() < 3)
             {
                 player.UpdateHealth(1);
+                SoundManager.PlaySound("playercollect");
                 Destroy(gameObject);
             }
             else

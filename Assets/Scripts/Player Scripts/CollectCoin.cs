@@ -26,6 +26,7 @@ public class CollectCoin : MonoBehaviour
         {
             player.UpdateScore(Random.Range(scoreMinAmount, scoreMaxAmount));
             player.coins++;
+            SoundManager.PlaySound("playercollect");
             Destroy(gameObject);
         }
     }

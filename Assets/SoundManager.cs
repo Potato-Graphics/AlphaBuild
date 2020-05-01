@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SoundManager : MonoBehaviour
 {
-    public static AudioClip PlayerFire, PlayerJump, PlayerDash, PlayerCollect, PlayerDamage, PlayerPump, BubblePop, PlaneDive, FrogCroak, BallBounce;
+    public static AudioClip PlayerFire, PlayerJump, PlayerDash, PlayerCollect, PlayerDamage, PlayerPump, BubblePop, PlaneDive, FrogCroak, BallBounce, ChargerPatrol, ChargerExplosion;
     static AudioSource audioGame;
 
 
@@ -20,7 +20,9 @@ public class SoundManager : MonoBehaviour
         BubblePop = Resources.Load<AudioClip>("bubblepop");
         PlaneDive = Resources.Load<AudioClip>("planedive");
         FrogCroak = Resources.Load<AudioClip>("frogcroak");
-        BallBounce = Resources.Load<AudioClip>("ballbounce");
+        ChargerPatrol = Resources.Load<AudioClip>("chargerpatrol");
+        ChargerExplosion = Resources.Load<AudioClip>("chargerexplosion");
+
 
         audioGame = GetComponent<AudioSource> ();
     }
@@ -41,13 +43,13 @@ public class SoundManager : MonoBehaviour
          case "playerjump":
                 audioGame.PlayOneShot(PlayerJump);
                 break;
-         case "playerDash":
+         case "playerdash":
                 audioGame.PlayOneShot(PlayerDash);
                 break;
          case "playercollect":
                 audioGame.PlayOneShot(PlayerCollect);
                 break;
-            case "playerDamage":
+            case "playerdamage":
                 audioGame.PlayOneShot(PlayerDamage);
                 break;
             case
@@ -69,6 +71,14 @@ public class SoundManager : MonoBehaviour
             case
             "ballbounce":
                 audioGame.PlayOneShot(BallBounce);
+                break;
+            case
+            "chargerpatrol":
+                audioGame.PlayOneShot(ChargerPatrol);
+                break;
+            case
+            "chargerexplosion":
+                audioGame.PlayOneShot(ChargerExplosion);
                 break;
         }
     }

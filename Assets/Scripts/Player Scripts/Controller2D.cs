@@ -81,6 +81,7 @@ public class Controller2D : MonoBehaviour
     {
         yield return new WaitForSeconds(0.3f);
         dashing = false;
+        player.playerdashaudio = false;
     }
 
    public IEnumerator DashDelay()
