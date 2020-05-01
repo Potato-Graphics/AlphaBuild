@@ -185,16 +185,16 @@ public class Enemy : MonoBehaviour
                 if(boxCollider != null)
             {
                 if (col.gameObject.GetComponent<BoxCollider2D>() != null)
-                {
-                    Physics2D.IgnoreCollision(circleCollider, col.gameObject.GetComponent<BoxCollider2D>());
+                {//
+                   // Physics2D.IgnoreCollision(circleCollider, col.gameObject.GetComponent<BoxCollider2D>());
                 }
                 else
                       if (col.gameObject.GetComponent<CircleCollider2D>() != null)
                 {
-                    Physics2D.IgnoreCollision(circleCollider, col.gameObject.GetComponent<CircleCollider2D>());
+                    //Physics2D.IgnoreCollision(circleCollider, col.gameObject.GetComponent<CircleCollider2D>());
                 }
             }
-           Physics2D.IgnoreCollision(gameObject.GetComponent<BoxCollider2D>(), col.gameObject.GetComponent<BoxCollider2D>());
+         //  Physics2D.IgnoreCollision(gameObject.GetComponent<BoxCollider2D>(), col.gameObject.GetComponent<BoxCollider2D>());
             if (GetEnemyType() == EnemyType.HelicopterSeed)
             {
                 transform.position = startPosition;
@@ -293,6 +293,10 @@ public class Enemy : MonoBehaviour
                 if (planeDistance < distanceToCharge)
                 {
                     SetState(State.Attacking);
+                }
+                if(GetState() == State.Idle)
+                {
+                    aiPath.enabled = false;
                 }
                 if (GetState() == State.Attacking)
                 {

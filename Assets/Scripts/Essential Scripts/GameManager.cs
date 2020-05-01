@@ -77,8 +77,8 @@ public class GameManager : MonoBehaviour
     IEnumerator UpdateHealth()
     {
         yield return new WaitForSeconds(0.8f);
-        player.UpdateHealth(3);
         RespawnNpc();
+        player.UpdateHealth(3);
     }
 
     void OnPlayerDied()
