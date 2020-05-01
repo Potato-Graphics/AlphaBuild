@@ -218,9 +218,9 @@ public class Enemy : MonoBehaviour
         switch(GetEnemyType())
         {
             case EnemyType.RangePlane:
-           
-                //print(transform.position.x - player.transform.position.x);
-                if (transform.position.x - player.transform.position.x <= 10 && GetState() != State.Attacking)
+
+                float distance = Vector3.Distance(player.transform.position, transform.position);
+                if (distance < distanceToCharge)
                 {
                     SetState(State.Attacking);
                 }
@@ -512,10 +512,7 @@ public class Enemy : MonoBehaviour
                 switch(GetEnemyType())
                 {
                     case EnemyType.RangePlane:
-                        targetLocation = player.transform.position;
-                        targetLocation.x = player.transform.position.x + Random.Range(2, 10);
-                        print(targetLocation);
-                        print(player.transform.position);
+
                         break;
                     case EnemyType.BounceStressBall:
                         Bounce();
