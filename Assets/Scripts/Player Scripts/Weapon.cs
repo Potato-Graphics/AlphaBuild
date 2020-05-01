@@ -21,11 +21,20 @@ public class Weapon : MonoBehaviour
     public Vector3 position;
     [SerializeField] float speed = 25;
     public Image specialBar;
+    public Image waterBottleBar;
     bool rechargingWater = false;
 
-    public int waterRemaining = 10;
-    public int MAX_WATER = 10;
+    public static float waterRemaining;
+
+    public float WaterRemaining
+    {
+        get { return waterRemaining; }
+        set { waterRemaining = Mathf.Clamp(value, 0, Mathf.RoundToInt(MAX_WATER)); }
+    }
+    public float MAX_WATER = 10;
     public float waterGainTimer = 2.5f;
+
+    float fillAmount = 1f;
 
     float timeToFire = 0;
 
@@ -53,7 +62,7 @@ public class Weapon : MonoBehaviour
     public Transform firePoint;
     void Start()
     {
-        waterRemaining = MAX_WATER;
+        WaterRemaining = MAX_WATER;
         controller = GetComponent<Controller2D>();
         player = GetComponent<Player>();
         anim = player.GetComponent<Animator>();
@@ -85,18 +94,19 @@ public class Weapon : MonoBehaviour
         rechargingWater = false;
     }
 
+
     public void UpdateWaterRemaining(int amount)
     {
-        waterRemaining += amount;
-        if (waterRemaining < 0) waterRemaining = 0;
-        if (waterRemaining >= MAX_WATER) waterRemaining = MAX_WATER;
+        WaterRemaining += amount;
+
+
+        fillAmount =  WaterRemaining / MAX_WATER;
+        waterBottleBar.fillAmount = fillAmount;
     }
 
-
-
-    public int GetWaterRemaining()
+    public float GetWaterRemaining()
     {
-        return waterRemaining;
+        return WaterRemaining;
     }
 
 
@@ -582,21 +592,11 @@ public class Weapon : MonoBehaviour
             drainAmount = Mathf.RoundToInt(player.bulletSizeMultiplier * 2.4f);
         }
         UpdateWaterRemaining(-drainAmount);
-        drainAmount = 0;
         delay = true;
         StartCoroutine(ShootDelay());
         specialBar.fillAmount = 0;
         player.bulletSizeMultiplier = 1;
-        if (playerfire != null)
-        {
-            playerfire.PlayOneShot(playerfire.clip);
-            Debug.LogError("is playing? " + playerfire.isPlaying);
-        }
-        else
-        {
-            Debug.LogError("null");
-        }
-       
+
     }
 
     IEnumerator ShootDelay()
