@@ -61,6 +61,9 @@ public class Enemy : MonoBehaviour
     public bool frogSoundPlaying = false;
     public bool planeSounddPlaying = false;
 
+    BoxCollider2D boxCollider;
+    CircleCollider2D circleCollider;
+
     /*
      * Raycast
      */
@@ -131,6 +134,8 @@ public class Enemy : MonoBehaviour
         SetState(State.Idle);
         startPosition = transform.position;
         startHealth = currentHealth;
+        circleCollider = GetComponent<CircleCollider2D>();
+        boxCollider = GetComponent<BoxCollider2D>();
 
         enemies.Add(this);
      
@@ -161,7 +166,34 @@ public class Enemy : MonoBehaviour
     {
         if (col.gameObject.tag == "Enemy")
         {
-          //  Physics2D.IgnoreCollision(gameObject.GetComponent<BoxCollider2D>(), col.gameObject.GetComponent<BoxCollider2D>());
+            if(circleCollider != null)
+            {
+                if (col.gameObject.GetComponent<BoxCollider2D>() != null)
+                {
+                    Physics2D.IgnoreCollision(circleCollider, col.gameObject.GetComponent<BoxCollider2D>());
+                }
+                else
+                    if (col.gameObject.GetComponent<CircleCollider2D>() != null)
+                {
+                    Physics2D.IgnoreCollision(circleCollider, col.gameObject.GetComponent<CircleCollider2D>());
+                }
+
+
+
+            } else
+                if(boxCollider != null)
+            {
+                if (col.gameObject.GetComponent<BoxCollider2D>() != null)
+                {
+                    Physics2D.IgnoreCollision(circleCollider, col.gameObject.GetComponent<BoxCollider2D>());
+                }
+                else
+                      if (col.gameObject.GetComponent<CircleCollider2D>() != null)
+                {
+                    Physics2D.IgnoreCollision(circleCollider, col.gameObject.GetComponent<CircleCollider2D>());
+                }
+            }
+           Physics2D.IgnoreCollision(gameObject.GetComponent<BoxCollider2D>(), col.gameObject.GetComponent<BoxCollider2D>());
             if (GetEnemyType() == EnemyType.HelicopterSeed)
             {
                 transform.position = startPosition;

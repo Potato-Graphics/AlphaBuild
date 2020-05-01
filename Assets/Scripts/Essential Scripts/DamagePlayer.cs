@@ -56,7 +56,7 @@ public class DamagePlayer : MonoBehaviour
         {
             if (destroyable)
             {
-                enemy.UpdateHealth(enemy.MAX_HEALTH);
+                enemy.UpdateHealth(-enemy.startHealth);
                 enemy.SetState(Enemy.State.Dead);
 
             }
