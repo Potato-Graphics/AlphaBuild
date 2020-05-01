@@ -32,7 +32,7 @@ Transform:
   m_GameObject: {fileID: 185060045685596072}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -229.7349, y: -0.9999981, z: 3.127594}
-  m_LocalScale: {x: 0.0950114, y: 0.0950114, z: 0}
+  m_LocalScale: {x: 0.13128868, y: 0.13128868, z: 0}
   m_Children:
   - {fileID: 2751825628800652834}
   m_Father: {fileID: 0}
@@ -223,11 +223,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2224898668938251592}
     m_Modifications:
-    - target: {fileID: 3359067198048578912, guid: 1be8d79e6f456e54ab8dcbdd42314277,
-        type: 3}
-      propertyPath: m_Name
-      value: bubblepop
-      objectReference: {fileID: 0}
     - target: {fileID: 6720856199554915039, guid: 1be8d79e6f456e54ab8dcbdd42314277,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -282,6 +277,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3359067198048578912, guid: 1be8d79e6f456e54ab8dcbdd42314277,
+        type: 3}
+      propertyPath: m_Name
+      value: bubblepop
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1be8d79e6f456e54ab8dcbdd42314277, type: 3}
