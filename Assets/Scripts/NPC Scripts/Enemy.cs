@@ -219,8 +219,8 @@ public class Enemy : MonoBehaviour
         {
             case EnemyType.RangePlane:
 
-                float distance = Vector3.Distance(player.transform.position, transform.position);
-                if (distance < distanceToCharge)
+                float planeDistance = Vector3.Distance(player.transform.position, transform.position);
+                if (planeDistance < distanceToCharge)
                 {
                     SetState(State.Attacking);
                 }
