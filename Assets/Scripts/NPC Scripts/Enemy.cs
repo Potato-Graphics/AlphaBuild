@@ -235,6 +235,12 @@ public class Enemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(player.GetHealth() <= 0)
+        {
+            transform.position = startPosition;
+            currentHealth = startHealth;
+            SetState(State.Idle);
+        }
      
         // Initialising the player object
         playerObject = GameObject.FindGameObjectWithTag("Player").transform;

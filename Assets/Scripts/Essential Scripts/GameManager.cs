@@ -62,6 +62,7 @@ public class GameManager : MonoBehaviour
             enemy.enemy.SetActive(true);
             enemy.enemy.GetComponent<Enemy>().SetState(Enemy.State.Idle);
             enemy.enemy.GetComponent<Enemy>().UpdateHealth(enemy.MAX_HEALTH);
+            Debug.LogError(enemy.enemy.GetComponent<Enemy>().GetState());
         }
         respawnEnemies.Clear();
     }

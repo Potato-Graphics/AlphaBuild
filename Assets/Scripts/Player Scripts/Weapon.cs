@@ -59,6 +59,7 @@ public class Weapon : MonoBehaviour
     public Rigidbody2D muzzleFlashUpDiag;
     public Rigidbody2D muzzleFlashDownDiag;
 
+
     public Transform firePoint;
     void Start()
     {
