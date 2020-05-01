@@ -11,6 +11,7 @@ public class ZiplineHandler : MonoBehaviour
     private int targetZiplinePointIndex = 0;
     private int lastZiplinePointIndex;
     public float minDistance = 0.1f;
+    Vector3 startPosition;
 
     // Start is called before the first frame update
     void Start()
@@ -18,6 +19,16 @@ public class ZiplineHandler : MonoBehaviour
         player = GameObject.FindObjectOfType<Player>();
         targetPoint = ziplinePoints[targetZiplinePointIndex];
         lastZiplinePointIndex = ziplinePoints.Count - 1;
+        startPosition = transform.position;
+    }
+
+    public void ResetZipline()
+    {
+        Debug.LogError("test");
+        targetPoint = ziplinePoints[targetZiplinePointIndex];
+        lastZiplinePointIndex = ziplinePoints.Count - 1;
+        transform.position = startPosition;
+
     }
 
     // Update is called once per frame
