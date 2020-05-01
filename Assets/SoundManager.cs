@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SoundManager : MonoBehaviour
 {
-    public static AudioClip PlayerFire, PlayerChargedFire, PlayerJump, PlayerDash, PlayerCollect, PlayerDamage, PlayerPump;
+    public static AudioClip PlayerFire, PlayerJump, PlayerDash, PlayerCollect, PlayerDamage, PlayerPump, BubblePop, PlaneDive, FrogCroak, BallBounce;
     static AudioSource audioGame;
 
 
@@ -12,12 +12,15 @@ public class SoundManager : MonoBehaviour
     void Start()
     {
         PlayerFire = Resources.Load<AudioClip>("playerfire");
-        PlayerChargedFire = Resources.Load<AudioClip>("playerchargefire");
         PlayerJump = Resources.Load<AudioClip>("playerjump");
         PlayerDash = Resources.Load<AudioClip>("playerdash");
         PlayerCollect = Resources.Load<AudioClip>("playercollect");
         PlayerDamage = Resources.Load<AudioClip>("playerdamage");
         PlayerPump = Resources.Load<AudioClip>("playerpump");
+        BubblePop = Resources.Load<AudioClip>("bubblepop");
+        PlaneDive = Resources.Load<AudioClip>("planedive");
+        FrogCroak = Resources.Load<AudioClip>("frogcroak");
+        BallBounce = Resources.Load<AudioClip>("ballbounce");
 
         audioGame = GetComponent<AudioSource> ();
     }
@@ -35,9 +38,6 @@ public class SoundManager : MonoBehaviour
             case "playerfire":
                 audioGame.PlayOneShot(PlayerFire);
                 break;
-         case "playerchargedfire":
-                audioGame.PlayOneShot(PlayerChargedFire);
-                break;
          case "playerjump":
                 audioGame.PlayOneShot(PlayerJump);
                 break;
@@ -50,9 +50,25 @@ public class SoundManager : MonoBehaviour
             case "playerDamage":
                 audioGame.PlayOneShot(PlayerDamage);
                 break;
-            case 
+            case
             "playerpump":
                 audioGame.PlayOneShot(PlayerPump);
+                break;
+            case
+            "bubblepop":
+                audioGame.PlayOneShot(BubblePop);
+                break;
+            case
+            "planedive":
+                audioGame.PlayOneShot(PlaneDive);
+                break;
+            case
+            "frogcroak":
+                audioGame.PlayOneShot(FrogCroak);
+                break;
+            case
+            "ballbounce":
+                audioGame.PlayOneShot(BallBounce);
                 break;
         }
     }

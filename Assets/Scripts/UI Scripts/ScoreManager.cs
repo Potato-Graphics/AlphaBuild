@@ -30,7 +30,7 @@ public class ScoreManager : MonoBehaviour
         if (Time.time >= timeSecond)
         {
             ScoreValue -= ScoreValue / 10;
-            timeSecond += 3;
+            timeSecond += 10;
         }
     }
 }

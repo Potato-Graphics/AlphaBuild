@@ -23,7 +23,7 @@ public class ShowUI : MonoBehaviour
     }
     IEnumerator WaitForSec()
     {
-        yield return new WaitForSeconds(5);
+        yield return new WaitForSeconds(4);
         Destroy(uiObject);
         Destroy(gameObject);
     }
