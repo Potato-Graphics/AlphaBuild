@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class UIAppear : MonoBehaviour
 {
+    public AudioSource endtrack;
     public GameObject endMenu;
 
     public GameObject Image;
@@ -24,6 +25,8 @@ public class UIAppear : MonoBehaviour
             endMenu.SetActive(true);
             Image.SetActive(true);
             Time.timeScale = 0;
+            endtrack.Play();
+        
         }
     }
 }
