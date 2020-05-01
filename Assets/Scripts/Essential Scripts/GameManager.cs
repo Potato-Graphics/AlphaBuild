@@ -57,9 +57,9 @@ public class GameManager : MonoBehaviour
         foreach (RespawnEnemy enemy in respawnEnemies)
         {
             enemy.enemy.transform.position = enemy.spawnPoint;
+            enemy.enemy.SetActive(true);
             enemy.enemy.GetComponent<Enemy>().SetState(Enemy.State.Idle);
             enemy.enemy.GetComponent<Enemy>().UpdateHealth(enemy.enemy.GetComponent<Enemy>().MAX_HEALTH);
-            enemy.enemy.SetActive(true);
         }
         respawnEnemies.Clear();
     }
@@ -69,8 +69,6 @@ public class GameManager : MonoBehaviour
         {
             OnPlayerDied();
         }
-        Debug.LogError("the list contains: " + respawnEnemies.Count);
-        
     }
 
     void OnPlayerDied()
@@ -79,10 +77,6 @@ public class GameManager : MonoBehaviour
         player.UpdateHealth(3);
         GameObject[] enemies;
         enemies = GameObject.FindGameObjectsWithTag("Enemy");
-        foreach (GameObject enemy in enemies)
-        {
-            enemy.GetComponent<Enemy>().UpdateHealth(enemy.GetComponent<Enemy>().MAX_HEALTH);
-        }
         RespawnNpc();
     }
 

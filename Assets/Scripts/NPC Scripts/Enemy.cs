@@ -136,7 +136,7 @@ public class Enemy : MonoBehaviour
 
     public void AddToRespawnList()
     {
-        GameManager.Instance.AddRespawnObj(NPC_ID, startPosition, this.gameObject);
+        GameManager.Instance.AddRespawnObj(NPC_ID, startPosition, gameObject);
     }
 
 
